@@ -22,6 +22,7 @@ shane 세인
 ace 에이스
 kris 크리스
 nox 녹스
+
 look 룩
 alice 앨리스
 chancellor 챈슬러
