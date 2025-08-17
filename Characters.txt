@@ -7,14 +7,14 @@ yeonhee 연희
 melkir 멜키르
 lina 리나
 vanessa 바네사
-pascal 파스칼
 rin 린
 colt 콜트
 karma 카르마
 platen 플라튼
 ludy 루디
-espada 에스파다
 eileen 아일린
+pascal 파스칼
+espada 에스파다
 
 yushin 유신
 jave 제이브
