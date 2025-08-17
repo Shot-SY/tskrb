@@ -1,5 +1,6 @@
 return {
   ["B1JV"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -16,6 +17,7 @@ return {
     yushin = 1,
   },
   ["B1KL"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -33,6 +35,7 @@ return {
     teo = 1,
   },
   ["B1KM"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -49,6 +52,7 @@ return {
     velika = 1,
   },
   ["B1KW"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -64,6 +68,7 @@ return {
     yushin = 1,
   },
   ["B1KX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -80,6 +85,7 @@ return {
     velika = 1,
   },
   ["B1KY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -96,6 +102,7 @@ return {
     yushin = 1,
   },
   ["B1L0"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -110,7 +117,7 @@ return {
     yushin = 1,
   },
   ["B1LA"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -125,6 +132,7 @@ return {
     teo = 1,
   },
   ["B1LC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -141,6 +149,7 @@ return {
     velika = 1,
   },
   ["B1LE"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -157,7 +166,7 @@ return {
     yushin = 1,
   },
   ["B1LF"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -176,6 +185,7 @@ return {
     yushin = 1,
   },
   ["B1LG"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -192,6 +202,7 @@ return {
     teo = 2,
   },
   ["B1LH"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -207,6 +218,7 @@ return {
     teo = 2,
   },
   ["B1LI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -223,6 +235,7 @@ return {
     teo = 1,
   },
   ["B1LJ"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -237,6 +250,7 @@ return {
     velika = 2,
   },
   ["B1LK"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -252,6 +266,7 @@ return {
     teo = 1,
   },
   ["B1LM"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -268,6 +283,7 @@ return {
     vanessa = 1,
   },
   ["B1LO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -280,6 +296,7 @@ return {
     sieg = 1,
   },
   ["B1LR"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -295,7 +312,7 @@ return {
     teo = 3,
   },
   ["B1LS"] = {
-    ace = 2,
+    ace = 3,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -312,6 +329,7 @@ return {
     yeonhee = 1,
   },
   ["B1LT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -327,6 +345,7 @@ return {
     yeonhee = 1,
   },
   ["B1LU"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -343,6 +362,7 @@ return {
     velika = 1,
   },
   ["B1LV"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -361,6 +381,7 @@ return {
     teo = 1,
   },
   ["B1LX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -375,6 +396,7 @@ return {
     yushin = 2,
   },
   ["B1LY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -389,6 +411,7 @@ return {
     teo = 4,
   },
   ["B1LZ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -405,6 +428,7 @@ return {
     yeonhee = 1,
   },
   ["B1M0"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -423,6 +447,7 @@ return {
     yeonhee = 1,
   },
   ["B1M2"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -438,7 +463,7 @@ return {
     teo = 2,
   },
   ["B1M4"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -454,7 +479,7 @@ return {
     vanessa = 1,
   },
   ["B1M5"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -471,6 +496,7 @@ return {
     velika = 2,
   },
   ["B1M8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -487,6 +513,7 @@ return {
     yushin = 1,
   },
   ["B1M9"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     colt = 1,
@@ -504,6 +531,7 @@ return {
     teo = 2,
   },
   ["B1MA"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -519,6 +547,7 @@ return {
     teo = 1,
   },
   ["B1MD"] = {
+    ace = 1,
     ballista = 1,
     bidam = 2,
     chancellor = 1,
@@ -535,6 +564,7 @@ return {
     velika = 1,
   },
   ["B1ME"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -550,6 +580,7 @@ return {
     velika = 1,
   },
   ["B1MG"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -567,6 +598,7 @@ return {
     yushin = 1,
   },
   ["B1MI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -581,6 +613,7 @@ return {
     yushin = 2,
   },
   ["B1MJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -598,6 +631,7 @@ return {
     yushin = 1,
   },
   ["B1ML"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -613,6 +647,7 @@ return {
     teo = 2,
   },
   ["B1MM"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -629,6 +664,7 @@ return {
     teo = 1,
   },
   ["B1MN"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -643,6 +679,7 @@ return {
     velika = 1,
   },
   ["B1MO"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -659,6 +696,7 @@ return {
     yushin = 1,
   },
   ["B1MP"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 1,
@@ -676,6 +714,7 @@ return {
     yushin = 2,
   },
   ["B1MQ"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -692,6 +731,7 @@ return {
     teo = 2,
   },
   ["B1MR"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -708,6 +748,7 @@ return {
     velika = 1,
   },
   ["B1MS"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -723,6 +764,7 @@ return {
     spike = 1,
   },
   ["B1MT"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -738,6 +780,7 @@ return {
     vanessa = 1,
   },
   ["B1MU"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -755,7 +798,7 @@ return {
     teo = 2,
   },
   ["B1MV"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -770,6 +813,7 @@ return {
     velika = 1,
   },
   ["B1MW"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -785,6 +829,7 @@ return {
     teo = 2,
   },
   ["B1MX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -802,6 +847,7 @@ return {
     yushin = 1,
   },
   ["B1MY"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -818,6 +864,7 @@ return {
     yushin = 1,
   },
   ["B1MZ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     dellons = 1,
@@ -832,6 +879,7 @@ return {
     teo = 3,
   },
   ["B1N1"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -847,6 +895,7 @@ return {
     yushin = 1,
   },
   ["B1N3"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 2,
     eileen = 2,
@@ -862,6 +911,7 @@ return {
     yushin = 1,
   },
   ["B1N5"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 1,
@@ -879,6 +929,7 @@ return {
     velika = 1,
   },
   ["B1N6"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -893,6 +944,7 @@ return {
     teo = 2,
   },
   ["B1N7"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 2,
@@ -908,6 +960,7 @@ return {
     yushin = 1,
   },
   ["B1N9"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -923,6 +976,7 @@ return {
     teo = 1,
   },
   ["B1NA"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -938,6 +992,7 @@ return {
     velika = 1,
   },
   ["B1NE"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -953,6 +1008,7 @@ return {
     velika = 2,
   },
   ["B1NF"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 3,
@@ -967,6 +1023,7 @@ return {
     yeonhee = 1,
   },
   ["B1NG"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -982,6 +1039,7 @@ return {
     teo = 2,
   },
   ["B1NI"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -998,7 +1056,7 @@ return {
     yushin = 1,
   },
   ["B1NK"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1015,6 +1073,7 @@ return {
     teo = 2,
   },
   ["B1NL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1029,6 +1088,7 @@ return {
     teo = 2,
   },
   ["B1NM"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -1045,6 +1105,7 @@ return {
     teo = 1,
   },
   ["B1NN"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 2,
@@ -1059,6 +1120,7 @@ return {
     velika = 1,
   },
   ["B1NS"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -1074,6 +1136,7 @@ return {
     yushin = 1,
   },
   ["B1NT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -1090,7 +1153,7 @@ return {
     yushin = 1,
   },
   ["B1NU"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -1105,6 +1168,7 @@ return {
     yushin = 1,
   },
   ["B1NV"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1119,6 +1183,7 @@ return {
     teo = 1,
   },
   ["B1NW"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -1136,6 +1201,7 @@ return {
     sylvesta = 1,
   },
   ["B1NY"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 2,
     eileen = 2,
@@ -1151,6 +1217,7 @@ return {
     velika = 1,
   },
   ["B1O0"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -1166,6 +1233,7 @@ return {
     velika = 2,
   },
   ["B1O1"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     colt = 1,
@@ -1183,6 +1251,7 @@ return {
     velika = 1,
   },
   ["B1O2"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     dellons = 1,
@@ -1198,6 +1267,7 @@ return {
     yushin = 1,
   },
   ["B1O3"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -1213,6 +1283,7 @@ return {
     yushin = 1,
   },
   ["B1O5"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -1227,6 +1298,7 @@ return {
     teo = 2,
   },
   ["B1O6"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1241,7 +1313,7 @@ return {
     sieg = 1,
   },
   ["B1OE"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -1255,6 +1327,7 @@ return {
     teo = 4,
   },
   ["B1OF"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -1270,6 +1343,7 @@ return {
     teo = 2,
   },
   ["B1OG"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -1285,6 +1359,7 @@ return {
     yushin = 1,
   },
   ["B1OP"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1301,6 +1376,7 @@ return {
     yushin = 1,
   },
   ["B1OQ"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -1316,6 +1392,7 @@ return {
     teo = 3,
   },
   ["B1OU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -1331,6 +1408,7 @@ return {
     vanessa = 1,
   },
   ["B1OV"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 2,
@@ -1347,6 +1425,7 @@ return {
     velika = 1,
   },
   ["B1OX"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -1364,6 +1443,7 @@ return {
     yeonhee = 1,
   },
   ["B1OY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1377,6 +1457,7 @@ return {
     yushin = 2,
   },
   ["B1OZ"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     eileen = 1,
@@ -1396,6 +1477,7 @@ return {
     yeonhee = 1,
   },
   ["B1P2"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -1411,6 +1493,7 @@ return {
     teo = 2,
   },
   ["B1P3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 2,
@@ -1424,6 +1507,7 @@ return {
     teo = 2,
   },
   ["B1P5"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -1440,7 +1524,7 @@ return {
     yeonhee = 1,
   },
   ["B1P6"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -1457,6 +1541,7 @@ return {
     teo = 2,
   },
   ["B1P7"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1470,6 +1555,7 @@ return {
     teo = 1,
   },
   ["B1P8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1484,6 +1570,7 @@ return {
     yushin = 1,
   },
   ["B1PC"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     eileen = 1,
@@ -1501,6 +1588,7 @@ return {
     velika = 1,
   },
   ["B1PE"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -1517,6 +1605,7 @@ return {
     yeonhee = 1,
   },
   ["B1PF"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -1530,6 +1619,7 @@ return {
     teo = 1,
   },
   ["B1PG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -1546,6 +1636,7 @@ return {
     velika = 1,
   },
   ["B1PH"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -1562,6 +1653,7 @@ return {
     teo = 2,
   },
   ["B1PI"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -1579,6 +1671,7 @@ return {
     vanessa = 1,
   },
   ["B1PK"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -1595,6 +1688,7 @@ return {
     teo = 1,
   },
   ["B1PL"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -1610,7 +1704,7 @@ return {
     yeonhee = 2,
   },
   ["B1PN"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -1627,6 +1721,7 @@ return {
     teo = 2,
   },
   ["B1PO"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -1644,6 +1739,7 @@ return {
     teo = 2,
   },
   ["B1PP"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -1661,6 +1757,7 @@ return {
     yushin = 1,
   },
   ["B1PQ"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -1676,6 +1773,7 @@ return {
     teo = 1,
   },
   ["B1PS"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -1691,6 +1789,7 @@ return {
     yeonhee = 1,
   },
   ["B1PT"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -1707,6 +1806,7 @@ return {
     teo = 1,
   },
   ["B1PU"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     bidam = 1,
@@ -1727,6 +1827,7 @@ return {
     yushin = 1,
   },
   ["B1PV"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1743,6 +1844,7 @@ return {
     yushin = 1,
   },
   ["B1PY"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -1758,6 +1860,7 @@ return {
     teo = 4,
   },
   ["B1PZ"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -1774,6 +1877,7 @@ return {
     velika = 1,
   },
   ["B1Q0"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1789,6 +1893,7 @@ return {
     yushin = 2,
   },
   ["B1Q1"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 2,
     eileen = 1,
@@ -1804,6 +1909,7 @@ return {
     yeonhee = 1,
   },
   ["B1Q2"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -1821,7 +1927,7 @@ return {
     teo = 3,
   },
   ["B1Q4"] = {
-    ace = 2,
+    ace = 3,
     alice = 1,
     chancellor = 2,
     eileen = 2,
@@ -1836,6 +1942,7 @@ return {
     sieg = 1,
   },
   ["B1Q6"] = {
+    ace = 1,
     chancellor = 1,
     colt = 2,
     eileen = 1,
@@ -1853,6 +1960,7 @@ return {
     velika = 1,
   },
   ["B1Q8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1868,6 +1976,7 @@ return {
     yushin = 1,
   },
   ["B1Q9"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     bidam = 1,
@@ -1886,6 +1995,7 @@ return {
     yushin = 1,
   },
   ["B1QA"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -1905,7 +2015,7 @@ return {
     yeonhee = 1,
   },
   ["B1QB"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -1921,6 +2031,7 @@ return {
     velika = 1,
   },
   ["B1QC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -1937,6 +2048,7 @@ return {
     velika = 1,
   },
   ["B1QD"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -1951,6 +2063,7 @@ return {
     vanessa = 1,
   },
   ["B1QE"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -1966,6 +2079,7 @@ return {
     velika = 2,
   },
   ["B1QF"] = {
+    ace = 1,
     aragon = 1,
     bidam = 2,
     chancellor = 1,
@@ -1981,6 +2095,7 @@ return {
     teo = 2,
   },
   ["B1QG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -1997,6 +2112,7 @@ return {
     teo = 1,
   },
   ["B1QI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2012,6 +2128,7 @@ return {
     vanessa = 1,
   },
   ["B1QL"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -2029,7 +2146,7 @@ return {
     yushin = 2,
   },
   ["B1QM"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2045,6 +2162,7 @@ return {
     yushin = 1,
   },
   ["B1QN"] = {
+    ace = 1,
     chancellor = 2,
     colt = 1,
     eileen = 1,
@@ -2063,6 +2181,7 @@ return {
     vanessa = 1,
   },
   ["B1QO"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -2080,6 +2199,7 @@ return {
     teo = 2,
   },
   ["B1QP"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -2095,6 +2215,7 @@ return {
     yushin = 1,
   },
   ["B1QQ"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -2110,6 +2231,7 @@ return {
     teo = 3,
   },
   ["B1QR"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 2,
@@ -2126,6 +2248,7 @@ return {
     velika = 1,
   },
   ["B1QS"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2140,6 +2263,7 @@ return {
     yushin = 1,
   },
   ["B1QT"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -2156,6 +2280,7 @@ return {
     teo = 1,
   },
   ["B1QU"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -2172,6 +2297,7 @@ return {
     teo = 2,
   },
   ["B1QV"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -2188,6 +2314,7 @@ return {
     teo = 2,
   },
   ["B1QW"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -2204,6 +2331,7 @@ return {
     yushin = 1,
   },
   ["B1QX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -2220,6 +2348,7 @@ return {
     velika = 1,
   },
   ["B1QY"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -2235,6 +2364,7 @@ return {
     velika = 1,
   },
   ["B1QZ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -2251,6 +2381,7 @@ return {
     velika = 1,
   },
   ["B1R0"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -2267,6 +2398,7 @@ return {
     velika = 2,
   },
   ["B1R1"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2283,6 +2415,7 @@ return {
     teo = 1,
   },
   ["B1R2"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -2297,6 +2430,7 @@ return {
     yushin = 1,
   },
   ["B1R3"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 2,
@@ -2312,6 +2446,7 @@ return {
     velika = 1,
   },
   ["B1R4"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -2329,6 +2464,7 @@ return {
     teo = 1,
   },
   ["B1R5"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2345,6 +2481,7 @@ return {
     yushin = 1,
   },
   ["B1R6"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -2361,6 +2498,7 @@ return {
     teo = 2,
   },
   ["B1R7"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -2377,6 +2515,7 @@ return {
     velika = 1,
   },
   ["B1R8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2392,6 +2531,7 @@ return {
     velika = 1,
   },
   ["B1R9"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -2408,6 +2548,7 @@ return {
     velika = 1,
   },
   ["B1RC"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -2423,6 +2564,7 @@ return {
     teo = 1,
   },
   ["B1RD"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -2439,6 +2581,7 @@ return {
     teo = 1,
   },
   ["B1RG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -2453,6 +2596,7 @@ return {
     teo = 2,
   },
   ["B1RI"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -2469,6 +2613,7 @@ return {
     teo = 1,
   },
   ["B1RL"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -2485,6 +2630,7 @@ return {
     yushin = 1,
   },
   ["B1RM"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -2501,6 +2647,7 @@ return {
     yushin = 1,
   },
   ["B1RO"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -2516,6 +2663,7 @@ return {
     yushin = 1,
   },
   ["B1RQ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -2532,7 +2680,7 @@ return {
     yeonhee = 1,
   },
   ["B1RR"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -2546,6 +2694,7 @@ return {
     velika = 1,
   },
   ["B1RS"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -2563,6 +2712,7 @@ return {
     yushin = 1,
   },
   ["B1RU"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -2578,6 +2728,7 @@ return {
     teo = 1,
   },
   ["B1RV"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2592,6 +2743,7 @@ return {
     yeonhee = 1,
   },
   ["B1RW"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2606,6 +2758,7 @@ return {
     vanessa = 1,
   },
   ["B1RX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2621,6 +2774,7 @@ return {
     teo = 1,
   },
   ["B1RY"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -2636,6 +2790,7 @@ return {
     teo = 4,
   },
   ["B1RZ"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -2651,6 +2806,7 @@ return {
     teo = 1,
   },
   ["B1S0"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2666,6 +2822,7 @@ return {
     yushin = 1,
   },
   ["B1S1"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2682,6 +2839,7 @@ return {
     yushin = 1,
   },
   ["B1S3"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -2696,6 +2854,7 @@ return {
     sieg = 1,
   },
   ["B1S4"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2711,6 +2870,7 @@ return {
     yushin = 1,
   },
   ["B1S5"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -2728,6 +2888,7 @@ return {
     vanessa = 1,
   },
   ["B1S8"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -2746,6 +2907,7 @@ return {
     teo = 2,
   },
   ["B1SB"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -2762,6 +2924,7 @@ return {
     yushin = 1,
   },
   ["B1SD"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2777,6 +2940,7 @@ return {
     velika = 1,
   },
   ["B1SG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -2793,6 +2957,7 @@ return {
     teo = 1,
   },
   ["B1SI"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -2808,6 +2973,7 @@ return {
     yushin = 1,
   },
   ["B1SJ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -2824,6 +2990,7 @@ return {
     yeonhee = 1,
   },
   ["B1SK"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -2839,6 +3006,7 @@ return {
     vanessa = 1,
   },
   ["B1SL"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -2854,6 +3022,7 @@ return {
     sieg = 1,
   },
   ["B1SM"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -2870,6 +3039,7 @@ return {
     teo = 1,
   },
   ["B1SN"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -2884,7 +3054,7 @@ return {
     yushin = 1,
   },
   ["B1SP"] = {
-    ace = 2,
+    ace = 3,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -2900,7 +3070,7 @@ return {
     vanessa = 1,
   },
   ["B1SR"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -2916,6 +3086,7 @@ return {
     velika = 1,
   },
   ["B1SU"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -2933,6 +3104,7 @@ return {
     velika = 1,
   },
   ["B1SW"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -2949,7 +3121,7 @@ return {
     yushin = 2,
   },
   ["B1SX"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -2965,7 +3137,7 @@ return {
     teo = 2,
   },
   ["B1SY"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 2,
     dellons = 1,
@@ -2983,6 +3155,7 @@ return {
     velika = 1,
   },
   ["B1SZ"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -2999,6 +3172,7 @@ return {
     velika = 1,
   },
   ["B1T1"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3015,7 +3189,7 @@ return {
     teo = 2,
   },
   ["B1T2"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -3034,6 +3208,7 @@ return {
     velika = 1,
   },
   ["B1T3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3048,6 +3223,7 @@ return {
     vanessa = 1,
   },
   ["B1T5"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -3063,6 +3239,7 @@ return {
     teo = 2,
   },
   ["B1T6"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -3077,6 +3254,7 @@ return {
     yushin = 3,
   },
   ["B1T7"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -3091,6 +3269,7 @@ return {
     velika = 1,
   },
   ["B1T8"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 2,
     eileen = 1,
@@ -3106,6 +3285,7 @@ return {
     teo = 1,
   },
   ["B1T9"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -3123,6 +3303,7 @@ return {
     velika = 1,
   },
   ["B1TC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3139,7 +3320,7 @@ return {
     vanessa = 1,
   },
   ["B1TD"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -3157,6 +3338,7 @@ return {
     teo = 2,
   },
   ["B1TE"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -3172,6 +3354,7 @@ return {
     velika = 1,
   },
   ["B1TF"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -3187,7 +3370,7 @@ return {
     velika = 1,
   },
   ["B1TG"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -3201,6 +3384,7 @@ return {
     teo = 3,
   },
   ["B1TJ"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -3215,6 +3399,7 @@ return {
     yushin = 1,
   },
   ["B1TK"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -3231,6 +3416,7 @@ return {
     teo = 1,
   },
   ["B1TL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3247,6 +3433,7 @@ return {
     yushin = 3,
   },
   ["B1TM"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -3263,6 +3450,7 @@ return {
     yushin = 1,
   },
   ["B1TN"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -3279,6 +3467,7 @@ return {
     yushin = 1,
   },
   ["B1TP"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3295,6 +3484,7 @@ return {
     teo = 2,
   },
   ["B1TQ"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -3310,6 +3500,7 @@ return {
     teo = 1,
   },
   ["B1TR"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -3325,6 +3516,7 @@ return {
     teo = 2,
   },
   ["B1TW"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3339,6 +3531,7 @@ return {
     yushin = 1,
   },
   ["B1TX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -3354,6 +3547,7 @@ return {
     teo = 2,
   },
   ["B1TZ"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -3371,6 +3565,7 @@ return {
     teo = 1,
   },
   ["B1U0"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -3387,6 +3582,7 @@ return {
     yushin = 1,
   },
   ["B1U2"] = {
+    ace = 1,
     alice = 2,
     chancellor = 1,
     dellons = 1,
@@ -3404,7 +3600,7 @@ return {
     yushin = 1,
   },
   ["B1U3"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -3418,6 +3614,7 @@ return {
     sieg = 1,
   },
   ["B1U4"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -3433,6 +3630,7 @@ return {
     teo = 4,
   },
   ["B1U5"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -3448,6 +3646,7 @@ return {
     yushin = 1,
   },
   ["B1U6"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -3464,6 +3663,7 @@ return {
     teo = 3,
   },
   ["B1U7"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -3479,6 +3679,7 @@ return {
     velika = 2,
   },
   ["B1U8"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -3494,6 +3695,7 @@ return {
     yushin = 1,
   },
   ["B1U9"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -3510,6 +3712,7 @@ return {
     velika = 1,
   },
   ["B1UA"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -3528,6 +3731,7 @@ return {
     yushin = 1,
   },
   ["B1UB"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3544,6 +3748,7 @@ return {
     yushin = 2,
   },
   ["B1UC"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -3561,6 +3766,7 @@ return {
     teo = 1,
   },
   ["B1UD"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -3577,6 +3783,7 @@ return {
     velika = 2,
   },
   ["B1UE"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 2,
@@ -3591,6 +3798,7 @@ return {
     velika = 1,
   },
   ["B1UF"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -3607,6 +3815,7 @@ return {
     velika = 1,
   },
   ["B1UG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -3623,6 +3832,7 @@ return {
     yushin = 1,
   },
   ["B1UH"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -3638,6 +3848,7 @@ return {
     teo = 1,
   },
   ["B1UI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3654,6 +3865,7 @@ return {
     yushin = 1,
   },
   ["B1UJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3668,6 +3880,7 @@ return {
     yushin = 1,
   },
   ["B1UK"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -3684,6 +3897,7 @@ return {
     yushin = 1,
   },
   ["B1UL"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -3699,6 +3913,7 @@ return {
     velika = 1,
   },
   ["B1UM"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -3714,6 +3929,7 @@ return {
     teo = 1,
   },
   ["B1UN"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -3729,6 +3945,7 @@ return {
     teo = 3,
   },
   ["B1UO"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -3747,6 +3964,7 @@ return {
     velika = 1,
   },
   ["B1UQ"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -3764,7 +3982,7 @@ return {
     yushin = 1,
   },
   ["B1UR"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -3780,6 +3998,7 @@ return {
     yushin = 1,
   },
   ["B1US"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -3795,6 +4014,7 @@ return {
     velika = 1,
   },
   ["B1UT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3809,6 +4029,7 @@ return {
     teo = 2,
   },
   ["B1V6"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 2,
     eileen = 1,
@@ -3823,6 +4044,7 @@ return {
     sieg = 1,
   },
   ["B1VF"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -3838,6 +4060,7 @@ return {
     teo = 1,
   },
   ["B1VL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3854,6 +4077,7 @@ return {
     velika = 1,
   },
   ["B1VV"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -3869,6 +4093,7 @@ return {
     yushin = 1,
   },
   ["B1VW"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -3884,6 +4109,7 @@ return {
     velika = 1,
   },
   ["B1W8"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     bidam = 1,
@@ -3903,6 +4129,7 @@ return {
     yushin = 1,
   },
   ["B1WE"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -3919,6 +4146,7 @@ return {
     vanessa = 1,
   },
   ["B1X0"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -3936,6 +4164,7 @@ return {
     yeonhee = 1,
   },
   ["B1X4"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -3951,7 +4180,7 @@ return {
     teo = 1,
   },
   ["B1XQ"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -3966,6 +4195,7 @@ return {
     teo = 1,
   },
   ["B1XV"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     bidam = 1,
@@ -3984,7 +4214,7 @@ return {
     teo = 2,
   },
   ["B1Y0"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -3999,6 +4229,7 @@ return {
     yushin = 1,
   },
   ["B1YA"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -4015,6 +4246,7 @@ return {
     teo = 1,
   },
   ["B1YD"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -4034,6 +4266,7 @@ return {
     velika = 1,
   },
   ["B1YE"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 2,
     eileen = 1,
@@ -4052,7 +4285,7 @@ return {
     teo = 2,
   },
   ["B1YV"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -4070,6 +4303,7 @@ return {
     velika = 1,
   },
   ["B1Z1"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     bidam = 1,
@@ -4087,7 +4321,7 @@ return {
     teo = 2,
   },
   ["B1Z3"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4105,7 +4339,7 @@ return {
     teo = 2,
   },
   ["B1ZA"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 2,
     dellons = 1,
@@ -4122,6 +4356,7 @@ return {
     yeonhee = 1,
   },
   ["B1ZL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -4135,6 +4370,7 @@ return {
     yushin = 2,
   },
   ["B1ZP"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -4149,6 +4385,7 @@ return {
     teo = 3,
   },
   ["B1ZU"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -4166,7 +4403,7 @@ return {
     vanessa = 1,
   },
   ["B200"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -4182,6 +4419,7 @@ return {
     sieg = 1,
   },
   ["B206"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     chancellor = 2,
@@ -4197,6 +4435,7 @@ return {
     teo = 3,
   },
   ["B20A"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4212,6 +4451,7 @@ return {
     yushin = 1,
   },
   ["B20K"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -4228,6 +4468,7 @@ return {
     vanessa = 2,
   },
   ["B20L"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -4246,6 +4487,7 @@ return {
     teo = 2,
   },
   ["B20N"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -4260,6 +4502,7 @@ return {
     sieg = 2,
   },
   ["B20O"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4275,6 +4518,7 @@ return {
     teo = 3,
   },
   ["B20U"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -4291,6 +4535,7 @@ return {
     teo = 1,
   },
   ["B216"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     bidam = 1,
@@ -4311,6 +4556,7 @@ return {
     yushin = 1,
   },
   ["B21E"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -4328,6 +4574,7 @@ return {
     yeonhee = 1,
   },
   ["B21G"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -4344,6 +4591,7 @@ return {
     teo = 2,
   },
   ["B21K"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     bidam = 1,
@@ -4362,6 +4610,7 @@ return {
     teo = 2,
   },
   ["B21Q"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -4379,6 +4628,7 @@ return {
     yeonhee = 1,
   },
   ["B21W"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -4395,6 +4645,7 @@ return {
     teo = 1,
   },
   ["B21X"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -4411,6 +4662,7 @@ return {
     vanessa = 1,
   },
   ["B225"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -4429,6 +4681,7 @@ return {
     velika = 1,
   },
   ["B226"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     dellons = 1,
@@ -4446,6 +4699,7 @@ return {
     yushin = 1,
   },
   ["B22C"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 1,
@@ -4463,6 +4717,7 @@ return {
     yushin = 1,
   },
   ["B22D"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4479,6 +4734,7 @@ return {
     yushin = 1,
   },
   ["B22F"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -4498,6 +4754,7 @@ return {
     vanessa = 1,
   },
   ["B22T"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -4513,6 +4770,7 @@ return {
     teo = 3,
   },
   ["B22V"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4527,6 +4785,7 @@ return {
     teo = 1,
   },
   ["B230"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -4544,6 +4803,7 @@ return {
     yushin = 1,
   },
   ["B23G"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -4561,6 +4821,7 @@ return {
     teo = 2,
   },
   ["B23N"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4577,7 +4838,7 @@ return {
     vanessa = 1,
   },
   ["B240"] = {
-    ace = 1,
+    ace = 2,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -4594,6 +4855,7 @@ return {
     teo = 1,
   },
   ["B242"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     eileen = 1,
@@ -4609,7 +4871,7 @@ return {
     teo = 2,
   },
   ["B246"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -4625,6 +4887,7 @@ return {
     teo = 4,
   },
   ["B24A"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -4642,6 +4905,7 @@ return {
     yushin = 2,
   },
   ["B24F"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     dellons = 1,
@@ -4659,6 +4923,7 @@ return {
     teo = 2,
   },
   ["B24I"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -4677,6 +4942,7 @@ return {
     yeonhee = 1,
   },
   ["B24M"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     eileen = 1,
@@ -4691,6 +4957,7 @@ return {
     teo = 3,
   },
   ["B24T"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -4707,6 +4974,7 @@ return {
     yushin = 1,
   },
   ["B253"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4722,6 +4990,7 @@ return {
     velika = 2,
   },
   ["B25N"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -4738,6 +5007,7 @@ return {
     teo = 2,
   },
   ["B25O"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -4754,7 +5024,7 @@ return {
     teo = 2,
   },
   ["B25Y"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -4770,6 +5040,7 @@ return {
     velika = 1,
   },
   ["B261"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -4786,6 +5057,7 @@ return {
     vanessa = 1,
   },
   ["B26N"] = {
+    ace = 1,
     aragon = 1,
     bidam = 2,
     chancellor = 1,
@@ -4805,6 +5077,7 @@ return {
     teo = 2,
   },
   ["B26X"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -4821,6 +5094,7 @@ return {
     sieg = 1,
   },
   ["B277"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -4836,6 +5110,7 @@ return {
     teo = 2,
   },
   ["B278"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -4852,7 +5127,7 @@ return {
     teo = 2,
   },
   ["B27N"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -4870,6 +5145,7 @@ return {
     velika = 1,
   },
   ["B281"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 3,
@@ -4884,7 +5160,7 @@ return {
     yushin = 1,
   },
   ["B282"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4902,6 +5178,7 @@ return {
     yushin = 1,
   },
   ["B288"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -4917,6 +5194,7 @@ return {
     velika = 1,
   },
   ["B289"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4934,6 +5212,7 @@ return {
     yushin = 1,
   },
   ["B28A"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4950,6 +5229,7 @@ return {
     yeonhee = 1,
   },
   ["B28B"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 2,
@@ -4966,6 +5246,7 @@ return {
     teo = 1,
   },
   ["B28C"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 2,
     eileen = 2,
@@ -4980,6 +5261,7 @@ return {
     teo = 1,
   },
   ["B28D"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -4998,7 +5280,7 @@ return {
     yushin = 1,
   },
   ["B28E"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -5015,6 +5297,7 @@ return {
     yeonhee = 1,
   },
   ["B28H"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -5032,6 +5315,7 @@ return {
     vanessa = 1,
   },
   ["B28I"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 2,
@@ -5047,6 +5331,7 @@ return {
     yushin = 2,
   },
   ["B28J"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -5063,6 +5348,7 @@ return {
     yushin = 1,
   },
   ["B28K"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -5082,6 +5368,7 @@ return {
     yushin = 1,
   },
   ["B28L"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5097,6 +5384,7 @@ return {
     yushin = 2,
   },
   ["B28M"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -5116,6 +5404,7 @@ return {
     yushin = 1,
   },
   ["B28N"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -5132,6 +5421,7 @@ return {
     velika = 1,
   },
   ["B28O"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -5146,6 +5436,7 @@ return {
     yushin = 1,
   },
   ["B28P"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -5161,6 +5452,7 @@ return {
     yeonhee = 1,
   },
   ["B28Q"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -5176,6 +5468,7 @@ return {
     velika = 1,
   },
   ["B28R"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -5191,6 +5484,7 @@ return {
     teo = 2,
   },
   ["B28S"] = {
+    ace = 1,
     alice = 2,
     chancellor = 1,
     eileen = 1,
@@ -5207,6 +5501,7 @@ return {
     velika = 1,
   },
   ["B28T"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -5223,6 +5518,7 @@ return {
     vanessa = 1,
   },
   ["B28U"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     eileen = 1,
@@ -5237,6 +5533,7 @@ return {
     yushin = 1,
   },
   ["B28V"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -5253,6 +5550,7 @@ return {
     velika = 1,
   },
   ["B28W"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 1,
@@ -5270,6 +5568,7 @@ return {
     teo = 2,
   },
   ["B291"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5286,6 +5585,7 @@ return {
     teo = 2,
   },
   ["B292"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -5302,6 +5602,7 @@ return {
     teo = 2,
   },
   ["B293"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -5321,7 +5622,7 @@ return {
     teo = 1,
   },
   ["B294"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5336,6 +5637,7 @@ return {
     velika = 1,
   },
   ["B295"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -5350,6 +5652,7 @@ return {
     teo = 1,
   },
   ["B296"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -5367,6 +5670,7 @@ return {
     teo = 1,
   },
   ["B298"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5382,6 +5686,7 @@ return {
     teo = 1,
   },
   ["B299"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -5396,6 +5701,7 @@ return {
     teo = 1,
   },
   ["B29A"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5411,6 +5717,7 @@ return {
     teo = 1,
   },
   ["B29B"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5424,6 +5731,7 @@ return {
     yushin = 1,
   },
   ["B29C"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -5440,6 +5748,7 @@ return {
     vanessa = 1,
   },
   ["B29D"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -5457,6 +5766,7 @@ return {
     velika = 1,
   },
   ["B29E"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -5473,6 +5783,7 @@ return {
     velika = 1,
   },
   ["B29F"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -5488,6 +5799,7 @@ return {
     teo = 3,
   },
   ["B29G"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -5504,6 +5816,7 @@ return {
     yushin = 1,
   },
   ["B29H"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5521,6 +5834,7 @@ return {
     vanessa = 1,
   },
   ["B29I"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -5537,6 +5851,7 @@ return {
     velika = 1,
   },
   ["B29J"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5554,6 +5869,7 @@ return {
     velika = 2,
   },
   ["B29K"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -5570,6 +5886,7 @@ return {
     yeonhee = 1,
   },
   ["B29N"] = {
+    ace = 1,
     chancellor = 3,
     eileen = 1,
     espada = 1,
@@ -5584,6 +5901,7 @@ return {
     velika = 1,
   },
   ["B29P"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -5601,6 +5919,7 @@ return {
     teo = 2,
   },
   ["B29Q"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -5615,6 +5934,7 @@ return {
     teo = 2,
   },
   ["B29R"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -5631,6 +5951,7 @@ return {
     yushin = 1,
   },
   ["B29S"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -5645,6 +5966,7 @@ return {
     vanessa = 1,
   },
   ["B29T"] = {
+    ace = 1,
     aragon = 2,
     bidam = 1,
     chancellor = 1,
@@ -5664,6 +5986,7 @@ return {
     vanessa = 1,
   },
   ["B29U"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -5679,6 +6002,7 @@ return {
     teo = 1,
   },
   ["B29V"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -5696,6 +6020,7 @@ return {
     teo = 1,
   },
   ["B29W"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -5712,6 +6037,7 @@ return {
     yushin = 1,
   },
   ["B29X"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -5727,6 +6053,7 @@ return {
     teo = 2,
   },
   ["B29Y"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -5742,6 +6069,7 @@ return {
     teo = 3,
   },
   ["B29Z"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -5758,6 +6086,7 @@ return {
     yushin = 1,
   },
   ["B2A0"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -5773,6 +6102,7 @@ return {
     yushin = 1,
   },
   ["B2A1"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -5789,6 +6119,7 @@ return {
     teo = 1,
   },
   ["B2A2"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -5804,6 +6135,7 @@ return {
     yeonhee = 1,
   },
   ["B2A3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -5822,7 +6154,7 @@ return {
     yushin = 1,
   },
   ["B2A5"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -5836,6 +6168,7 @@ return {
     sieg = 1,
   },
   ["B2A6"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5853,6 +6186,7 @@ return {
     yeonhee = 1,
   },
   ["B2A7"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -5868,7 +6202,7 @@ return {
     velika = 2,
   },
   ["B2A8"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -5881,6 +6215,7 @@ return {
     sieg = 1,
   },
   ["B2A9"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -5896,6 +6231,7 @@ return {
     yushin = 2,
   },
   ["B2AA"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -5910,6 +6246,7 @@ return {
     yushin = 3,
   },
   ["B2AB"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -5925,7 +6262,7 @@ return {
     yushin = 1,
   },
   ["B2AC"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -5943,6 +6280,7 @@ return {
     teo = 1,
   },
   ["B2AE"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     dellons = 1,
@@ -5959,6 +6297,7 @@ return {
     vanessa = 1,
   },
   ["B2AF"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -5978,6 +6317,7 @@ return {
     velika = 1,
   },
   ["B2AG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -5995,6 +6335,7 @@ return {
     yeonhee = 1,
   },
   ["B2AH"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -6011,7 +6352,7 @@ return {
     velika = 1,
   },
   ["B2AI"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6027,6 +6368,7 @@ return {
     yushin = 1,
   },
   ["B2AJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6040,6 +6382,7 @@ return {
     teo = 1,
   },
   ["B2AL"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -6059,6 +6402,7 @@ return {
     teo = 2,
   },
   ["B2AM"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 2,
     espada = 2,
@@ -6073,7 +6417,7 @@ return {
     teo = 1,
   },
   ["B2AN"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -6089,6 +6433,7 @@ return {
     teo = 1,
   },
   ["B2AP"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     bidam = 1,
@@ -6106,6 +6451,7 @@ return {
     yeonhee = 1,
   },
   ["B2AQ"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -6121,6 +6467,7 @@ return {
     yushin = 1,
   },
   ["B2AR"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -6136,6 +6483,7 @@ return {
     teo = 1,
   },
   ["B2AS"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -6150,7 +6498,7 @@ return {
     teo = 3,
   },
   ["B2AU"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -6165,7 +6513,7 @@ return {
     teo = 1,
   },
   ["B2AV"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -6181,7 +6529,7 @@ return {
     yeonhee = 1,
   },
   ["B2AW"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6198,6 +6546,7 @@ return {
     yushin = 1,
   },
   ["B2AX"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -6214,6 +6563,7 @@ return {
     vanessa = 1,
   },
   ["B2AY"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -6231,6 +6581,7 @@ return {
     teo = 2,
   },
   ["B2B1"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -6246,6 +6597,7 @@ return {
     vanessa = 1,
   },
   ["B2B2"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6261,6 +6613,7 @@ return {
     yushin = 1,
   },
   ["B2B3"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -6277,6 +6630,7 @@ return {
     teo = 1,
   },
   ["B2B4"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6293,7 +6647,7 @@ return {
     teo = 2,
   },
   ["B2B5"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6308,6 +6662,7 @@ return {
     teo = 2,
   },
   ["B2B7"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6324,6 +6679,7 @@ return {
     yushin = 1,
   },
   ["B2B8"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 3,
     eileen = 1,
@@ -6338,6 +6694,7 @@ return {
     taka = 1,
   },
   ["B2B9"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6353,7 +6710,7 @@ return {
     yushin = 1,
   },
   ["B2BA"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -6371,6 +6728,7 @@ return {
     teo = 3,
   },
   ["B2BB"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -6388,6 +6746,7 @@ return {
     yushin = 1,
   },
   ["B2BC"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -6404,7 +6763,7 @@ return {
     velika = 1,
   },
   ["B2BD"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -6421,6 +6780,7 @@ return {
     yushin = 1,
   },
   ["B2BE"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -6437,7 +6797,7 @@ return {
     velika = 1,
   },
   ["B2BF"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -6453,6 +6813,7 @@ return {
     vanessa = 1,
   },
   ["B2BG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -6470,6 +6831,7 @@ return {
     yushin = 1,
   },
   ["B2BH"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 3,
     espada = 1,
@@ -6483,6 +6845,7 @@ return {
     yushin = 2,
   },
   ["B2BI"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -6501,6 +6864,7 @@ return {
     yushin = 1,
   },
   ["B2BJ"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -6516,6 +6880,7 @@ return {
     yushin = 1,
   },
   ["B2BL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6530,6 +6895,7 @@ return {
     teo = 1,
   },
   ["B2BM"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -6546,6 +6912,7 @@ return {
     teo = 1,
   },
   ["B2BO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6560,6 +6927,7 @@ return {
     teo = 1,
   },
   ["B2BP"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -6576,7 +6944,7 @@ return {
     yushin = 1,
   },
   ["B2BQ"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -6592,6 +6960,7 @@ return {
     yushin = 1,
   },
   ["B2BR"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -6606,6 +6975,7 @@ return {
     yushin = 1,
   },
   ["B2BS"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 3,
@@ -6621,6 +6991,7 @@ return {
     teo = 3,
   },
   ["B2BT"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -6636,6 +7007,7 @@ return {
     teo = 3,
   },
   ["B2BU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -6651,6 +7023,7 @@ return {
     teo = 1,
   },
   ["B2BV"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6665,7 +7038,7 @@ return {
     velika = 1,
   },
   ["B2BX"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     ballista = 1,
     chancellor = 1,
@@ -6682,6 +7055,7 @@ return {
     velika = 1,
   },
   ["B2BY"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -6698,6 +7072,7 @@ return {
     velika = 1,
   },
   ["B2BZ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6713,6 +7088,7 @@ return {
     velika = 1,
   },
   ["B2C0"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6727,6 +7103,7 @@ return {
     teo = 1,
   },
   ["B2C2"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     dellons = 1,
@@ -6743,6 +7120,7 @@ return {
     velika = 1,
   },
   ["B2C3"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     colt = 1,
@@ -6761,6 +7139,7 @@ return {
     yushin = 1,
   },
   ["B2C5"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -6777,7 +7156,7 @@ return {
     velika = 1,
   },
   ["B2CA"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -6792,6 +7171,7 @@ return {
     teo = 1,
   },
   ["B2CB"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -6807,6 +7187,7 @@ return {
     vanessa = 1,
   },
   ["B2CC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6823,6 +7204,7 @@ return {
     yushin = 1,
   },
   ["B2CD"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -6840,6 +7222,7 @@ return {
     velika = 1,
   },
   ["B2CE"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -6856,6 +7239,7 @@ return {
     yushin = 1,
   },
   ["B2CH"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -6872,6 +7256,7 @@ return {
     teo = 2,
   },
   ["B2CK"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -6889,7 +7274,7 @@ return {
     yushin = 1,
   },
   ["B2CL"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -6905,6 +7290,7 @@ return {
     teo = 3,
   },
   ["B2CN"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -6922,6 +7308,7 @@ return {
     yushin = 1,
   },
   ["B2CO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6936,6 +7323,7 @@ return {
     yushin = 2,
   },
   ["B2CP"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -6953,7 +7341,7 @@ return {
     yushin = 1,
   },
   ["B2CQ"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -6968,6 +7356,7 @@ return {
     vanessa = 1,
   },
   ["B2CR"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -6983,6 +7372,7 @@ return {
     yushin = 1,
   },
   ["B2CS"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -7000,7 +7390,7 @@ return {
     yushin = 1,
   },
   ["B2CT"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7017,6 +7407,7 @@ return {
     yushin = 1,
   },
   ["B2CU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7033,6 +7424,7 @@ return {
     teo = 2,
   },
   ["B2CV"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     eileen = 1,
@@ -7050,6 +7442,7 @@ return {
     yushin = 1,
   },
   ["B2CX"] = {
+    ace = 1,
     aragon = 1,
     bidam = 2,
     chancellor = 1,
@@ -7066,6 +7459,7 @@ return {
     yushin = 1,
   },
   ["B2CY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7080,6 +7474,7 @@ return {
     teo = 2,
   },
   ["B2CZ"] = {
+    ace = 1,
     ballista = 2,
     chancellor = 1,
     eileen = 1,
@@ -7094,6 +7489,7 @@ return {
     teo = 2,
   },
   ["B2D0"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -7108,6 +7504,7 @@ return {
     teo = 2,
   },
   ["B2D1"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     colt = 3,
@@ -7125,6 +7522,7 @@ return {
     yushin = 1,
   },
   ["B2D2"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7139,6 +7537,7 @@ return {
     velika = 1,
   },
   ["B2D3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7154,6 +7553,7 @@ return {
     yushin = 1,
   },
   ["B2D4"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -7169,6 +7569,7 @@ return {
     yushin = 1,
   },
   ["B2D5"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 2,
@@ -7185,6 +7586,7 @@ return {
     velika = 1,
   },
   ["B2D6"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -7201,6 +7603,7 @@ return {
     yushin = 1,
   },
   ["B2D7"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -7216,6 +7619,7 @@ return {
     teo = 3,
   },
   ["B2D8"] = {
+    ace = 1,
     alice = 1,
     chancellor = 3,
     eileen = 2,
@@ -7230,6 +7634,7 @@ return {
     teo = 2,
   },
   ["B2DA"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -7245,7 +7650,7 @@ return {
     velika = 1,
   },
   ["B2DB"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7259,7 +7664,7 @@ return {
     teo = 1,
   },
   ["B2DC"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     bidam = 1,
     chancellor = 2,
@@ -7275,6 +7680,7 @@ return {
     vanessa = 1,
   },
   ["B2DD"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -7289,6 +7695,7 @@ return {
     yushin = 1,
   },
   ["B2DE"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -7305,7 +7712,7 @@ return {
     yushin = 1,
   },
   ["B2DF"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     bidam = 3,
     chancellor = 1,
@@ -7322,6 +7729,7 @@ return {
     teo = 1,
   },
   ["B2DG"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7337,6 +7745,7 @@ return {
     velika = 1,
   },
   ["B2DH"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -7351,6 +7760,7 @@ return {
     yushin = 2,
   },
   ["B2DI"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -7366,7 +7776,7 @@ return {
     yushin = 1,
   },
   ["B2DJ"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -7381,6 +7791,7 @@ return {
     teo = 3,
   },
   ["B2DK"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7395,6 +7806,7 @@ return {
     vanessa = 1,
   },
   ["B2DL"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -7410,6 +7822,7 @@ return {
     velika = 2,
   },
   ["B2DM"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7427,6 +7840,7 @@ return {
     yeonhee = 1,
   },
   ["B2DN"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -7444,6 +7858,7 @@ return {
     yeonhee = 1,
   },
   ["B2DO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7458,6 +7873,7 @@ return {
     yushin = 1,
   },
   ["B2DP"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -7474,6 +7890,7 @@ return {
     teo = 1,
   },
   ["B2DR"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -7488,6 +7905,7 @@ return {
     yeonhee = 1,
   },
   ["B2DS"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -7503,6 +7921,7 @@ return {
     teo = 2,
   },
   ["B2DT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -7518,6 +7937,7 @@ return {
     velika = 1,
   },
   ["B2DU"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -7532,6 +7952,7 @@ return {
     teo = 3,
   },
   ["B2DW"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7547,6 +7968,7 @@ return {
     teo = 3,
   },
   ["B2DY"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -7562,6 +7984,7 @@ return {
     velika = 2,
   },
   ["B2DZ"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -7580,6 +8003,7 @@ return {
     teo = 1,
   },
   ["B2E1"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7598,6 +8022,7 @@ return {
     yushin = 1,
   },
   ["B2E2"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -7615,6 +8040,7 @@ return {
     vanessa = 1,
   },
   ["B2E4"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -7633,6 +8059,7 @@ return {
     yushin = 1,
   },
   ["B2E5"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     dellons = 1,
@@ -7649,6 +8076,7 @@ return {
     sieg = 1,
   },
   ["B2E8"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -7665,6 +8093,7 @@ return {
     teo = 1,
   },
   ["B2E9"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7680,6 +8109,7 @@ return {
     yushin = 1,
   },
   ["B2EA"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -7695,6 +8125,7 @@ return {
     velika = 1,
   },
   ["B2EB"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7710,6 +8141,7 @@ return {
     yushin = 1,
   },
   ["B2EC"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -7726,7 +8158,7 @@ return {
     vanessa = 1,
   },
   ["B2ED"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7742,6 +8174,7 @@ return {
     teo = 2,
   },
   ["B2EE"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -7756,6 +8189,7 @@ return {
     teo = 1,
   },
   ["B2EF"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -7771,6 +8205,7 @@ return {
     yushin = 1,
   },
   ["B2EG"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     bidam = 1,
@@ -7790,6 +8225,7 @@ return {
     yushin = 1,
   },
   ["B2EH"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -7806,6 +8242,7 @@ return {
     teo = 2,
   },
   ["B2EI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7820,7 +8257,7 @@ return {
     yushin = 1,
   },
   ["B2EJ"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -7835,7 +8272,7 @@ return {
     yushin = 2,
   },
   ["B2EK"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7850,6 +8287,7 @@ return {
     yushin = 1,
   },
   ["B2EL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7863,6 +8301,7 @@ return {
     teo = 2,
   },
   ["B2EO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7880,6 +8319,7 @@ return {
     velika = 1,
   },
   ["B2EP"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7897,6 +8337,7 @@ return {
     vanessa = 1,
   },
   ["B2EQ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -7913,6 +8354,7 @@ return {
     teo = 1,
   },
   ["B2ER"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     colt = 1,
@@ -7930,6 +8372,7 @@ return {
     teo = 1,
   },
   ["B2EU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7946,6 +8389,7 @@ return {
     yushin = 1,
   },
   ["B2EV"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -7962,6 +8406,7 @@ return {
     yeonhee = 1,
   },
   ["B2EW"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -7976,6 +8421,7 @@ return {
     teo = 3,
   },
   ["B2EX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -7991,6 +8437,7 @@ return {
     teo = 1,
   },
   ["B2EY"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     colt = 1,
@@ -8007,7 +8454,7 @@ return {
     teo = 2,
   },
   ["B2EZ"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8023,6 +8470,7 @@ return {
     velika = 1,
   },
   ["B2F1"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -8039,6 +8487,7 @@ return {
     vanessa = 1,
   },
   ["B2F2"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -8054,6 +8503,7 @@ return {
     teo = 2,
   },
   ["B2F3"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -8069,6 +8519,7 @@ return {
     velika = 1,
   },
   ["B2F4"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -8086,6 +8537,7 @@ return {
     vanessa = 1,
   },
   ["B2F7"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8101,6 +8553,7 @@ return {
     yushin = 1,
   },
   ["B2F8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -8116,6 +8569,7 @@ return {
     yushin = 1,
   },
   ["B2F9"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -8130,6 +8584,7 @@ return {
     teo = 1,
   },
   ["B2FB"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 3,
     espada = 1,
@@ -8145,7 +8600,7 @@ return {
     velika = 1,
   },
   ["B2FC"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -8161,6 +8616,7 @@ return {
     sieg = 1,
   },
   ["B2FD"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -8177,6 +8633,7 @@ return {
     teo = 2,
   },
   ["B2FE"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8193,6 +8650,7 @@ return {
     yushin = 1,
   },
   ["B2FF"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     eileen = 1,
@@ -8206,6 +8664,7 @@ return {
     sieg = 1,
   },
   ["B2FG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -8220,6 +8679,7 @@ return {
     teo = 1,
   },
   ["B2FI"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -8234,6 +8694,7 @@ return {
     yushin = 1,
   },
   ["B2FJ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -8249,7 +8710,7 @@ return {
     teo = 2,
   },
   ["B2FK"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -8267,6 +8728,7 @@ return {
     vanessa = 1,
   },
   ["B2FM"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -8284,7 +8746,7 @@ return {
     velika = 1,
   },
   ["B2FN"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -8299,6 +8761,7 @@ return {
     yushin = 1,
   },
   ["B2FO"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 3,
@@ -8314,6 +8777,7 @@ return {
     teo = 1,
   },
   ["B2FP"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 2,
@@ -8327,6 +8791,7 @@ return {
     yushin = 1,
   },
   ["B2FQ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -8343,6 +8808,7 @@ return {
     teo = 2,
   },
   ["B2FR"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -8360,6 +8826,7 @@ return {
     teo = 1,
   },
   ["B2FS"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8376,6 +8843,7 @@ return {
     yushin = 2,
   },
   ["B2FT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8394,7 +8862,7 @@ return {
     yushin = 1,
   },
   ["B2FU"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -8411,6 +8879,7 @@ return {
     yeonhee = 1,
   },
   ["B2FV"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -8425,6 +8894,7 @@ return {
     teo = 1,
   },
   ["B2FW"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -8440,6 +8910,7 @@ return {
     teo = 1,
   },
   ["B2FX"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -8456,6 +8927,7 @@ return {
     vanessa = 1,
   },
   ["B2FY"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -8471,6 +8943,7 @@ return {
     teo = 3,
   },
   ["B2FZ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8487,7 +8960,7 @@ return {
     velika = 1,
   },
   ["B2G0"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8504,6 +8977,7 @@ return {
     velika = 1,
   },
   ["B2G1"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8521,6 +8995,7 @@ return {
     yushin = 1,
   },
   ["B2G2"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -8538,6 +9013,7 @@ return {
     yushin = 1,
   },
   ["B2G4"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -8555,6 +9031,7 @@ return {
     yushin = 1,
   },
   ["B2G5"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -8570,6 +9047,7 @@ return {
     sieg = 1,
   },
   ["B2G6"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -8584,6 +9062,7 @@ return {
     teo = 3,
   },
   ["B2G7"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 2,
     eileen = 1,
@@ -8603,6 +9082,7 @@ return {
     yushin = 1,
   },
   ["B2G8"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 2,
@@ -8618,6 +9098,7 @@ return {
     velika = 1,
   },
   ["B2GA"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -8633,6 +9114,7 @@ return {
     velika = 1,
   },
   ["B2GB"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8647,6 +9129,7 @@ return {
     teo = 2,
   },
   ["B2GC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -8664,6 +9147,7 @@ return {
     yeonhee = 1,
   },
   ["B2GD"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -8680,6 +9164,7 @@ return {
     velika = 1,
   },
   ["B2GE"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -8696,6 +9181,7 @@ return {
     yushin = 1,
   },
   ["B2GF"] = {
+    ace = 1,
     alice = 1,
     bidam = 2,
     chancellor = 1,
@@ -8711,6 +9197,7 @@ return {
     teo = 2,
   },
   ["B2GG"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -8727,6 +9214,7 @@ return {
     yushin = 1,
   },
   ["B2GH"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -8742,6 +9230,7 @@ return {
     velika = 1,
   },
   ["B2GI"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -8759,6 +9248,7 @@ return {
     velika = 1,
   },
   ["B2GK"] = {
+    ace = 1,
     chancellor = 3,
     eileen = 1,
     espada = 1,
@@ -8775,6 +9265,7 @@ return {
     yushin = 1,
   },
   ["B2GL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8789,6 +9280,7 @@ return {
     yushin = 1,
   },
   ["B2GN"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -8805,6 +9297,7 @@ return {
     yushin = 1,
   },
   ["B2GO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -8818,7 +9311,7 @@ return {
     teo = 1,
   },
   ["B2GP"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8834,6 +9327,7 @@ return {
     velika = 1,
   },
   ["B2GQ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8849,7 +9343,7 @@ return {
     yushin = 1,
   },
   ["B2GR"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -8865,7 +9359,7 @@ return {
     velika = 1,
   },
   ["B2GS"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -8882,6 +9376,7 @@ return {
     teo = 2,
   },
   ["B2GT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8897,6 +9392,7 @@ return {
     teo = 2,
   },
   ["B2GU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -8911,6 +9407,7 @@ return {
     teo = 2,
   },
   ["B2GV"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -8927,6 +9424,7 @@ return {
     velika = 1,
   },
   ["B2GW"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -8943,6 +9441,7 @@ return {
     yushin = 1,
   },
   ["B2GY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8958,6 +9457,7 @@ return {
     velika = 1,
   },
   ["B2GZ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -8974,6 +9474,7 @@ return {
     vanessa = 1,
   },
   ["B2H0"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -8990,6 +9491,7 @@ return {
     vanessa = 1,
   },
   ["B2H1"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -9004,6 +9506,7 @@ return {
     yushin = 1,
   },
   ["B2H3"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -9019,6 +9522,7 @@ return {
     teo = 1,
   },
   ["B2H4"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -9035,6 +9539,7 @@ return {
     teo = 2,
   },
   ["B2H5"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -9050,6 +9555,7 @@ return {
     yeonhee = 1,
   },
   ["B2H6"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9065,6 +9571,7 @@ return {
     teo = 1,
   },
   ["B2H7"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9080,6 +9587,7 @@ return {
     teo = 1,
   },
   ["B2H8"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -9096,6 +9604,7 @@ return {
     yeonhee = 1,
   },
   ["B2H9"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -9111,6 +9620,7 @@ return {
     velika = 1,
   },
   ["B2HD"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -9125,6 +9635,7 @@ return {
     teo = 2,
   },
   ["B2HE"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9142,6 +9653,7 @@ return {
     yushin = 1,
   },
   ["B2HF"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -9157,6 +9669,7 @@ return {
     vanessa = 1,
   },
   ["B2HH"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -9174,6 +9687,7 @@ return {
     teo = 1,
   },
   ["B2HI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9189,6 +9703,7 @@ return {
     yushin = 1,
   },
   ["B2HJ"] = {
+    ace = 1,
     aragon = 1,
     ballista = 2,
     chancellor = 1,
@@ -9204,7 +9719,7 @@ return {
     yushin = 1,
   },
   ["B2HM"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -9220,6 +9735,7 @@ return {
     teo = 1,
   },
   ["B2HN"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -9235,6 +9751,7 @@ return {
     teo = 2,
   },
   ["B2HQ"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 3,
@@ -9249,6 +9766,7 @@ return {
     teo = 1,
   },
   ["B2HR"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -9265,6 +9783,7 @@ return {
     teo = 1,
   },
   ["B2HS"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -9281,6 +9800,7 @@ return {
     teo = 1,
   },
   ["B2HT"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -9295,6 +9815,7 @@ return {
     teo = 1,
   },
   ["B2HW"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -9311,6 +9832,7 @@ return {
     teo = 1,
   },
   ["B2HX"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -9327,7 +9849,7 @@ return {
     velika = 1,
   },
   ["B2HY"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9343,7 +9865,7 @@ return {
     yushin = 1,
   },
   ["B2HZ"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -9362,6 +9884,7 @@ return {
     yushin = 1,
   },
   ["B2I0"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9377,6 +9900,7 @@ return {
     velika = 1,
   },
   ["B2I1"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     dellons = 1,
@@ -9394,6 +9918,7 @@ return {
     teo = 2,
   },
   ["B2I2"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -9408,6 +9933,7 @@ return {
     yushin = 1,
   },
   ["B2I3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9424,6 +9950,7 @@ return {
     yeonhee = 1,
   },
   ["B2I4"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -9442,6 +9969,7 @@ return {
     yushin = 1,
   },
   ["B2I5"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -9457,7 +9985,7 @@ return {
     velika = 1,
   },
   ["B2I6"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     chancellor = 2,
     dellons = 1,
@@ -9475,6 +10003,7 @@ return {
     yushin = 3,
   },
   ["B2I7"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -9492,7 +10021,7 @@ return {
     velika = 1,
   },
   ["B2I9"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -9508,6 +10037,7 @@ return {
     yushin = 1,
   },
   ["B2IA"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -9521,6 +10051,7 @@ return {
     spike = 1,
   },
   ["B2IB"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -9537,6 +10068,7 @@ return {
     yushin = 1,
   },
   ["B2IC"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -9553,6 +10085,7 @@ return {
     teo = 3,
   },
   ["B2ID"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9566,6 +10099,7 @@ return {
     velika = 1,
   },
   ["B2IF"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -9581,6 +10115,7 @@ return {
     teo = 3,
   },
   ["B2IG"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -9596,7 +10131,7 @@ return {
     teo = 1,
   },
   ["B2IH"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -9612,6 +10147,7 @@ return {
     teo = 1,
   },
   ["B2II"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9627,6 +10163,7 @@ return {
     teo = 2,
   },
   ["B2IJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9642,6 +10179,7 @@ return {
     teo = 1,
   },
   ["B2IK"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -9657,6 +10195,7 @@ return {
     vanessa = 1,
   },
   ["B2IL"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -9673,6 +10212,7 @@ return {
     velika = 1,
   },
   ["B2IM"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9688,6 +10228,7 @@ return {
     yushin = 1,
   },
   ["B2IO"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -9704,6 +10245,7 @@ return {
     velika = 1,
   },
   ["B2IP"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -9718,6 +10260,7 @@ return {
     teo = 1,
   },
   ["B2IQ"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -9733,6 +10276,7 @@ return {
     yushin = 2,
   },
   ["B2IR"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -9748,6 +10292,7 @@ return {
     yushin = 1,
   },
   ["B2IT"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -9765,7 +10310,7 @@ return {
     yeonhee = 1,
   },
   ["B2IV"] = {
-    ace = 2,
+    ace = 3,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9780,6 +10325,7 @@ return {
     teo = 3,
   },
   ["B2IW"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -9794,6 +10340,7 @@ return {
     velika = 1,
   },
   ["B2IY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 2,
@@ -9807,6 +10354,7 @@ return {
     velika = 1,
   },
   ["B2J0"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9823,6 +10371,7 @@ return {
     yushin = 1,
   },
   ["B2J1"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -9838,6 +10387,7 @@ return {
     teo = 1,
   },
   ["B2J2"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9853,6 +10403,7 @@ return {
     yushin = 1,
   },
   ["B2J3"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -9869,6 +10420,7 @@ return {
     teo = 2,
   },
   ["B2J4"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -9884,7 +10436,7 @@ return {
     yushin = 1,
   },
   ["B2J5"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9900,6 +10452,7 @@ return {
     yushin = 2,
   },
   ["B2J6"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -9916,6 +10469,7 @@ return {
     velika = 1,
   },
   ["B2J7"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -9931,6 +10485,7 @@ return {
     teo = 1,
   },
   ["B2J8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9947,6 +10502,7 @@ return {
     velika = 1,
   },
   ["B2J9"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -9965,6 +10521,7 @@ return {
     yushin = 1,
   },
   ["B2JA"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -9980,6 +10537,7 @@ return {
     yushin = 1,
   },
   ["B2JB"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -9996,6 +10554,7 @@ return {
     teo = 2,
   },
   ["B2JC"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -10014,6 +10573,7 @@ return {
     yushin = 1,
   },
   ["B2JD"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -10031,7 +10591,7 @@ return {
     yushin = 2,
   },
   ["B2JF"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -10050,6 +10610,7 @@ return {
     teo = 1,
   },
   ["B2JG"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 3,
     espada = 1,
@@ -10065,6 +10626,7 @@ return {
     teo = 1,
   },
   ["B2JH"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -10080,6 +10642,7 @@ return {
     sieg = 1,
   },
   ["B2JI"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     bidam = 1,
@@ -10100,6 +10663,7 @@ return {
     velika = 1,
   },
   ["B2JJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -10115,6 +10679,7 @@ return {
     vanessa = 1,
   },
   ["B2JK"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10130,6 +10695,7 @@ return {
     teo = 2,
   },
   ["B2JL"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -10146,6 +10712,7 @@ return {
     yushin = 1,
   },
   ["B2JM"] = {
+    ace = 1,
     aragon = 2,
     chancellor = 1,
     eileen = 1,
@@ -10159,7 +10726,7 @@ return {
     sieg = 1,
   },
   ["B2JN"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10175,7 +10742,7 @@ return {
     velika = 1,
   },
   ["B2JP"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -10193,6 +10760,7 @@ return {
     teo = 3,
   },
   ["B2JQ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10207,6 +10775,7 @@ return {
     yushin = 1,
   },
   ["B2JR"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -10223,7 +10792,7 @@ return {
     yushin = 1,
   },
   ["B2JS"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10239,6 +10808,7 @@ return {
     teo = 1,
   },
   ["B2JT"] = {
+    ace = 1,
     alice = 2,
     chancellor = 1,
     eileen = 1,
@@ -10255,6 +10825,7 @@ return {
     yushin = 1,
   },
   ["B2JU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10271,6 +10842,7 @@ return {
     teo = 1,
   },
   ["B2JV"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -10285,6 +10857,7 @@ return {
     vanessa = 1,
   },
   ["B2JW"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -10300,6 +10873,7 @@ return {
     teo = 4,
   },
   ["B2JX"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -10317,6 +10891,7 @@ return {
     yushin = 1,
   },
   ["B2JY"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -10331,6 +10906,7 @@ return {
     teo = 3,
   },
   ["B2JZ"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -10347,6 +10923,7 @@ return {
     velika = 2,
   },
   ["B2K1"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10363,6 +10940,7 @@ return {
     vanessa = 1,
   },
   ["B2K2"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -10382,6 +10960,7 @@ return {
     yushin = 1,
   },
   ["B2K3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10397,6 +10976,7 @@ return {
     velika = 1,
   },
   ["B2K4"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -10411,6 +10991,7 @@ return {
     teo = 2,
   },
   ["B2K5"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -10427,6 +11008,7 @@ return {
     yushin = 1,
   },
   ["B2K6"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -10440,7 +11022,7 @@ return {
     teo = 2,
   },
   ["B2K7"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -10455,7 +11037,7 @@ return {
     teo = 1,
   },
   ["B2K8"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10472,6 +11054,7 @@ return {
     velika = 1,
   },
   ["B2K9"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -10489,6 +11072,7 @@ return {
     yushin = 1,
   },
   ["B2KA"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 3,
@@ -10503,7 +11087,7 @@ return {
     teo = 3,
   },
   ["B2KB"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -10522,6 +11106,7 @@ return {
     yushin = 1,
   },
   ["B2KC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10537,6 +11122,7 @@ return {
     yushin = 1,
   },
   ["B2KE"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -10554,7 +11140,7 @@ return {
     velika = 1,
   },
   ["B2KF"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10571,6 +11157,7 @@ return {
     yushin = 1,
   },
   ["B2KG"] = {
+    ace = 1,
     chancellor = 2,
     colt = 1,
     eileen = 1,
@@ -10585,6 +11172,7 @@ return {
     velika = 1,
   },
   ["B2KH"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -10599,6 +11187,7 @@ return {
     velika = 1,
   },
   ["B2KI"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -10614,6 +11203,7 @@ return {
     teo = 2,
   },
   ["B2KJ"] = {
+    ace = 1,
     chancellor = 3,
     eileen = 1,
     espada = 1,
@@ -10631,6 +11221,7 @@ return {
     yushin = 1,
   },
   ["B2KK"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10646,6 +11237,7 @@ return {
     teo = 2,
   },
   ["B2KL"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -10661,7 +11253,7 @@ return {
     yushin = 1,
   },
   ["B2KM"] = {
-    ace = 1,
+    ace = 2,
     bidam = 3,
     chancellor = 2,
     eileen = 2,
@@ -10678,6 +11270,7 @@ return {
     teo = 2,
   },
   ["B2KN"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -10696,6 +11289,7 @@ return {
     velika = 1,
   },
   ["B2KO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -10714,6 +11308,7 @@ return {
     vanessa = 1,
   },
   ["B2KQ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -10729,6 +11324,7 @@ return {
     teo = 3,
   },
   ["B2KR"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -10743,6 +11339,7 @@ return {
     teo = 5,
   },
   ["B2KS"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 2,
@@ -10756,6 +11353,7 @@ return {
     teo = 1,
   },
   ["B2KT"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -10771,6 +11369,7 @@ return {
     teo = 2,
   },
   ["B2KU"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -10786,6 +11385,7 @@ return {
     teo = 3,
   },
   ["B2KV"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -10803,6 +11403,7 @@ return {
     vanessa = 1,
   },
   ["B2KW"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10818,6 +11419,7 @@ return {
     velika = 1,
   },
   ["B2KX"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -10837,7 +11439,7 @@ return {
     yeonhee = 1,
   },
   ["B2KY"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     colt = 1,
     eileen = 1,
@@ -10854,6 +11456,7 @@ return {
     velika = 1,
   },
   ["B2L0"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -10871,6 +11474,7 @@ return {
     teo = 2,
   },
   ["B2L2"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -10886,6 +11490,7 @@ return {
     teo = 1,
   },
   ["B2L3"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -10903,6 +11508,7 @@ return {
     yushin = 1,
   },
   ["B2L4"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -10917,6 +11523,7 @@ return {
     yushin = 2,
   },
   ["B2L5"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -10933,6 +11540,7 @@ return {
     velika = 1,
   },
   ["B2L6"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 2,
     eileen = 1,
@@ -10948,6 +11556,7 @@ return {
     yushin = 1,
   },
   ["B2L8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -10963,6 +11572,7 @@ return {
     teo = 1,
   },
   ["B2L9"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -10978,6 +11588,7 @@ return {
     velika = 1,
   },
   ["B2LA"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -10993,6 +11604,7 @@ return {
     velika = 1,
   },
   ["B2LC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11008,7 +11620,7 @@ return {
     yushin = 1,
   },
   ["B2LD"] = {
-    ace = 2,
+    ace = 3,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -11023,6 +11635,7 @@ return {
     teo = 1,
   },
   ["B2LE"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11039,6 +11652,7 @@ return {
     teo = 2,
   },
   ["B2LF"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -11056,6 +11670,7 @@ return {
     yushin = 1,
   },
   ["B2LQ"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -11072,6 +11687,7 @@ return {
     yushin = 1,
   },
   ["B2LR"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 1,
@@ -11088,6 +11704,7 @@ return {
     velika = 1,
   },
   ["B2LT"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -11106,6 +11723,7 @@ return {
     velika = 1,
   },
   ["B2LU"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -11121,6 +11739,7 @@ return {
     yushin = 1,
   },
   ["B2LV"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -11137,6 +11756,7 @@ return {
     teo = 1,
   },
   ["B2LW"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -11154,6 +11774,7 @@ return {
     velika = 1,
   },
   ["B2LX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11168,6 +11789,7 @@ return {
     velika = 1,
   },
   ["B2LZ"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -11184,6 +11806,7 @@ return {
     teo = 4,
   },
   ["B2M0"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 2,
@@ -11200,6 +11823,7 @@ return {
     teo = 3,
   },
   ["B2M1"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -11216,6 +11840,7 @@ return {
     yushin = 1,
   },
   ["B2M4"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11231,6 +11856,7 @@ return {
     yushin = 1,
   },
   ["B2M5"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11247,6 +11873,7 @@ return {
     vanessa = 1,
   },
   ["B2M6"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -11265,6 +11892,7 @@ return {
     velika = 1,
   },
   ["B2M7"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -11280,6 +11908,7 @@ return {
     velika = 1,
   },
   ["B2M8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11294,6 +11923,7 @@ return {
     yushin = 1,
   },
   ["B2M9"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11309,6 +11939,7 @@ return {
     yushin = 1,
   },
   ["B2MA"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -11323,7 +11954,7 @@ return {
     teo = 2,
   },
   ["B2MB"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -11339,6 +11970,7 @@ return {
     yushin = 2,
   },
   ["B2MC"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -11353,6 +11985,7 @@ return {
     sieg = 1,
   },
   ["B2MD"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11369,6 +12002,7 @@ return {
     velika = 1,
   },
   ["B2ME"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -11384,6 +12018,7 @@ return {
     teo = 1,
   },
   ["B2MF"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11401,6 +12036,7 @@ return {
     yushin = 1,
   },
   ["B2MH"] = {
+    ace = 1,
     aragon = 2,
     chancellor = 1,
     dellons = 2,
@@ -11416,6 +12052,7 @@ return {
     teo = 2,
   },
   ["C1O5"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -11432,6 +12069,7 @@ return {
     vanessa = 1,
   },
   ["C1OC"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -11449,7 +12087,7 @@ return {
     vanessa = 1,
   },
   ["C1OR"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -11464,6 +12102,7 @@ return {
     teo = 2,
   },
   ["C1OU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11479,6 +12118,7 @@ return {
     yeonhee = 1,
   },
   ["C1P0"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -11497,6 +12137,7 @@ return {
     velika = 1,
   },
   ["C1P8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -11512,6 +12153,7 @@ return {
     yushin = 1,
   },
   ["C1PR"] = {
+    ace = 1,
     chancellor = 3,
     eileen = 2,
     espada = 1,
@@ -11526,7 +12168,7 @@ return {
     velika = 1,
   },
   ["C1QC"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -11541,6 +12183,7 @@ return {
     teo = 2,
   },
   ["C1QY"] = {
+    ace = 1,
     bidam = 3,
     chancellor = 1,
     eileen = 1,
@@ -11557,6 +12200,7 @@ return {
     teo = 1,
   },
   ["C1RC"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -11574,6 +12218,7 @@ return {
     teo = 2,
   },
   ["C1RD"] = {
+    ace = 1,
     chancellor = 3,
     dellons = 1,
     eileen = 2,
@@ -11589,6 +12234,7 @@ return {
     teo = 2,
   },
   ["C1TI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11603,6 +12249,7 @@ return {
     yushin = 2,
   },
   ["C1TT"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     bidam = 1,
@@ -11622,6 +12269,7 @@ return {
     teo = 1,
   },
   ["C1U3"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -11637,7 +12285,7 @@ return {
     vanessa = 1,
   },
   ["C1U5"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -11655,6 +12303,7 @@ return {
     teo = 1,
   },
   ["C1U7"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11670,7 +12319,7 @@ return {
     teo = 4,
   },
   ["C1UD"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -11688,7 +12337,7 @@ return {
     vanessa = 1,
   },
   ["C1UW"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11705,6 +12354,7 @@ return {
     teo = 1,
   },
   ["C1UX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11720,6 +12370,7 @@ return {
     yushin = 1,
   },
   ["C1V4"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11737,6 +12388,7 @@ return {
     velika = 1,
   },
   ["C1V5"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11754,6 +12406,7 @@ return {
     teo = 1,
   },
   ["C1V6"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -11771,6 +12424,7 @@ return {
     spike = 1,
   },
   ["C1V7"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -11787,6 +12441,7 @@ return {
     vanessa = 1,
   },
   ["C1V8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11801,6 +12456,7 @@ return {
     yushin = 1,
   },
   ["C1VA"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11815,6 +12471,7 @@ return {
     vanessa = 1,
   },
   ["C1VB"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     eileen = 1,
@@ -11832,6 +12489,7 @@ return {
     yushin = 1,
   },
   ["C1VC"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -11848,7 +12506,7 @@ return {
     teo = 2,
   },
   ["C1VD"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -11864,6 +12522,7 @@ return {
     teo = 2,
   },
   ["C1VE"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 2,
     eileen = 1,
@@ -11879,6 +12538,7 @@ return {
     teo = 1,
   },
   ["C1VF"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -11895,6 +12555,7 @@ return {
     yushin = 1,
   },
   ["C1VG"] = {
+    ace = 1,
     bidam = 3,
     chancellor = 1,
     eileen = 2,
@@ -11909,6 +12570,7 @@ return {
     vanessa = 1,
   },
   ["C1VH"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -11924,6 +12586,7 @@ return {
     velika = 1,
   },
   ["C1VI"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -11939,6 +12602,7 @@ return {
     yushin = 1,
   },
   ["C1VL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -11953,6 +12617,7 @@ return {
     yushin = 1,
   },
   ["C1VM"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -11967,6 +12632,7 @@ return {
     velika = 1,
   },
   ["C1VN"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -11986,6 +12652,7 @@ return {
     teo = 1,
   },
   ["C1VP"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -12002,6 +12669,7 @@ return {
     teo = 1,
   },
   ["C1VQ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     dellons = 1,
@@ -12019,6 +12687,7 @@ return {
     yushin = 1,
   },
   ["C1VR"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -12035,7 +12704,7 @@ return {
     teo = 1,
   },
   ["C1VT"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12051,7 +12720,7 @@ return {
     yushin = 1,
   },
   ["C1VU"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12066,6 +12735,7 @@ return {
     yushin = 1,
   },
   ["C1VV"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -12082,6 +12752,7 @@ return {
     teo = 2,
   },
   ["C1VW"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -12097,6 +12768,7 @@ return {
     teo = 1,
   },
   ["C1VY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12114,6 +12786,7 @@ return {
     velika = 1,
   },
   ["C1VZ"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -12128,6 +12801,7 @@ return {
     yushin = 1,
   },
   ["C1W0"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -12143,6 +12817,7 @@ return {
     teo = 1,
   },
   ["C1W1"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -12159,6 +12834,7 @@ return {
     yushin = 1,
   },
   ["C1W2"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -12175,6 +12851,7 @@ return {
     sieg = 1,
   },
   ["C1W3"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -12190,6 +12867,7 @@ return {
     teo = 2,
   },
   ["C1W4"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12205,6 +12883,7 @@ return {
     vanessa = 1,
   },
   ["C1W5"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12220,7 +12899,7 @@ return {
     teo = 1,
   },
   ["C1W6"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12238,6 +12917,7 @@ return {
     velika = 1,
   },
   ["C1W7"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -12251,6 +12931,7 @@ return {
     teo = 2,
   },
   ["C1W8"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -12267,6 +12948,7 @@ return {
     vanessa = 1,
   },
   ["C1WA"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -12283,6 +12965,7 @@ return {
     yeonhee = 1,
   },
   ["C1WB"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -12298,6 +12981,7 @@ return {
     teo = 1,
   },
   ["C1WC"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -12314,6 +12998,7 @@ return {
     teo = 2,
   },
   ["C1WD"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12328,6 +13013,7 @@ return {
     teo = 2,
   },
   ["C1WE"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -12343,6 +13029,7 @@ return {
     vanessa = 1,
   },
   ["C1WF"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -12362,6 +13049,7 @@ return {
     yushin = 1,
   },
   ["C1WG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -12378,6 +13066,7 @@ return {
     vanessa = 1,
   },
   ["C1WH"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -12394,6 +13083,7 @@ return {
     velika = 1,
   },
   ["C1WI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12412,6 +13102,7 @@ return {
     velika = 1,
   },
   ["C1WJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12426,6 +13117,7 @@ return {
     yushin = 2,
   },
   ["C1WK"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 1,
@@ -12443,6 +13135,7 @@ return {
     yushin = 1,
   },
   ["C1WL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12459,6 +13152,7 @@ return {
     yushin = 1,
   },
   ["C1WM"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -12473,6 +13167,7 @@ return {
     velika = 1,
   },
   ["C1WN"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -12488,6 +13183,7 @@ return {
     velika = 1,
   },
   ["C1WQ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12505,7 +13201,7 @@ return {
     vanessa = 1,
   },
   ["C1WR"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -12522,6 +13218,7 @@ return {
     velika = 1,
   },
   ["C1WS"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -12539,6 +13236,7 @@ return {
     vanessa = 1,
   },
   ["C1WT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12553,6 +13251,7 @@ return {
     yushin = 1,
   },
   ["C1WU"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -12571,6 +13270,7 @@ return {
     yushin = 1,
   },
   ["C1WV"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -12587,7 +13287,7 @@ return {
     yushin = 1,
   },
   ["C1WW"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12602,6 +13302,7 @@ return {
     yushin = 1,
   },
   ["C1WX"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -12616,6 +13317,7 @@ return {
     teo = 2,
   },
   ["C1WY"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -12631,6 +13333,7 @@ return {
     yushin = 1,
   },
   ["C1WZ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12647,6 +13350,7 @@ return {
     yushin = 1,
   },
   ["C1X0"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -12665,6 +13369,7 @@ return {
     yushin = 1,
   },
   ["C1X1"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -12679,6 +13384,7 @@ return {
     teo = 2,
   },
   ["C1X2"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -12696,6 +13402,7 @@ return {
     yeonhee = 1,
   },
   ["C1X3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -12710,6 +13417,7 @@ return {
     teo = 1,
   },
   ["C1X4"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -12727,6 +13435,7 @@ return {
     yushin = 1,
   },
   ["C1X5"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -12744,6 +13453,7 @@ return {
     yushin = 1,
   },
   ["C1X8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -12758,6 +13468,7 @@ return {
     vanessa = 1,
   },
   ["C1X9"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -12774,6 +13485,7 @@ return {
     teo = 4,
   },
   ["C1XA"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -12792,6 +13504,7 @@ return {
     yushin = 1,
   },
   ["C1XB"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -12805,6 +13518,7 @@ return {
     teo = 3,
   },
   ["C1XC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12820,7 +13534,7 @@ return {
     yushin = 1,
   },
   ["C1XD"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -12837,6 +13551,7 @@ return {
     velika = 1,
   },
   ["C1XE"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -12853,6 +13568,7 @@ return {
     teo = 3,
   },
   ["C1XG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -12867,6 +13583,7 @@ return {
     taka = 1,
   },
   ["C1XH"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12885,6 +13602,7 @@ return {
     yushin = 1,
   },
   ["C1XI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12901,6 +13619,7 @@ return {
     velika = 3,
   },
   ["C1XJ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -12915,6 +13634,7 @@ return {
     teo = 2,
   },
   ["C1XK"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12930,6 +13650,7 @@ return {
     velika = 1,
   },
   ["C1XL"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -12947,6 +13668,7 @@ return {
     yushin = 1,
   },
   ["C1XM"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -12963,6 +13685,7 @@ return {
     velika = 1,
   },
   ["C1XN"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -12977,7 +13700,7 @@ return {
     yushin = 3,
   },
   ["C1XO"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 2,
     eileen = 1,
@@ -12993,6 +13716,7 @@ return {
     velika = 1,
   },
   ["C1XP"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -13007,6 +13731,7 @@ return {
     velika = 1,
   },
   ["C1XQ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13021,6 +13746,7 @@ return {
     velika = 1,
   },
   ["C1XR"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -13036,6 +13762,7 @@ return {
     yushin = 1,
   },
   ["C1XS"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -13054,6 +13781,7 @@ return {
     teo = 1,
   },
   ["C1XT"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13069,6 +13797,7 @@ return {
     teo = 1,
   },
   ["C1XU"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -13085,6 +13814,7 @@ return {
     teo = 1,
   },
   ["C1XV"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13099,6 +13829,7 @@ return {
     sieg = 1,
   },
   ["C1XW"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13114,6 +13845,7 @@ return {
     yushin = 1,
   },
   ["C1XX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13130,6 +13862,7 @@ return {
     velika = 1,
   },
   ["C1XY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13146,6 +13879,7 @@ return {
     velika = 1,
   },
   ["C1XZ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -13160,6 +13894,7 @@ return {
     teo = 1,
   },
   ["C1Y0"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -13175,6 +13910,7 @@ return {
     yeonhee = 1,
   },
   ["C1Y1"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -13191,6 +13927,7 @@ return {
     velika = 1,
   },
   ["C1Y2"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13208,6 +13945,7 @@ return {
     vanessa = 1,
   },
   ["C1Y3"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13222,6 +13960,7 @@ return {
     teo = 3,
   },
   ["C1Y5"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -13236,6 +13975,7 @@ return {
     yushin = 1,
   },
   ["C1Y7"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -13250,6 +13990,7 @@ return {
     velika = 2,
   },
   ["C1Y8"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -13264,6 +14005,7 @@ return {
     yushin = 1,
   },
   ["C1YC"] = {
+    ace = 1,
     ballista = 1,
     bidam = 2,
     chancellor = 1,
@@ -13280,6 +14022,7 @@ return {
     teo = 1,
   },
   ["C1YD"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13297,6 +14040,7 @@ return {
     velika = 1,
   },
   ["C1YE"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13311,7 +14055,7 @@ return {
     teo = 2,
   },
   ["C1YH"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -13328,7 +14072,7 @@ return {
     yushin = 1,
   },
   ["C1YI"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13345,6 +14089,7 @@ return {
     yushin = 1,
   },
   ["C1YJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13360,6 +14105,7 @@ return {
     yushin = 1,
   },
   ["C1YK"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13374,6 +14120,7 @@ return {
     velika = 1,
   },
   ["C1YL"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -13393,6 +14140,7 @@ return {
     yushin = 1,
   },
   ["C1YM"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 3,
     espada = 1,
@@ -13409,6 +14157,7 @@ return {
     yushin = 1,
   },
   ["C1YN"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -13424,6 +14173,7 @@ return {
     velika = 2,
   },
   ["C1YP"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13439,6 +14189,7 @@ return {
     teo = 2,
   },
   ["C1YR"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13454,6 +14205,7 @@ return {
     teo = 1,
   },
   ["C1YS"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -13469,6 +14221,7 @@ return {
     teo = 1,
   },
   ["C1YT"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -13484,6 +14237,7 @@ return {
     velika = 2,
   },
   ["C1YU"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -13499,6 +14253,7 @@ return {
     vanessa = 2,
   },
   ["C1YV"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 2,
@@ -13514,6 +14269,7 @@ return {
     vanessa = 1,
   },
   ["C1YW"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13530,6 +14286,7 @@ return {
     yushin = 1,
   },
   ["C1YX"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -13548,6 +14305,7 @@ return {
     yushin = 1,
   },
   ["C1YY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13563,6 +14321,7 @@ return {
     yushin = 1,
   },
   ["C1YZ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13579,6 +14338,7 @@ return {
     velika = 1,
   },
   ["C1Z1"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     bidam = 1,
@@ -13596,6 +14356,7 @@ return {
     teo = 1,
   },
   ["C1Z2"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -13612,6 +14373,7 @@ return {
     velika = 1,
   },
   ["C1Z3"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -13626,6 +14388,7 @@ return {
     teo = 1,
   },
   ["C1Z4"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13641,7 +14404,7 @@ return {
     velika = 1,
   },
   ["C1Z5"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -13658,6 +14421,7 @@ return {
     velika = 1,
   },
   ["C1Z6"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -13675,6 +14439,7 @@ return {
     yushin = 1,
   },
   ["C1Z7"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -13691,7 +14456,7 @@ return {
     vanessa = 1,
   },
   ["C1Z8"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -13706,6 +14471,7 @@ return {
     teo = 3,
   },
   ["C1Z9"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -13721,6 +14487,7 @@ return {
     yushin = 1,
   },
   ["C1ZA"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     dellons = 1,
@@ -13738,6 +14505,7 @@ return {
     teo = 4,
   },
   ["C1ZB"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13754,6 +14522,7 @@ return {
     yushin = 2,
   },
   ["C1ZC"] = {
+    ace = 1,
     alice = 1,
     ballista = 2,
     chancellor = 1,
@@ -13770,7 +14539,7 @@ return {
     velika = 2,
   },
   ["C1ZE"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -13785,7 +14554,7 @@ return {
     yushin = 1,
   },
   ["C1ZF"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13803,6 +14572,7 @@ return {
     vanessa = 1,
   },
   ["C1ZG"] = {
+    ace = 1,
     chancellor = 2,
     colt = 1,
     eileen = 1,
@@ -13817,6 +14587,7 @@ return {
     sieg = 2,
   },
   ["C1ZH"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 3,
@@ -13832,6 +14603,7 @@ return {
     teo = 2,
   },
   ["C1ZI"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -13850,6 +14622,7 @@ return {
     yushin = 1,
   },
   ["C1ZJ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13865,6 +14638,7 @@ return {
     teo = 3,
   },
   ["C1ZK"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -13879,6 +14653,7 @@ return {
     yushin = 1,
   },
   ["C1ZL"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -13895,6 +14670,7 @@ return {
     velika = 1,
   },
   ["C1ZM"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -13911,6 +14687,7 @@ return {
     vanessa = 1,
   },
   ["C1ZN"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -13927,6 +14704,7 @@ return {
     yushin = 1,
   },
   ["C1ZO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -13942,6 +14720,7 @@ return {
     velika = 1,
   },
   ["C1ZP"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -13958,6 +14737,7 @@ return {
     yushin = 1,
   },
   ["C1ZR"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -13974,6 +14754,7 @@ return {
     yushin = 1,
   },
   ["C1ZS"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -13989,6 +14770,7 @@ return {
     sieg = 1,
   },
   ["C1ZT"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 1,
@@ -14007,6 +14789,7 @@ return {
     velika = 1,
   },
   ["C1ZU"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -14024,6 +14807,7 @@ return {
     velika = 1,
   },
   ["C1ZW"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -14042,6 +14826,7 @@ return {
     yushin = 1,
   },
   ["C1ZX"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -14061,6 +14846,7 @@ return {
     yushin = 1,
   },
   ["C1ZY"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -14076,6 +14862,7 @@ return {
     teo = 1,
   },
   ["C1ZZ"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -14091,6 +14878,7 @@ return {
     yushin = 1,
   },
   ["C201"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -14105,6 +14893,7 @@ return {
     teo = 2,
   },
   ["C202"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     colt = 1,
@@ -14121,7 +14910,7 @@ return {
     velika = 1,
   },
   ["C203"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -14137,6 +14926,7 @@ return {
     vanessa = 1,
   },
   ["C204"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -14151,6 +14941,7 @@ return {
     teo = 1,
   },
   ["C205"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -14165,6 +14956,7 @@ return {
     teo = 2,
   },
   ["C208"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -14183,6 +14975,7 @@ return {
     yushin = 1,
   },
   ["C209"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -14198,6 +14991,7 @@ return {
     teo = 1,
   },
   ["C20A"] = {
+    ace = 1,
     ballista = 2,
     chancellor = 1,
     dellons = 1,
@@ -14216,6 +15010,7 @@ return {
     yushin = 2,
   },
   ["C20B"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -14230,7 +15025,7 @@ return {
     sieg = 1,
   },
   ["C20C"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -14246,6 +15041,7 @@ return {
     teo = 3,
   },
   ["C20D"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -14260,6 +15056,7 @@ return {
     teo = 1,
   },
   ["C20E"] = {
+    ace = 1,
     aragon = 1,
     bidam = 2,
     chancellor = 1,
@@ -14275,6 +15072,7 @@ return {
     teo = 2,
   },
   ["C20F"] = {
+    ace = 1,
     aragon = 2,
     chancellor = 1,
     eileen = 1,
@@ -14291,6 +15089,7 @@ return {
     vanessa = 1,
   },
   ["C20G"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -14307,6 +15106,7 @@ return {
     teo = 1,
   },
   ["C20J"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -14323,6 +15123,7 @@ return {
     yushin = 1,
   },
   ["C20K"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 2,
     colt = 1,
@@ -14341,6 +15142,7 @@ return {
     teo = 1,
   },
   ["C20M"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -14358,6 +15160,7 @@ return {
     velika = 1,
   },
   ["C20N"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -14374,7 +15177,7 @@ return {
     teo = 2,
   },
   ["C20P"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -14391,6 +15194,7 @@ return {
     vanessa = 1,
   },
   ["C20Q"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -14404,6 +15208,7 @@ return {
     yeonhee = 1,
   },
   ["C20R"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -14419,6 +15224,7 @@ return {
     velika = 1,
   },
   ["C20S"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 2,
@@ -14438,6 +15244,7 @@ return {
     velika = 1,
   },
   ["C20U"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -14452,6 +15259,7 @@ return {
     teo = 1,
   },
   ["C20W"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -14468,6 +15276,7 @@ return {
     teo = 3,
   },
   ["C20Y"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 3,
@@ -14482,6 +15291,7 @@ return {
     teo = 2,
   },
   ["C20Z"] = {
+    ace = 1,
     alice = 1,
     bidam = 2,
     chancellor = 1,
@@ -14499,6 +15309,7 @@ return {
     teo = 1,
   },
   ["C210"] = {
+    ace = 1,
     alice = 1,
     bidam = 2,
     chancellor = 1,
@@ -14513,6 +15324,7 @@ return {
     teo = 2,
   },
   ["C211"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -14527,6 +15339,7 @@ return {
     teo = 2,
   },
   ["C212"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -14542,6 +15355,7 @@ return {
     teo = 2,
   },
   ["C213"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -14557,6 +15371,7 @@ return {
     yushin = 1,
   },
   ["C214"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -14573,7 +15388,7 @@ return {
     velika = 1,
   },
   ["C215"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -14588,7 +15403,7 @@ return {
     velika = 1,
   },
   ["C216"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     chancellor = 1,
     colt = 1,
@@ -14607,6 +15422,7 @@ return {
     teo = 1,
   },
   ["C217"] = {
+    ace = 1,
     aragon = 2,
     chancellor = 1,
     eileen = 2,
@@ -14623,6 +15439,7 @@ return {
     yushin = 1,
   },
   ["C218"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -14640,6 +15457,7 @@ return {
     vanessa = 1,
   },
   ["C219"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -14658,6 +15476,7 @@ return {
     yeonhee = 1,
   },
   ["C21A"] = {
+    ace = 1,
     ballista = 2,
     chancellor = 1,
     eileen = 2,
@@ -14672,6 +15491,7 @@ return {
     yushin = 1,
   },
   ["C21B"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -14686,6 +15506,7 @@ return {
     velika = 1,
   },
   ["C21C"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -14701,6 +15522,7 @@ return {
     yeonhee = 1,
   },
   ["C21D"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -14717,6 +15539,7 @@ return {
     yushin = 1,
   },
   ["C21E"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -14732,6 +15555,7 @@ return {
     teo = 2,
   },
   ["C21G"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -14746,6 +15570,7 @@ return {
     yushin = 1,
   },
   ["C21H"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -14763,6 +15588,7 @@ return {
     yushin = 1,
   },
   ["C21I"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -14778,6 +15604,7 @@ return {
     velika = 2,
   },
   ["C21J"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -14792,7 +15619,7 @@ return {
     vanessa = 1,
   },
   ["C21K"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -14806,6 +15633,7 @@ return {
     teo = 1,
   },
   ["C21L"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -14822,6 +15650,7 @@ return {
     yushin = 1,
   },
   ["C21O"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -14839,6 +15668,7 @@ return {
     yushin = 1,
   },
   ["C21Q"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -14854,6 +15684,7 @@ return {
     teo = 2,
   },
   ["C21T"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -14868,6 +15699,7 @@ return {
     spike = 1,
   },
   ["C21U"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 2,
     eileen = 2,
@@ -14884,6 +15716,7 @@ return {
     velika = 2,
   },
   ["C21V"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -14900,7 +15733,7 @@ return {
     yushin = 1,
   },
   ["C21W"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -14918,6 +15751,7 @@ return {
     yushin = 1,
   },
   ["C21X"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 2,
@@ -14933,6 +15767,7 @@ return {
     teo = 1,
   },
   ["C21Y"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -14949,6 +15784,7 @@ return {
     teo = 2,
   },
   ["C221"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -14964,7 +15800,7 @@ return {
     teo = 1,
   },
   ["C222"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -14982,6 +15818,7 @@ return {
     teo = 2,
   },
   ["C223"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -14998,6 +15835,7 @@ return {
     teo = 1,
   },
   ["C225"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -15014,6 +15852,7 @@ return {
     velika = 1,
   },
   ["C226"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 3,
@@ -15029,6 +15868,7 @@ return {
     yeonhee = 1,
   },
   ["C227"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -15043,6 +15883,7 @@ return {
     yushin = 1,
   },
   ["C228"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -15058,6 +15899,7 @@ return {
     teo = 3,
   },
   ["C22B"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15073,6 +15915,7 @@ return {
     yushin = 1,
   },
   ["C22C"] = {
+    ace = 1,
     ballista = 2,
     chancellor = 1,
     eileen = 1,
@@ -15087,6 +15930,7 @@ return {
     sieg = 1,
   },
   ["D1HE"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -15106,6 +15950,7 @@ return {
     yushin = 1,
   },
   ["D1HF"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15122,7 +15967,7 @@ return {
     yushin = 1,
   },
   ["D1HI"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -15137,6 +15982,7 @@ return {
     teo = 3,
   },
   ["D1HJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 3,
     espada = 1,
@@ -15151,6 +15997,7 @@ return {
     teo = 2,
   },
   ["D1HK"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -15166,6 +16013,7 @@ return {
     vanessa = 1,
   },
   ["D1HM"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -15182,7 +16030,7 @@ return {
     teo = 2,
   },
   ["D1HN"] = {
-    ace = 1,
+    ace = 2,
     aragon = 2,
     chancellor = 1,
     eileen = 1,
@@ -15198,6 +16046,7 @@ return {
     yushin = 1,
   },
   ["D1HO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15214,6 +16063,7 @@ return {
     yushin = 1,
   },
   ["D1HP"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -15229,6 +16079,7 @@ return {
     yushin = 1,
   },
   ["D1HR"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -15245,6 +16096,7 @@ return {
     teo = 1,
   },
   ["D1HS"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 2,
@@ -15262,6 +16114,7 @@ return {
     vanessa = 1,
   },
   ["D1HT"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -15278,6 +16131,7 @@ return {
     vanessa = 1,
   },
   ["D1HV"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15293,7 +16147,7 @@ return {
     teo = 2,
   },
   ["D1HW"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -15310,6 +16164,7 @@ return {
     yushin = 1,
   },
   ["D1HX"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     eileen = 2,
@@ -15325,6 +16180,7 @@ return {
     vanessa = 1,
   },
   ["D1HY"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 2,
@@ -15342,6 +16198,7 @@ return {
     teo = 2,
   },
   ["D1HZ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15359,6 +16216,7 @@ return {
     yushin = 1,
   },
   ["D1I0"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -15374,6 +16232,7 @@ return {
     yushin = 1,
   },
   ["D1I1"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -15391,6 +16250,7 @@ return {
     vanessa = 1,
   },
   ["D1I2"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -15405,6 +16265,7 @@ return {
     teo = 2,
   },
   ["D1I3"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -15420,6 +16281,7 @@ return {
     vanessa = 1,
   },
   ["D1I4"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -15434,6 +16296,7 @@ return {
     sieg = 1,
   },
   ["D1I5"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 3,
     eileen = 1,
@@ -15449,6 +16312,7 @@ return {
     velika = 1,
   },
   ["D1I6"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     dellons = 1,
@@ -15466,7 +16330,7 @@ return {
     vanessa = 1,
   },
   ["D1I7"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15480,7 +16344,7 @@ return {
     yushin = 1,
   },
   ["D1I8"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -15495,6 +16359,7 @@ return {
     yushin = 1,
   },
   ["D1I9"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15511,6 +16376,7 @@ return {
     velika = 1,
   },
   ["D1IA"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -15527,6 +16393,7 @@ return {
     yushin = 1,
   },
   ["D1IB"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -15543,6 +16410,7 @@ return {
     yushin = 1,
   },
   ["D1IC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15558,6 +16426,7 @@ return {
     velika = 1,
   },
   ["D1ID"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15575,7 +16444,7 @@ return {
     yushin = 1,
   },
   ["D1IE"] = {
-    ace = 2,
+    ace = 3,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -15590,6 +16459,7 @@ return {
     velika = 1,
   },
   ["D1IF"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -15608,6 +16478,7 @@ return {
     yushin = 1,
   },
   ["D1IG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -15623,6 +16494,7 @@ return {
     vanessa = 2,
   },
   ["D1IH"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -15638,6 +16510,7 @@ return {
     yushin = 1,
   },
   ["D1II"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -15654,6 +16527,7 @@ return {
     velika = 1,
   },
   ["D1IJ"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -15668,6 +16542,7 @@ return {
     teo = 1,
   },
   ["D1IK"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -15683,6 +16558,7 @@ return {
     velika = 1,
   },
   ["D1IL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -15696,6 +16572,7 @@ return {
     velika = 1,
   },
   ["D1IO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15713,6 +16590,7 @@ return {
     yushin = 1,
   },
   ["D1IP"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15728,6 +16606,7 @@ return {
     velika = 1,
   },
   ["D1IQ"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     chancellor = 1,
@@ -15743,6 +16622,7 @@ return {
     yushin = 1,
   },
   ["D1IR"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -15758,6 +16638,7 @@ return {
     yeonhee = 1,
   },
   ["D1IT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15773,6 +16654,7 @@ return {
     vanessa = 1,
   },
   ["D1IU"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -15788,6 +16670,7 @@ return {
     teo = 4,
   },
   ["D1IV"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 2,
     eileen = 1,
@@ -15805,6 +16688,7 @@ return {
     yeonhee = 2,
   },
   ["D1IW"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -15820,6 +16704,7 @@ return {
     yeonhee = 1,
   },
   ["D1IY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15835,6 +16720,7 @@ return {
     yushin = 1,
   },
   ["D1IZ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15849,6 +16735,7 @@ return {
     vanessa = 1,
   },
   ["D1J2"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -15865,6 +16752,7 @@ return {
     velika = 1,
   },
   ["D1J3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15880,6 +16768,7 @@ return {
     velika = 1,
   },
   ["D1J5"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 2,
@@ -15894,6 +16783,7 @@ return {
     sylvesta = 1,
   },
   ["D1J6"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15909,6 +16799,7 @@ return {
     teo = 2,
   },
   ["D1J7"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -15925,6 +16816,7 @@ return {
     velika = 1,
   },
   ["D1J8"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -15941,7 +16833,7 @@ return {
     teo = 2,
   },
   ["D1J9"] = {
-    ace = 1,
+    ace = 2,
     ballista = 2,
     chancellor = 1,
     eileen = 1,
@@ -15958,6 +16850,7 @@ return {
     yushin = 1,
   },
   ["D1JA"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -15972,6 +16865,7 @@ return {
     yushin = 1,
   },
   ["D1JB"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -15989,6 +16883,7 @@ return {
     vanessa = 1,
   },
   ["D1JC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16007,6 +16902,7 @@ return {
     yushin = 2,
   },
   ["D1JE"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -16023,6 +16919,7 @@ return {
     yushin = 1,
   },
   ["D1JF"] = {
+    ace = 1,
     ballista = 2,
     chancellor = 1,
     eileen = 1,
@@ -16040,6 +16937,7 @@ return {
     velika = 1,
   },
   ["D1JG"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16054,7 +16952,7 @@ return {
     teo = 3,
   },
   ["D1JH"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -16069,6 +16967,7 @@ return {
     teo = 1,
   },
   ["D1JI"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -16086,6 +16985,7 @@ return {
     vanessa = 1,
   },
   ["D1JJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16102,6 +17002,7 @@ return {
     teo = 1,
   },
   ["D1JK"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     bidam = 1,
@@ -16119,6 +17020,7 @@ return {
     yushin = 1,
   },
   ["D1JL"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -16132,7 +17034,7 @@ return {
     velika = 1,
   },
   ["D1JM"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16150,6 +17052,7 @@ return {
     yushin = 1,
   },
   ["D1JN"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -16164,6 +17067,7 @@ return {
     yeonhee = 1,
   },
   ["D1JO"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -16181,7 +17085,7 @@ return {
     yushin = 1,
   },
   ["D1JP"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -16198,6 +17102,7 @@ return {
     teo = 3,
   },
   ["D1JQ"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -16214,7 +17119,7 @@ return {
     yushin = 1,
   },
   ["D1JR"] = {
-    ace = 2,
+    ace = 3,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -16231,6 +17136,7 @@ return {
     teo = 2,
   },
   ["D1JS"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16246,6 +17152,7 @@ return {
     yushin = 1,
   },
   ["D1JT"] = {
+    ace = 1,
     chancellor = 2,
     colt = 1,
     eileen = 1,
@@ -16260,6 +17167,7 @@ return {
     velika = 1,
   },
   ["D1JU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16273,6 +17181,7 @@ return {
     yushin = 1,
   },
   ["D1K0"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -16289,6 +17198,7 @@ return {
     teo = 2,
   },
   ["D1K2"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -16304,6 +17214,7 @@ return {
     vanessa = 1,
   },
   ["D1K3"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -16320,6 +17231,7 @@ return {
     yushin = 1,
   },
   ["D1K4"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     dellons = 1,
@@ -16335,6 +17247,7 @@ return {
     teo = 2,
   },
   ["D1K5"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -16351,6 +17264,7 @@ return {
     teo = 1,
   },
   ["D1K6"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -16369,7 +17283,7 @@ return {
     velika = 1,
   },
   ["D1K8"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     bidam = 2,
     chancellor = 1,
@@ -16385,6 +17299,7 @@ return {
     teo = 3,
   },
   ["D1KA"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -16400,6 +17315,7 @@ return {
     yushin = 1,
   },
   ["D1KB"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -16416,6 +17332,7 @@ return {
     teo = 2,
   },
   ["D1KC"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16431,6 +17348,7 @@ return {
     yushin = 1,
   },
   ["D1KD"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     eileen = 1,
@@ -16448,6 +17366,7 @@ return {
     velika = 1,
   },
   ["D1KE"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16466,6 +17385,7 @@ return {
     yushin = 1,
   },
   ["D1KG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -16482,6 +17402,7 @@ return {
     yushin = 1,
   },
   ["D1KI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16499,6 +17420,7 @@ return {
     yushin = 1,
   },
   ["D1KJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16514,6 +17436,7 @@ return {
     spike = 3,
   },
   ["D1KK"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     dellons = 2,
@@ -16530,6 +17453,7 @@ return {
     teo = 3,
   },
   ["D1KL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16547,6 +17471,7 @@ return {
     yushin = 2,
   },
   ["D1KM"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16562,6 +17487,7 @@ return {
     yushin = 1,
   },
   ["D1KN"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16577,6 +17503,7 @@ return {
     yushin = 1,
   },
   ["D1KO"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -16594,6 +17521,7 @@ return {
     yushin = 1,
   },
   ["D1KP"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -16607,6 +17535,7 @@ return {
     teo = 1,
   },
   ["D1KS"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -16623,6 +17552,7 @@ return {
     yeonhee = 1,
   },
   ["D1KT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16638,6 +17568,7 @@ return {
     yushin = 1,
   },
   ["D1KU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16655,7 +17586,7 @@ return {
     velika = 1,
   },
   ["D1KV"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16671,6 +17602,7 @@ return {
     yushin = 1,
   },
   ["D1KW"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -16685,6 +17617,7 @@ return {
     teo = 1,
   },
   ["D1KX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16700,6 +17633,7 @@ return {
     yushin = 1,
   },
   ["D1KZ"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     colt = 1,
@@ -16717,6 +17651,7 @@ return {
     velika = 1,
   },
   ["D1L2"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     ballista = 1,
@@ -16735,6 +17670,7 @@ return {
     teo = 1,
   },
   ["D1L3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16750,6 +17686,7 @@ return {
     vanessa = 1,
   },
   ["D1L4"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -16765,6 +17702,7 @@ return {
     yushin = 1,
   },
   ["D1L5"] = {
+    ace = 1,
     bidam = 3,
     chancellor = 1,
     eileen = 1,
@@ -16779,6 +17717,7 @@ return {
     teo = 2,
   },
   ["D1L6"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16794,6 +17733,7 @@ return {
     teo = 1,
   },
   ["D1L7"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -16809,6 +17749,7 @@ return {
     teo = 1,
   },
   ["D1LC"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -16826,6 +17767,7 @@ return {
     yushin = 1,
   },
   ["D1LE"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16842,6 +17784,7 @@ return {
     yushin = 1,
   },
   ["D1LG"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -16858,6 +17801,7 @@ return {
     teo = 1,
   },
   ["D1LI"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -16872,6 +17816,7 @@ return {
     velika = 1,
   },
   ["D1LJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -16888,6 +17833,7 @@ return {
     yushin = 1,
   },
   ["D1LL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16902,6 +17848,7 @@ return {
     velika = 1,
   },
   ["D1LM"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -16917,6 +17864,7 @@ return {
     velika = 1,
   },
   ["D1LN"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     colt = 1,
@@ -16933,6 +17881,7 @@ return {
     velika = 1,
   },
   ["D1LP"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -16949,6 +17898,7 @@ return {
     velika = 1,
   },
   ["D1LQ"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -16968,6 +17918,7 @@ return {
     velika = 1,
   },
   ["D1LR"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -16982,6 +17933,7 @@ return {
     teo = 4,
   },
   ["D1LS"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -16998,6 +17950,7 @@ return {
     teo = 1,
   },
   ["D1LT"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     colt = 1,
@@ -17017,6 +17970,7 @@ return {
     yushin = 1,
   },
   ["D1LU"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     eileen = 1,
@@ -17033,6 +17987,7 @@ return {
     velika = 1,
   },
   ["D1LV"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -17048,7 +18003,7 @@ return {
     yushin = 1,
   },
   ["D1LX"] = {
-    ace = 1,
+    ace = 2,
     alice = 3,
     chancellor = 1,
     eileen = 1,
@@ -17064,6 +18019,7 @@ return {
     teo = 1,
   },
   ["D1LY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -17080,6 +18036,7 @@ return {
     vanessa = 1,
   },
   ["D1LZ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -17096,6 +18053,7 @@ return {
     teo = 1,
   },
   ["D1M0"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -17113,6 +18071,7 @@ return {
     velika = 1,
   },
   ["D1M1"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -17129,6 +18088,7 @@ return {
     yushin = 1,
   },
   ["D1M2"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -17146,6 +18106,7 @@ return {
     velika = 1,
   },
   ["D1M3"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -17163,6 +18124,7 @@ return {
     velika = 1,
   },
   ["D1M5"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17178,6 +18140,7 @@ return {
     velika = 2,
   },
   ["D1M7"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -17192,7 +18155,7 @@ return {
     sieg = 1,
   },
   ["D1M8"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -17209,6 +18172,7 @@ return {
     teo = 2,
   },
   ["D1M9"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -17223,6 +18187,7 @@ return {
     teo = 1,
   },
   ["D1MA"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -17240,6 +18205,7 @@ return {
     teo = 2,
   },
   ["D1MB"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -17257,6 +18223,7 @@ return {
     teo = 1,
   },
   ["D1MD"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -17273,6 +18240,7 @@ return {
     teo = 1,
   },
   ["D1MF"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17291,7 +18259,7 @@ return {
     yushin = 1,
   },
   ["D1MG"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -17307,6 +18275,7 @@ return {
     yushin = 1,
   },
   ["D1MH"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -17321,6 +18290,7 @@ return {
     sieg = 1,
   },
   ["D1MI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -17335,6 +18305,7 @@ return {
     yeonhee = 1,
   },
   ["D1MJ"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17349,6 +18320,7 @@ return {
     velika = 1,
   },
   ["D1MK"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -17365,6 +18337,7 @@ return {
     yushin = 1,
   },
   ["D1MM"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -17381,6 +18354,7 @@ return {
     yushin = 1,
   },
   ["D1MN"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -17397,6 +18371,7 @@ return {
     velika = 1,
   },
   ["D1MO"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     eileen = 1,
@@ -17413,6 +18388,7 @@ return {
     teo = 1,
   },
   ["D1MQ"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -17428,6 +18404,7 @@ return {
     velika = 1,
   },
   ["D1MR"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -17443,6 +18420,7 @@ return {
     velika = 1,
   },
   ["D1MS"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -17462,6 +18440,7 @@ return {
     yushin = 1,
   },
   ["D1MT"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -17477,6 +18456,7 @@ return {
     teo = 1,
   },
   ["D1MU"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17494,7 +18474,7 @@ return {
     yeonhee = 1,
   },
   ["D1MW"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -17511,6 +18491,7 @@ return {
     yushin = 1,
   },
   ["D1MX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17527,6 +18508,7 @@ return {
     velika = 1,
   },
   ["D1MY"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -17544,6 +18526,7 @@ return {
     teo = 1,
   },
   ["D1MZ"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -17559,6 +18542,7 @@ return {
     velika = 1,
   },
   ["D1N0"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17576,6 +18560,7 @@ return {
     spike = 1,
   },
   ["D1N1"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 3,
     espada = 1,
@@ -17590,6 +18575,7 @@ return {
     teo = 2,
   },
   ["D1N2"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     dellons = 1,
@@ -17607,6 +18593,7 @@ return {
     teo = 1,
   },
   ["D1N3"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 2,
@@ -17625,6 +18612,7 @@ return {
     yushin = 1,
   },
   ["D1N4"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -17641,6 +18629,7 @@ return {
     velika = 1,
   },
   ["D1N5"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -17656,6 +18645,7 @@ return {
     velika = 2,
   },
   ["D1N6"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -17674,6 +18664,7 @@ return {
     teo = 3,
   },
   ["D1N7"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -17690,6 +18681,7 @@ return {
     teo = 2,
   },
   ["D1N8"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -17704,6 +18696,7 @@ return {
     yushin = 1,
   },
   ["D1N9"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -17719,6 +18712,7 @@ return {
     vanessa = 1,
   },
   ["D1NA"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17734,6 +18728,7 @@ return {
     yushin = 1,
   },
   ["D1NB"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -17753,6 +18748,7 @@ return {
     teo = 1,
   },
   ["D1NC"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -17769,6 +18765,7 @@ return {
     velika = 3,
   },
   ["D1NE"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     dellons = 1,
@@ -17785,6 +18782,7 @@ return {
     velika = 1,
   },
   ["D1NF"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -17802,6 +18800,7 @@ return {
     yeonhee = 1,
   },
   ["D1NG"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17817,6 +18816,7 @@ return {
     yushin = 1,
   },
   ["D1NH"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -17834,6 +18834,7 @@ return {
     yeonhee = 1,
   },
   ["D1NI"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -17851,6 +18852,7 @@ return {
     teo = 1,
   },
   ["D1NK"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17866,6 +18868,7 @@ return {
     yushin = 1,
   },
   ["D1NL"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -17882,6 +18885,7 @@ return {
     velika = 1,
   },
   ["D1NM"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -17898,6 +18902,7 @@ return {
     yushin = 1,
   },
   ["D1NN"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -17912,7 +18917,7 @@ return {
     sieg = 1,
   },
   ["D1NQ"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -17930,6 +18935,7 @@ return {
     yushin = 1,
   },
   ["D1NR"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 3,
     eileen = 1,
@@ -17945,7 +18951,7 @@ return {
     velika = 1,
   },
   ["D1NV"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -17961,6 +18967,7 @@ return {
     teo = 2,
   },
   ["D1NW"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -17976,6 +18983,7 @@ return {
     teo = 2,
   },
   ["D1NX"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -17993,6 +19001,7 @@ return {
     yushin = 1,
   },
   ["D1NY"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -18006,6 +19015,7 @@ return {
     teo = 2,
   },
   ["D1O0"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18019,7 +19029,7 @@ return {
     yushin = 1,
   },
   ["D1O2"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -18034,6 +19044,7 @@ return {
     teo = 2,
   },
   ["D1O3"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 3,
     espada = 1,
@@ -18048,6 +19059,7 @@ return {
     teo = 1,
   },
   ["D1O4"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -18064,6 +19076,7 @@ return {
     teo = 2,
   },
   ["D1O5"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -18080,6 +19093,7 @@ return {
     teo = 3,
   },
   ["D1O6"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -18094,6 +19108,7 @@ return {
     vanessa = 1,
   },
   ["D1O7"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -18112,6 +19127,7 @@ return {
     yushin = 1,
   },
   ["D1OA"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -18127,6 +19143,7 @@ return {
     teo = 2,
   },
   ["D1OC"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 3,
     dellons = 1,
@@ -18143,6 +19160,7 @@ return {
     teo = 1,
   },
   ["D1OD"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -18158,6 +19176,7 @@ return {
     teo = 2,
   },
   ["D1OE"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -18173,6 +19192,7 @@ return {
     velika = 1,
   },
   ["D1OR"] = {
+    ace = 1,
     alice = 2,
     chancellor = 1,
     eileen = 1,
@@ -18189,6 +19209,7 @@ return {
     yushin = 1,
   },
   ["D1OY"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -18204,6 +19225,7 @@ return {
     vanessa = 1,
   },
   ["D1P5"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -18218,6 +19240,7 @@ return {
     velika = 1,
   },
   ["D1PB"] = {
+    ace = 1,
     ballista = 2,
     bidam = 1,
     chancellor = 1,
@@ -18237,6 +19260,7 @@ return {
     teo = 1,
   },
   ["D1PI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18251,6 +19275,7 @@ return {
     vanessa = 1,
   },
   ["D1PO"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 2,
     eileen = 1,
@@ -18267,6 +19292,7 @@ return {
     teo = 4,
   },
   ["D1PQ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -18284,6 +19310,7 @@ return {
     vanessa = 1,
   },
   ["D1R1"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -18299,7 +19326,7 @@ return {
     yushin = 1,
   },
   ["D1R7"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -18315,6 +19342,7 @@ return {
     spike = 1,
   },
   ["D1RB"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18333,7 +19361,7 @@ return {
     yushin = 1,
   },
   ["D1RD"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -18351,6 +19379,7 @@ return {
     vanessa = 1,
   },
   ["D1RF"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -18368,6 +19397,7 @@ return {
     teo = 1,
   },
   ["D1RK"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 2,
     eileen = 1,
@@ -18386,7 +19416,7 @@ return {
     yushin = 1,
   },
   ["D1RN"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -18401,6 +19431,7 @@ return {
     teo = 1,
   },
   ["D1RT"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18417,7 +19448,7 @@ return {
     teo = 1,
   },
   ["D1S6"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18433,6 +19464,7 @@ return {
     teo = 1,
   },
   ["D1S9"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 2,
@@ -18448,6 +19480,7 @@ return {
     velika = 1,
   },
   ["D1SB"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -18464,6 +19497,7 @@ return {
     yushin = 1,
   },
   ["D1SM"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     colt = 1,
@@ -18483,7 +19517,7 @@ return {
     velika = 1,
   },
   ["D1ST"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -18499,6 +19533,7 @@ return {
     teo = 1,
   },
   ["D1SX"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -18514,6 +19549,7 @@ return {
     yushin = 1,
   },
   ["D1T3"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -18531,7 +19567,7 @@ return {
     yushin = 1,
   },
   ["D1T4"] = {
-    ace = 1,
+    ace = 2,
     ballista = 1,
     chancellor = 1,
     dellons = 1,
@@ -18547,7 +19583,7 @@ return {
     teo = 1,
   },
   ["D1TA"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     dellons = 2,
@@ -18562,6 +19598,7 @@ return {
     teo = 2,
   },
   ["D1TB"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -18578,6 +19615,7 @@ return {
     yushin = 1,
   },
   ["D1TF"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18595,7 +19633,7 @@ return {
     yushin = 1,
   },
   ["D1TJ"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -18612,6 +19650,7 @@ return {
     teo = 2,
   },
   ["D1TU"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -18631,6 +19670,7 @@ return {
     velika = 2,
   },
   ["D1UA"] = {
+    ace = 1,
     alice = 1,
     chancellor = 2,
     eileen = 1,
@@ -18648,6 +19688,7 @@ return {
     velika = 1,
   },
   ["D1V9"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -18665,6 +19706,7 @@ return {
     teo = 1,
   },
   ["D1VF"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 2,
@@ -18683,7 +19725,7 @@ return {
     velika = 1,
   },
   ["D1VP"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18698,6 +19740,7 @@ return {
     teo = 1,
   },
   ["D1VU"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 2,
@@ -18712,6 +19755,7 @@ return {
     teo = 2,
   },
   ["D1W5"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -18727,6 +19771,7 @@ return {
     teo = 1,
   },
   ["D1W6"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18743,6 +19788,7 @@ return {
     yushin = 1,
   },
   ["D1W9"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -18759,6 +19805,7 @@ return {
     velika = 1,
   },
   ["D1WI"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18773,6 +19820,7 @@ return {
     yushin = 1,
   },
   ["D1WK"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -18790,6 +19838,7 @@ return {
     teo = 1,
   },
   ["D1WL"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -18806,6 +19855,7 @@ return {
     teo = 1,
   },
   ["D1WM"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -18823,6 +19873,7 @@ return {
     sylvesta = 1,
   },
   ["D1WP"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18839,7 +19890,7 @@ return {
     vanessa = 1,
   },
   ["D1WW"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -18856,7 +19907,7 @@ return {
     vanessa = 1,
   },
   ["D1X1"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -18872,6 +19923,7 @@ return {
     teo = 1,
   },
   ["D1X7"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -18888,6 +19940,7 @@ return {
     yushin = 1,
   },
   ["D1XM"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18903,6 +19956,7 @@ return {
     yushin = 1,
   },
   ["D1XS"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -18919,6 +19973,7 @@ return {
     teo = 4,
   },
   ["D1XW"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18935,7 +19990,7 @@ return {
     velika = 2,
   },
   ["D1XY"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18950,6 +20005,7 @@ return {
     teo = 4,
   },
   ["D1Y2"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -18967,6 +20023,7 @@ return {
     vanessa = 1,
   },
   ["D1Y3"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -18983,6 +20040,7 @@ return {
     velika = 1,
   },
   ["D1YG"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -18999,6 +20057,7 @@ return {
     vanessa = 1,
   },
   ["D1YU"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -19016,6 +20075,7 @@ return {
     yushin = 1,
   },
   ["D1Z9"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 2,
@@ -19032,7 +20092,7 @@ return {
     yushin = 1,
   },
   ["D1ZS"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -19048,6 +20108,7 @@ return {
     teo = 2,
   },
   ["D1ZT"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -19065,6 +20126,7 @@ return {
     teo = 2,
   },
   ["D1ZW"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 2,
@@ -19079,6 +20141,7 @@ return {
     teo = 1,
   },
   ["D1ZZ"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -19095,7 +20158,7 @@ return {
     velika = 1,
   },
   ["D202"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19112,7 +20175,7 @@ return {
     teo = 2,
   },
   ["D204"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19127,6 +20190,7 @@ return {
     teo = 2,
   },
   ["D20D"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -19145,6 +20209,7 @@ return {
     velika = 1,
   },
   ["D20E"] = {
+    ace = 1,
     aragon = 2,
     chancellor = 1,
     eileen = 1,
@@ -19162,6 +20227,7 @@ return {
     vanessa = 1,
   },
   ["D20Q"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -19178,6 +20244,7 @@ return {
     velika = 1,
   },
   ["D20X"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -19192,6 +20259,7 @@ return {
     velika = 1,
   },
   ["D214"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -19207,6 +20275,7 @@ return {
     teo = 3,
   },
   ["D215"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -19225,6 +20294,7 @@ return {
     yushin = 1,
   },
   ["D219"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -19240,6 +20310,7 @@ return {
     teo = 1,
   },
   ["D21A"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -19257,6 +20328,7 @@ return {
     yushin = 2,
   },
   ["D21C"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     bidam = 1,
@@ -19274,6 +20346,7 @@ return {
     velika = 1,
   },
   ["D21D"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -19287,6 +20360,7 @@ return {
     yushin = 1,
   },
   ["D21E"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19300,6 +20374,7 @@ return {
     teo = 2,
   },
   ["D21F"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -19315,7 +20390,7 @@ return {
     velika = 1,
   },
   ["D21G"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 2,
     eileen = 1,
@@ -19333,6 +20408,7 @@ return {
     yushin = 1,
   },
   ["D21H"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -19349,6 +20425,7 @@ return {
     teo = 3,
   },
   ["D21I"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -19364,6 +20441,7 @@ return {
     yushin = 1,
   },
   ["D21J"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -19380,6 +20458,7 @@ return {
     velika = 1,
   },
   ["D21K"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -19392,6 +20471,7 @@ return {
     yushin = 1,
   },
   ["D21L"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -19408,6 +20488,7 @@ return {
     teo = 1,
   },
   ["D21M"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -19427,6 +20508,7 @@ return {
     yushin = 1,
   },
   ["D21P"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -19444,6 +20526,7 @@ return {
     yeonhee = 1,
   },
   ["D21Q"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19461,6 +20544,7 @@ return {
     yushin = 1,
   },
   ["D21R"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -19476,6 +20560,7 @@ return {
     velika = 1,
   },
   ["D21S"] = {
+    ace = 1,
     alice = 1,
     ballista = 1,
     bidam = 1,
@@ -19496,6 +20581,7 @@ return {
     velika = 1,
   },
   ["D21T"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19510,6 +20596,7 @@ return {
     velika = 1,
   },
   ["D21U"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19525,6 +20612,7 @@ return {
     yushin = 1,
   },
   ["D21V"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -19539,6 +20627,7 @@ return {
     teo = 2,
   },
   ["D21W"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -19555,6 +20644,7 @@ return {
     teo = 1,
   },
   ["D21X"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -19570,6 +20660,7 @@ return {
     velika = 1,
   },
   ["D21Y"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -19586,6 +20677,7 @@ return {
     teo = 2,
   },
   ["D21Z"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -19601,6 +20693,7 @@ return {
     yushin = 1,
   },
   ["D220"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -19616,6 +20709,7 @@ return {
     teo = 2,
   },
   ["D221"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19632,6 +20726,7 @@ return {
     yeonhee = 1,
   },
   ["D222"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -19649,6 +20744,7 @@ return {
     yushin = 1,
   },
   ["D223"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19664,6 +20760,7 @@ return {
     yushin = 1,
   },
   ["D224"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 2,
@@ -19679,6 +20776,7 @@ return {
     yushin = 1,
   },
   ["D225"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -19694,6 +20792,7 @@ return {
     yushin = 1,
   },
   ["D226"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -19710,6 +20809,7 @@ return {
     yushin = 1,
   },
   ["D227"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -19724,6 +20824,7 @@ return {
     velika = 1,
   },
   ["D228"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 2,
@@ -19739,6 +20840,7 @@ return {
     teo = 1,
   },
   ["D229"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -19755,6 +20857,7 @@ return {
     yushin = 2,
   },
   ["D22A"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -19774,6 +20877,7 @@ return {
     velika = 1,
   },
   ["D22B"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -19790,6 +20894,7 @@ return {
     teo = 2,
   },
   ["D22C"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -19804,6 +20909,7 @@ return {
     teo = 1,
   },
   ["D22D"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -19820,6 +20926,7 @@ return {
     velika = 1,
   },
   ["D22F"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19835,6 +20942,7 @@ return {
     vanessa = 1,
   },
   ["D22G"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -19849,7 +20957,7 @@ return {
     teo = 1,
   },
   ["D22H"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19866,6 +20974,7 @@ return {
     vanessa = 1,
   },
   ["D22I"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19882,6 +20991,7 @@ return {
     teo = 4,
   },
   ["D22J"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -19899,7 +21009,7 @@ return {
     teo = 1,
   },
   ["D22K"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19915,6 +21025,7 @@ return {
     yushin = 2,
   },
   ["D22M"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19931,7 +21042,7 @@ return {
     teo = 3,
   },
   ["D22N"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19946,6 +21057,7 @@ return {
     teo = 1,
   },
   ["D22O"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -19963,6 +21075,7 @@ return {
     teo = 1,
   },
   ["D22P"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -19979,6 +21092,7 @@ return {
     yushin = 1,
   },
   ["D22Q"] = {
+    ace = 1,
     ballista = 2,
     chancellor = 1,
     eileen = 2,
@@ -19995,6 +21109,7 @@ return {
     yeonhee = 1,
   },
   ["D22S"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20013,6 +21128,7 @@ return {
     yushin = 1,
   },
   ["D22T"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -20028,6 +21144,7 @@ return {
     teo = 2,
   },
   ["D22V"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20043,6 +21160,7 @@ return {
     velika = 1,
   },
   ["D22W"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -20059,6 +21177,7 @@ return {
     yushin = 1,
   },
   ["D22X"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -20074,6 +21193,7 @@ return {
     velika = 1,
   },
   ["D22Y"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20090,6 +21210,7 @@ return {
     velika = 1,
   },
   ["D22Z"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -20109,6 +21230,7 @@ return {
     yushin = 1,
   },
   ["D230"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -20124,6 +21246,7 @@ return {
     velika = 1,
   },
   ["D231"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -20137,6 +21260,7 @@ return {
     velika = 1,
   },
   ["D232"] = {
+    ace = 1,
     aragon = 2,
     bidam = 1,
     chancellor = 1,
@@ -20154,6 +21278,7 @@ return {
     yushin = 1,
   },
   ["D234"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -20173,6 +21298,7 @@ return {
     yushin = 1,
   },
   ["D235"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -20189,6 +21315,7 @@ return {
     yushin = 1,
   },
   ["D236"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -20205,6 +21332,7 @@ return {
     yushin = 1,
   },
   ["D237"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -20220,6 +21348,7 @@ return {
     teo = 3,
   },
   ["D238"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -20235,6 +21364,7 @@ return {
     yushin = 1,
   },
   ["D239"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -20250,6 +21380,7 @@ return {
     yushin = 1,
   },
   ["D23B"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -20267,6 +21398,7 @@ return {
     yeonhee = 1,
   },
   ["D23C"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20281,6 +21413,7 @@ return {
     teo = 3,
   },
   ["D23D"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20295,6 +21428,7 @@ return {
     teo = 2,
   },
   ["D23E"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -20312,6 +21446,7 @@ return {
     teo = 2,
   },
   ["D23G"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -20327,6 +21462,7 @@ return {
     vanessa = 1,
   },
   ["D23H"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -20342,6 +21478,7 @@ return {
     teo = 1,
   },
   ["D23I"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20359,7 +21496,7 @@ return {
     yushin = 1,
   },
   ["D23K"] = {
-    ace = 1,
+    ace = 2,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -20376,6 +21513,7 @@ return {
     teo = 1,
   },
   ["D23L"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -20389,6 +21527,7 @@ return {
     sieg = 1,
   },
   ["D23M"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20403,6 +21542,7 @@ return {
     teo = 3,
   },
   ["D23O"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 2,
     espada = 1,
@@ -20418,6 +21558,7 @@ return {
     velika = 1,
   },
   ["D23P"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20434,6 +21575,7 @@ return {
     yushin = 1,
   },
   ["D23R"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     colt = 1,
@@ -20452,6 +21594,7 @@ return {
     teo = 3,
   },
   ["D23S"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -20465,6 +21608,7 @@ return {
     velika = 1,
   },
   ["D23T"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -20479,6 +21623,7 @@ return {
     spike = 1,
   },
   ["D23U"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20494,6 +21639,7 @@ return {
     yeonhee = 1,
   },
   ["D23V"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -20509,7 +21655,7 @@ return {
     yushin = 2,
   },
   ["D23W"] = {
-    ace = 1,
+    ace = 2,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -20526,6 +21672,7 @@ return {
     yushin = 1,
   },
   ["D23X"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     eileen = 3,
@@ -20540,7 +21687,7 @@ return {
     teo = 1,
   },
   ["D23Y"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -20557,6 +21704,7 @@ return {
     yushin = 1,
   },
   ["D23Z"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20572,6 +21720,7 @@ return {
     vanessa = 1,
   },
   ["D240"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -20588,6 +21737,7 @@ return {
     teo = 3,
   },
   ["D241"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -20604,6 +21754,7 @@ return {
     vanessa = 1,
   },
   ["D242"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20619,6 +21770,7 @@ return {
     velika = 2,
   },
   ["D243"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -20633,6 +21785,7 @@ return {
     teo = 2,
   },
   ["D245"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20649,6 +21802,7 @@ return {
     yeonhee = 2,
   },
   ["D246"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 3,
@@ -20663,6 +21817,7 @@ return {
     teo = 1,
   },
   ["D247"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -20679,6 +21834,7 @@ return {
     velika = 1,
   },
   ["D248"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20695,6 +21851,7 @@ return {
     velika = 1,
   },
   ["D249"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20712,6 +21869,7 @@ return {
     vanessa = 1,
   },
   ["D24A"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -20726,6 +21884,7 @@ return {
     teo = 2,
   },
   ["D24C"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     colt = 1,
@@ -20743,6 +21902,7 @@ return {
     teo = 1,
   },
   ["D24D"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -20759,6 +21919,7 @@ return {
     yushin = 1,
   },
   ["D24E"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     eileen = 1,
@@ -20773,6 +21934,7 @@ return {
     teo = 1,
   },
   ["D24F"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20788,6 +21950,7 @@ return {
     teo = 1,
   },
   ["D24G"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -20803,6 +21966,7 @@ return {
     teo = 1,
   },
   ["D24H"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -20819,6 +21983,7 @@ return {
     velika = 1,
   },
   ["D24I"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -20834,6 +21999,7 @@ return {
     yushin = 2,
   },
   ["D24K"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -20851,6 +22017,7 @@ return {
     yushin = 1,
   },
   ["D24L"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -20866,6 +22033,7 @@ return {
     teo = 3,
   },
   ["D24M"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20880,6 +22048,7 @@ return {
     yushin = 1,
   },
   ["D24N"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20895,6 +22064,7 @@ return {
     yushin = 1,
   },
   ["D24O"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20910,6 +22080,7 @@ return {
     vanessa = 1,
   },
   ["D24Q"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 2,
@@ -20923,6 +22094,7 @@ return {
     teo = 3,
   },
   ["D24R"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 2,
@@ -20936,6 +22108,7 @@ return {
     teo = 2,
   },
   ["D24S"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -20951,6 +22124,7 @@ return {
     vanessa = 1,
   },
   ["D24T"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -20965,6 +22139,7 @@ return {
     velika = 1,
   },
   ["D24U"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -20980,6 +22155,7 @@ return {
     teo = 1,
   },
   ["D24W"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -20995,6 +22171,7 @@ return {
     yushin = 1,
   },
   ["D24X"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -21011,6 +22188,7 @@ return {
     yushin = 1,
   },
   ["D24Z"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     colt = 1,
@@ -21029,6 +22207,7 @@ return {
     yushin = 1,
   },
   ["D250"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21046,6 +22225,7 @@ return {
     yushin = 1,
   },
   ["D252"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21063,6 +22243,7 @@ return {
     velika = 1,
   },
   ["D253"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21078,6 +22259,7 @@ return {
     teo = 1,
   },
   ["D255"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21093,6 +22275,7 @@ return {
     teo = 3,
   },
   ["D256"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 2,
     eileen = 1,
@@ -21109,6 +22292,7 @@ return {
     velika = 1,
   },
   ["D257"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -21124,6 +22308,7 @@ return {
     teo = 2,
   },
   ["D258"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     eileen = 1,
@@ -21141,6 +22326,7 @@ return {
     velika = 1,
   },
   ["D259"] = {
+    ace = 1,
     alice = 2,
     chancellor = 1,
     dellons = 1,
@@ -21158,6 +22344,7 @@ return {
     yushin = 1,
   },
   ["D25D"] = {
+    ace = 1,
     aragon = 2,
     chancellor = 1,
     eileen = 1,
@@ -21173,6 +22360,7 @@ return {
     yeonhee = 1,
   },
   ["D25E"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -21189,6 +22377,7 @@ return {
     yushin = 1,
   },
   ["D25F"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21204,6 +22393,7 @@ return {
     velika = 1,
   },
   ["D25G"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -21219,6 +22409,7 @@ return {
     velika = 1,
   },
   ["D25H"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -21233,6 +22424,7 @@ return {
     vanessa = 1,
   },
   ["D25I"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21248,6 +22440,7 @@ return {
     yushin = 1,
   },
   ["D25J"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -21264,6 +22457,7 @@ return {
     yushin = 1,
   },
   ["D25L"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 2,
@@ -21281,6 +22475,7 @@ return {
     velika = 1,
   },
   ["D25M"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21296,6 +22491,7 @@ return {
     teo = 1,
   },
   ["D25O"] = {
+    ace = 1,
     chancellor = 2,
     colt = 1,
     eileen = 2,
@@ -21310,6 +22506,7 @@ return {
     teo = 3,
   },
   ["D25P"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -21327,7 +22524,7 @@ return {
     yushin = 1,
   },
   ["D25Q"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -21342,7 +22539,7 @@ return {
     teo = 1,
   },
   ["D25R"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -21357,7 +22554,7 @@ return {
     velika = 1,
   },
   ["D25S"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -21372,6 +22569,7 @@ return {
     yushin = 2,
   },
   ["D25T"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 2,
@@ -21387,6 +22585,7 @@ return {
     vanessa = 2,
   },
   ["D25V"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -21402,6 +22601,7 @@ return {
     vanessa = 1,
   },
   ["D25W"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 2,
@@ -21417,6 +22617,7 @@ return {
     yeonhee = 2,
   },
   ["D25Y"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -21435,6 +22636,7 @@ return {
     yushin = 1,
   },
   ["D261"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -21451,6 +22653,7 @@ return {
     velika = 1,
   },
   ["D262"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -21467,6 +22670,7 @@ return {
     teo = 2,
   },
   ["D263"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -21484,6 +22688,7 @@ return {
     yushin = 1,
   },
   ["D264"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21499,6 +22704,7 @@ return {
     teo = 3,
   },
   ["D265"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     colt = 1,
@@ -21517,6 +22723,7 @@ return {
     velika = 1,
   },
   ["D268"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -21534,6 +22741,7 @@ return {
     velika = 1,
   },
   ["D269"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     dellons = 1,
@@ -21551,6 +22759,7 @@ return {
     vanessa = 1,
   },
   ["D26A"] = {
+    ace = 1,
     chancellor = 1,
     colt = 1,
     eileen = 1,
@@ -21567,6 +22776,7 @@ return {
     yushin = 2,
   },
   ["D26B"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -21583,6 +22793,7 @@ return {
     vanessa = 2,
   },
   ["D26C"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     dellons = 1,
@@ -21599,6 +22810,7 @@ return {
     velika = 1,
   },
   ["D26D"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -21615,6 +22827,7 @@ return {
     yushin = 2,
   },
   ["D26E"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -21631,6 +22844,7 @@ return {
     yushin = 1,
   },
   ["D26F"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21647,6 +22861,7 @@ return {
     velika = 1,
   },
   ["D26G"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -21661,6 +22876,7 @@ return {
     sieg = 2,
   },
   ["D26H"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -21676,6 +22892,7 @@ return {
     vanessa = 1,
   },
   ["D26I"] = {
+    ace = 1,
     chancellor = 2,
     dellons = 1,
     eileen = 1,
@@ -21693,6 +22910,7 @@ return {
     velika = 1,
   },
   ["D26J"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -21711,6 +22929,7 @@ return {
     yushin = 1,
   },
   ["D26K"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -21727,6 +22946,7 @@ return {
     teo = 2,
   },
   ["D26L"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -21742,6 +22962,7 @@ return {
     velika = 1,
   },
   ["D26M"] = {
+    ace = 1,
     ballista = 1,
     bidam = 1,
     chancellor = 1,
@@ -21758,6 +22979,7 @@ return {
     vanessa = 1,
   },
   ["D26N"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -21776,6 +22998,7 @@ return {
     yushin = 2,
   },
   ["D26O"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -21790,6 +23013,7 @@ return {
     vanessa = 1,
   },
   ["D26P"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21806,6 +23030,7 @@ return {
     yushin = 1,
   },
   ["D26Q"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     dellons = 1,
@@ -21823,6 +23048,7 @@ return {
     teo = 1,
   },
   ["D26R"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -21840,6 +23066,7 @@ return {
     yushin = 1,
   },
   ["D26S"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -21855,6 +23082,7 @@ return {
     teo = 1,
   },
   ["D26T"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21869,6 +23097,7 @@ return {
     velika = 1,
   },
   ["D26U"] = {
+    ace = 1,
     aragon = 1,
     bidam = 1,
     chancellor = 1,
@@ -21887,6 +23116,7 @@ return {
     yeonhee = 1,
   },
   ["D26V"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 2,
     colt = 1,
@@ -21905,6 +23135,7 @@ return {
     yushin = 1,
   },
   ["D26W"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -21920,6 +23151,7 @@ return {
     yushin = 1,
   },
   ["D26Z"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -21938,7 +23170,7 @@ return {
     yushin = 2,
   },
   ["D270"] = {
-    ace = 1,
+    ace = 2,
     bidam = 2,
     chancellor = 1,
     eileen = 1,
@@ -21954,6 +23186,7 @@ return {
     teo = 3,
   },
   ["D271"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -21969,6 +23202,7 @@ return {
     yeonhee = 1,
   },
   ["D272"] = {
+    ace = 1,
     aragon = 1,
     ballista = 1,
     chancellor = 1,
@@ -21985,7 +23219,7 @@ return {
     vanessa = 1,
   },
   ["D273"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22000,6 +23234,7 @@ return {
     teo = 2,
   },
   ["D274"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -22015,7 +23250,7 @@ return {
     velika = 1,
   },
   ["D275"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -22031,6 +23266,7 @@ return {
     teo = 2,
   },
   ["D277"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -22048,6 +23284,7 @@ return {
     yeonhee = 1,
   },
   ["D278"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -22065,6 +23302,7 @@ return {
     yushin = 1,
   },
   ["D279"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22081,6 +23319,7 @@ return {
     velika = 1,
   },
   ["D27A"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -22095,6 +23334,7 @@ return {
     velika = 1,
   },
   ["D27B"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 3,
     espada = 1,
@@ -22110,6 +23350,7 @@ return {
     teo = 2,
   },
   ["D27C"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22124,6 +23365,7 @@ return {
     yeonhee = 1,
   },
   ["D27D"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22141,7 +23383,7 @@ return {
     yushin = 1,
   },
   ["D27E"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22158,6 +23400,7 @@ return {
     teo = 2,
   },
   ["D27F"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22172,6 +23415,7 @@ return {
     teo = 2,
   },
   ["D27G"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22186,6 +23430,7 @@ return {
     teo = 1,
   },
   ["D27H"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 2,
     eileen = 1,
@@ -22202,6 +23447,7 @@ return {
     velika = 1,
   },
   ["D27I"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -22216,6 +23462,7 @@ return {
     velika = 1,
   },
   ["D27J"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -22229,7 +23476,7 @@ return {
     sylvesta = 1,
   },
   ["D27M"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -22244,6 +23491,7 @@ return {
     sieg = 1,
   },
   ["D27N"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22259,6 +23507,7 @@ return {
     teo = 1,
   },
   ["D27O"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22276,6 +23525,7 @@ return {
     teo = 1,
   },
   ["D27P"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -22294,7 +23544,7 @@ return {
     velika = 1,
   },
   ["D27R"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22312,6 +23562,7 @@ return {
     velika = 1,
   },
   ["D27S"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -22329,7 +23580,7 @@ return {
     yushin = 1,
   },
   ["D27T"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     colt = 1,
     eileen = 2,
@@ -22348,6 +23599,7 @@ return {
     velika = 1,
   },
   ["D27U"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 2,
@@ -22363,6 +23615,7 @@ return {
     yushin = 1,
   },
   ["D27V"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -22379,6 +23632,7 @@ return {
     taka = 1,
   },
   ["D27W"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22394,6 +23648,7 @@ return {
     velika = 1,
   },
   ["D27X"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     dellons = 1,
@@ -22410,6 +23665,7 @@ return {
     teo = 1,
   },
   ["D27Y"] = {
+    ace = 1,
     ballista = 1,
     chancellor = 1,
     eileen = 1,
@@ -22426,6 +23682,7 @@ return {
     yeonhee = 1,
   },
   ["D27Z"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -22440,6 +23697,7 @@ return {
     teo = 2,
   },
   ["D280"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22454,6 +23712,7 @@ return {
     sieg = 1,
   },
   ["D281"] = {
+    ace = 1,
     alice = 1,
     bidam = 1,
     chancellor = 1,
@@ -22469,6 +23728,7 @@ return {
     sieg = 1,
   },
   ["D282"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22486,6 +23746,7 @@ return {
     velika = 1,
   },
   ["D283"] = {
+    ace = 1,
     ballista = 1,
     bidam = 2,
     chancellor = 1,
@@ -22501,7 +23762,7 @@ return {
     teo = 1,
   },
   ["D285"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22516,6 +23777,7 @@ return {
     velika = 1,
   },
   ["D286"] = {
+    ace = 1,
     bidam = 2,
     chancellor = 1,
     eileen = 3,
@@ -22531,6 +23793,7 @@ return {
     teo = 1,
   },
   ["D287"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -22547,7 +23810,7 @@ return {
     teo = 1,
   },
   ["D288"] = {
-    ace = 1,
+    ace = 2,
     bidam = 1,
     chancellor = 2,
     eileen = 1,
@@ -22563,6 +23826,7 @@ return {
     vanessa = 1,
   },
   ["D289"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -22578,6 +23842,7 @@ return {
     velika = 1,
   },
   ["D28A"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 2,
@@ -22594,6 +23859,7 @@ return {
     vanessa = 1,
   },
   ["D28B"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22608,7 +23874,7 @@ return {
     teo = 2,
   },
   ["D28C"] = {
-    ace = 2,
+    ace = 3,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -22623,6 +23889,7 @@ return {
     yushin = 1,
   },
   ["D28D"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -22640,6 +23907,7 @@ return {
     velika = 1,
   },
   ["D28F"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -22655,6 +23923,7 @@ return {
     velika = 1,
   },
   ["D28G"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22670,6 +23939,7 @@ return {
     teo = 1,
   },
   ["D28H"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     eileen = 1,
@@ -22685,6 +23955,7 @@ return {
     teo = 1,
   },
   ["D28I"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22699,7 +23970,7 @@ return {
     teo = 3,
   },
   ["D28J"] = {
-    ace = 1,
+    ace = 2,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22717,6 +23988,7 @@ return {
     velika = 2,
   },
   ["D28K"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     chancellor = 1,
@@ -22733,6 +24005,7 @@ return {
     teo = 1,
   },
   ["D28M"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 2,
     espada = 1,
@@ -22748,6 +24021,7 @@ return {
     yushin = 1,
   },
   ["D28O"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22765,6 +24039,7 @@ return {
     teo = 2,
   },
   ["D28P"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22779,6 +24054,7 @@ return {
     teo = 1,
   },
   ["D28Q"] = {
+    ace = 1,
     alice = 1,
     chancellor = 1,
     eileen = 1,
@@ -22793,6 +24069,7 @@ return {
     velika = 1,
   },
   ["D28R"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 2,
@@ -22810,6 +24087,7 @@ return {
     yushin = 1,
   },
   ["D28S"] = {
+    ace = 1,
     chancellor = 2,
     eileen = 1,
     espada = 1,
@@ -22825,6 +24103,7 @@ return {
     yushin = 1,
   },
   ["D28T"] = {
+    ace = 1,
     bidam = 1,
     chancellor = 1,
     eileen = 1,
@@ -22839,6 +24118,7 @@ return {
     velika = 1,
   },
   ["D28W"] = {
+    ace = 1,
     chancellor = 1,
     eileen = 1,
     espada = 1,
@@ -22853,7 +24133,7 @@ return {
     teo = 1,
   },
   ["D28Y"] = {
-    ace = 1,
+    ace = 2,
     bidam = 2,
     chancellor = 1,
     dellons = 1,
@@ -22868,6 +24148,7 @@ return {
     teo = 3,
   },
   ["D28Z"] = {
+    ace = 1,
     alice = 1,
     aragon = 1,
     ballista = 1,
@@ -22885,6 +24166,7 @@ return {
     teo = 1,
   },
   ["D290"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 1,
     dellons = 1,
@@ -22902,6 +24184,7 @@ return {
     teo = 1,
   },
   ["D299"] = {
+    ace = 1,
     chancellor = 1,
     dellons = 1,
     eileen = 1,
@@ -22917,6 +24200,7 @@ return {
     teo = 1,
   },
   ["D29B"] = {
+    ace = 1,
     aragon = 1,
     chancellor = 2,
     eileen = 1,
