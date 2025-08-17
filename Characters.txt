@@ -10,15 +10,15 @@ vanessa 바네사
 pascal 파스칼
 rin 린
 colt 콜트
-
-eileen 아일린
-dellons 델론즈
-ludy 루디
-yushin 유신
 karma 카르마
 platen 플라튼
-jave 제이브
+ludy 루디
 espada 에스파다
+eileen 아일린
+
+yushin 유신
+jave 제이브
+dellons 델론즈
 shane 세인
 ace 에이스
 kris 크리스
