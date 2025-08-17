@@ -912,13 +912,13 @@
             return fetch(`data.lua?t=${ts}`)
                 .then(r => r.text())
                 .then(text => {
-                    // Convert Lua table string to a valid JSON string
+                    // Lua 테이블 문자열을 유효한 JSON 문자열로 변환
                     let jsonString = text
                         .trim()
-                        .replace(/^return\s*/, '')      // Remove "return"
-                        .replace(/,(\s*})/, '$1')       // Remove trailing commas before '}'
-                        .replace(/(\w+)\s*=/g, '"$1":') // Add quotes to keys (e.g., aragon= -> "aragon":)
-                        .replace(/\["(\w+)"\]/g, '"$1"'); // Convert ["KEY"] to "KEY"
+                        .replace(/^return\s*/, '')      // "return" 제거
+                        .replace(/,(\s*[}\]])/g, '$1')  // 닫는 괄호 앞의 불필요한 쉼표 제거 (조금 더 견고하게 수정)
+                        .replace(/(\w+)\s*=/g, '"$1":') // 키에 따옴표 추가 (aragon= -> "aragon":)
+                        .replace(/\["(\w+)"\]\s*=/g, '"$1":'); // ["KEY"]= 를 "KEY": 로 변환 (수정된 부분)
 
                     luaData = JSON.parse(jsonString);
                     
@@ -935,7 +935,14 @@
                         let copyText = `${key}: `;
                         let textParts = [];
 
-                        for (const charName in itemChars) {
+                        // 캐릭터 순서를 Characters.txt 순서대로 정렬하기 위한 준비
+                        const orderedChars = Object.keys(itemChars).sort((a, b) => {
+                            const indexA = characters.findIndex(([eng]) => eng === a);
+                            const indexB = characters.findIndex(([eng]) => eng === b);
+                            return indexA - indexB;
+                        });
+
+                        for (const charName of orderedChars) {
                             const count = itemChars[charName];
                             if (tier0Eng.has(charName)) tier0Count += count;
                             else if (tier1Eng.has(charName)) tier1Count += count;
