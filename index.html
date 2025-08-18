@@ -663,22 +663,13 @@
 
     <script>
         let lastActivityTime = Date.now();
-        const updateActivityTime = () => {
-            lastActivityTime = Date.now();
-        };
-        ['click', 'touchstart', 'scroll', 'keypress'].forEach(event => {
-            document.addEventListener(event, updateActivityTime);
-        });
+        const updateActivityTime = () => { lastActivityTime = Date.now(); };
+        ['click', 'touchstart', 'scroll', 'keypress'].forEach(event => document.addEventListener(event, updateActivityTime));
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'visible') {
                 const currentTime = Date.now();
                 const inactiveTime = currentTime - lastActivityTime;
-                const twoHours = 7200000;
-                if (inactiveTime > twoHours) {
-                    window.location.reload(true);
-                } else {
-                    lastActivityTime = currentTime;
-                }
+                if (inactiveTime > 7200000) { window.location.reload(true); } else { lastActivityTime = currentTime; }
             }
         });
 
@@ -703,33 +694,15 @@
                         if (results) {
                             results.style.willChange = 'scroll-position';
                             results.style.webkitOverflowScrolling = 'touch';
-                            let lastScrollTime = 0;
-                            const scrollThreshold = 16; 
-                            results.addEventListener('scroll', function(e) {
-                                const now = performance.now();
-                                if (now - lastScrollTime >= scrollThreshold) {
-                                    lastScrollTime = now;
-                                    if (!results.isScrolling) {
-                                        results.isScrolling = true;
-                                        results.classList.add('scrolling');
-                                        document.body.classList.add('is-scrolling');
-                                    }
-                                    clearTimeout(results.scrollEndTimer);
-                                    results.scrollEndTimer = setTimeout(function() {
-                                        results.isScrolling = false;
-                                        results.classList.remove('scrolling');
-                                        document.body.classList.remove('is-scrolling');
-                                    }, 100);
+                            results.addEventListener('scroll', function() {
+                                if (!results.isScrolling) {
+                                    results.isScrolling = true;
+                                    results.classList.add('scrolling');
                                 }
-                            }, { passive: true });
-                            results.addEventListener('touchstart', function() {
-                                results.classList.add('scrolling');
-                                document.body.classList.add('is-scrolling');
-                            }, { passive: true });
-                            results.addEventListener('touchend', function() {
-                                setTimeout(function() {
+                                clearTimeout(results.scrollEndTimer);
+                                results.scrollEndTimer = setTimeout(function() {
+                                    results.isScrolling = false;
                                     results.classList.remove('scrolling');
-                                    document.body.classList.remove('is-scrolling');
                                 }, 100);
                             }, { passive: true });
                         }
@@ -745,16 +718,8 @@
         });
 
         function optimizeParticles() {
-            const pauseParticles = () => {
-                if (window.tsParticles && window.tsParticles.domItem(0)) {
-                    window.tsParticles.domItem(0).pause();
-                }
-            };
-            const resumeParticles = () => {
-                if (window.tsParticles && window.tsParticles.domItem(0)) {
-                    window.tsParticles.domItem(0).play();
-                }
-            };
+            const pauseParticles = () => window.tsParticles?.domItem(0)?.pause();
+            const resumeParticles = () => window.tsParticles?.domItem(0)?.play();
             const results = document.getElementById('results');
             if (results) {
                 results.addEventListener('scroll', () => {
@@ -765,29 +730,12 @@
                         results.particlesTimer = setTimeout(() => {
                             resumeParticles();
                             results.particlesPaused = false;
-                        }, 200); 
+                        }, 200);
                     }
-                }, { passive: true });
-                results.addEventListener('touchstart', () => {
-                    if (!results.particlesPaused) {
-                        pauseParticles();
-                        results.particlesPaused = true;
-                    }
-                }, { passive: true });
-                results.addEventListener('touchend', () => {
-                    clearTimeout(results.particlesTimer);
-                    results.particlesTimer = setTimeout(() => {
-                        resumeParticles();
-                        results.particlesPaused = false;
-                    }, 200);
                 }, { passive: true });
             }
             document.addEventListener('visibilitychange', () => {
-                if (document.visibilityState === 'hidden') {
-                    pauseParticles();
-                } else {
-                    resumeParticles();
-                }
+                document.visibilityState === 'hidden' ? pauseParticles() : resumeParticles();
             });
         }
 
@@ -796,6 +744,7 @@
         let tier1Characters = [];
         let tier2Characters = [];
         let currentFilteredData = {};
+        let itemObserver;
 
 		function loadCharacters() {
             const ts = new Date().getTime();
@@ -813,8 +762,8 @@
                         }
                         const parts = trimmedLine.split(' ');
                         if (parts.length >= 2) {
-                            const eng = parts[0];
-                            const kor = parts.slice(1).join(' ');
+                            const [eng, ...korParts] = parts;
+                            const kor = korParts.join(' ');
                             const charData = [eng, kor];
                             
                             if (currentTier === 0) tier0Characters.push(charData);
@@ -822,13 +771,7 @@
                             else if (currentTier === 2) tier2Characters.push(charData);
                         }
                     });
-
                     characters = [...tier0Characters, ...tier1Characters, ...tier2Characters];
-                    
-                    characters.forEach(([eng, kor]) => {
-                        new Image().src = `Portrait/${kor}.png`;
-                    });
-
                     createCharacterBoxes();
                 })
                 .catch(error => { console.error('Character data loading error:', error); });
@@ -858,36 +801,21 @@
                     charBox.classList.add('extras-character-border'); // Tier 2
                 }
 
-                const img = document.createElement('img');
-                img.src = `Portrait/${kor}.png`;
-                img.alt = kor;
-                img.className = 'character-img';
-                img.loading = 'lazy';
-                img.decoding = 'async';
-                const nameSpan = document.createElement('span');
-                nameSpan.className = 'character-name';
-                nameSpan.textContent = eng;
-                const spinboxContainer = document.createElement('div');
-                spinboxContainer.className = 'spinbox-container';
-                const spinbox = document.createElement('input');
-                spinbox.type = 'number';
-                spinbox.id = `${eng}-spin`;
-                spinbox.min = 0;
-                spinbox.max = 8;
-                spinbox.value = 0;
-                spinbox.disabled = true;
-                spinboxContainer.appendChild(spinbox);
-                charBox.append(img, nameSpan, spinboxContainer);
+                charBox.innerHTML = `
+                    <img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async">
+                    <span class="character-name">${eng}</span>
+                    <div class="spinbox-container">
+                        <input type="number" id="${eng}-spin" min="0" max="8" value="0" disabled>
+                    </div>`;
                 fragment.appendChild(charBox);
+                
                 charBox.addEventListener('click', (e) => {
-                    if(e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox);
+                    if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox);
                 });
-                spinbox.addEventListener('click', (e) => {
+                charBox.querySelector('input').addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if(!charBox.classList.contains('selected')) {
-                        charBox.classList.add('selected');
-                        spinbox.disabled = false;
-                        if(spinbox.value === '0') spinbox.value = '1';
+                    if (!charBox.classList.contains('selected')) {
+                        toggleSelection(charBox);
                     }
                 });
             });
@@ -896,13 +824,9 @@
 
         function toggleSelection(charBox) {
             const spinbox = charBox.querySelector('input[type="number"]');
-            if(charBox.classList.toggle('selected')) {
-                spinbox.disabled = false;
-                spinbox.value = spinbox.value === '0' ? '1' : spinbox.value;
-            } else {
-                spinbox.disabled = true;
-                spinbox.value = 0;
-            }
+            const isSelected = charBox.classList.toggle('selected');
+            spinbox.disabled = !isSelected;
+            spinbox.value = isSelected ? (spinbox.value === '0' ? '1' : spinbox.value) : 0;
         }
 
         let itemDetailsMap = {};
@@ -912,14 +836,7 @@
             return fetch(`data.lua?t=${ts}`)
                 .then(r => r.text())
                 .then(text => {
-                    // Lua 테이블 문자열을 유효한 JSON 문자열로 변환
-                    let jsonString = text
-                        .trim()
-                        .replace(/^return\s*/, '')      // "return" 제거
-                        .replace(/,(\s*[}\]])/g, '$1')  // 닫는 괄호 앞의 불필요한 쉼표 제거 (조금 더 견고하게 수정)
-                        .replace(/(\w+)\s*=/g, '"$1":') // 키에 따옴표 추가 (aragon= -> "aragon":)
-                        .replace(/\["(\w+)"\]\s*=/g, '"$1":'); // ["KEY"]= 를 "KEY": 로 변환 (수정된 부분)
-
+                    let jsonString = text.trim().replace(/^return\s*/, '').replace(/,(\s*[}\]])/g, '$1').replace(/(\w+)\s*=/g, '"$1":').replace(/\["(\w+)"\]\s*=/g, '"$1":');
                     luaData = JSON.parse(jsonString);
                     
                     itemDetailsMap = {};
@@ -928,14 +845,9 @@
 
                     for (const key in luaData) {
                         const itemChars = luaData[key];
-                        let tier0Count = 0;
-                        let tier1Count = 0;
-                        let tier2Count = 0;
-                        let totalCount = 0;
-                        let copyText = `${key}: `;
+                        let tier0Count = 0, tier1Count = 0, tier2Count = 0, totalCount = 0;
                         let textParts = [];
 
-                        // 캐릭터 순서를 Characters.txt 순서대로 정렬하기 위한 준비
                         const orderedChars = Object.keys(itemChars).sort((a, b) => {
                             const indexA = characters.findIndex(([eng]) => eng === a);
                             const indexB = characters.findIndex(([eng]) => eng === b);
@@ -951,13 +863,7 @@
                             textParts.push(`${charName} x${count}`);
                         }
 
-                        itemDetailsMap[key] = {
-                            tier0Count,
-                            tier1Count,
-                            tier2Count,
-                            totalCount,
-                            copyText: copyText + textParts.join(', ')
-                        };
+                        itemDetailsMap[key] = { tier0Count, tier1Count, tier2Count, totalCount, copyText: `${key}: ${textParts.join(', ')}` };
                     }
                 }).catch(error => { console.error('Data loading error:', error); });
         }
@@ -965,58 +871,32 @@
         function applyFiltersAndSort() {
             const resultsDiv = document.getElementById('results');
             resultsDiv.classList.add('sorting'); 
-            
-            if (window.tsParticles && window.tsParticles.domItem(0)) {
-                window.tsParticles.domItem(0).pause();
-            }
-
+            window.tsParticles?.domItem(0)?.pause();
             setTimeout(() => {
-                let filtered = {};
-                for(const [k, v] of Object.entries(luaData)) {
-                    if(checkConditions(v)) filtered[k] = v;
-                }
-                currentFilteredData = filtered;
-
-                const data = currentFilteredData;
-                const sortKey = document.getElementById('sortDropdown')?.value || 'tier';
+                currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v)));
                 
-                const sortedKeys = Object.keys(data).sort((a, b) => {
-                    const itemA = itemDetailsMap[a];
-                    const itemB = itemDetailsMap[b];
-
-                    if (sortKey === 'total') {
-                        return itemB.totalCount - itemA.totalCount;
-                    } 
-                    // Default sort is 'tier'
-                    else {
-                        const tier0Diff = itemB.tier0Count - itemA.tier0Count;
-                        if (tier0Diff !== 0) return tier0Diff;
-
-                        const tier1Diff = itemB.tier1Count - itemA.tier1Count;
-                        if (tier1Diff !== 0) return tier1Diff;
-                        
-                        return itemB.tier2Count - itemA.tier2Count;
-                    }
+                const sortKey = document.getElementById('sortDropdown')?.value || 'tier';
+                const sortedKeys = Object.keys(currentFilteredData).sort((a, b) => {
+                    const itemA = itemDetailsMap[a], itemB = itemDetailsMap[b];
+                    if (sortKey === 'total') return itemB.totalCount - itemA.totalCount;
+                    const tier0Diff = itemB.tier0Count - itemA.tier0Count;
+                    if (tier0Diff !== 0) return tier0Diff;
+                    const tier1Diff = itemB.tier1Count - itemA.tier1Count;
+                    if (tier1Diff !== 0) return tier1Diff;
+                    return itemB.tier2Count - itemA.tier2Count;
                 });
                 
-                displayResults(data, sortedKeys);
+                displayResults(currentFilteredData, sortedKeys);
                 
                 resultsDiv.classList.remove('sorting');
-                if (window.tsParticles && window.tsParticles.domItem(0)) {
-                    window.tsParticles.domItem(0).play();
-                }
+                window.tsParticles?.domItem(0)?.play();
             }, 200);
         }
 
         function checkConditions(itemChars) {
             return characters.every(([eng]) => {
                 const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`);
-                if (box && box.classList.contains('selected')) {
-                    const requiredCount = parseInt(box.querySelector('input').value);
-                    const hasCount = itemChars[eng] || 0;
-                    return hasCount >= requiredCount;
-                }
-                return true;
+                return !box?.classList.contains('selected') || (itemChars[eng] || 0) >= parseInt(box.querySelector('input').value);
             });
         }
 
@@ -1048,44 +928,29 @@
 					if (e.target.closest('.extras-box') || e.target.classList.contains('scroll-indicator')) return;
 					copyToClipboard(item);
 				});
-
                 item.addEventListener('mouseenter', () => resetOtherScrolledItems(item));
-                
                 item.addEventListener('mouseleave', () => {
-                    const container = item.querySelector('.item-images-wrapper.has-scroll .item-images');
-                    if (container && container.scrollLeft > 0) {
-                        container.scroll({ left: 0, behavior: 'smooth' });
+                    const imgContainer = item.querySelector('.item-images-wrapper.has-scroll .item-images');
+                    if (imgContainer && imgContainer.scrollLeft > 0) {
+                        imgContainer.scroll({ left: 0, behavior: 'smooth' });
                     }
                 });
                 
                 const imagesWrapper = document.createElement('div');
                 imagesWrapper.className = 'item-images-wrapper';
-
 				const imageContainer = document.createElement('div');
 				imageContainer.className = 'item-images'; 
 
 				const charValue = data[k];
-
-                const tier0ImageData = [];
-                const tier1ImageData = [];
-                const tier2ImageData = [];
+                const tier0ImageData = [], tier1ImageData = [], tier2ImageData = [];
 
                 for (const charName in charValue) {
                     const count = charValue[charName];
                     const charInfo = characters.find(([eng]) => eng === charName);
                     if (!charInfo) continue;
-
                     const [engName, korName] = charInfo;
                     const originalIndex = characters.findIndex(([eng]) => eng === engName);
-                    
-                    const imageData = {
-                        src: `Portrait/${korName}.png`,
-                        alt: korName,
-                        engName: engName,
-                        count: count,
-                        originalIndex: originalIndex 
-                    };
-
+                    const imageData = { src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: count, originalIndex: originalIndex };
                     if (tier0Eng.has(engName)) tier0ImageData.push(imageData);
                     else if (tier1Eng.has(engName)) tier1ImageData.push(imageData);
                     else tier2ImageData.push(imageData);
@@ -1096,38 +961,16 @@
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
 
                 const allImportantCharsData = [...tier0ImageData, ...tier1ImageData];
-
-                allImportantCharsData.forEach(charData => {
-                    const container = document.createElement('div');
-                    container.className = 'image-with-count-container';
-
-                    const img = document.createElement('img');
-                    img.src = charData.src;
-                    img.alt = charData.alt;
-                    img.className = 'small-character-img';
-
-                    const isTier0 = tier0Eng.has(charData.engName);
-                    if (isTier0) {
-                        img.classList.add('super-rare');
-                    } else {
-                        img.classList.add('rare');
+                
+                if (allImportantCharsData.length > 0) {
+                    const firstCharData = allImportantCharsData[0];
+                    imageContainer.appendChild(createCharacterImageElement(firstCharData, tier0Eng));
+                    const remainingCharsData = allImportantCharsData.slice(1);
+                    if (remainingCharsData.length > 0) {
+                        item.classList.add('lazy-load-item');
+                        item.dataset.remainingChars = JSON.stringify(remainingCharsData);
                     }
-                    container.appendChild(img);
-                    
-                    if (charData.count > 1) {
-                        const badge = document.createElement('div');
-                        badge.className = 'image-count-badge';
-                        badge.textContent = `x${charData.count}`;
-                        
-                        if (isTier0) {
-                            badge.classList.add('super-rare-badge');
-                        } else {
-                            badge.classList.add('rare-badge');
-                        }
-                        container.appendChild(badge);
-                    }
-                    imageContainer.appendChild(container);
-                });
+                }
 
 				if (tier2ImageData.length > 0) {
 					const extrasBox = document.createElement('div');
@@ -1146,7 +989,6 @@
                 
                 imagesWrapper.appendChild(imageContainer);
                 imagesWrapper.appendChild(scrollIndicator);
-
 				item.appendChild(imagesWrapper);
 				container.appendChild(item);
 			});
@@ -1156,46 +998,111 @@
 			document.getElementById('copyInstruction').style.display = 'block';
             
             setupScrollIndicators();
+            setupItemObserver();
 		}
+
+        function createCharacterImageElement(charData, tier0Eng, isLazy = false) {
+            const container = document.createElement('div');
+            container.className = 'image-with-count-container';
+            if (isLazy) container.classList.add('js-lazy-loaded');
+            
+            const img = document.createElement('img');
+            img.src = charData.src;
+            img.alt = charData.alt;
+            img.className = 'small-character-img';
+            const isTier0 = tier0Eng.has(charData.engName);
+            img.classList.add(isTier0 ? 'super-rare' : 'rare');
+            container.appendChild(img);
+
+            if (charData.count > 1) {
+                const badge = document.createElement('div');
+                badge.className = 'image-count-badge';
+                badge.textContent = `x${charData.count}`;
+                badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge');
+                container.appendChild(badge);
+            }
+            return container;
+        }
+
+        function setupItemObserver() {
+            if (itemObserver) {
+                itemObserver.disconnect();
+            }
+            const options = {
+                root: document.getElementById('results'),
+                rootMargin: '400px 0px',
+                threshold: 0
+            };
+            itemObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    const item = entry.target;
+                    if (entry.isIntersecting) {
+                        clearTimeout(item.revertTimer);
+                        item.renderTimer = setTimeout(() => {
+                            renderFullItem(item);
+                        }, 150);
+                    } else {
+                        clearTimeout(item.renderTimer);
+                        item.revertTimer = setTimeout(() => {
+                            revertToLazyItem(item);
+                        }, 150);
+                    }
+                });
+            }, options);
+            const lazyItems = document.querySelectorAll('.lazy-load-item');
+            lazyItems.forEach(item => itemObserver.observe(item));
+        }
+
+        function renderFullItem(item) {
+            if (item.querySelector('.js-lazy-loaded')) return;
+            const remainingCharsData = item.dataset.remainingChars;
+            if (remainingCharsData) {
+                const remainingChars = JSON.parse(remainingCharsData);
+                const imageContainer = item.querySelector('.item-images');
+                const extrasBox = imageContainer.querySelector('.extras-box');
+                const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+                remainingChars.forEach(charData => {
+                    const imageElement = createCharacterImageElement(charData, tier0Eng, true);
+                    if (extrasBox) {
+                        imageContainer.insertBefore(imageElement, extrasBox);
+                    } else {
+                        imageContainer.appendChild(imageElement);
+                    }
+                });
+            }
+            setupScrollIndicatorForItem(item);
+        }
+
+        function revertToLazyItem(item) {
+            const lazyElements = item.querySelectorAll('.js-lazy-loaded');
+            if (lazyElements.length === 0) return;
+            lazyElements.forEach(el => el.remove());
+            setupScrollIndicatorForItem(item);
+        }
 
 		function setupScrollIndicators() {
-			const resultItems = document.querySelectorAll('#results .result-item');
-
-			resultItems.forEach(item => {
-				const wrapper = item.querySelector('.item-images-wrapper');
-				const imagesContainer = item.querySelector('.item-images');
-                const scrollIndicator = item.querySelector('.scroll-indicator');
-
-				if (!wrapper || !imagesContainer || !scrollIndicator) return;
-
-				requestAnimationFrame(() => {
-					const hasScroll = imagesContainer.scrollWidth > imagesContainer.clientWidth;
-					if (hasScroll) {
-						wrapper.classList.add('has-scroll');
-						
-                        scrollIndicator.onclick = (e) => {
-                            e.stopPropagation();
-                            imagesContainer.scroll({
-                                left: imagesContainer.scrollWidth - imagesContainer.clientWidth,
-                                behavior: 'smooth'
-                            });
-                        };
-
-						imagesContainer.onscroll = () => {
-							const isAtEnd = imagesContainer.scrollLeft + imagesContainer.clientWidth >= imagesContainer.scrollWidth - 5;
-							if (isAtEnd) {
-								wrapper.classList.add('scrolled-to-end');
-							} else {
-								wrapper.classList.remove('scrolled-to-end');
-							}
-						};
-
-					} else {
-						wrapper.classList.remove('has-scroll');
-					}
-				});
-			});
+			document.querySelectorAll('#results .result-item').forEach(setupScrollIndicatorForItem);
 		}
+        
+        function setupScrollIndicatorForItem(item) {
+            const wrapper = item.querySelector('.item-images-wrapper');
+            const imagesContainer = item.querySelector('.item-images');
+            const scrollIndicator = item.querySelector('.scroll-indicator');
+            if (!wrapper || !imagesContainer || !scrollIndicator) return;
+            requestAnimationFrame(() => {
+                const hasScroll = imagesContainer.scrollWidth > imagesContainer.clientWidth;
+                if (hasScroll) {
+                    wrapper.classList.add('has-scroll');
+                    scrollIndicator.onclick = (e) => { e.stopPropagation(); imagesContainer.scroll({ left: imagesContainer.scrollWidth - imagesContainer.clientWidth, behavior: 'smooth' }); };
+                    imagesContainer.onscroll = () => { wrapper.classList.toggle('scrolled-to-end', imagesContainer.scrollLeft + imagesContainer.clientWidth >= imagesContainer.scrollWidth - 5); };
+                    imagesContainer.dispatchEvent(new Event('scroll'));
+                } else {
+                    wrapper.classList.remove('has-scroll', 'scrolled-to-end');
+                    imagesContainer.onscroll = null;
+                    scrollIndicator.onclick = null;
+                }
+            });
+        }
         
 		function resetAllScrolledItems() {
 		    document.querySelectorAll('.item-images-wrapper.has-scroll .item-images').forEach(container => {
@@ -1220,28 +1127,14 @@
 			const popup = document.getElementById('extrasPopup');
 			const grid = document.getElementById('extras-popup-grid');
 			grid.innerHTML = '';
-
 			images.forEach(charData => {
 				const container = document.createElement('div');
 				container.className = 'image-with-count-container';
-
-				const img = document.createElement('img');
-				img.src = charData.src;
-				img.alt = charData.alt;
-				img.className = 'small-character-img extras-character-border';
-				img.loading = 'lazy';
-				img.decoding = 'async';
-				container.appendChild(img);
-
-				if (charData.count > 1) {
-					const badge = document.createElement('div');
-					badge.className = 'image-count-badge';
-					badge.textContent = `x${charData.count}`;
-					container.appendChild(badge);
-				}
+				container.innerHTML = `
+                    <img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async">
+                    ${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`;
 				grid.appendChild(container);
 			});
-
 			popup.style.display = 'flex';
 		}
 
@@ -1258,14 +1151,11 @@
         function showCopyMessage(){
             const msg = document.getElementById('copyMessage');
             msg.classList.add('show');
-            setTimeout(() => {
-                msg.classList.remove('show');
-            }, 2000);
+            setTimeout(() => { msg.classList.remove('show'); }, 2000);
         }
 
 		function getSelectedCharacters(){
-		    return [...document.getElementsByClassName('character-box')]
-		        .filter(b => b.classList.contains('selected'))
+		    return [...document.querySelectorAll('.character-box.selected')]
 		        .map(b => `${b.dataset.engName}:${b.querySelector('input').value}`)
 		        .join(',');
 		}
@@ -1276,7 +1166,7 @@
                 const now = Date.now();
                 if (now - lastCall >= delay) {
                     lastCall = now;
-                    return func.apply(this, args);
+                    func.apply(this, args);
                 }
             };
         }
@@ -1285,26 +1175,17 @@
             let timeoutId;
             return function(...args) {
                 clearTimeout(timeoutId);
-                timeoutId = setTimeout(() => {
-                    func.apply(this, args);
-                }, delay);
+                timeoutId = setTimeout(() => func.apply(this, args), delay);
             };
         }
 
 		const throttledFilterHandler = throttle(function() {
 		    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-		    loadData().then(() => {
-		        applyFiltersAndSort();
-		        const selectedCharsString = getSelectedCharacters();
-		        if (selectedCharsString) {
-		            gtag('event', 'apply_filter', {
-		                'selected_characters': selectedCharsString
-		            });
-		        }
-		    })
-		    .catch(error => {
-		        console.error('Filter application error:', error);
-		    });
+            applyFiltersAndSort();
+            const selectedCharsString = getSelectedCharacters();
+            if (selectedCharsString) {
+                gtag('event', 'apply_filter', { 'selected_characters': selectedCharsString });
+            }
 		}, 300);
 
         document.getElementById('filterButton').addEventListener('click', throttledFilterHandler);
@@ -1317,30 +1198,19 @@
 		document.addEventListener('DOMContentLoaded', () => {
 			const extrasPopup = document.getElementById('extrasPopup');
 			const closeExtrasBtn = document.getElementById('closeExtrasPopup');
-
 			const hideExtrasPopup = () => { extrasPopup.style.display = 'none'; };
-			
 			closeExtrasBtn.addEventListener('click', hideExtrasPopup);
-
-			window.addEventListener('click', (event) => {
-				if (event.target == extrasPopup) {
-					hideExtrasPopup();
-				}
-			});
+			window.addEventListener('click', (event) => { if (event.target == extrasPopup) hideExtrasPopup(); });
 
             const resultsContainer = document.getElementById('results');
             if (resultsContainer) {
                 resultsContainer.addEventListener('scroll', resetAllScrolledItems);
             }
             document.body.addEventListener('click', (e) => {
-                if (!e.target.closest('.result-item')) {
-                    resetAllScrolledItems();
-                }
+                if (!e.target.closest('.result-item')) resetAllScrolledItems();
             });
 			window.addEventListener('scroll', throttle(resetAllScrolledItems, 100));
-			
-            const debouncedScrollSetup = debounce(setupScrollIndicators, 50);
-            window.addEventListener('resize', debouncedScrollSetup);
+			window.addEventListener('resize', debounce(setupScrollIndicators, 50));
 		});
     </script>
 </body>
