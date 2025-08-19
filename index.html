@@ -24,67 +24,6 @@
 	        position: relative;
 	        overflow-y: scroll;
 	    }
-
-        /* Initial hidden states for animations */
-        .animate-content {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        /* Animation keyframes */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slideInFromLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Animation classes that will be applied */
-        .animate-fadeInUp {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        .animate-fadeInScale {
-            animation: fadeInScale 0.5s ease-out forwards;
-        }
-
-        .animate-slideInFromLeft {
-            animation: slideInFromLeft 0.7s ease-out forwards;
-        }
-
-        /* Staggered animation delays */
-        .animate-delay-100 { animation-delay: 0.1s; }
-        .animate-delay-200 { animation-delay: 0.2s; }
-        .animate-delay-300 { animation-delay: 0.3s; }
-        .animate-delay-400 { animation-delay: 0.4s; }
-        .animate-delay-500 { animation-delay: 0.5s; }
-
 	    h1 {
 	        text-align: center;
 	        margin-bottom: 30px;
@@ -693,19 +632,19 @@
         <div class="spinner"></div>
     </div>
     <div id="tsparticles"></div>
-    <h1 class="animate-content">SEVEN KNIGHTS RE:BIRTH</h1>
-    <div class="character-grid animate-content" id="characterGrid"></div>
-    <button id="filterButton" class="animate-content">Apply Filter</button>
-	<div id="copyInstruction" class="animate-content">
+    <h1>SEVEN KNIGHTS RE:BIRTH</h1>
+    <div class="character-grid" id="characterGrid"></div>
+    <button id="filterButton">Apply Filter</button>
+	<div id="copyInstruction">
 	  ※ Click item to copy
 	</div>
-    <div class="sort-container animate-content">
+    <div class="sort-container">
         <select id="sortDropdown">
             <option value="tier" selected>Tier Count</option>
             <option value="total">Total Count</option>
         </select>
     </div>
-    <div id="results" class="animate-content"></div>
+    <div id="results"></div>
     <div id="copyMessage">
         <div class="copy-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -733,27 +672,6 @@
                 if (inactiveTime > 7200000) { window.location.reload(true); } else { lastActivityTime = currentTime; }
             }
         });
-
-        // Animation trigger function
-        function triggerAnimations() {
-            setTimeout(() => {
-                const animatedElements = document.querySelectorAll('.animate-content');
-                animatedElements.forEach((element, index) => {
-                    // Add delay based on element order
-                    const delay = index * 100; // 100ms between each element
-                    element.style.animationDelay = `${delay}ms`;
-                    
-                    // Choose animation type based on element
-                    if (element.tagName === 'H1') {
-                        element.classList.add('animate-fadeInScale');
-                    } else if (element.classList.contains('character-grid')) {
-                        element.classList.add('animate-slideInFromLeft');
-                    } else {
-                        element.classList.add('animate-fadeInUp');
-                    }
-                });
-            }, 100);
-        }
 
         window.addEventListener('load', () => {
             const lastLoad = localStorage.getItem('lastLoadTime');
@@ -790,9 +708,6 @@
                         }
                         optimizeImages();
                         optimizeParticles();
-                        
-                        // Trigger animations after everything is loaded
-                        triggerAnimations();
                     }, 500);
                 })
                 .catch(error => {
@@ -873,13 +788,10 @@
             const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
             const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 
-            characters.forEach(([eng, kor], index) => {
+            characters.forEach(([eng, kor]) => {
                 const charBox = document.createElement('div');
-                charBox.className = 'character-box animate-content';
+                charBox.className = 'character-box';
                 charBox.dataset.engName = eng;
-                
-                // Add staggered animation delay for character boxes
-                charBox.style.animationDelay = `${(index * 20) + 300}ms`;
                 
                 if (tier0Eng.has(eng)) {
                     charBox.classList.add('super-rare'); // Tier 0
@@ -1007,13 +919,10 @@
             const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
             const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 			
-			sortedKeys.forEach((k, index) => {
+			sortedKeys.forEach(k => {
 				const item = document.createElement('div');
-				item.className = 'result-item animate-content';
+				item.className = 'result-item';
 				item.dataset.itemKey = k;
-                
-                // Add staggered animation for result items
-                item.style.animationDelay = `${index * 50}ms`;
 
 				item.addEventListener('click', (e) => {
 					if (e.target.closest('.extras-box') || e.target.classList.contains('scroll-indicator')) return;
@@ -1087,14 +996,6 @@
 			res.innerHTML = '';
 			res.appendChild(fragment);
 			document.getElementById('copyInstruction').style.display = 'block';
-            
-            // Add animation to result items after they're rendered
-            setTimeout(() => {
-                const resultItems = res.querySelectorAll('.result-item');
-                resultItems.forEach(item => {
-                    item.classList.add('animate-fadeInUp');
-                });
-            }, 100);
             
             setupScrollIndicators();
             setupItemObserver();
