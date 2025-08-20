@@ -508,7 +508,7 @@
 		}
 		.image-with-count-container.animate-in {
 			opacity: 0; /* 애니메이션 시작 전 보이지 않도록 설정 */
-			animation: itemAppear 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+			animation: itemAppear 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 		}
 		/* --- END NEW STYLES --- */
 
@@ -1087,7 +1087,7 @@
                     
                     // 애니메이션 클래스와 지연 시간 추가
                     imageElement.classList.add('animate-in');
-                    imageElement.style.animationDelay = `${index * 40}ms`;
+                    imageElement.style.animationDelay = `${index * 30}ms`;
 
                     if (extrasBox) {
                         imageContainer.insertBefore(imageElement, extrasBox);
