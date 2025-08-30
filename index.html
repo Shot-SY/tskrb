@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEVEN KNIGHTS RE:BIRTH</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHQ2JPN68G"></script>
+    <script async src="https://www.googletagmanager.com/gtag/jsid=G-CHQ2JPN68G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -250,11 +250,11 @@
 		    background-color: rgba(20,20,20,0.8);
 		    border-radius: 15px;
 		    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-		    position: relative;
-		    z-index: 1;
-		    will-change: scroll-position;
-		    -webkit-overflow-scrolling: touch;
-		    transform: translateZ(0);
+	        position: relative;
+	        z-index: 1;
+	        will-change: scroll-position;
+	        -webkit-overflow-scrolling: touch;
+	        transform: translateZ(0);
             transition: opacity 0.2s ease-in-out;
 		}
         #results.sorting {
@@ -1059,7 +1059,7 @@
 
 				const charValue = data[k];
                 const itemDetails = itemDetailsMap[k];
-                let allItemsData = [];
+                let allImportantItemsData = [];
                 const tier2ImageData = [];
 
                 for (const charName in charValue) {
@@ -1071,44 +1071,49 @@
                     const imageData = { type: 'character', src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: charValue[charName], originalIndex: originalIndex };
                     
                     if (tier0Characters.some(c => c[0] === engName) || tier1Characters.some(c => c[0] === engName)) {
-                        allItemsData.push(imageData);
+                        allImportantItemsData.push(imageData);
                     } else {
                         tier2ImageData.push(imageData);
                     }
                 }
 
+                // First, sort all important characters by their original index
+                allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
+
+                // Now, if there's a costume, insert it right after Teo
                 if (itemDetails.costume) {
-                    const teoIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
-                    // Place costume after Teo, or at the start if Teo isn't present
-                    const costumeIndex = (teoIndex !== -1) ? teoIndex + 0.5 : -1; 
-                    allItemsData.push({ type: 'costume', originalIndex: costumeIndex });
+                    const teoIndex = allImportantItemsData.findIndex(item => item.type === 'character' && item.engName.toLowerCase() === 'teo');
+                    const costumeData = { type: 'costume' };
+                    if (teoIndex !== -1) {
+                        allImportantItemsData.splice(teoIndex + 1, 0, costumeData);
+                    } else {
+                        allImportantItemsData.unshift(costumeData); // Fallback if Teo isn't in the list
+                    }
                 }
 
-                allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
-                if (allItemsData.length > 0) {
-                    const firstItemData = allItemsData[0];
+                if (allImportantItemsData.length > 0) {
+                    const firstItemData = allImportantItemsData[0];
                     if (firstItemData.type === 'costume') {
                         imageContainer.appendChild(createCostumeBoxElement());
                     } else {
                         imageContainer.appendChild(createCharacterImageElement(firstItemData, tier0Eng));
                     }
 
-                    const remainingItemsData = allItemsData.slice(1);
+                    const remainingItemsData = allImportantItemsData.slice(1);
                     if (remainingItemsData.length > 0 || tier2ImageData.length > 0) {
                         item.classList.add('lazy-load-item');
                         item.dataset.remainingItems = JSON.stringify(remainingItemsData);
+                        item.dataset.tier2Items = JSON.stringify(tier2ImageData);
                     }
                 }
 
-				if (tier2ImageData.length > 0) {
-					const extrasBox = document.createElement('div');
-					extrasBox.className = 'extras-box'; 
-					extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
-					extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2ImageData); });
-                    // Append extras box conditionally during lazy load
-				}
+                if (tier2ImageData.length > 0 && allImportantItemsData.length === 0) {
+                     item.classList.add('lazy-load-item');
+                     item.dataset.tier2Items = JSON.stringify(tier2ImageData);
+                }
+
 
                 const priceBox = document.createElement('div');
                 priceBox.className = 'price-box';
@@ -1190,11 +1195,12 @@
         function renderFullItem(item) {
             if (item.querySelector('.js-lazy-loaded')) return;
             const remainingItemsJSON = item.dataset.remainingItems;
+            const tier2ItemsJSON = item.dataset.tier2Items;
+            const imageContainer = item.querySelector('.item-images');
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+
             if (remainingItemsJSON) {
                 const remainingItems = JSON.parse(remainingItemsJSON);
-                const imageContainer = item.querySelector('.item-images');
-                const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-                
                 remainingItems.forEach(itemData => {
                     let element;
                     if (itemData.type === 'costume') {
@@ -1206,27 +1212,16 @@
                 });
             }
 
-            // Check if extras box needs to be added (if it wasn't added initially)
-            if (!item.querySelector('.extras-box')) {
-                const k = item.dataset.itemKey;
-                const charValue = luaData[k];
-                const tier2ImageData = [];
-
-                 for (const charName in charValue) {
-                    const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName);
-                    if (!charInfo || tier0Characters.some(c => c[0] === charInfo[0]) || tier1Characters.some(c => c[0] === charInfo[0])) continue;
-                     tier2ImageData.push({ engName: charInfo[0], src: `Portrait/${charInfo[1]}.png`, alt: charInfo[1], count: charValue[charName] });
-                 }
-
-                if(tier2ImageData.length > 0) {
+            if (tier2ItemsJSON) {
+                const tier2Items = JSON.parse(tier2ItemsJSON);
+                if(tier2Items.length > 0) {
                     const extrasBox = document.createElement('div');
                     extrasBox.className = 'extras-box js-lazy-loaded'; 
                     extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
-                    extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2ImageData); });
-                    item.querySelector('.item-images').appendChild(extrasBox);
+                    extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2Items); });
+                    imageContainer.appendChild(extrasBox);
                 }
             }
-
             setupScrollControlsForItem(item);
         }
 
