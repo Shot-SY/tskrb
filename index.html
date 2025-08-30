@@ -424,24 +424,28 @@
 			height: 60px;
 			min-width: 84px;
 			padding: 0 12px;
-			background: rgba(108, 122, 137, 0.15);
-			border: 1px solid rgba(108, 122, 137, 0.7);
 			border-radius: 10px;
 			text-align: center;
 		}
-		.item-box .item-title {
-			color: rgba(236, 240, 241, 0.8);
-			font-size: 14px;
+        .costume-box {
+			background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 193, 7, 0.25));
+			border: 1px solid rgba(255, 215, 0, 0.8);
+			box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            min-width: 130px;
+        }
+		.costume-box .item-title {
+			color: rgba(255, 235, 170, 0.9);
+			font-size: 13px;
 			font-weight: normal;
 			text-transform: uppercase;
 			margin-bottom: 2px;
 		}
-		.item-box .item-count {
+		.costume-box .costume-name {
 			color: #fff;
-			font-size: 19px;
+			font-size: 21px;
 			font-weight: 700;
 			font-family: 'Poppins', sans-serif;
-			text-shadow: 0 0 5px rgba(108, 122, 137, 0.5);
+			text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
 		}
 		.price-box {
 			display: flex;
@@ -691,13 +695,13 @@
 	            font-size: 1em;
 	            padding: 15px 20px;
 	        }
-			.item-box .item-title {
+			.item-box .item-title, .costume-box .item-title {
 				font-size: 12px;
 			}
 			.extras-box .item-title {
 				font-size: 12px;
 			}
-			.item-box .item-count {
+			.costume-box .costume-name {
 				font-size: 17px;
 			}
 			.price-box .price-usd {
@@ -726,8 +730,8 @@
 	</div>
     <div class="sort-container">
         <select id="sortDropdown">
-            <option value="tier" selected>Tier Count</option>
-            <option value="total">Total Count</option>
+            <option value="price" selected>Price</option>
+            <option value="total">Character Count</option>
         </select>
     </div>
     <div id="results"></div>
@@ -940,7 +944,7 @@
                         const itemDetails = {
                             originalText: line,
                             price: parseFloat(pricePart.replace('$', '')),
-                            costume: line.includes('['),
+                            costume: line.toLowerCase().includes('[teo legend costume]'),
                             tier0Count: 0,
                             tier1Count: 0,
                             tier2Count: 0,
@@ -978,15 +982,21 @@
             setTimeout(() => {
                 currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v)));
                 
-                const sortKey = document.getElementById('sortDropdown')?.value || 'tier';
+                const sortKey = document.getElementById('sortDropdown')?.value || 'price';
                 const sortedKeys = Object.keys(currentFilteredData).sort((a, b) => {
-                    const itemA = itemDetailsMap[a], itemB = itemDetailsMap[b];
-                    if (sortKey === 'total') return itemB.totalCount - itemA.totalCount;
-                    const tier0Diff = itemB.tier0Count - itemA.tier0Count;
-                    if (tier0Diff !== 0) return tier0Diff;
-                    const tier1Diff = itemB.tier1Count - itemA.tier1Count;
-                    if (tier1Diff !== 0) return tier1Diff;
-                    return itemB.tier2Count - itemA.tier2Count;
+                    const itemA = itemDetailsMap[a];
+                    const itemB = itemDetailsMap[b];
+                    
+                    if (sortKey === 'total') {
+                        const totalDiff = itemB.totalCount - itemA.totalCount;
+                        if (totalDiff !== 0) return totalDiff;
+                        return itemB.price - itemA.price; // Secondary sort by price
+                    }
+                    
+                    // Default to price sort
+                    const priceDiff = itemB.price - itemA.price;
+                    if (priceDiff !== 0) return priceDiff;
+                    return itemB.totalCount - itemA.totalCount; // Secondary sort by total count
                 });
                 
                 displayResults(currentFilteredData, sortedKeys);
@@ -1090,8 +1100,8 @@
 
                 if (itemDetails.costume) {
                     const costumeBox = document.createElement('div');
-                    costumeBox.className = 'item-box';
-                    costumeBox.innerHTML = `<div class="item-title">COSTUME</div><div class="item-count">✓</div>`;
+                    costumeBox.className = 'item-box costume-box';
+                    costumeBox.innerHTML = `<div class="item-title">LEGEND COSTUME</div><div class="costume-name">TEO</div>`;
                     rightSection.appendChild(costumeBox);
                 }
 
