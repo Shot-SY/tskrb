@@ -327,6 +327,7 @@
 	    .small-character-img {
 			height: 60px;
 			width: auto;
+            min-width: 45px;
 			object-fit: contain;
 			border-radius: 10px;
 			transition: transform 0.2s;
@@ -387,6 +388,7 @@
             position: relative;
             display: inline-block;
             vertical-align: middle;
+            flex-shrink: 0;
         }
 		.image-count-badge {
 		    position: absolute;
@@ -416,37 +418,36 @@
 		    color: #ff5252;
 		    text-shadow: 0 0 5px rgba(255, 82, 82, 0.7);
 		}
-		.item-box {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			height: 60px;
-			min-width: 84px;
-			padding: 0 12px;
-			border-radius: 10px;
-			text-align: center;
-		}
-        .costume-box {
-			background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 193, 7, 0.25));
-			border: 1px solid rgba(255, 215, 0, 0.8);
-			box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            min-width: 130px;
+        .costume-item-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            width: 70px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #2d2a21, #1c1a16);
+			border: 2px solid #D4AF37;
+			box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+            padding: 4px;
+            box-sizing: border-box;
         }
-		.costume-box .item-title {
-			color: rgba(255, 235, 170, 0.9);
-			font-size: 13px;
-			font-weight: normal;
-			text-transform: uppercase;
-			margin-bottom: 2px;
-		}
-		.costume-box .costume-name {
-			color: #fff;
-			font-size: 21px;
-			font-weight: 700;
-			font-family: 'Poppins', sans-serif;
-			text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
-		}
+        .costume-item-box .costume-line-1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFD700;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.1;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
+        }
+        .costume-item-box .costume-line-2 {
+            font-size: 11px;
+            font-weight: 600;
+            color: #eee;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 		.price-box {
 			display: flex;
 			flex-direction: column;
@@ -675,7 +676,7 @@
 				flex-basis: 100%;
 			}
 			.result-info-right {
-				justify-content: space-between;
+				justify-content: flex-end;
 			}
 			.price-box {
 			    flex-grow: 1;
@@ -683,14 +684,12 @@
 			    background: rgba(39, 174, 96, 0.1);
 			    min-width: 0;
 			}
-			.item-box {
-			    flex-grow: 1;
-			    min-width: 0;
-				max-width: 140px;
-			}
-			.small-character-img, .item-box, .extras-box, .price-box {
+			.small-character-img, .extras-box, .price-box, .costume-item-box {
 				height: 54px;
 			}
+            .costume-item-box {
+                width: 60px;
+            }
 	        .item-images {
 	            gap: 6px;
 	        }
@@ -708,14 +707,14 @@
 	            font-size: 1em;
 	            padding: 15px 20px;
 	        }
-			.item-box .item-title, .costume-box .item-title {
-				font-size: 12px;
-			}
 			.extras-box .item-title {
 				font-size: 12px;
 			}
-			.costume-box .costume-name {
+			.costume-item-box .costume-line-1 {
 				font-size: 17px;
+			}
+            .costume-item-box .costume-line-2 {
+				font-size: 10px;
 			}
 			.price-box .price-usd {
 				font-size: 19px;
@@ -942,8 +941,6 @@
                     luaData = {};
                     itemDetailsMap = {};
                     const lines = text.split('\n');
-                    const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-                    const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 
                     lines.forEach(line => {
                         if (!line.trim() || !line.includes('=')) return;
@@ -996,13 +993,12 @@
                     if (sortKey === 'total') {
                         const totalDiff = itemB.totalCount - itemA.totalCount;
                         if (totalDiff !== 0) return totalDiff;
-                        return itemB.price - itemA.price; // Secondary sort by price
+                        return itemB.price - itemA.price;
                     }
                     
-                    // Default to price sort
                     const priceDiff = itemB.price - itemA.price;
                     if (priceDiff !== 0) return priceDiff;
-                    return itemB.totalCount - itemA.totalCount; // Secondary sort by total count
+                    return itemB.totalCount - itemA.totalCount;
                 });
                 
                 displayResults(currentFilteredData, sortedKeys);
@@ -1063,34 +1059,46 @@
 
 				const charValue = data[k];
                 const itemDetails = itemDetailsMap[k];
-                const tier0ImageData = [], tier1ImageData = [], tier2ImageData = [];
+                let allItemsData = [];
+                const tier2ImageData = [];
 
                 for (const charName in charValue) {
-                    const count = charValue[charName];
                     const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName);
                     if (!charInfo) continue;
+                    
                     const [engName, korName] = charInfo;
                     const originalIndex = characters.findIndex(([eng]) => eng === engName);
-                    const imageData = { src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: count, originalIndex: originalIndex };
+                    const imageData = { type: 'character', src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: charValue[charName], originalIndex: originalIndex };
                     
-                    if (tier0Eng.has(engName)) tier0ImageData.push(imageData);
-                    else if (tier1Characters.some(([eng]) => eng === engName)) tier1ImageData.push(imageData);
-                    else tier2ImageData.push(imageData);
+                    if (tier0Characters.some(c => c[0] === engName) || tier1Characters.some(c => c[0] === engName)) {
+                        allItemsData.push(imageData);
+                    } else {
+                        tier2ImageData.push(imageData);
+                    }
                 }
 
-                tier0ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
-                tier1ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
-                tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
+                if (itemDetails.costume) {
+                    const teoIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
+                    // Place costume after Teo, or at the start if Teo isn't present
+                    const costumeIndex = (teoIndex !== -1) ? teoIndex + 0.5 : -1; 
+                    allItemsData.push({ type: 'costume', originalIndex: costumeIndex });
+                }
 
-                const allImportantCharsData = [...tier0ImageData, ...tier1ImageData];
+                allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
+                tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
-                if (allImportantCharsData.length > 0) {
-                    const firstCharData = allImportantCharsData[0];
-                    imageContainer.appendChild(createCharacterImageElement(firstCharData, tier0Eng));
-                    const remainingCharsData = allImportantCharsData.slice(1);
-                    if (remainingCharsData.length > 0) {
+                if (allItemsData.length > 0) {
+                    const firstItemData = allItemsData[0];
+                    if (firstItemData.type === 'costume') {
+                        imageContainer.appendChild(createCostumeBoxElement());
+                    } else {
+                        imageContainer.appendChild(createCharacterImageElement(firstItemData, tier0Eng));
+                    }
+
+                    const remainingItemsData = allItemsData.slice(1);
+                    if (remainingItemsData.length > 0 || tier2ImageData.length > 0) {
                         item.classList.add('lazy-load-item');
-                        item.dataset.remainingChars = JSON.stringify(remainingCharsData);
+                        item.dataset.remainingItems = JSON.stringify(remainingItemsData);
                     }
                 }
 
@@ -1099,15 +1107,8 @@
 					extrasBox.className = 'extras-box'; 
 					extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
 					extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2ImageData); });
-					imageContainer.appendChild(extrasBox);
+                    // Append extras box conditionally during lazy load
 				}
-
-                if (itemDetails.costume) {
-                    const costumeBox = document.createElement('div');
-                    costumeBox.className = 'item-box costume-box';
-                    costumeBox.innerHTML = `<div class="item-title">LEGEND COSTUME</div><div class="costume-name">TEO TS</div>`;
-                    rightSection.appendChild(costumeBox);
-                }
 
                 const priceBox = document.createElement('div');
                 priceBox.className = 'price-box';
@@ -1162,52 +1163,70 @@
             return container;
         }
 
+        function createCostumeBoxElement(isLazy = false) {
+            const box = document.createElement('div');
+            box.className = 'costume-item-box';
+            if (isLazy) box.classList.add('js-lazy-loaded');
+            box.innerHTML = `<div class="costume-line-1">LC</div><div class="costume-line-2">TEO TS</div>`;
+            return box;
+        }
+
         function setupItemObserver() {
-            if (itemObserver) {
-                itemObserver.disconnect();
-            }
-            const options = {
-                root: document.getElementById('results'),
-                rootMargin: '400px 0px',
-                threshold: 0
-            };
-            itemObserver = new IntersectionObserver((entries, observer) => {
+            if (itemObserver) itemObserver.disconnect();
+            itemObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    const item = entry.target;
                     if (entry.isIntersecting) {
-                        clearTimeout(item.revertTimer);
-                        item.renderTimer = setTimeout(() => {
-                            renderFullItem(item);
-                        }, 100);
+                        clearTimeout(entry.target.revertTimer);
+                        entry.target.renderTimer = setTimeout(() => renderFullItem(entry.target), 100);
                     } else {
-                        clearTimeout(item.renderTimer);
-                        item.revertTimer = setTimeout(() => {
-                            revertToLazyItem(item);
-                        }, 100);
+                        clearTimeout(entry.target.renderTimer);
+                        entry.target.revertTimer = setTimeout(() => revertToLazyItem(entry.target), 100);
                     }
                 });
-            }, options);
-            const lazyItems = document.querySelectorAll('.lazy-load-item');
-            lazyItems.forEach(item => itemObserver.observe(item));
+            }, { root: document.getElementById('results'), rootMargin: '400px 0px' });
+            document.querySelectorAll('.lazy-load-item').forEach(item => itemObserver.observe(item));
         }
 
         function renderFullItem(item) {
             if (item.querySelector('.js-lazy-loaded')) return;
-            const remainingCharsData = item.dataset.remainingChars;
-            if (remainingCharsData) {
-                const remainingChars = JSON.parse(remainingCharsData);
+            const remainingItemsJSON = item.dataset.remainingItems;
+            if (remainingItemsJSON) {
+                const remainingItems = JSON.parse(remainingItemsJSON);
                 const imageContainer = item.querySelector('.item-images');
-                const extrasBox = imageContainer.querySelector('.extras-box');
                 const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-                remainingChars.forEach(charData => {
-                    const imageElement = createCharacterImageElement(charData, tier0Eng, true);
-                    if (extrasBox) {
-                        imageContainer.insertBefore(imageElement, extrasBox);
+                
+                remainingItems.forEach(itemData => {
+                    let element;
+                    if (itemData.type === 'costume') {
+                        element = createCostumeBoxElement(true);
                     } else {
-                        imageContainer.appendChild(imageElement);
+                        element = createCharacterImageElement(itemData, tier0Eng, true);
                     }
+                    imageContainer.appendChild(element);
                 });
             }
+
+            // Check if extras box needs to be added (if it wasn't added initially)
+            if (!item.querySelector('.extras-box')) {
+                const k = item.dataset.itemKey;
+                const charValue = luaData[k];
+                const tier2ImageData = [];
+
+                 for (const charName in charValue) {
+                    const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName);
+                    if (!charInfo || tier0Characters.some(c => c[0] === charInfo[0]) || tier1Characters.some(c => c[0] === charInfo[0])) continue;
+                     tier2ImageData.push({ engName: charInfo[0], src: `Portrait/${charInfo[1]}.png`, alt: charInfo[1], count: charValue[charName] });
+                 }
+
+                if(tier2ImageData.length > 0) {
+                    const extrasBox = document.createElement('div');
+                    extrasBox.className = 'extras-box js-lazy-loaded'; 
+                    extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
+                    extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2ImageData); });
+                    item.querySelector('.item-images').appendChild(extrasBox);
+                }
+            }
+
             setupScrollControlsForItem(item);
         }
 
