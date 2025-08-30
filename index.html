@@ -281,7 +281,7 @@
 			box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.4);
 			display: flex;
 			align-items: center;
-			justify-content: flex-start;
+			justify-content: space-between;
 			flex-wrap: nowrap;
 			gap: 18px;
 			position: relative;
@@ -316,6 +316,14 @@
         .item-images::-webkit-scrollbar {
             display: none; 
         }
+		.result-info-right {
+			display: flex;
+			align-items: center;
+			flex-wrap: nowrap;
+			gap: 10px;
+			justify-content: flex-end;
+            flex-shrink: 0;
+		}
 	    .small-character-img {
 			height: 60px;
 			width: auto;
@@ -407,6 +415,55 @@
 		.image-count-badge.super-rare-badge { /* Tier 0 */
 		    color: #ff5252;
 		    text-shadow: 0 0 5px rgba(255, 82, 82, 0.7);
+		}
+		.item-box {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 60px;
+			min-width: 84px;
+			padding: 0 12px;
+			background: rgba(108, 122, 137, 0.15);
+			border: 1px solid rgba(108, 122, 137, 0.7);
+			border-radius: 10px;
+			text-align: center;
+		}
+		.item-box .item-title {
+			color: rgba(236, 240, 241, 0.8);
+			font-size: 14px;
+			font-weight: normal;
+			text-transform: uppercase;
+			margin-bottom: 2px;
+		}
+		.item-box .item-count {
+			color: #fff;
+			font-size: 19px;
+			font-weight: 700;
+			font-family: 'Poppins', sans-serif;
+			text-shadow: 0 0 5px rgba(108, 122, 137, 0.5);
+		}
+		.price-box {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: flex-end;
+			height: 60px;
+			min-width: 114px;
+			padding: 0 12px;
+			background: linear-gradient(270deg, rgba(39, 174, 96, 0.2), transparent);
+			border-radius: 10px;
+			font-family: 'Poppins', sans-serif;
+		}
+		.price-box .price-usd {
+			font-size: 22px;
+			font-weight: 700;
+			color: #2ecc71;
+			text-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+		}
+		.price-box .price-krw {
+			font-size: 14px;
+			color: #bdc3c7;
 		}
 	    .sort-container {
 	        display: flex;
@@ -598,10 +655,24 @@
 	            padding: 12px;
 				flex-wrap: wrap;
 	        }
-            .item-images-wrapper {
+            .item-images-wrapper, .result-info-right {
 				flex-basis: 100%;
 			}
-			.small-character-img, .extras-box {
+			.result-info-right {
+				justify-content: space-between;
+			}
+			.price-box {
+			    flex-grow: 1;
+			    align-items: center;
+			    background: rgba(39, 174, 96, 0.1);
+			    min-width: 0;
+			}
+			.item-box {
+			    flex-grow: 1;
+			    min-width: 0;
+				max-width: 140px;
+			}
+			.small-character-img, .item-box, .extras-box, .price-box {
 				height: 54px;
 			}
 	        .item-images {
@@ -620,6 +691,21 @@
 	            font-size: 1em;
 	            padding: 15px 20px;
 	        }
+			.item-box .item-title {
+				font-size: 12px;
+			}
+			.extras-box .item-title {
+				font-size: 12px;
+			}
+			.item-box .item-count {
+				font-size: 17px;
+			}
+			.price-box .price-usd {
+				font-size: 19px;
+			}
+			.price-box .price-krw {
+				font-size: 12px;
+			}
 			.extras-popup-content {
 				width: 90%;
 				padding: 20px;
@@ -833,38 +919,55 @@
 
         function loadData() {
             const ts = new Date().getTime();
-            return fetch(`data.lua?t=${ts}`)
+            return fetch(`account_prices.txt?t=${ts}`)
                 .then(r => r.text())
                 .then(text => {
-                    let jsonString = text.trim().replace(/^return\s*/, '').replace(/,(\s*[}\]])/g, '$1').replace(/(\w+)\s*=/g, '"$1":').replace(/\["(\w+)"\]\s*=/g, '"$1":');
-                    luaData = JSON.parse(jsonString);
-                    
+                    luaData = {};
                     itemDetailsMap = {};
+                    const lines = text.split('\n');
                     const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
                     const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 
-                    for (const key in luaData) {
-                        const itemChars = luaData[key];
-                        let tier0Count = 0, tier1Count = 0, tier2Count = 0, totalCount = 0;
-                        let textParts = [];
+                    lines.forEach(line => {
+                        if (!line.trim() || !line.includes('=')) return;
 
-                        const orderedChars = Object.keys(itemChars).sort((a, b) => {
-                            const indexA = characters.findIndex(([eng]) => eng === a);
-                            const indexB = characters.findIndex(([eng]) => eng === b);
-                            return indexA - indexB;
+                        const parts = line.split('=');
+                        const pricePart = parts.pop().trim();
+                        const contentPart = parts.join('=').trim();
+                        const contentWords = contentPart.split(/\s+/);
+                        const key = contentWords.shift();
+
+                        const itemDetails = {
+                            originalText: line,
+                            price: parseFloat(pricePart.replace('$', '')),
+                            costume: line.includes('['),
+                            tier0Count: 0,
+                            tier1Count: 0,
+                            tier2Count: 0,
+                            totalCount: 0,
+                        };
+
+                        const currentItemChars = {};
+                        contentWords.forEach(word => {
+                            const match = word.match(/^([a-zA-Z]+)(\d+)$/);
+                            if (match) {
+                                const charName = match[1].toLowerCase();
+                                const count = parseInt(match[2]);
+                                currentItemChars[charName] = (currentItemChars[charName] || 0) + count;
+                            }
                         });
 
-                        for (const charName of orderedChars) {
-                            const count = itemChars[charName];
-                            if (tier0Eng.has(charName)) tier0Count += count;
-                            else if (tier1Eng.has(charName)) tier1Count += count;
-                            else tier2Count += count;
-                            totalCount += count;
-                            textParts.push(`${charName} x${count}`);
+                        for (const charName in currentItemChars) {
+                            const count = currentItemChars[charName];
+                            if (tier0Eng.has(charName)) itemDetails.tier0Count += count;
+                            else if (tier1Eng.has(charName)) itemDetails.tier1Count += count;
+                            else itemDetails.tier2Count += count;
+                            itemDetails.totalCount += count;
                         }
-
-                        itemDetailsMap[key] = { tier0Count, tier1Count, tier2Count, totalCount, copyText: `${key}: ${textParts.join(', ')}` };
-                    }
+                        
+                        luaData[key] = currentItemChars;
+                        itemDetailsMap[key] = itemDetails;
+                    });
                 }).catch(error => { console.error('Data loading error:', error); });
         }
 
@@ -896,13 +999,12 @@
         function checkConditions(itemChars) {
             return characters.every(([eng]) => {
                 const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`);
-                return !box?.classList.contains('selected') || (itemChars[eng] || 0) >= parseInt(box.querySelector('input').value);
+                return !box?.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value);
             });
         }
 
         function optimizeImages() {
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
+            document.querySelectorAll('img').forEach(img => {
                 if (!img.hasAttribute('loading')) img.loading = 'lazy';
                 if (!img.hasAttribute('decoding')) img.decoding = 'async';
             });
@@ -917,7 +1019,6 @@
 			fragment.appendChild(container);
 
             const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-            const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 			
 			sortedKeys.forEach(k => {
 				const item = document.createElement('div');
@@ -936,23 +1037,30 @@
                     }
                 });
                 
+                // Left Side: Images
                 const imagesWrapper = document.createElement('div');
                 imagesWrapper.className = 'item-images-wrapper';
 				const imageContainer = document.createElement('div');
 				imageContainer.className = 'item-images'; 
 
+                // Right Side: Info (Costume, Price)
+                const rightSection = document.createElement('div');
+                rightSection.className = 'result-info-right';
+
 				const charValue = data[k];
+                const itemDetails = itemDetailsMap[k];
                 const tier0ImageData = [], tier1ImageData = [], tier2ImageData = [];
 
                 for (const charName in charValue) {
                     const count = charValue[charName];
-                    const charInfo = characters.find(([eng]) => eng === charName);
+                    const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName);
                     if (!charInfo) continue;
                     const [engName, korName] = charInfo;
                     const originalIndex = characters.findIndex(([eng]) => eng === engName);
                     const imageData = { src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: count, originalIndex: originalIndex };
+                    
                     if (tier0Eng.has(engName)) tier0ImageData.push(imageData);
-                    else if (tier1Eng.has(engName)) tier1ImageData.push(imageData);
+                    else if (tier1Characters.some(([eng]) => eng === engName)) tier1ImageData.push(imageData);
                     else tier2ImageData.push(imageData);
                 }
 
@@ -976,12 +1084,23 @@
 					const extrasBox = document.createElement('div');
 					extrasBox.className = 'extras-box'; 
 					extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
-					extrasBox.addEventListener('click', (e) => {
-						e.stopPropagation();
-						showExtrasPopup(tier2ImageData);
-					});
+					extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2ImageData); });
 					imageContainer.appendChild(extrasBox);
 				}
+
+                if (itemDetails.costume) {
+                    const costumeBox = document.createElement('div');
+                    costumeBox.className = 'item-box';
+                    costumeBox.innerHTML = `<div class="item-title">COSTUME</div><div class="item-count">✓</div>`;
+                    rightSection.appendChild(costumeBox);
+                }
+
+                const priceBox = document.createElement('div');
+                priceBox.className = 'price-box';
+                const usdPrice = itemDetails.price.toFixed(2);
+                const krwPriceRounded = Math.round(itemDetails.price * 1380 / 1000) * 1000;
+                priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
+                rightSection.appendChild(priceBox);
                 
                 const scrollIndicator = document.createElement('div');
                 scrollIndicator.className = 'scroll-indicator';
@@ -990,6 +1109,7 @@
                 imagesWrapper.appendChild(imageContainer);
                 imagesWrapper.appendChild(scrollIndicator);
 				item.appendChild(imagesWrapper);
+                item.appendChild(rightSection);
 				container.appendChild(item);
 			});
 
@@ -1142,7 +1262,7 @@
             const itemKey = el.dataset.itemKey;
             const itemDetails = itemDetailsMap[itemKey];
             if (!itemDetails) return;
-            navigator.clipboard.writeText(itemDetails.copyText).then(
+            navigator.clipboard.writeText(itemDetails.originalText).then(
                 () => showCopyMessage(),
                 err => console.error('Copy failed: ', err)
             );
