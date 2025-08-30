@@ -512,7 +512,6 @@
 		.scroll-indicator {
 			position: absolute;
 			top: 50%;
-            right: 15px; 
 			transform: translateY(-50%);
 			width: 28px;
 			height: 28px;
@@ -521,39 +520,52 @@
 			border: 1px solid rgba(255,255,255,0.2);
 			color: #fff;
 			border-radius: 50%;
-			display: none; 
+			display: none;
 			align-items: center;
 			justify-content: center;
-			font-size: 18px;
+			font-size: 24px;
 			line-height: 28px;
 			font-weight: bold;
 			cursor: pointer;
 			z-index: 10;
 			transition: opacity 0.2s;
             text-shadow: 0 0 4px rgba(0,0,0,0.5);
+            user-select: none;
 		}
-		.item-images-wrapper.has-scroll .scroll-indicator {
-			display: flex;
-		}
-		.item-images-wrapper.scrolled-to-end .scroll-indicator {
-			opacity: 0;
-			pointer-events: none;
-		}
+        .scroll-indicator.visible {
+            display: flex;
+        }
+        .scroll-indicator-left {
+            left: 5px;
+        }
+        .scroll-indicator-right {
+            right: 5px;
+        }
+        .item-images-wrapper.has-scroll::before,
         .item-images-wrapper.has-scroll::after {
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
             width: 70px;
             height: 100%;
-            background: linear-gradient(to right, rgba(26, 28, 32, 0), #1a1c20 80%);
             pointer-events: none;
             z-index: 5;
             transition: opacity 0.3s;
+            opacity: 0;
+        }
+        .item-images-wrapper.has-scroll::before {
+            left: 0;
+            background: linear-gradient(to left, rgba(26, 28, 32, 0), #1a1c20 80%);
+        }
+        .item-images-wrapper.has-scroll::after {
+            right: 0;
+            background: linear-gradient(to right, rgba(26, 28, 32, 0), #1a1c20 80%);
+        }
+        .item-images-wrapper.scrolled-from-start::before {
             opacity: 1;
         }
-        .item-images-wrapper.scrolled-to-end::after {
-            opacity: 0;
+        .item-images-wrapper:not(.scrolled-to-end)::after {
+            opacity: 1;
         }
 	    #loader {
 	        position: fixed;
@@ -685,9 +697,10 @@
 			.scroll-indicator {
 				display: none !important;
 			}
-			.item-images-wrapper.has-scroll::after {
-			    width: 60px;
-			}
+            .item-images-wrapper.has-scroll::before,
+            .item-images-wrapper.has-scroll::after {
+                width: 60px;
+            }
 	        #copyInstruction {
 	            font-size: 1em;
 	        }
@@ -945,9 +958,6 @@
                             originalText: line,
                             price: parseFloat(pricePart.replace('$', '')),
                             costume: line.toLowerCase().includes('[teo legend costume]'),
-                            tier0Count: 0,
-                            tier1Count: 0,
-                            tier2Count: 0,
                             totalCount: 0,
                         };
 
@@ -962,11 +972,7 @@
                         });
 
                         for (const charName in currentItemChars) {
-                            const count = currentItemChars[charName];
-                            if (tier0Eng.has(charName)) itemDetails.tier0Count += count;
-                            else if (tier1Eng.has(charName)) itemDetails.tier1Count += count;
-                            else itemDetails.tier2Count += count;
-                            itemDetails.totalCount += count;
+                            itemDetails.totalCount += currentItemChars[charName];
                         }
                         
                         luaData[key] = currentItemChars;
@@ -1036,7 +1042,7 @@
 				item.dataset.itemKey = k;
 
 				item.addEventListener('click', (e) => {
-					if (e.target.closest('.extras-box') || e.target.classList.contains('scroll-indicator')) return;
+					if (e.target.closest('.extras-box') || e.target.closest('.scroll-indicator')) return;
 					copyToClipboard(item);
 				});
                 item.addEventListener('mouseenter', () => resetOtherScrolledItems(item));
@@ -1047,13 +1053,11 @@
                     }
                 });
                 
-                // Left Side: Images
                 const imagesWrapper = document.createElement('div');
                 imagesWrapper.className = 'item-images-wrapper';
 				const imageContainer = document.createElement('div');
 				imageContainer.className = 'item-images'; 
 
-                // Right Side: Info (Costume, Price)
                 const rightSection = document.createElement('div');
                 rightSection.className = 'result-info-right';
 
@@ -1112,12 +1116,16 @@
                 priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
                 rightSection.appendChild(priceBox);
                 
-                const scrollIndicator = document.createElement('div');
-                scrollIndicator.className = 'scroll-indicator';
-                scrollIndicator.innerHTML = '...';
-                
+                const scrollIndicatorLeft = document.createElement('div');
+                scrollIndicatorLeft.className = 'scroll-indicator scroll-indicator-left';
+                scrollIndicatorLeft.innerHTML = '‹';
+                const scrollIndicatorRight = document.createElement('div');
+                scrollIndicatorRight.className = 'scroll-indicator scroll-indicator-right';
+                scrollIndicatorRight.innerHTML = '›';
+
                 imagesWrapper.appendChild(imageContainer);
-                imagesWrapper.appendChild(scrollIndicator);
+                imagesWrapper.appendChild(scrollIndicatorLeft);
+                imagesWrapper.appendChild(scrollIndicatorRight);
 				item.appendChild(imagesWrapper);
                 item.appendChild(rightSection);
 				container.appendChild(item);
@@ -1127,7 +1135,7 @@
 			res.appendChild(fragment);
 			document.getElementById('copyInstruction').style.display = 'block';
             
-            setupScrollIndicators();
+            document.querySelectorAll('#results .result-item').forEach(setupScrollControlsForItem);
             setupItemObserver();
 		}
 
@@ -1200,36 +1208,60 @@
                     }
                 });
             }
-            setupScrollIndicatorForItem(item);
+            setupScrollControlsForItem(item);
         }
 
         function revertToLazyItem(item) {
             const lazyElements = item.querySelectorAll('.js-lazy-loaded');
             if (lazyElements.length === 0) return;
             lazyElements.forEach(el => el.remove());
-            setupScrollIndicatorForItem(item);
+            setupScrollControlsForItem(item);
         }
-
-		function setupScrollIndicators() {
-			document.querySelectorAll('#results .result-item').forEach(setupScrollIndicatorForItem);
-		}
         
-        function setupScrollIndicatorForItem(item) {
+        function setupScrollControlsForItem(item) {
             const wrapper = item.querySelector('.item-images-wrapper');
             const imagesContainer = item.querySelector('.item-images');
-            const scrollIndicator = item.querySelector('.scroll-indicator');
-            if (!wrapper || !imagesContainer || !scrollIndicator) return;
+            const scrollLeftBtn = item.querySelector('.scroll-indicator-left');
+            const scrollRightBtn = item.querySelector('.scroll-indicator-right');
+
+            if (!wrapper || !imagesContainer || !scrollLeftBtn || !scrollRightBtn) return;
+
             requestAnimationFrame(() => {
                 const hasScroll = imagesContainer.scrollWidth > imagesContainer.clientWidth;
+                
                 if (hasScroll) {
                     wrapper.classList.add('has-scroll');
-                    scrollIndicator.onclick = (e) => { e.stopPropagation(); imagesContainer.scroll({ left: imagesContainer.scrollWidth - imagesContainer.clientWidth, behavior: 'smooth' }); };
-                    imagesContainer.onscroll = () => { wrapper.classList.toggle('scrolled-to-end', imagesContainer.scrollLeft + imagesContainer.clientWidth >= imagesContainer.scrollWidth - 5); };
+
+                    scrollRightBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        imagesContainer.scrollBy({ left: imagesContainer.clientWidth * 0.8, behavior: 'smooth' });
+                    };
+                    scrollLeftBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        imagesContainer.scrollBy({ left: -imagesContainer.clientWidth * 0.8, behavior: 'smooth' });
+                    };
+
+                    imagesContainer.onscroll = () => {
+                        const { scrollLeft, scrollWidth, clientWidth } = imagesContainer;
+                        const tolerance = 5;
+
+                        const isAtStart = scrollLeft < tolerance;
+                        const isAtEnd = scrollLeft + clientWidth >= scrollWidth - tolerance;
+
+                        scrollLeftBtn.classList.toggle('visible', !isAtStart);
+                        scrollRightBtn.classList.toggle('visible', !isAtEnd);
+                        
+                        wrapper.classList.toggle('scrolled-from-start', !isAtStart);
+                        wrapper.classList.toggle('scrolled-to-end', isAtEnd);
+                    };
                     imagesContainer.dispatchEvent(new Event('scroll'));
                 } else {
-                    wrapper.classList.remove('has-scroll', 'scrolled-to-end');
+                    wrapper.classList.remove('has-scroll', 'scrolled-from-start', 'scrolled-to-end');
+                    scrollLeftBtn.classList.remove('visible');
+                    scrollRightBtn.classList.remove('visible');
                     imagesContainer.onscroll = null;
-                    scrollIndicator.onclick = null;
+                    scrollLeftBtn.onclick = null;
+                    scrollRightBtn.onclick = null;
                 }
             });
         }
@@ -1340,7 +1372,9 @@
                 if (!e.target.closest('.result-item')) resetAllScrolledItems();
             });
 			window.addEventListener('scroll', throttle(resetAllScrolledItems, 100));
-			window.addEventListener('resize', debounce(setupScrollIndicators, 50));
+			window.addEventListener('resize', debounce(() => {
+                document.querySelectorAll('#results .result-item').forEach(setupScrollControlsForItem);
+            }, 50));
 		});
     </script>
 </body>
