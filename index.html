@@ -418,36 +418,6 @@
 		    color: #ff5252;
 		    text-shadow: 0 0 5px rgba(255, 82, 82, 0.7);
 		}
-        .costume-item-box {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 60px;
-            width: 70px;
-            border-radius: 10px;
-            flex-shrink: 0;
-            background: linear-gradient(135deg, #2d2a21, #1c1a16);
-			border: 2px solid #D4AF37;
-			box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
-            padding: 4px;
-            box-sizing: border-box;
-        }
-        .costume-item-box .costume-line-1 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #FFD700;
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.1;
-            text-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
-        }
-        .costume-item-box .costume-line-2 {
-            font-size: 11px;
-            font-weight: 600;
-            color: #eee;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
 		.price-box {
 			display: flex;
 			flex-direction: column;
@@ -684,12 +654,9 @@
 			    background: rgba(39, 174, 96, 0.1);
 			    min-width: 0;
 			}
-			.small-character-img, .extras-box, .price-box, .costume-item-box {
+			.small-character-img, .extras-box, .price-box {
 				height: 54px;
 			}
-            .costume-item-box {
-                width: 60px;
-            }
 	        .item-images {
 	            gap: 6px;
 	        }
@@ -709,12 +676,6 @@
 	        }
 			.extras-box .item-title {
 				font-size: 12px;
-			}
-			.costume-item-box .costume-line-1 {
-				font-size: 17px;
-			}
-            .costume-item-box .costume-line-2 {
-				font-size: 10px;
 			}
 			.price-box .price-usd {
 				font-size: 19px;
@@ -1080,14 +1041,20 @@
                 // First, sort all important characters by their original index
                 allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
 
-                // Now, if there's a costume, insert it right after Teo
+                // If there's a TEO TS costume, insert it as an image to the left of Teo
                 if (itemDetails.costume) {
+                    const teoTsData = { 
+                        type: 'character', 
+                        src: 'Portrait/태오ts스킨.png', 
+                        alt: '태오 TS 스킨', 
+                        engName: 'TeoTS', 
+                        count: 1 
+                    };
                     const teoIndex = allImportantItemsData.findIndex(item => item.type === 'character' && item.engName.toLowerCase() === 'teo');
-                    const costumeData = { type: 'costume' };
                     if (teoIndex !== -1) {
-                        allImportantItemsData.splice(teoIndex + 1, 0, costumeData);
+                        allImportantItemsData.splice(teoIndex, 0, teoTsData); // Insert BEFORE Teo
                     } else {
-                        allImportantItemsData.unshift(costumeData); // Fallback if Teo isn't in the list
+                        allImportantItemsData.unshift(teoTsData); // Fallback if Teo isn't in the list
                     }
                 }
 
@@ -1095,11 +1062,7 @@
                 
                 if (allImportantItemsData.length > 0) {
                     const firstItemData = allImportantItemsData[0];
-                    if (firstItemData.type === 'costume') {
-                        imageContainer.appendChild(createCostumeBoxElement());
-                    } else {
-                        imageContainer.appendChild(createCharacterImageElement(firstItemData, tier0Eng));
-                    }
+                    imageContainer.appendChild(createCharacterImageElement(firstItemData, tier0Eng));
 
                     const remainingItemsData = allImportantItemsData.slice(1);
                     if (remainingItemsData.length > 0 || tier2ImageData.length > 0) {
@@ -1154,7 +1117,7 @@
             img.src = charData.src;
             img.alt = charData.alt;
             img.className = 'small-character-img';
-            const isTier0 = tier0Eng.has(charData.engName);
+            const isTier0 = tier0Eng.has(charData.engName) || charData.engName === 'TeoTS';
             img.classList.add(isTier0 ? 'super-rare' : 'rare');
             container.appendChild(img);
 
@@ -1166,14 +1129,6 @@
                 container.appendChild(badge);
             }
             return container;
-        }
-
-        function createCostumeBoxElement(isLazy = false) {
-            const box = document.createElement('div');
-            box.className = 'costume-item-box';
-            if (isLazy) box.classList.add('js-lazy-loaded');
-            box.innerHTML = `<div class="costume-line-1">LC</div><div class="costume-line-2">TEO TS</div>`;
-            return box;
         }
 
         function setupItemObserver() {
@@ -1202,12 +1157,7 @@
             if (remainingItemsJSON) {
                 const remainingItems = JSON.parse(remainingItemsJSON);
                 remainingItems.forEach(itemData => {
-                    let element;
-                    if (itemData.type === 'costume') {
-                        element = createCostumeBoxElement(true);
-                    } else {
-                        element = createCharacterImageElement(itemData, tier0Eng, true);
-                    }
+                    const element = createCharacterImageElement(itemData, tier0Eng, true);
                     imageContainer.appendChild(element);
                 });
             }
