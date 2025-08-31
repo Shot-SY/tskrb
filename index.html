@@ -864,22 +864,8 @@
             const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
             const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 
+            // First, create all the character boxes from the file
             characters.forEach(([eng, kor]) => {
-                // If the current character is Teo, add the TS Skin box before it
-                if (eng === 'Teo') {
-                    const teoTsBox = document.createElement('div');
-                    teoTsBox.className = 'character-box legendary-item';
-                    teoTsBox.dataset.engName = 'TeoTS';
-                    teoTsBox.innerHTML = `
-                        <img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async">
-                        <span class="character-name">Teo TS Skin</span>
-                        <div class="spinbox-container" style="visibility: hidden;"><!-- Placeholder --></div>`;
-                    
-                    teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
-                    fragment.appendChild(teoTsBox);
-                }
-
-                // Create the regular character box
                 const charBox = document.createElement('div');
                 charBox.className = 'character-box';
                 charBox.dataset.engName = eng;
@@ -898,7 +884,6 @@
                     <div class="spinbox-container">
                         <input type="number" id="${eng}-spin" min="0" max="8" value="0" disabled>
                     </div>`;
-                fragment.appendChild(charBox);
                 
                 charBox.addEventListener('click', (e) => {
                     if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox);
@@ -909,10 +894,39 @@
                         toggleSelection(charBox);
                     }
                 });
+                fragment.appendChild(charBox);
             });
+
+            // Now, create the Teo TS Skin box independently
+            const teoTsBox = document.createElement('div');
+            teoTsBox.className = 'character-box legendary-item';
+            teoTsBox.dataset.engName = 'TeoTS';
+            teoTsBox.innerHTML = `
+                <img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async">
+                <span class="character-name">Teo TS Skin</span>
+                <div class="spinbox-container" style="visibility: hidden;"><!-- Placeholder --></div>`;
+            teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
+
+            // Find the 'Teo' box within the fragment (case-insensitive)
+            let teoBoxNode = null;
+            for (const child of fragment.children) {
+                if (child.dataset.engName && child.dataset.engName.toLowerCase() === 'teo') {
+                    teoBoxNode = child;
+                    break;
+                }
+            }
+
+            // Insert the skin box before Teo if found, otherwise at the very beginning
+            if (teoBoxNode) {
+                fragment.insertBefore(teoTsBox, teoBoxNode);
+            } else {
+                fragment.insertBefore(teoTsBox, fragment.firstChild);
+            }
             
+            // Finally, append the complete fragment to the grid
             characterGrid.appendChild(fragment);
         }
+
 
         function toggleSelection(charBox) {
             const spinbox = charBox.querySelector('input[type="number"]');
@@ -1003,7 +1017,7 @@
         function checkConditions(itemChars, itemKey) {
             const allCharsMatch = characters.every(([eng]) => {
                 const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`);
-                if (!box) return true; // Should not happen, but for safety
+                if (!box) return true;
                 return !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value);
             });
 
