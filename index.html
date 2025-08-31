@@ -71,6 +71,11 @@
 	        border: 2px solid #D32F2F;
 	        box-shadow: 0 0 15px rgba(211, 47, 47, 0.5), 0 4px 12px rgba(211, 47, 47, 0.7);
 	    }
+        /* Legendary Item (e.g., Costume) */
+        .character-box.legendary-item {
+            border: 2px solid #D4AF37;
+	        box-shadow: 0 0 15px rgba(212, 175, 55, 0.6), 0 4px 12px rgba(212, 175, 55, 0.7);
+        }
         /* Tier 2 (Normal) */
         .extras-character-border {
             border: 2px solid #b0b0b0;
@@ -356,6 +361,10 @@
 	        border: 2px solid #D32F2F;
 	        box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
 	    }
+        .small-character-img.legendary-item { /* Legendary Item */
+            border: 2px solid #D4AF37;
+	        box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
+        }
 	    body::before {
 	        content: "";
 	        position: absolute;
@@ -418,6 +427,10 @@
 		    color: #ff5252;
 		    text-shadow: 0 0 5px rgba(255, 82, 82, 0.7);
 		}
+        .image-count-badge.legendary-badge {
+		    color: #FFD700;
+		    text-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
+        }
 		.price-box {
 			display: flex;
 			flex-direction: column;
@@ -883,13 +896,30 @@
                 });
             });
             characterGrid.appendChild(fragment);
+
+            // Create and insert Teo TS Skin box
+            const teoTsBox = document.createElement('div');
+            teoTsBox.className = 'character-box legendary-item';
+            teoTsBox.dataset.engName = 'TeoTS';
+            teoTsBox.innerHTML = `
+                <img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async">
+                <span class="character-name">Teo TS Skin</span>
+                <div class="spinbox-container" style="visibility: hidden;"><!-- Placeholder for alignment --></div>`;
+            teoTsBox.addEventListener('click', () => { teoTsBox.classList.toggle('selected'); });
+            
+            const teoBox = characterGrid.querySelector('.character-box[data-eng-name="Teo"]');
+            if (teoBox) {
+                characterGrid.insertBefore(teoTsBox, teoBox);
+            }
         }
 
         function toggleSelection(charBox) {
             const spinbox = charBox.querySelector('input[type="number"]');
             const isSelected = charBox.classList.toggle('selected');
-            spinbox.disabled = !isSelected;
-            spinbox.value = isSelected ? (spinbox.value === '0' ? '1' : spinbox.value) : 0;
+            if (spinbox) {
+                spinbox.disabled = !isSelected;
+                spinbox.value = isSelected ? (spinbox.value === '0' ? '1' : spinbox.value) : 0;
+            }
         }
 
         let itemDetailsMap = {};
@@ -944,7 +974,7 @@
             resultsDiv.classList.add('sorting'); 
             window.tsParticles?.domItem(0)?.pause();
             setTimeout(() => {
-                currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v)));
+                currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v, k)));
                 
                 const sortKey = document.getElementById('sortDropdown')?.value || 'price';
                 const sortedKeys = Object.keys(currentFilteredData).sort((a, b) => {
@@ -969,11 +999,22 @@
             }, 200);
         }
 
-        function checkConditions(itemChars) {
-            return characters.every(([eng]) => {
+        function checkConditions(itemChars, itemKey) {
+            const allCharsMatch = characters.every(([eng]) => {
                 const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`);
                 return !box?.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value);
             });
+
+            if (!allCharsMatch) return false;
+
+            const teoTsBox = document.querySelector('.character-box[data-eng-name="TeoTS"]');
+            if (teoTsBox && teoTsBox.classList.contains('selected')) {
+                if (!itemDetailsMap[itemKey].costume) {
+                    return false;
+                }
+            }
+            
+            return true;
         }
 
         function optimizeImages() {
@@ -1038,10 +1079,8 @@
                     }
                 }
 
-                // First, sort all important characters by their original index
                 allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
 
-                // If there's a TEO TS costume, insert it as an image to the left of Teo
                 if (itemDetails.costume) {
                     const teoTsData = { 
                         type: 'character', 
@@ -1052,9 +1091,9 @@
                     };
                     const teoIndex = allImportantItemsData.findIndex(item => item.type === 'character' && item.engName.toLowerCase() === 'teo');
                     if (teoIndex !== -1) {
-                        allImportantItemsData.splice(teoIndex, 0, teoTsData); // Insert BEFORE Teo
+                        allImportantItemsData.splice(teoIndex, 0, teoTsData);
                     } else {
-                        allImportantItemsData.unshift(teoTsData); // Fallback if Teo isn't in the list
+                        allImportantItemsData.unshift(teoTsData);
                     }
                 }
 
@@ -1117,15 +1156,22 @@
             img.src = charData.src;
             img.alt = charData.alt;
             img.className = 'small-character-img';
-            const isTier0 = tier0Eng.has(charData.engName) || charData.engName === 'TeoTS';
-            img.classList.add(isTier0 ? 'super-rare' : 'rare');
+
+            const badge = document.createElement('div');
+            badge.className = 'image-count-badge';
+
+            if (charData.engName === 'TeoTS') {
+                img.classList.add('legendary-item');
+                badge.classList.add('legendary-badge');
+            } else {
+                const isTier0 = tier0Eng.has(charData.engName);
+                img.classList.add(isTier0 ? 'super-rare' : 'rare');
+                badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge');
+            }
             container.appendChild(img);
 
             if (charData.count > 1) {
-                const badge = document.createElement('div');
-                badge.className = 'image-count-badge';
                 badge.textContent = `x${charData.count}`;
-                badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge');
                 container.appendChild(badge);
             }
             return container;
