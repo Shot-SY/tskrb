@@ -865,16 +865,31 @@
             const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 
             characters.forEach(([eng, kor]) => {
+                // If the current character is Teo, add the TS Skin box before it
+                if (eng === 'Teo') {
+                    const teoTsBox = document.createElement('div');
+                    teoTsBox.className = 'character-box legendary-item';
+                    teoTsBox.dataset.engName = 'TeoTS';
+                    teoTsBox.innerHTML = `
+                        <img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async">
+                        <span class="character-name">Teo TS Skin</span>
+                        <div class="spinbox-container" style="visibility: hidden;"><!-- Placeholder --></div>`;
+                    
+                    teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
+                    fragment.appendChild(teoTsBox);
+                }
+
+                // Create the regular character box
                 const charBox = document.createElement('div');
                 charBox.className = 'character-box';
                 charBox.dataset.engName = eng;
                 
                 if (tier0Eng.has(eng)) {
-                    charBox.classList.add('super-rare'); // Tier 0
+                    charBox.classList.add('super-rare');
                 } else if (tier1Eng.has(eng)) {
-                    charBox.classList.add('rare'); // Tier 1
+                    charBox.classList.add('rare');
                 } else {
-                    charBox.classList.add('extras-character-border'); // Tier 2
+                    charBox.classList.add('extras-character-border');
                 }
 
                 charBox.innerHTML = `
@@ -895,22 +910,8 @@
                     }
                 });
             });
-            characterGrid.appendChild(fragment);
-
-            // Create and insert Teo TS Skin box
-            const teoTsBox = document.createElement('div');
-            teoTsBox.className = 'character-box legendary-item';
-            teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `
-                <img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async">
-                <span class="character-name">Teo TS Skin</span>
-                <div class="spinbox-container" style="visibility: hidden;"><!-- Placeholder for alignment --></div>`;
-            teoTsBox.addEventListener('click', () => { teoTsBox.classList.toggle('selected'); });
             
-            const teoBox = characterGrid.querySelector('.character-box[data-eng-name="Teo"]');
-            if (teoBox) {
-                characterGrid.insertBefore(teoTsBox, teoBox);
-            }
+            characterGrid.appendChild(fragment);
         }
 
         function toggleSelection(charBox) {
@@ -1002,7 +1003,8 @@
         function checkConditions(itemChars, itemKey) {
             const allCharsMatch = characters.every(([eng]) => {
                 const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`);
-                return !box?.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value);
+                if (!box) return true; // Should not happen, but for safety
+                return !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value);
             });
 
             if (!allCharsMatch) return false;
