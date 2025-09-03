@@ -1476,7 +1476,10 @@
 
 		function getSelectedCharacters(){
 		    return [...document.querySelectorAll('.character-box.selected')]
-		        .map(b => `${b.dataset.engName}:${b.querySelector('input').value}`)
+		        .map(b => {
+		            const value = b.querySelector('input')?.value ?? '1';
+		            return `${b.dataset.engName}:${value}`;
+		        })
 		        .join(',');
 		}
 
