@@ -647,7 +647,38 @@
             width: auto;
             object-fit: contain;
             border-radius: 8px;
-            box-shadow: none; /* Resetting inherited box-shadow */
+            box-shadow: none;
+        }
+        .item-detail-popup-footer {
+            margin-top: 15px;
+            padding: 15px 10px 5px;
+            border-top: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        #popup-total-count, #popup-ruby-info {
+            font-size: 16px;
+            color: #bdc3c7;
+            font-family: 'Poppins', sans-serif;
+        }
+        #popup-total-count {
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+        #popup-price-info {
+            text-align: right;
+        }
+        #popup-price-info .price-usd {
+			font-size: 20px;
+			font-weight: 700;
+			color: #2ecc71;
+        }
+        #popup-price-info .price-krw {
+			font-size: 13px;
+			color: #bdc3c7;
         }
 
 	    @media (max-width: 768px) {
@@ -730,6 +761,17 @@
             .detail-popup-img {
                 height: 45px;
             }
+            .item-detail-popup-footer {
+                justify-content: center;
+                text-align: center;
+                gap: 8px;
+            }
+            #popup-price-info {
+                text-align: center;
+                width: 100%;
+            }
+             #popup-price-info .price-usd { font-size: 18px; }
+             #popup-price-info .price-krw { font-size: 12px; }
 	    }
 	</style>
 </head>
@@ -773,6 +815,11 @@
         <div class="item-detail-popup-content">
             <span class="close-button" id="closeItemDetailPopup">×</span>
             <div id="item-detail-popup-grid"></div>
+            <div class="item-detail-popup-footer">
+                <div id="popup-total-count"></div>
+                <div id="popup-ruby-info"></div>
+                <div id="popup-price-info"></div>
+            </div>
         </div>
     </div>
 
@@ -1066,7 +1113,7 @@
 
 				item.addEventListener('click', (e) => {
 					if (e.target.closest('.extras-box') || e.target.closest('.scroll-indicator')) return;
-                    showItemDetailPopup(k); // MODIFIED: Show detail popup instead of direct copy
+                    showItemDetailPopup(k);
 				});
                 item.addEventListener('mouseenter', () => resetOtherScrolledItems(item));
                 item.addEventListener('mouseleave', () => {
@@ -1362,6 +1409,18 @@
                     grid.appendChild(img);
                 }
             });
+            
+            // --- NEW: Populate the footer ---
+            const totalCountEl = document.getElementById('popup-total-count');
+            const rubyInfoEl = document.getElementById('popup-ruby-info');
+            const priceInfoEl = document.getElementById('popup-price-info');
+
+            totalCountEl.textContent = `Total: ${itemDetails.totalCount} Chars`;
+            rubyInfoEl.textContent = '110,000+ Ruby';
+
+            const usdPrice = itemDetails.price.toFixed(2);
+            const krwPriceRounded = Math.round(itemDetails.price * 1380 / 1000) * 1000;
+            priceInfoEl.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
 
             popup.style.display = 'flex';
             copyToClipboard(itemKey);
