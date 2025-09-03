@@ -716,8 +716,8 @@
 	</div>
     <div class="sort-container">
         <select id="sortDropdown">
-            <option value="price" selected>Price</option>
-            <option value="total">Character Count</option>
+            <option value="price-high" selected>Price High</option>
+            <option value="price-low">Price Low</option>
         </select>
     </div>
     <div id="results"></div>
@@ -991,17 +991,18 @@
             setTimeout(() => {
                 currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v, k)));
                 
-                const sortKey = document.getElementById('sortDropdown')?.value || 'price';
+                const sortKey = document.getElementById('sortDropdown')?.value || 'price-high';
                 const sortedKeys = Object.keys(currentFilteredData).sort((a, b) => {
                     const itemA = itemDetailsMap[a];
                     const itemB = itemDetailsMap[b];
                     
-                    if (sortKey === 'total') {
-                        const totalDiff = itemB.totalCount - itemA.totalCount;
-                        if (totalDiff !== 0) return totalDiff;
-                        return itemB.price - itemA.price;
+                    if (sortKey === 'price-low') {
+                        const priceDiff = itemA.price - itemB.price;
+                        if (priceDiff !== 0) return priceDiff;
+                        return itemB.totalCount - itemA.totalCount;
                     }
                     
+                    // Default: price-high
                     const priceDiff = itemB.price - itemA.price;
                     if (priceDiff !== 0) return priceDiff;
                     return itemB.totalCount - itemA.totalCount;
