@@ -62,22 +62,22 @@
 	        transform: translateZ(0);
 	    }
         /* Tier 1 (Rare) */
-	    .character-box.rare, .detail-popup-img.rare {
+	    .character-box.rare {
 	        border: 2px solid #ff9800;
 	        box-shadow: 0 0 15px rgba(255,152,0,0.5), 0 4px 12px rgba(255,152,0,0.7);
 	    }
         /* Tier 0 (Super Rare) */
-        .character-box.super-rare, .detail-popup-img.super-rare {
+        .character-box.super-rare {
 	        border: 2px solid #D32F2F;
 	        box-shadow: 0 0 15px rgba(211, 47, 47, 0.5), 0 4px 12px rgba(211, 47, 47, 0.7);
 	    }
         /* Legendary Item (e.g., Costume) */
-        .character-box.legendary-item, .detail-popup-img.legendary-item {
+        .character-box.legendary-item {
             border: 2px solid #D4AF37;
 	        box-shadow: 0 0 15px rgba(212, 175, 55, 0.6), 0 4px 12px rgba(212, 175, 55, 0.7);
         }
         /* Tier 2 (Normal) */
-        .extras-character-border, .detail-popup-img.extras-character-border {
+        .extras-character-border {
             border: 2px solid #b0b0b0;
             box-shadow: 0 0 10px rgba(176, 176, 176, 0.3);
         }
@@ -639,7 +639,7 @@
             flex-wrap: wrap;
             gap: 8px;
             justify-content: center;
-            padding: 20px 10px 10px;
+            padding: 20px 10px 20px; /* Adjusted bottom padding */
             margin-top: 10px;
         }
         .detail-popup-img {
@@ -647,7 +647,23 @@
             width: auto;
             object-fit: contain;
             border-radius: 8px;
-            box-shadow: none;
+        }
+        /* --- MODIFIED: Popup Image Glow Effects --- */
+        .detail-popup-img.rare {
+            border: 2px solid #ff9800;
+            box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+        }
+        .detail-popup-img.super-rare {
+            border: 2px solid #D32F2F;
+            box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
+        }
+        .detail-popup-img.legendary-item {
+            border: 2px solid #D4AF37;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
+        }
+        .detail-popup-img.extras-character-border {
+             border: 2px solid #b0b0b0;
+             box-shadow: 0 0 6px rgba(176, 176, 176, 0.3);
         }
         .item-detail-popup-footer {
             margin-top: 15px;
@@ -767,7 +783,7 @@
 			}
             #item-detail-popup-grid {
                 gap: 5px;
-                padding: 15px 5px 5px;
+                padding: 15px 5px 15px; /* Adjusted bottom padding */
             }
             .detail-popup-img {
                 height: 45px;
