@@ -639,7 +639,7 @@
             flex-wrap: wrap;
             gap: 8px;
             justify-content: center;
-            padding: 20px 10px 20px; /* Adjusted bottom padding */
+            padding: 20px 10px 20px;
             margin-top: 10px;
         }
         .detail-popup-img {
@@ -648,7 +648,6 @@
             object-fit: contain;
             border-radius: 8px;
         }
-        /* --- MODIFIED: Popup Image Glow Effects --- */
         .detail-popup-img.rare {
             border: 2px solid #ff9800;
             box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
@@ -678,6 +677,7 @@
         }
         .popup-info-box {
             font-family: 'Poppins', sans-serif;
+            flex: 1; /* MODIFIED: Ensure equal width */
         }
         .footer-label {
             font-size: 14px;
@@ -783,7 +783,7 @@
 			}
             #item-detail-popup-grid {
                 gap: 5px;
-                padding: 15px 5px 15px; /* Adjusted bottom padding */
+                padding: 15px 5px 15px;
             }
             .detail-popup-img {
                 height: 45px;
@@ -840,7 +840,7 @@
             <div class="item-detail-popup-footer">
                 <div class="popup-info-box">
                     <div class="footer-value" id="popup-total-count-value"></div>
-                    <div class="footer-label">Chars</div>
+                    <div class="footer-label">Items</div>
                 </div>
                 <div class="popup-info-box">
                     <div class="footer-value" id="popup-ruby-info-value"></div>
@@ -1073,6 +1073,11 @@
 
                         for (const charName in currentItemChars) {
                             itemDetails.totalCount += currentItemChars[charName];
+                        }
+                        
+                        // MODIFIED: Add 1 to totalCount if Teo skin is present
+                        if (itemDetails.costume) {
+                            itemDetails.totalCount++;
                         }
                         
                         luaData[key] = currentItemChars;
