@@ -666,11 +666,11 @@
         .footer-label {
             font-size: 14px;
             color: #bdc3c7;
-            margin-bottom: 4px;
         }
         .footer-value {
             font-size: 22px;
             font-weight: 700;
+            margin-bottom: 4px;
         }
         #popup-total-count-value {
             color: #ff9800; /* Orange theme */
@@ -685,6 +685,7 @@
 			font-weight: 700;
 			color: #2ecc71; /* Green theme */
             text-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+            margin-bottom: 4px;
         }
         #popup-price-krw {
 			font-size: 14px;
@@ -822,15 +823,14 @@
             <div id="item-detail-popup-grid"></div>
             <div class="item-detail-popup-footer">
                 <div class="popup-info-box">
-                    <div class="footer-label">Total</div>
                     <div class="footer-value" id="popup-total-count-value"></div>
+                    <div class="footer-label">Chars</div>
                 </div>
                 <div class="popup-info-box">
-                    <div class="footer-label">Ruby</div>
                     <div class="footer-value" id="popup-ruby-info-value"></div>
+                    <div class="footer-label">Ruby</div>
                 </div>
                 <div class="popup-info-box">
-                    <div class="footer-label">Price</div>
                     <div id="popup-price-usd"></div>
                     <div id="popup-price-krw"></div>
                 </div>
@@ -1426,7 +1426,7 @@
             });
             
             // --- Populate the footer ---
-            document.getElementById('popup-total-count-value').textContent = `${itemDetails.totalCount} Chars`;
+            document.getElementById('popup-total-count-value').textContent = itemDetails.totalCount;
             document.getElementById('popup-ruby-info-value').textContent = '110,000+';
 
             const usdPrice = itemDetails.price.toFixed(2);
