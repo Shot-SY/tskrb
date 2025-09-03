@@ -62,22 +62,22 @@
 	        transform: translateZ(0);
 	    }
         /* Tier 1 (Rare) */
-	    .character-box.rare {
+	    .character-box.rare, .detail-popup-img.rare {
 	        border: 2px solid #ff9800;
 	        box-shadow: 0 0 15px rgba(255,152,0,0.5), 0 4px 12px rgba(255,152,0,0.7);
 	    }
         /* Tier 0 (Super Rare) */
-        .character-box.super-rare {
+        .character-box.super-rare, .detail-popup-img.super-rare {
 	        border: 2px solid #D32F2F;
 	        box-shadow: 0 0 15px rgba(211, 47, 47, 0.5), 0 4px 12px rgba(211, 47, 47, 0.7);
 	    }
         /* Legendary Item (e.g., Costume) */
-        .character-box.legendary-item {
+        .character-box.legendary-item, .detail-popup-img.legendary-item {
             border: 2px solid #D4AF37;
 	        box-shadow: 0 0 15px rgba(212, 175, 55, 0.6), 0 4px 12px rgba(212, 175, 55, 0.7);
         }
         /* Tier 2 (Normal) */
-        .extras-character-border {
+        .extras-character-border, .detail-popup-img.extras-character-border {
             border: 2px solid #b0b0b0;
             box-shadow: 0 0 10px rgba(176, 176, 176, 0.3);
         }
@@ -209,7 +209,7 @@
 	        font-family: 'Poppins', sans-serif;
 	        font-size: 1.1em;
 	        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-	        z-index: 1000;
+	        z-index: 5000; /* Popups are 4000 */
 	        transition: opacity 0.3s ease, transform 0.3s ease;
 	        border-left: 4px solid #ff4081;
 	        will-change: transform, opacity;
@@ -583,7 +583,8 @@
 	        0% { transform: rotate(0deg); }
 	        100% { transform: rotate(360deg); }
 	    }
-		#extrasPopup {
+		/* --- POPUP STYLES --- */
+		#extrasPopup, #itemDetailPopup {
 			display: none;
 			position: fixed;
 			z-index: 4000;
@@ -592,20 +593,25 @@
 			width: 100%;
 			height: 100%;
 			overflow: auto;
-			background-color: rgba(0,0,0,0.7);
+			background-color: rgba(0,0,0,0.8);
 			align-items: center;
 			justify-content: center;
 		}
-		.extras-popup-content {
+		.extras-popup-content, .item-detail-popup-content {
 			background-color: #1e1e1e;
 			padding: 25px;
-			border: 2px solid #b0b0b0;
+			border: 1px solid #555;
 			border-radius: 15px;
-			width: 80%;
-			max-width: 700px;
+			width: 90%;
+			max-width: 800px;
 			box-shadow: 0 5px 25px rgba(0,0,0,0.7);
 			position: relative;
 		}
+        .item-detail-popup-content {
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
 		.close-button {
 			color: #aaa;
 			position: absolute;
@@ -614,6 +620,7 @@
 			font-size: 28px;
 			font-weight: bold;
 			cursor: pointer;
+            z-index: 10;
 		}
 		.close-button:hover,
 		.close-button:focus {
@@ -626,6 +633,22 @@
 			justify-content: center;
 			padding-top: 10px;
 		}
+        #item-detail-popup-grid {
+            overflow-y: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 20px 10px 10px;
+            margin-top: 10px;
+        }
+        .detail-popup-img {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: none; /* Resetting inherited box-shadow */
+        }
 
 	    @media (max-width: 768px) {
 	        .character-grid {
@@ -696,10 +719,17 @@
 			.price-box .price-krw {
 				font-size: 12px;
 			}
-			.extras-popup-content {
-				width: 90%;
-				padding: 20px;
+			.extras-popup-content, .item-detail-popup-content {
+				width: 95%;
+				padding: 15px;
 			}
+            #item-detail-popup-grid {
+                gap: 5px;
+                padding: 15px 5px 5px;
+            }
+            .detail-popup-img {
+                height: 45px;
+            }
 	    }
 	</style>
 </head>
@@ -712,7 +742,7 @@
     <div class="character-grid" id="characterGrid"></div>
     <button id="filterButton">Apply Filter</button>
 	<div id="copyInstruction">
-	  ※ Click item to copy
+	  ※ Click item to see details & copy
 	</div>
     <div class="sort-container">
         <select id="sortDropdown">
@@ -730,12 +760,21 @@
         <span>Copied</span>
     </div>
 
+	<!-- Extras Popup -->
 	<div id="extrasPopup">
 		<div class="extras-popup-content">
 			<span class="close-button" id="closeExtrasPopup">×</span>
 			<div id="extras-popup-grid"></div>
 		</div>
 	</div>
+
+    <!-- Item Detail Popup -->
+    <div id="itemDetailPopup">
+        <div class="item-detail-popup-content">
+            <span class="close-button" id="closeItemDetailPopup">×</span>
+            <div id="item-detail-popup-grid"></div>
+        </div>
+    </div>
 
     <script>
         let lastActivityTime = Date.now();
@@ -864,19 +903,14 @@
             const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
             const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 
-            // First, create all the character boxes from the file
             characters.forEach(([eng, kor]) => {
                 const charBox = document.createElement('div');
                 charBox.className = 'character-box';
                 charBox.dataset.engName = eng;
                 
-                if (tier0Eng.has(eng)) {
-                    charBox.classList.add('super-rare');
-                } else if (tier1Eng.has(eng)) {
-                    charBox.classList.add('rare');
-                } else {
-                    charBox.classList.add('extras-character-border');
-                }
+                if (tier0Eng.has(eng)) charBox.classList.add('super-rare');
+                else if (tier1Eng.has(eng)) charBox.classList.add('rare');
+                else charBox.classList.add('extras-character-border');
 
                 charBox.innerHTML = `
                     <img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async">
@@ -890,14 +924,11 @@
                 });
                 charBox.querySelector('input').addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if (!charBox.classList.contains('selected')) {
-                        toggleSelection(charBox);
-                    }
+                    if (!charBox.classList.contains('selected')) toggleSelection(charBox);
                 });
                 fragment.appendChild(charBox);
             });
 
-            // Now, create the Teo TS Skin box independently
             const teoTsBox = document.createElement('div');
             teoTsBox.className = 'character-box legendary-item';
             teoTsBox.dataset.engName = 'TeoTS';
@@ -907,23 +938,11 @@
                 <div class="spinbox-container" style="visibility: hidden;"><!-- Placeholder --></div>`;
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
 
-            // Find the 'Teo' box within the fragment (case-insensitive)
-            let teoBoxNode = null;
-            for (const child of fragment.children) {
-                if (child.dataset.engName && child.dataset.engName.toLowerCase() === 'teo') {
-                    teoBoxNode = child;
-                    break;
-                }
-            }
-
-            // Insert the skin box before Teo if found, otherwise at the very beginning
-            if (teoBoxNode) {
-                fragment.insertBefore(teoTsBox, teoBoxNode);
-            } else {
-                fragment.insertBefore(teoTsBox, fragment.firstChild);
-            }
+            let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
             
-            // Finally, append the complete fragment to the grid
+            if (teoBoxNode) fragment.insertBefore(teoTsBox, teoBoxNode);
+            else fragment.insertBefore(teoTsBox, fragment.firstChild);
+            
             characterGrid.appendChild(fragment);
         }
 
@@ -997,15 +1016,11 @@
                     const itemB = itemDetailsMap[b];
                     
                     if (sortKey === 'price-low') {
-                        const priceDiff = itemA.price - itemB.price;
-                        if (priceDiff !== 0) return priceDiff;
-                        return itemB.totalCount - itemA.totalCount;
+                        return (itemA.price - itemB.price) || (itemB.totalCount - itemA.totalCount);
                     }
                     
                     // Default: price-high
-                    const priceDiff = itemB.price - itemA.price;
-                    if (priceDiff !== 0) return priceDiff;
-                    return itemB.totalCount - itemA.totalCount;
+                    return (itemB.price - itemA.price) || (itemB.totalCount - itemA.totalCount);
                 });
                 
                 displayResults(currentFilteredData, sortedKeys);
@@ -1018,20 +1033,13 @@
         function checkConditions(itemChars, itemKey) {
             const allCharsMatch = characters.every(([eng]) => {
                 const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`);
-                if (!box) return true;
-                return !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value);
+                return !box || !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value);
             });
 
             if (!allCharsMatch) return false;
 
             const teoTsBox = document.querySelector('.character-box[data-eng-name="TeoTS"]');
-            if (teoTsBox && teoTsBox.classList.contains('selected')) {
-                if (!itemDetailsMap[itemKey].costume) {
-                    return false;
-                }
-            }
-            
-            return true;
+            return !teoTsBox || !teoTsBox.classList.contains('selected') || itemDetailsMap[itemKey].costume;
         }
 
         function optimizeImages() {
@@ -1058,7 +1066,7 @@
 
 				item.addEventListener('click', (e) => {
 					if (e.target.closest('.extras-box') || e.target.closest('.scroll-indicator')) return;
-					copyToClipboard(item);
+                    showItemDetailPopup(k); // MODIFIED: Show detail popup instead of direct copy
 				});
                 item.addEventListener('mouseenter', () => resetOtherScrolledItems(item));
                 item.addEventListener('mouseleave', () => {
@@ -1099,19 +1107,10 @@
                 allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
 
                 if (itemDetails.costume) {
-                    const teoTsData = { 
-                        type: 'character', 
-                        src: 'Portrait/태오ts스킨.png', 
-                        alt: '태오 TS 스킨', 
-                        engName: 'TeoTS', 
-                        count: 1 
-                    };
-                    const teoIndex = allImportantItemsData.findIndex(item => item.type === 'character' && item.engName.toLowerCase() === 'teo');
-                    if (teoIndex !== -1) {
-                        allImportantItemsData.splice(teoIndex, 0, teoTsData);
-                    } else {
-                        allImportantItemsData.unshift(teoTsData);
-                    }
+                    const teoTsData = { type: 'character', src: 'Portrait/태오ts스킨.png', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1 };
+                    const teoIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
+                    if (teoIndex !== -1) allImportantItemsData.splice(teoIndex, 0, teoTsData);
+                    else allImportantItemsData.unshift(teoTsData);
                 }
 
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
@@ -1132,7 +1131,6 @@
                      item.classList.add('lazy-load-item');
                      item.dataset.tier2Items = JSON.stringify(tier2ImageData);
                 }
-
 
                 const priceBox = document.createElement('div');
                 priceBox.className = 'price-box';
@@ -1255,49 +1253,34 @@
 
             requestAnimationFrame(() => {
                 const hasScroll = imagesContainer.scrollWidth > imagesContainer.clientWidth;
+                wrapper.classList.toggle('has-scroll', hasScroll);
                 
                 if (hasScroll) {
-                    wrapper.classList.add('has-scroll');
-
-                    scrollRightBtn.onclick = (e) => {
-                        e.stopPropagation();
-                        imagesContainer.scrollBy({ left: imagesContainer.clientWidth * 0.8, behavior: 'smooth' });
-                    };
-                    scrollLeftBtn.onclick = (e) => {
-                        e.stopPropagation();
-                        imagesContainer.scrollBy({ left: -imagesContainer.clientWidth * 0.8, behavior: 'smooth' });
-                    };
+                    scrollRightBtn.onclick = (e) => { e.stopPropagation(); imagesContainer.scrollBy({ left: imagesContainer.clientWidth * 0.8, behavior: 'smooth' }); };
+                    scrollLeftBtn.onclick = (e) => { e.stopPropagation(); imagesContainer.scrollBy({ left: -imagesContainer.clientWidth * 0.8, behavior: 'smooth' }); };
 
                     imagesContainer.onscroll = () => {
                         const { scrollLeft, scrollWidth, clientWidth } = imagesContainer;
                         const tolerance = 5;
-
                         const isAtStart = scrollLeft < tolerance;
                         const isAtEnd = scrollLeft + clientWidth >= scrollWidth - tolerance;
-
                         scrollLeftBtn.classList.toggle('visible', !isAtStart);
                         scrollRightBtn.classList.toggle('visible', !isAtEnd);
-                        
                         wrapper.classList.toggle('scrolled-from-start', !isAtStart);
                         wrapper.classList.toggle('scrolled-to-end', isAtEnd);
                     };
                     imagesContainer.dispatchEvent(new Event('scroll'));
                 } else {
-                    wrapper.classList.remove('has-scroll', 'scrolled-from-start', 'scrolled-to-end');
                     scrollLeftBtn.classList.remove('visible');
                     scrollRightBtn.classList.remove('visible');
                     imagesContainer.onscroll = null;
-                    scrollLeftBtn.onclick = null;
-                    scrollRightBtn.onclick = null;
                 }
             });
         }
         
 		function resetAllScrolledItems() {
 		    document.querySelectorAll('.item-images-wrapper.has-scroll .item-images').forEach(container => {
-		        if (container.scrollLeft > 0) {
-		            container.scroll({ left: 0, behavior: 'smooth' });
-		        }
+		        if (container.scrollLeft > 0) container.scroll({ left: 0, behavior: 'smooth' });
 		    });
 		}
 
@@ -1305,9 +1288,7 @@
             document.querySelectorAll('.result-item').forEach(item => {
                 if (item !== currentItem) {
                     const container = item.querySelector('.item-images-wrapper.has-scroll .item-images');
-                    if (container && container.scrollLeft > 0) {
-                        container.scroll({ left: 0, behavior: 'smooth' });
-                    }
+                    if (container && container.scrollLeft > 0) container.scroll({ left: 0, behavior: 'smooth' });
                 }
             });
         }
@@ -1327,8 +1308,66 @@
 			popup.style.display = 'flex';
 		}
 
-        function copyToClipboard(el) {
-            const itemKey = el.dataset.itemKey;
+        function showItemDetailPopup(itemKey) {
+            const popup = document.getElementById('itemDetailPopup');
+            const grid = document.getElementById('item-detail-popup-grid');
+            grid.innerHTML = '';
+            grid.scrollTop = 0;
+
+            const charValue = luaData[itemKey];
+            const itemDetails = itemDetailsMap[itemKey];
+            let allItemsData = [];
+            
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+            const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
+
+            for (const charName in charValue) {
+                const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName);
+                if (!charInfo) continue;
+                
+                const [engName, korName] = charInfo;
+                const originalIndex = characters.findIndex(([eng]) => eng === engName);
+                allItemsData.push({ 
+                    src: `Portrait/${korName}.png`, 
+                    alt: korName, 
+                    engName, 
+                    count: charValue[charName], 
+                    originalIndex 
+                });
+            }
+            
+            if (itemDetails.costume) {
+                const teoTsData = { src: 'Portrait/태오ts스킨.png', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1 };
+                const teoIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
+                if (teoIndex !== -1) allItemsData.splice(teoIndex, 0, teoTsData);
+                else allItemsData.unshift(teoTsData);
+            }
+
+            allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
+
+            allItemsData.forEach(charData => {
+                for (let i = 0; i < charData.count; i++) {
+                    const img = document.createElement('img');
+                    img.src = charData.src;
+                    img.alt = charData.alt;
+                    img.className = 'detail-popup-img';
+                    img.loading = 'lazy';
+                    img.decoding = 'async';
+                    
+                    if (charData.engName === 'TeoTS') img.classList.add('legendary-item');
+                    else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
+                    else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
+                    else img.classList.add('extras-character-border');
+                    
+                    grid.appendChild(img);
+                }
+            });
+
+            popup.style.display = 'flex';
+            copyToClipboard(itemKey);
+        }
+
+        function copyToClipboard(itemKey) {
             const itemDetails = itemDetailsMap[itemKey];
             if (!itemDetails) return;
             navigator.clipboard.writeText(itemDetails.originalText).then(
@@ -1349,26 +1388,25 @@
 		        .join(',');
 		}
 
-        function throttle(func, delay) {
+        const throttle = (func, delay) => {
             let lastCall = 0;
-            return function(...args) {
+            return (...args) => {
                 const now = Date.now();
-                if (now - lastCall >= delay) {
-                    lastCall = now;
-                    func.apply(this, args);
-                }
+                if (now - lastCall < delay) return;
+                lastCall = now;
+                func(...args);
             };
-        }
+        };
 
-        function debounce(func, delay) {
+        const debounce = (func, delay) => {
             let timeoutId;
-            return function(...args) {
+            return (...args) => {
                 clearTimeout(timeoutId);
-                timeoutId = setTimeout(() => func.apply(this, args), delay);
+                timeoutId = setTimeout(() => func(...args), delay);
             };
-        }
+        };
 
-		const throttledFilterHandler = throttle(function() {
+		const throttledFilterHandler = throttle(() => {
 		    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
             applyFiltersAndSort();
             const selectedCharsString = getSelectedCharacters();
@@ -1389,7 +1427,23 @@
 			const closeExtrasBtn = document.getElementById('closeExtrasPopup');
 			const hideExtrasPopup = () => { extrasPopup.style.display = 'none'; };
 			closeExtrasBtn.addEventListener('click', hideExtrasPopup);
-			window.addEventListener('click', (event) => { if (event.target == extrasPopup) hideExtrasPopup(); });
+			
+            const itemDetailPopup = document.getElementById('itemDetailPopup');
+			const closeItemDetailBtn = document.getElementById('closeItemDetailPopup');
+			const hideItemDetailPopup = () => { itemDetailPopup.style.display = 'none'; };
+			closeItemDetailBtn.addEventListener('click', hideItemDetailPopup);
+
+			window.addEventListener('click', (event) => { 
+                if (event.target == extrasPopup) hideExtrasPopup(); 
+                if (event.target == itemDetailPopup) hideItemDetailPopup();
+            });
+
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    if (extrasPopup.style.display === 'flex') hideExtrasPopup();
+                    if (itemDetailPopup.style.display === 'flex') hideItemDetailPopup();
+                }
+            });
 
             const resultsContainer = document.getElementById('results');
             if (resultsContainer) {
