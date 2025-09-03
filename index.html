@@ -651,33 +651,43 @@
         }
         .item-detail-popup-footer {
             margin-top: 15px;
-            padding: 15px 10px 5px;
+            padding-top: 15px;
             border-top: 1px solid #444;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
+            text-align: center;
         }
-        #popup-total-count, #popup-ruby-info {
-            font-size: 16px;
-            color: #bdc3c7;
+        .popup-info-box {
             font-family: 'Poppins', sans-serif;
         }
-        #popup-total-count {
-            font-weight: 600;
-            color: #e0e0e0;
+        .footer-label {
+            font-size: 14px;
+            color: #bdc3c7;
+            margin-bottom: 4px;
         }
-        #popup-price-info {
-            text-align: right;
+        .footer-value {
+            font-size: 22px;
+            font-weight: 700;
         }
-        #popup-price-info .price-usd {
-			font-size: 20px;
+        #popup-total-count-value {
+            color: #ff9800; /* Orange theme */
+            text-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+        }
+        #popup-ruby-info-value {
+            color: #ff5252; /* Red theme */
+            text-shadow: 0 0 8px rgba(255, 82, 82, 0.6);
+        }
+        #popup-price-usd {
+			font-size: 22px;
 			font-weight: 700;
-			color: #2ecc71;
+			color: #2ecc71; /* Green theme */
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
         }
-        #popup-price-info .price-krw {
-			font-size: 13px;
+        #popup-price-krw {
+			font-size: 14px;
 			color: #bdc3c7;
         }
 
@@ -762,16 +772,11 @@
                 height: 45px;
             }
             .item-detail-popup-footer {
-                justify-content: center;
-                text-align: center;
-                gap: 8px;
+                gap: 10px;
             }
-            #popup-price-info {
-                text-align: center;
-                width: 100%;
-            }
-             #popup-price-info .price-usd { font-size: 18px; }
-             #popup-price-info .price-krw { font-size: 12px; }
+            .footer-label { font-size: 12px; }
+            .footer-value, #popup-price-usd { font-size: 18px; }
+            #popup-price-krw { font-size: 12px; }
 	    }
 	</style>
 </head>
@@ -816,9 +821,19 @@
             <span class="close-button" id="closeItemDetailPopup">×</span>
             <div id="item-detail-popup-grid"></div>
             <div class="item-detail-popup-footer">
-                <div id="popup-total-count"></div>
-                <div id="popup-ruby-info"></div>
-                <div id="popup-price-info"></div>
+                <div class="popup-info-box">
+                    <div class="footer-label">Total</div>
+                    <div class="footer-value" id="popup-total-count-value"></div>
+                </div>
+                <div class="popup-info-box">
+                    <div class="footer-label">Ruby</div>
+                    <div class="footer-value" id="popup-ruby-info-value"></div>
+                </div>
+                <div class="popup-info-box">
+                    <div class="footer-label">Price</div>
+                    <div id="popup-price-usd"></div>
+                    <div id="popup-price-krw"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -1410,17 +1425,14 @@
                 }
             });
             
-            // --- NEW: Populate the footer ---
-            const totalCountEl = document.getElementById('popup-total-count');
-            const rubyInfoEl = document.getElementById('popup-ruby-info');
-            const priceInfoEl = document.getElementById('popup-price-info');
-
-            totalCountEl.textContent = `Total: ${itemDetails.totalCount} Chars`;
-            rubyInfoEl.textContent = '110,000+ Ruby';
+            // --- Populate the footer ---
+            document.getElementById('popup-total-count-value').textContent = `${itemDetails.totalCount} Chars`;
+            document.getElementById('popup-ruby-info-value').textContent = '110,000+';
 
             const usdPrice = itemDetails.price.toFixed(2);
             const krwPriceRounded = Math.round(itemDetails.price * 1380 / 1000) * 1000;
-            priceInfoEl.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
+            document.getElementById('popup-price-usd').textContent = `$${usdPrice}`;
+            document.getElementById('popup-price-krw').textContent = `₩ ${krwPriceRounded.toLocaleString()}`;
 
             popup.style.display = 'flex';
             copyToClipboard(itemKey);
