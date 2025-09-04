@@ -199,7 +199,9 @@
 	        position: fixed;
 	        top: 50%;
 	        left: 50%;
-	        transform: translate(-50%, -50%) scale(0.8);
+            /* -- MODIFIED: CSS 변수 추가 -- */
+            --copy-translate-y: -50%; 
+	        transform: translate(-50%, var(--copy-translate-y)) scale(0.8);
 	        background: linear-gradient(135deg, #232526 0%, #414345 100%);
 	        color: #fff;
 	        padding: 20px 30px;
@@ -221,9 +223,10 @@
 	        animation: messagePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 	    }
 	    @keyframes messagePop {
-	        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-	        50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
-	        100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            /* -- MODIFIED: CSS 변수 사용 -- */
+	        0% { opacity: 0; transform: translate(-50%, var(--copy-translate-y)) scale(0.8); }
+	        50% { opacity: 1; transform: translate(-50%, var(--copy-translate-y)) scale(1.05); }
+	        100% { opacity: 1; transform: translate(-50%, var(--copy-translate-y)) scale(1); }
 	    }
 	    .copy-icon {
 	        width: 24px;
@@ -1075,7 +1078,6 @@
                             itemDetails.totalCount += currentItemChars[charName];
                         }
                         
-                        // MODIFIED: Add 1 to totalCount if Teo skin is present
                         if (itemDetails.costume) {
                             itemDetails.totalCount++;
                         }
@@ -1102,7 +1104,6 @@
                         return (itemA.price - itemB.price) || (itemB.totalCount - itemA.totalCount);
                     }
                     
-                    // Default: price-high
                     return (itemB.price - itemA.price) || (itemB.totalCount - itemA.totalCount);
                 });
                 
@@ -1446,7 +1447,6 @@
                 }
             });
             
-            // --- Populate the footer ---
             document.getElementById('popup-total-count-value').textContent = itemDetails.totalCount;
             document.getElementById('popup-ruby-info-value').textContent = '110,000+';
 
@@ -1468,10 +1468,33 @@
             );
         }
 
+        // -- MODIFIED: 함수 전체가 수정되었습니다 --
         function showCopyMessage(){
             const msg = document.getElementById('copyMessage');
+            const popup = document.getElementById('itemDetailPopup');
+            const popupContent = popup.querySelector('.item-detail-popup-content');
+
+            // 팝업이 보이는지 확인하고, 보인다면 그 아래에 메시지 위치시키기
+            if (popup && popup.style.display === 'flex' && popupContent) {
+                const popupRect = popupContent.getBoundingClientRect();
+                msg.style.top = `${popupRect.bottom + 15}px`; // 팝업 아래 15px 여백
+                msg.style.setProperty('--copy-translate-y', '0');
+            } else {
+                // 팝업이 안 보일 경우 원래대로 화면 중앙에 표시 (예비용)
+                msg.style.top = '50%';
+                msg.style.setProperty('--copy-translate-y', '-50%');
+            }
+            
             msg.classList.add('show');
-            setTimeout(() => { msg.classList.remove('show'); }, 2000);
+            
+            setTimeout(() => {
+                msg.classList.remove('show');
+                // 애니메이션이 끝난 후, 다음을 위해 인라인 스타일 제거
+                setTimeout(() => {
+                    msg.style.top = '';
+                    msg.style.removeProperty('--copy-translate-y');
+                }, 300); // transition 시간과 맞춤
+            }, 2000);
         }
 
 		function getSelectedCharacters(){
