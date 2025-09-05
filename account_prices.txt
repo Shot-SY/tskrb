@@ -1,6 +1,5 @@
 B2A1 pye1 teo4 pascal1 rin1 eileen4 dellons2 ludy1 espada1 shane1 ace1 look1 chancellor1 nia3 ruri1 aragon1 sieg2 rachel1 [teo legend costume] = $129.70
 B1LK pye1 teo3 yeonhee2 pascal2 rin1 eileen1 dellons1 ludy1 espada1 shane2 ace1 nox1 look2 chancellor1 nia2 taka1 sieg1 bidam1 rachel2 [teo legend costume] = $126.80
-B2C9 pye1 teo3 yeonhee2 lina1 vanessa1 pascal2 rin1 eileen1 dellons1 ludy1 platen1 espada1 shane1 ace2 kris1 chancellor2 nia2 sieg1 bidam1 rachel1 [teo legend costume] = $126.80
 B2D8 rosie1 teo4 pascal1 rin1 eileen3 ludy1 espada1 shane1 ace1 kris1 alice2 chancellor3 nia2 taka1 ballista1 sieg1 rachel1 [teo legend costume] = $115.20
 B1PS rosie1 teo3 yeonhee2 lina1 pascal1 rin1 colt1 eileen1 ludy1 espada1 shane1 ace1 chancellor3 nia2 sieg2 rachel2 [teo legend costume] = $112.30
 B2LD rosie1 teo3 yeonhee1 lina1 pascal1 rin1 eileen2 ludy1 yushin1 espada1 shane1 ace4 look1 alice1 chancellor2 nia2 ruri1 aragon1 ballista1 sieg2 rachel1 [teo legend costume] = $108.70
