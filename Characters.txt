@@ -24,6 +24,7 @@ ace 에이스
 kris 크리스
 nox 녹스
 alice 앨리스
+daisy 데이지
 look 룩
 chancellor 챈슬러
 nia 니아
