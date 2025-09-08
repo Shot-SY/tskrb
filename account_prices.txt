@@ -1210,7 +1210,6 @@ B2CR teo3 yeonhee1 lina1 pascal1 rin1 colt1 eileen1 ludy2 yushin2 shane2 espada1
 B2CZ teo3 yeonhee1 pascal3 rin1 vanessa1 platen1 eileen1 ludy1 yushin1 shane3 espada1 ace1 daisy1 chancellor2 nia1 ruri1 ballista3 sieg1 rachel3 velika1 [teo legend costume] = $35.50
 B2DP teo3 melkir1 lina1 pascal2 rin1 eileen1 ludy1 dellons1 yushin2 shane2 espada1 ace1 alice1 daisy1 look1 chancellor3 nia1 ruri1 sieg2 rachel3 velika1 [teo legend costume] = $35.50
 B2DT teo3 yeonhee1 lina1 pascal2 rin1 eileen3 ludy2 shane1 espada1 ace1 nox1 alice1 daisy1 chancellor1 nia2 spike1 sylvesta1 aragon1 sieg2 rachel2 velika1 [teo legend costume] = $35.50
-B2DZ teo3 yeonhee1 lina2 pascal4 rin2 platen1 eileen3 ludy2 dellons1 shane1 espada2 jave1 ace1 alice1 daisy1 chancellor1 nia2 sylvesta1 taka2 ruri2 sieg1 bidam1 rachel2 velika1 [teo legend costume] = $35.50
 B2EL teo3 yeonhee1 lina4 pascal2 rin1 eileen1 ludy3 dellons1 shane1 espada1 ace1 kris1 daisy1 chancellor1 nia1 ruri2 aragon1 ballista1 sieg1 rachel3 [teo legend costume] = $35.50
 B2EO teo3 lina1 pascal2 rin1 colt1 karma1 eileen1 ludy2 shane2 espada2 ace1 daisy2 look1 chancellor1 nia2 spike1 sylvesta1 taka2 sieg1 rachel3 velika1 [teo legend costume] = $35.50
 B2EQ teo3 melkir1 lina2 pascal3 rin1 vanessa1 karma1 eileen1 ludy2 yushin1 shane1 espada2 jave1 ace1 alice1 daisy1 look1 chancellor1 nia1 taka1 sieg2 bidam1 rachel2 [teo legend costume] = $35.50
