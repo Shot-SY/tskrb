@@ -1319,4 +1319,3 @@ B1RO teo4 melkir1 lina1 pascal2 rin1 vanessa1 platen1 eileen1 ludy2 dellons2 yus
 B2HT teo5 pascal3 rin1 eileen1 ludy2 yushin1 shane2 espada1 orly1 ace2 alice4 daisy1 chancellor1 nia2 sylvesta1 aragon1 sieg2 rachel2 velika1 = $40.60
 D22C teo4 melkir1 lina2 pascal3 rin1 eileen2 ludy1 yushin1 shane1 espada2 ace4 alice1 daisy1 chancellor1 nia2 ballista1 sieg2 rachel2 = $39.10
 B2HR teo4 yeonhee1 lina2 pascal2 rin1 eileen1 ludy1 shane1 espada1 jave1 ace2 nox2 alice1 daisy1 chancellor2 nia2 taka1 ruri1 aragon1 ballista1 sieg3 rachel4 velika1 = $38.40
-B2L9 teo4 lina3 pascal1 rin1 eileen1 ludy1 dellons1 yushin1 shane3 espada1 ace1 kris1 alice3 daisy1 chancellor1 nia1 taka1 sieg2 rachel3 velika1 = $34.80
