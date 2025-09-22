@@ -118,6 +118,73 @@
 	        transform: translateZ(0);
 	        backface-visibility: hidden;
 	    }
+        /* NEW 배지 스타일 */
+        .character-img-placeholder {
+            width: 80px;
+            height: 90px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff4081, #f50057);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .character-img-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff4081, #f50057, #ff9800, #4caf50);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+            border-radius: 12px;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .small-character-img-placeholder {
+            height: 60px;
+            min-width: 45px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff4081, #f50057);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-popup-img-placeholder {
+            height: 55px;
+            width: 45px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #ff4081, #f50057);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 8px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
 	    .character-name {
 	        font-size: 16px;
 	        margin-bottom: 10px;
@@ -365,6 +432,18 @@
 	        box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
 	    }
         .small-character-img.legendary-item { /* Legendary Item */
+            border: 2px solid #D4AF37;
+	        box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
+        }
+        .small-character-img-placeholder.rare { /* Tier 1 */
+	        border: 2px solid #ff9800;
+	        box-shadow: 0 0 8px rgba(255,152,0,0.6);
+	    }
+	    .small-character-img-placeholder.super-rare { /* Tier 0 */
+	        border: 2px solid #D32F2F;
+	        box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
+	    }
+        .small-character-img-placeholder.legendary-item { /* Legendary Item */
             border: 2px solid #D4AF37;
 	        box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
         }
@@ -686,6 +765,22 @@
              border: 2px solid #b0b0b0;
              box-shadow: 0 0 6px rgba(176, 176, 176, 0.3);
         }
+        .detail-popup-img-placeholder.rare {
+            border: 2px solid #ff9800;
+            box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+        }
+        .detail-popup-img-placeholder.super-rare {
+            border: 2px solid #D32F2F;
+            box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
+        }
+        .detail-popup-img-placeholder.legendary-item {
+            border: 2px solid #D4AF37;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
+        }
+        .detail-popup-img-placeholder.extras-character-border {
+             border: 2px solid #b0b0b0;
+             box-shadow: 0 0 6px rgba(176, 176, 176, 0.3);
+        }
         .item-detail-popup-footer {
             margin-top: 15px;
             padding-top: 15px;
@@ -729,42 +824,7 @@
 			font-size: 14px;
 			color: #bdc3c7;
         }
-        /* --- MODIFIED --- */
-        .new-character-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #ff4081;
-            font-family: 'Poppins', sans-serif;
-            border: 2px dashed #ff4081;
-            background-color: rgba(255, 64, 129, 0.1);
-            text-shadow: 0 0 5px rgba(255, 64, 129, 0.5);
-            border-radius: 10px;
-        }
-        .character-box .new-character-placeholder {
-            width: 80px;
-            height: 90px;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        .image-with-count-container .new-character-placeholder {
-            height: 60px;
-            width: 45px;
-            min-width: 45px;
-            font-size: 14px;
-            border-radius: 10px;
-        }
-        #extras-popup-grid .new-character-placeholder {
-            height: 60px;
-            width: 45px;
-            font-size: 14px;
-        }
-        #item-detail-popup-grid .new-character-placeholder {
-            height: 55px;
-            width: 45px; /* Adjust width as needed */
-            font-size: 12px;
-        }
+
 	    @media (max-width: 768px) {
 	        .character-grid {
 	            grid-template-columns: repeat(auto-fill, minmax(80px,1fr));
@@ -774,11 +834,16 @@
 	            height: 125px; 
 	            padding: 8px;
 	        }
-	        .character-box .character-img, .character-box .new-character-placeholder {
+	        .character-box .character-img {
 	            width: 60px;
 	            height: 70px;
 	            margin-bottom: 5px;
 	        }
+            .character-img-placeholder {
+                width: 60px;
+                height: 70px;
+                font-size: 12px;
+            }
 	        .character-box .character-name {
 	            font-size: 14px;
 	        }
@@ -805,10 +870,13 @@
 			    background: rgba(39, 174, 96, 0.1);
 			    min-width: 0;
 			}
-			.small-character-img, .extras-box, .price-box,
-            .image-with-count-container .new-character-placeholder {
+			.small-character-img, .extras-box, .price-box {
 				height: 54px;
 			}
+            .small-character-img-placeholder {
+                height: 54px;
+                font-size: 9px;
+            }
 	        .item-images {
 	            gap: 6px;
 	        }
@@ -843,8 +911,12 @@
                 gap: 5px;
                 padding: 15px 5px 15px;
             }
-            .detail-popup-img, #item-detail-popup-grid .new-character-placeholder {
+            .detail-popup-img {
                 height: 45px;
+            }
+            .detail-popup-img-placeholder {
+                height: 45px;
+                font-size: 7px;
             }
             .item-detail-popup-footer {
                 gap: 10px;
@@ -913,25 +985,6 @@
     </div>
 
     <script>
-        /* --- MODIFIED --- */
-        // 이미지 로드 실패 시 "NEW!" 플레이스홀더로 교체하는 함수
-        function handleImageError(imgElement) {
-            if (imgElement.dataset.errorHandled) return;
-            imgElement.dataset.errorHandled = 'true';
-
-            const placeholder = document.createElement('div');
-            placeholder.textContent = 'NEW!';
-
-            // 원본 이미지의 클래스를 복사하여 스타일 일관성 유지
-            placeholder.className = imgElement.className;
-            placeholder.classList.add('new-character-placeholder');
-            
-            // 충돌을 피하기 위해 원본 이미지 관련 클래스 제거
-            placeholder.classList.remove('character-img', 'small-character-img', 'detail-popup-img');
-            
-            imgElement.replaceWith(placeholder);
-        }
-
         let lastActivityTime = Date.now();
         const updateActivityTime = () => { lastActivityTime = Date.now(); };
         ['click', 'touchstart', 'scroll', 'keypress'].forEach(event => document.addEventListener(event, updateActivityTime));
@@ -1067,13 +1120,30 @@
                 else if (tier1Eng.has(eng)) charBox.classList.add('rare');
                 else charBox.classList.add('extras-character-border');
 
-                /* --- MODIFIED --- */
+                // 이미지 요소 생성
+                const imgElement = document.createElement('img');
+                imgElement.src = `Portrait/${kor}.png`;
+                imgElement.alt = kor;
+                imgElement.className = 'character-img';
+                imgElement.loading = 'lazy';
+                imgElement.decoding = 'async';
+                
+                // 이미지 로드 실패 시 placeholder로 교체
+                imgElement.onerror = function() {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'character-img-placeholder';
+                    placeholder.textContent = 'NEW!';
+                    this.parentNode.replaceChild(placeholder, this);
+                };
+
                 charBox.innerHTML = `
-                    <img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">
                     <span class="character-name">${eng}</span>
                     <div class="spinbox-container">
                         <input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled>
                     </div>`;
+                
+                // 이미지를 이름 앞에 삽입
+                charBox.insertBefore(imgElement, charBox.firstChild);
                 
                 charBox.addEventListener('click', (e) => {
                     if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox);
@@ -1085,14 +1155,30 @@
                 fragment.appendChild(charBox);
             });
 
+            // 태오 TS 스킨 처리
             const teoTsBox = document.createElement('div');
             teoTsBox.className = 'character-box legendary-item';
             teoTsBox.dataset.engName = 'TeoTS';
-            /* --- MODIFIED --- */
+            
+            const teoTsImg = document.createElement('img');
+            teoTsImg.src = 'Portrait/태오ts스킨.png';
+            teoTsImg.alt = '태오 TS 스킨';
+            teoTsImg.className = 'character-img';
+            teoTsImg.loading = 'lazy';
+            teoTsImg.decoding = 'async';
+            
+            teoTsImg.onerror = function() {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'character-img-placeholder';
+                placeholder.textContent = 'NEW!';
+                this.parentNode.replaceChild(placeholder, this);
+            };
+            
             teoTsBox.innerHTML = `
-                <img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">
                 <span class="character-name">Teo TS</span>
                 <div class="spinbox-container" style="visibility: hidden;"><!-- Placeholder --></div>`;
+            
+            teoTsBox.insertBefore(teoTsImg, teoTsBox.firstChild);
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
 
             let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
@@ -1102,7 +1188,6 @@
             
             characterGrid.appendChild(fragment);
         }
-
 
         function toggleSelection(charBox) {
             const spinbox = charBox.querySelector('input[type="number"]');
@@ -1331,8 +1416,23 @@
             img.src = charData.src;
             img.alt = charData.alt;
             img.className = 'small-character-img';
-            /* --- MODIFIED --- */
-            img.onerror = function() { handleImageError(this); };
+
+            // 이미지 로드 실패 시 placeholder로 교체
+            img.onerror = function() {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'small-character-img-placeholder';
+                placeholder.textContent = 'NEW!';
+                
+                // 기존 클래스 적용
+                if (charData.engName === 'TeoTS') {
+                    placeholder.classList.add('legendary-item');
+                } else {
+                    const isTier0 = tier0Eng.has(charData.engName);
+                    placeholder.classList.add(isTier0 ? 'super-rare' : 'rare');
+                }
+                
+                this.parentNode.replaceChild(placeholder, this);
+            };
 
             const badge = document.createElement('div');
             badge.className = 'image-count-badge';
@@ -1462,10 +1562,30 @@
 			images.forEach(charData => {
 				const container = document.createElement('div');
 				container.className = 'image-with-count-container';
-                /* --- MODIFIED --- */
-				container.innerHTML = `
-                    <img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">
-                    ${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`;
+                
+                const img = document.createElement('img');
+                img.src = charData.src;
+                img.alt = charData.alt;
+                img.className = 'small-character-img extras-character-border';
+                img.loading = 'lazy';
+                img.decoding = 'async';
+                
+                // 이미지 로드 실패 시 placeholder로 교체
+                img.onerror = function() {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'small-character-img-placeholder extras-character-border';
+                    placeholder.textContent = 'NEW!';
+                    this.parentNode.replaceChild(placeholder, this);
+                };
+                
+                container.appendChild(img);
+                
+                if (charData.count > 1) {
+                    const badge = document.createElement('div');
+                    badge.className = 'image-count-badge';
+                    badge.textContent = `x${charData.count}`;
+                    container.appendChild(badge);
+                }
 				grid.appendChild(container);
 			});
 			popup.style.display = 'flex';
@@ -1516,8 +1636,20 @@
                     img.className = 'detail-popup-img';
                     img.loading = 'lazy';
                     img.decoding = 'async';
-                    /* --- MODIFIED --- */
-                    img.onerror = function() { handleImageError(this); };
+                    
+                    // 이미지 로드 실패 시 placeholder로 교체
+                    img.onerror = function() {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'detail-popup-img-placeholder';
+                        placeholder.textContent = 'NEW!';
+                        
+                        if (charData.engName === 'TeoTS') placeholder.classList.add('legendary-item');
+                        else if (tier0Eng.has(charData.engName)) placeholder.classList.add('super-rare');
+                        else if (tier1Eng.has(charData.engName)) placeholder.classList.add('rare');
+                        else placeholder.classList.add('extras-character-border');
+                        
+                        this.parentNode.replaceChild(placeholder, this);
+                    };
                     
                     if (charData.engName === 'TeoTS') img.classList.add('legendary-item');
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
