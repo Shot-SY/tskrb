@@ -729,7 +729,42 @@
 			font-size: 14px;
 			color: #bdc3c7;
         }
-
+        /* --- MODIFIED --- */
+        .new-character-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ff4081;
+            font-family: 'Poppins', sans-serif;
+            border: 2px dashed #ff4081;
+            background-color: rgba(255, 64, 129, 0.1);
+            text-shadow: 0 0 5px rgba(255, 64, 129, 0.5);
+            border-radius: 10px;
+        }
+        .character-box .new-character-placeholder {
+            width: 80px;
+            height: 90px;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .image-with-count-container .new-character-placeholder {
+            height: 60px;
+            width: 45px;
+            min-width: 45px;
+            font-size: 14px;
+            border-radius: 10px;
+        }
+        #extras-popup-grid .new-character-placeholder {
+            height: 60px;
+            width: 45px;
+            font-size: 14px;
+        }
+        #item-detail-popup-grid .new-character-placeholder {
+            height: 55px;
+            width: 45px; /* Adjust width as needed */
+            font-size: 12px;
+        }
 	    @media (max-width: 768px) {
 	        .character-grid {
 	            grid-template-columns: repeat(auto-fill, minmax(80px,1fr));
@@ -739,7 +774,7 @@
 	            height: 125px; 
 	            padding: 8px;
 	        }
-	        .character-box .character-img {
+	        .character-box .character-img, .character-box .new-character-placeholder {
 	            width: 60px;
 	            height: 70px;
 	            margin-bottom: 5px;
@@ -770,7 +805,8 @@
 			    background: rgba(39, 174, 96, 0.1);
 			    min-width: 0;
 			}
-			.small-character-img, .extras-box, .price-box {
+			.small-character-img, .extras-box, .price-box,
+            .image-with-count-container .new-character-placeholder {
 				height: 54px;
 			}
 	        .item-images {
@@ -807,7 +843,7 @@
                 gap: 5px;
                 padding: 15px 5px 15px;
             }
-            .detail-popup-img {
+            .detail-popup-img, #item-detail-popup-grid .new-character-placeholder {
                 height: 45px;
             }
             .item-detail-popup-footer {
@@ -877,6 +913,25 @@
     </div>
 
     <script>
+        /* --- MODIFIED --- */
+        // 이미지 로드 실패 시 "NEW!" 플레이스홀더로 교체하는 함수
+        function handleImageError(imgElement) {
+            if (imgElement.dataset.errorHandled) return;
+            imgElement.dataset.errorHandled = 'true';
+
+            const placeholder = document.createElement('div');
+            placeholder.textContent = 'NEW!';
+
+            // 원본 이미지의 클래스를 복사하여 스타일 일관성 유지
+            placeholder.className = imgElement.className;
+            placeholder.classList.add('new-character-placeholder');
+            
+            // 충돌을 피하기 위해 원본 이미지 관련 클래스 제거
+            placeholder.classList.remove('character-img', 'small-character-img', 'detail-popup-img');
+            
+            imgElement.replaceWith(placeholder);
+        }
+
         let lastActivityTime = Date.now();
         const updateActivityTime = () => { lastActivityTime = Date.now(); };
         ['click', 'touchstart', 'scroll', 'keypress'].forEach(event => document.addEventListener(event, updateActivityTime));
@@ -1012,8 +1067,9 @@
                 else if (tier1Eng.has(eng)) charBox.classList.add('rare');
                 else charBox.classList.add('extras-character-border');
 
+                /* --- MODIFIED --- */
                 charBox.innerHTML = `
-                    <img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async">
+                    <img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">
                     <span class="character-name">${eng}</span>
                     <div class="spinbox-container">
                         <input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled>
@@ -1032,8 +1088,9 @@
             const teoTsBox = document.createElement('div');
             teoTsBox.className = 'character-box legendary-item';
             teoTsBox.dataset.engName = 'TeoTS';
+            /* --- MODIFIED --- */
             teoTsBox.innerHTML = `
-                <img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async">
+                <img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">
                 <span class="character-name">Teo TS</span>
                 <div class="spinbox-container" style="visibility: hidden;"><!-- Placeholder --></div>`;
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
@@ -1274,6 +1331,8 @@
             img.src = charData.src;
             img.alt = charData.alt;
             img.className = 'small-character-img';
+            /* --- MODIFIED --- */
+            img.onerror = function() { handleImageError(this); };
 
             const badge = document.createElement('div');
             badge.className = 'image-count-badge';
@@ -1403,8 +1462,9 @@
 			images.forEach(charData => {
 				const container = document.createElement('div');
 				container.className = 'image-with-count-container';
+                /* --- MODIFIED --- */
 				container.innerHTML = `
-                    <img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async">
+                    <img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">
                     ${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`;
 				grid.appendChild(container);
 			});
@@ -1456,6 +1516,8 @@
                     img.className = 'detail-popup-img';
                     img.loading = 'lazy';
                     img.decoding = 'async';
+                    /* --- MODIFIED --- */
+                    img.onerror = function() { handleImageError(this); };
                     
                     if (charData.engName === 'TeoTS') img.classList.add('legendary-item');
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
