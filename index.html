@@ -118,73 +118,6 @@
 	        transform: translateZ(0);
 	        backface-visibility: hidden;
 	    }
-        /* NEW 배지 스타일 */
-        .character-img-placeholder {
-            width: 80px;
-            height: 90px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #ff4081, #f50057);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-
-        .character-img-placeholder::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff4081, #f50057, #ff9800, #4caf50);
-            background-size: 400% 400%;
-            animation: gradientShift 3s ease infinite;
-            border-radius: 12px;
-            z-index: -1;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .small-character-img-placeholder {
-            height: 60px;
-            min-width: 45px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #ff4081, #f50057);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 10px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            flex-shrink: 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .detail-popup-img-placeholder {
-            height: 55px;
-            width: 45px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #ff4081, #f50057);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 8px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-        }
 	    .character-name {
 	        font-size: 16px;
 	        margin-bottom: 10px;
@@ -266,7 +199,6 @@
 	        position: fixed;
 	        top: 50%;
 	        left: 50%;
-            /* -- MODIFIED: CSS 변수 추가 -- */
             --copy-translate-y: -50%; 
 	        transform: translate(-50%, var(--copy-translate-y)) scale(0.8);
 	        background: linear-gradient(135deg, #232526 0%, #414345 100%);
@@ -278,7 +210,7 @@
 	        font-family: 'Poppins', sans-serif;
 	        font-size: 1.1em;
 	        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-	        z-index: 5000; /* Popups are 4000 */
+	        z-index: 5000;
 	        transition: opacity 0.3s ease, transform 0.3s ease;
 	        border-left: 4px solid #ff4081;
 	        will-change: transform, opacity;
@@ -290,7 +222,6 @@
 	        animation: messagePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 	    }
 	    @keyframes messagePop {
-            /* -- MODIFIED: CSS 변수 사용 -- */
 	        0% { opacity: 0; transform: translate(-50%, var(--copy-translate-y)) scale(0.8); }
 	        50% { opacity: 1; transform: translate(-50%, var(--copy-translate-y)) scale(1.05); }
 	        100% { opacity: 1; transform: translate(-50%, var(--copy-translate-y)) scale(1); }
@@ -432,18 +363,6 @@
 	        box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
 	    }
         .small-character-img.legendary-item { /* Legendary Item */
-            border: 2px solid #D4AF37;
-	        box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
-        }
-        .small-character-img-placeholder.rare { /* Tier 1 */
-	        border: 2px solid #ff9800;
-	        box-shadow: 0 0 8px rgba(255,152,0,0.6);
-	    }
-	    .small-character-img-placeholder.super-rare { /* Tier 0 */
-	        border: 2px solid #D32F2F;
-	        box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
-	    }
-        .small-character-img-placeholder.legendary-item { /* Legendary Item */
             border: 2px solid #D4AF37;
 	        box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
         }
@@ -665,7 +584,6 @@
 	        0% { transform: rotate(0deg); }
 	        100% { transform: rotate(360deg); }
 	    }
-		/* --- POPUP STYLES --- */
 		#extrasPopup, #itemDetailPopup {
 			display: none;
 			position: fixed;
@@ -723,11 +641,9 @@
             justify-content: center;
             padding: 20px 10px 20px;
             margin-top: 10px;
-            /* MODIFIED: Firefox 스크롤바 스타일 */
             scrollbar-width: thin;
             scrollbar-color: #ff4081 #1e1e1e;
         }
-        /* MODIFIED: Webkit(Chrome, Safari) 기반 브라우저 스크롤바 스타일 */
         #item-detail-popup-grid::-webkit-scrollbar {
             width: 8px;
         }
@@ -765,22 +681,6 @@
              border: 2px solid #b0b0b0;
              box-shadow: 0 0 6px rgba(176, 176, 176, 0.3);
         }
-        .detail-popup-img-placeholder.rare {
-            border: 2px solid #ff9800;
-            box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
-        }
-        .detail-popup-img-placeholder.super-rare {
-            border: 2px solid #D32F2F;
-            box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
-        }
-        .detail-popup-img-placeholder.legendary-item {
-            border: 2px solid #D4AF37;
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
-        }
-        .detail-popup-img-placeholder.extras-character-border {
-             border: 2px solid #b0b0b0;
-             box-shadow: 0 0 6px rgba(176, 176, 176, 0.3);
-        }
         .item-detail-popup-footer {
             margin-top: 15px;
             padding-top: 15px;
@@ -794,7 +694,7 @@
         }
         .popup-info-box {
             font-family: 'Poppins', sans-serif;
-            flex: 1; /* MODIFIED: Ensure equal width */
+            flex: 1;
         }
         .footer-label {
             font-size: 14px;
@@ -806,17 +706,17 @@
             margin-bottom: 4px;
         }
         #popup-total-count-value {
-            color: #ff9800; /* Orange theme */
+            color: #ff9800;
             text-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
         }
         #popup-ruby-info-value {
-            color: #ff5252; /* Red theme */
+            color: #ff5252;
             text-shadow: 0 0 8px rgba(255, 82, 82, 0.6);
         }
         #popup-price-usd {
 			font-size: 22px;
 			font-weight: 700;
-			color: #2ecc71; /* Green theme */
+			color: #2ecc71;
             text-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
             margin-bottom: 4px;
         }
@@ -824,7 +724,72 @@
 			font-size: 14px;
 			color: #bdc3c7;
         }
-
+        /* --- MODIFIED --- */
+        .new-character-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            text-transform: uppercase;
+        }
+        .character-box.super-rare .new-character-placeholder,
+        .detail-popup-img.super-rare.new-character-placeholder,
+        .small-character-img.super-rare.new-character-placeholder {
+            border: 2px solid #D32F2F;
+            color: #ff5252;
+            text-shadow: 0 0 8px rgba(255, 82, 82, 0.7);
+            box-shadow: inset 0 0 10px rgba(211, 47, 47, 0.5);
+        }
+        .character-box.rare .new-character-placeholder,
+        .detail-popup-img.rare.new-character-placeholder,
+        .small-character-img.rare.new-character-placeholder {
+            border: 2px solid #ff9800;
+            color: #ffc107;
+            text-shadow: 0 0 8px rgba(255, 193, 7, 0.7);
+            box-shadow: inset 0 0 10px rgba(255, 152, 0, 0.5);
+        }
+        .character-box.legendary-item .new-character-placeholder,
+        .detail-popup-img.legendary-item.new-character-placeholder,
+        .small-character-img.legendary-item.new-character-placeholder {
+            border: 2px solid #D4AF37;
+            color: #FFD700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.6);
+        }
+        .character-box.extras-character-border .new-character-placeholder,
+        .detail-popup-img.extras-character-border.new-character-placeholder,
+        .small-character-img.extras-character-border.new-character-placeholder {
+            border: 2px solid #b0b0b0;
+            color: #e0e0e0;
+            text-shadow: 0 0 5px rgba(224, 224, 224, 0.5);
+            box-shadow: inset 0 0 8px rgba(176, 176, 176, 0.3);
+        }
+        .character-box .new-character-placeholder {
+            width: 80px;
+            height: 90px;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .image-with-count-container .new-character-placeholder {
+            height: 60px;
+            width: 45px;
+            min-width: 45px;
+            font-size: 14px;
+        }
+        #extras-popup-grid .new-character-placeholder {
+            height: 60px;
+            width: 45px;
+            font-size: 14px;
+        }
+        #item-detail-popup-grid .new-character-placeholder {
+            height: 55px;
+            width: 45px;
+            font-size: 12px;
+        }
 	    @media (max-width: 768px) {
 	        .character-grid {
 	            grid-template-columns: repeat(auto-fill, minmax(80px,1fr));
@@ -834,16 +799,11 @@
 	            height: 125px; 
 	            padding: 8px;
 	        }
-	        .character-box .character-img {
+	        .character-box .character-img, .character-box .new-character-placeholder {
 	            width: 60px;
 	            height: 70px;
 	            margin-bottom: 5px;
 	        }
-            .character-img-placeholder {
-                width: 60px;
-                height: 70px;
-                font-size: 12px;
-            }
 	        .character-box .character-name {
 	            font-size: 14px;
 	        }
@@ -870,13 +830,10 @@
 			    background: rgba(39, 174, 96, 0.1);
 			    min-width: 0;
 			}
-			.small-character-img, .extras-box, .price-box {
+			.small-character-img, .extras-box, .price-box,
+            .image-with-count-container .new-character-placeholder {
 				height: 54px;
 			}
-            .small-character-img-placeholder {
-                height: 54px;
-                font-size: 9px;
-            }
 	        .item-images {
 	            gap: 6px;
 	        }
@@ -911,12 +868,8 @@
                 gap: 5px;
                 padding: 15px 5px 15px;
             }
-            .detail-popup-img {
+            .detail-popup-img, #item-detail-popup-grid .new-character-placeholder {
                 height: 45px;
-            }
-            .detail-popup-img-placeholder {
-                height: 45px;
-                font-size: 7px;
             }
             .item-detail-popup-footer {
                 gap: 10px;
@@ -954,7 +907,6 @@
         <span>Copied</span>
     </div>
 
-	<!-- Extras Popup -->
 	<div id="extrasPopup">
 		<div class="extras-popup-content">
 			<span class="close-button" id="closeExtrasPopup">×</span>
@@ -962,7 +914,6 @@
 		</div>
 	</div>
 
-    <!-- Item Detail Popup -->
     <div id="itemDetailPopup">
         <div class="item-detail-popup-content">
             <span class="close-button" id="closeItemDetailPopup">×</span>
@@ -985,6 +936,21 @@
     </div>
 
     <script>
+        function handleImageError(imgElement) {
+            if (imgElement.dataset.errorHandled) return;
+            imgElement.dataset.errorHandled = 'true';
+
+            const placeholder = document.createElement('div');
+            placeholder.textContent = 'NEW!';
+
+            placeholder.className = imgElement.className;
+            placeholder.classList.add('new-character-placeholder');
+            
+            placeholder.classList.remove('character-img', 'small-character-img', 'detail-popup-img');
+            
+            imgElement.replaceWith(placeholder);
+        }
+
         let lastActivityTime = Date.now();
         const updateActivityTime = () => { lastActivityTime = Date.now(); };
         ['click', 'touchstart', 'scroll', 'keypress'].forEach(event => document.addEventListener(event, updateActivityTime));
@@ -1120,30 +1086,12 @@
                 else if (tier1Eng.has(eng)) charBox.classList.add('rare');
                 else charBox.classList.add('extras-character-border');
 
-                // 이미지 요소 생성
-                const imgElement = document.createElement('img');
-                imgElement.src = `Portrait/${kor}.png`;
-                imgElement.alt = kor;
-                imgElement.className = 'character-img';
-                imgElement.loading = 'lazy';
-                imgElement.decoding = 'async';
-                
-                // 이미지 로드 실패 시 placeholder로 교체
-                imgElement.onerror = function() {
-                    const placeholder = document.createElement('div');
-                    placeholder.className = 'character-img-placeholder';
-                    placeholder.textContent = 'NEW!';
-                    this.parentNode.replaceChild(placeholder, this);
-                };
-
                 charBox.innerHTML = `
+                    <img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">
                     <span class="character-name">${eng}</span>
                     <div class="spinbox-container">
                         <input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled>
                     </div>`;
-                
-                // 이미지를 이름 앞에 삽입
-                charBox.insertBefore(imgElement, charBox.firstChild);
                 
                 charBox.addEventListener('click', (e) => {
                     if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox);
@@ -1155,30 +1103,13 @@
                 fragment.appendChild(charBox);
             });
 
-            // 태오 TS 스킨 처리
             const teoTsBox = document.createElement('div');
             teoTsBox.className = 'character-box legendary-item';
             teoTsBox.dataset.engName = 'TeoTS';
-            
-            const teoTsImg = document.createElement('img');
-            teoTsImg.src = 'Portrait/태오ts스킨.png';
-            teoTsImg.alt = '태오 TS 스킨';
-            teoTsImg.className = 'character-img';
-            teoTsImg.loading = 'lazy';
-            teoTsImg.decoding = 'async';
-            
-            teoTsImg.onerror = function() {
-                const placeholder = document.createElement('div');
-                placeholder.className = 'character-img-placeholder';
-                placeholder.textContent = 'NEW!';
-                this.parentNode.replaceChild(placeholder, this);
-            };
-            
             teoTsBox.innerHTML = `
+                <img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">
                 <span class="character-name">Teo TS</span>
                 <div class="spinbox-container" style="visibility: hidden;"><!-- Placeholder --></div>`;
-            
-            teoTsBox.insertBefore(teoTsImg, teoTsBox.firstChild);
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
 
             let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
@@ -1188,6 +1119,7 @@
             
             characterGrid.appendChild(fragment);
         }
+
 
         function toggleSelection(charBox) {
             const spinbox = charBox.querySelector('input[type="number"]');
@@ -1416,23 +1348,7 @@
             img.src = charData.src;
             img.alt = charData.alt;
             img.className = 'small-character-img';
-
-            // 이미지 로드 실패 시 placeholder로 교체
-            img.onerror = function() {
-                const placeholder = document.createElement('div');
-                placeholder.className = 'small-character-img-placeholder';
-                placeholder.textContent = 'NEW!';
-                
-                // 기존 클래스 적용
-                if (charData.engName === 'TeoTS') {
-                    placeholder.classList.add('legendary-item');
-                } else {
-                    const isTier0 = tier0Eng.has(charData.engName);
-                    placeholder.classList.add(isTier0 ? 'super-rare' : 'rare');
-                }
-                
-                this.parentNode.replaceChild(placeholder, this);
-            };
+            img.onerror = function() { handleImageError(this); };
 
             const badge = document.createElement('div');
             badge.className = 'image-count-badge';
@@ -1562,30 +1478,9 @@
 			images.forEach(charData => {
 				const container = document.createElement('div');
 				container.className = 'image-with-count-container';
-                
-                const img = document.createElement('img');
-                img.src = charData.src;
-                img.alt = charData.alt;
-                img.className = 'small-character-img extras-character-border';
-                img.loading = 'lazy';
-                img.decoding = 'async';
-                
-                // 이미지 로드 실패 시 placeholder로 교체
-                img.onerror = function() {
-                    const placeholder = document.createElement('div');
-                    placeholder.className = 'small-character-img-placeholder extras-character-border';
-                    placeholder.textContent = 'NEW!';
-                    this.parentNode.replaceChild(placeholder, this);
-                };
-                
-                container.appendChild(img);
-                
-                if (charData.count > 1) {
-                    const badge = document.createElement('div');
-                    badge.className = 'image-count-badge';
-                    badge.textContent = `x${charData.count}`;
-                    container.appendChild(badge);
-                }
+				container.innerHTML = `
+                    <img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">
+                    ${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`;
 				grid.appendChild(container);
 			});
 			popup.style.display = 'flex';
@@ -1636,20 +1531,7 @@
                     img.className = 'detail-popup-img';
                     img.loading = 'lazy';
                     img.decoding = 'async';
-                    
-                    // 이미지 로드 실패 시 placeholder로 교체
-                    img.onerror = function() {
-                        const placeholder = document.createElement('div');
-                        placeholder.className = 'detail-popup-img-placeholder';
-                        placeholder.textContent = 'NEW!';
-                        
-                        if (charData.engName === 'TeoTS') placeholder.classList.add('legendary-item');
-                        else if (tier0Eng.has(charData.engName)) placeholder.classList.add('super-rare');
-                        else if (tier1Eng.has(charData.engName)) placeholder.classList.add('rare');
-                        else placeholder.classList.add('extras-character-border');
-                        
-                        this.parentNode.replaceChild(placeholder, this);
-                    };
+                    img.onerror = function() { handleImageError(this); };
                     
                     if (charData.engName === 'TeoTS') img.classList.add('legendary-item');
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
@@ -1681,19 +1563,16 @@
             );
         }
 
-        // -- MODIFIED: 함수 전체가 수정되었습니다 --
         function showCopyMessage(){
             const msg = document.getElementById('copyMessage');
             const popup = document.getElementById('itemDetailPopup');
             const popupContent = popup.querySelector('.item-detail-popup-content');
 
-            // 팝업이 보이는지 확인하고, 보인다면 그 아래에 메시지 위치시키기
             if (popup && popup.style.display === 'flex' && popupContent) {
                 const popupRect = popupContent.getBoundingClientRect();
-                msg.style.top = `${popupRect.bottom + 15}px`; // 팝업 아래 15px 여백
+                msg.style.top = `${popupRect.bottom + 15}px`;
                 msg.style.setProperty('--copy-translate-y', '0');
             } else {
-                // 팝업이 안 보일 경우 원래대로 화면 중앙에 표시 (예비용)
                 msg.style.top = '50%';
                 msg.style.setProperty('--copy-translate-y', '-50%');
             }
@@ -1702,11 +1581,10 @@
             
             setTimeout(() => {
                 msg.classList.remove('show');
-                // 애니메이션이 끝난 후, 다음을 위해 인라인 스타일 제거
                 setTimeout(() => {
                     msg.style.top = '';
                     msg.style.removeProperty('--copy-translate-y');
-                }, 300); // transition 시간과 맞춤
+                }, 300);
             }, 2000);
         }
 
