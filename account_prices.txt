@@ -7,7 +7,6 @@ D249 rosie1 teo5 yeonhee1 melkir1 lina1 pascal3 rin2 vanessa1 karma1 platen1 mih
 B2MC rosie1 teo5 yeonhee4 melkir1 pascal2 rin2 vanessa1 miho1 eileen1 ludy2 yushin1 shane1 espada2 jave1 ace2 kris1 nox2 alice1 daisy1 chancellor2 nia3 sieg1 rachel2 velika1 = $115.20
 B1PS rosie1 teo3 yeonhee4 lina1 pascal2 rin1 colt2 miho1 eileen1 ludy1 shane1 espada2 ace1 alice1 daisy1 look1 chancellor3 nia2 aragon1 ballista1 sieg2 rachel3 [teo legend costume] = $113.80
 D1M9 rosie1 teo6 yeonhee2 lina2 pascal4 rin1 colt1 vanessa1 miho2 eileen2 ludy2 shane1 espada1 ace1 alice1 daisy1 chancellor3 nia1 taka1 ruri1 sieg2 bidam1 rachel3 = $113.80
-C1ZX jury1 teo4 yeonhee3 lina1 pascal1 rin2 colt2 karma2 miho1 eileen1 ludy1 yushin1 shane1 espada1 jave1 ace1 nox3 alice1 daisy2 look3 chancellor1 nia1 taka1 ruri1 ballista1 sieg1 rachel2 velika1 [teo legend costume] = $113.00
 D224 jury1 teo6 yeonhee1 lina1 pascal3 rin1 miho1 eileen2 ludy1 yushin1 shane1 espada3 jave2 ace1 nox1 alice1 daisy1 chancellor1 nia2 sylvesta1 aragon3 sieg1 bidam3 rachel2 [teo legend costume] = $113.00
 D28R rosie1 teo4 yeonhee1 lina3 pascal2 rin1 vanessa1 platen2 miho1 eileen2 ludy1 yushin1 shane1 espada1 ace1 kris1 alice1 daisy2 chancellor2 nia2 taka1 ballista2 sieg1 bidam1 rachel2 [teo legend costume] = $112.30
 D28G rosie1 teo4 yeonhee1 lina2 pascal3 rin2 colt1 miho1 eileen1 ludy2 yushin3 shane1 espada2 ace2 alice1 daisy1 look1 chancellor1 nia3 ballista1 sieg1 bidam2 rachel3 [teo legend costume] = $110.90
