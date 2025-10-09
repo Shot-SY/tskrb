@@ -432,6 +432,51 @@
 		    color: #FFD700;
 		    text-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
         }
+        
+        /* --- NEW: Transcendence Badge Effects --- */
+        /* 2초월(x3) ~ 5초월(x6) 뱃지 스타일 */
+        .image-count-badge.transcend-mid {
+            background: linear-gradient(135deg, #005f73, #0a9396);
+            border-color: #94d2bd;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            animation: pulse-mid 2.5s ease-in-out infinite;
+        }
+
+        /* 6초월(x7) 이상 뱃지 스타일 */
+        .image-count-badge.transcend-max {
+            background: linear-gradient(135deg, #ae2012, #ff4d6d);
+            border-color: #ff8fa3;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 0 0 6px #fff;
+            animation: pulse-max 2s ease-in-out infinite;
+            transform: scale(1.05); /* 살짝 크게 */
+        }
+
+        /* 애니메이션 효과 정의 */
+        @keyframes pulse-mid {
+            0% { box-shadow: 0 2px 5px rgba(0,0,0,0.6), 0 0 8px rgba(0, 255, 255, 0.5); }
+            50% { box-shadow: 0 2px 5px rgba(0,0,0,0.6), 0 0 14px rgba(0, 255, 255, 0.8); }
+            100% { box-shadow: 0 2px 5px rgba(0,0,0,0.6), 0 0 8px rgba(0, 255, 255, 0.5); }
+        }
+
+        @keyframes pulse-max {
+            0% { 
+                box-shadow: 0 2px 5px rgba(0,0,0,0.6), 0 0 10px rgba(255, 100, 255, 0.7), 0 0 4px white;
+                transform: scale(1.05);
+            }
+            50% { 
+                box-shadow: 0 2px 5px rgba(0,0,0,0.6), 0 0 20px rgba(255, 100, 255, 1), 0 0 8px white;
+                transform: scale(1.1);
+            }
+            100% { 
+                box-shadow: 0 2px 5px rgba(0,0,0,0.6), 0 0 10px rgba(255, 100, 255, 0.7), 0 0 4px white;
+                transform: scale(1.05);
+            }
+        }
+        /* --- END: New Styles --- */
+
 		.price-box {
 			display: flex;
 			flex-direction: column;
@@ -1365,6 +1410,14 @@
 
             if (charData.count > 1) {
                 badge.textContent = `x${charData.count}`;
+
+                // --- MODIFIED: Apply badge styles based on transcendence level ---
+                if (charData.count >= 7) { // 6초월 (x7) 이상
+                    badge.classList.add('transcend-max');
+                } else if (charData.count >= 3) { // 2초월 (x3) ~ 5초월 (x6)
+                    badge.classList.add('transcend-mid');
+                }
+                
                 container.appendChild(badge);
             }
             return container;
