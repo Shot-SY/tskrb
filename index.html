@@ -419,6 +419,7 @@
 		    border: 1px solid rgba(255, 255, 255, 0.1);
 		    box-shadow: 0 2px 5px rgba(0,0,0,0.6); 
 		    pointer-events: none;
+            transition: all 0.3s ease;
 		}
 		.image-count-badge.rare-badge { /* Tier 1 */
 		    color: #ffc107;
@@ -432,6 +433,49 @@
 		    color: #FFD700;
 		    text-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
         }
+
+        /* --- ✨ NEW BADGE EFFECTS START --- */
+        
+        /* Tier 1 Effect (x3 ~ x6): Static Glow */
+        .image-count-badge.badge-tier-1 {
+            border-width: 2px;
+            transform: scale(1.02);
+        }
+        .badge-tier-1.rare-badge {
+            box-shadow: 0 0 8px rgba(255, 193, 7, 0.7), 0 2px 5px rgba(0,0,0,0.6);
+            border-color: rgba(255, 193, 7, 0.5);
+        }
+        .badge-tier-1.super-rare-badge {
+            box-shadow: 0 0 8px rgba(255, 82, 82, 0.7), 0 2px 5px rgba(0,0,0,0.6);
+            border-color: rgba(255, 82, 82, 0.5);
+        }
+        .badge-tier-1.legendary-badge {
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.8), 0 2px 5px rgba(0,0,0,0.6);
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+        
+        /* Tier 2 Effect (x7+): Pulsing Glow Animation */
+        .image-count-badge.badge-tier-2 {
+            border-width: 2px;
+        }
+        .badge-tier-2.rare-badge { animation: badge-pulse-rare 2s infinite; }
+        .badge-tier-2.super-rare-badge { animation: badge-pulse-super-rare 2s infinite; }
+        .badge-tier-2.legendary-badge { animation: badge-pulse-legendary 2s infinite; }
+
+        @keyframes badge-pulse-rare {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(255, 193, 7, 0.7), 0 2px 5px rgba(0,0,0,0.6); border-color: rgba(255, 193, 7, 0.5); }
+          50% { transform: scale(1.1); box-shadow: 0 0 14px rgba(255, 193, 7, 1), 0 2px 5px rgba(0,0,0,0.6); border-color: rgba(255, 193, 7, 1); }
+        }
+        @keyframes badge-pulse-super-rare {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(255, 82, 82, 0.7), 0 2px 5px rgba(0,0,0,0.6); border-color: rgba(255, 82, 82, 0.5); }
+          50% { transform: scale(1.1); box-shadow: 0 0 14px rgba(255, 82, 82, 1), 0 2px 5px rgba(0,0,0,0.6); border-color: rgba(255, 82, 82, 1); }
+        }
+        @keyframes badge-pulse-legendary {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(255, 215, 0, 0.8), 0 2px 5px rgba(0,0,0,0.6); border-color: rgba(255, 215, 0, 0.6); }
+          50% { transform: scale(1.1); box-shadow: 0 0 14px rgba(255, 215, 0, 1), 0 2px 5px rgba(0,0,0,0.6); border-color: rgba(255, 215, 0, 1); }
+        }
+        /* --- ✨ NEW BADGE EFFECTS END --- */
+
 		.price-box {
 			display: flex;
 			flex-direction: column;
@@ -1365,6 +1409,15 @@
 
             if (charData.count > 1) {
                 badge.textContent = `x${charData.count}`;
+
+                // --- ✨ NEW LOGIC FOR BADGE EFFECTS ---
+                if (charData.count >= 7) {
+                    badge.classList.add('badge-tier-2');
+                } else if (charData.count >= 3) {
+                    badge.classList.add('badge-tier-1');
+                }
+                // --- ✨ END OF NEW LOGIC ---
+
                 container.appendChild(badge);
             }
             return container;
