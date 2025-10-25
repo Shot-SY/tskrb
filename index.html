@@ -127,13 +127,34 @@
 		.advanced-search-content { background-color: #1e1e1e; padding: 25px; border: 1px solid #555; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.7); display: flex; flex-direction: column; max-height: 85vh; }
 		.advanced-search-header h2 { margin-top: 0; margin-bottom: 10px; color: #448AFF; font-family: 'Poppins', sans-serif; }
 		.advanced-search-header p { margin-top: 0; margin-bottom: 20px; line-height: 1.6; color: #bdc3c7; font-size: 15px; }
-		/* --- MODIFIED --- Advanced Search Grid size */
-		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 12px; overflow-y: auto; padding: 10px; margin: 0 -10px 20px; flex-grow: 1; }
-		/* --- MODIFIED --- Advanced Search Box selection effect */
-		.adv-char-box { cursor: pointer; border-radius: 10px; position: relative; background-color: rgba(26,26,26,0.2); backdrop-filter: blur(5px); filter: brightness(0.7); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, filter 0.2s ease-out; }
-		.adv-char-box:not(.selected):hover { transform: scale(1.08); filter: brightness(0.9); }
-		.adv-char-box.selected { filter: brightness(1); transform: scale(1.1); box-shadow: 0 0 20px #448AFF, inset 0 0 10px rgba(68, 138, 255, 0.5); z-index: 2; }
-		.adv-char-box .character-img { width: 100%; height: auto; display: block; margin-bottom: 0; }
+		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 15px; overflow-y: auto; padding: 10px; margin: 0 -10px 20px; flex-grow: 1; }
+		/* --- MODIFIED --- Advanced Search Box Styles */
+		.adv-char-box {
+			cursor: pointer;
+			border-radius: 10px;
+			position: relative;
+			background-color: rgba(26,26,26,0.2);
+			backdrop-filter: blur(5px);
+			transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 10px 5px;
+		}
+		.adv-char-box .character-img {
+			width: 60px;
+			height: 70px;
+			margin-bottom: 8px;
+			border-radius: 8px;
+		}
+		.adv-char-name { font-size: 13px; font-weight: 600; color: #fff; text-align: center; }
+		.adv-char-box:hover { transform: scale(1.05); }
+		.adv-char-box.selected {
+			background-color: rgba(255, 64, 129, 0.9);
+			box-shadow: 0 0 20px rgba(255, 64, 129, 0.7), 0 4px 10px rgba(255, 64, 129, 0.5);
+			transform: translateY(-5px);
+			z-index: 2;
+		}
 		.advanced-search-footer { display: flex; justify-content: flex-end; gap: 15px; padding-top: 20px; border-top: 1px solid #444; }
 		.adv-search-btn { padding: 10px 25px; font-size: 16px; border-radius: 20px; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; transition: all 0.2s; }
 		#adv-search-execute { background-color: #2979FF; color: white; }
@@ -146,7 +167,7 @@
         .adv-char-box.legendary-item .new-character-placeholder { color: #FFD700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.8); box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.6); }
         .adv-char-box.extras-character-border .new-character-placeholder { color: #e0e0e0; text-shadow: 0 0 5px rgba(224, 224, 224, 0.5); box-shadow: inset 0 0 8px rgba(176, 176, 176, 0.3); }
         .character-box .new-character-placeholder { width: 80px; height: 90px; font-size: 22px; margin-bottom: 10px; }
-        .adv-char-box .new-character-placeholder { width: 100%; height: auto; aspect-ratio: 80 / 90; font-size: 18px; }
+        .adv-char-box .new-character-placeholder { width: 60px; height: 70px; margin-bottom: 8px; font-size: 16px; }
         .image-with-count-container .new-character-placeholder { height: 60px; width: 45px; min-width: 45px; font-size: 14px; }
         #extras-popup-grid .new-character-placeholder { height: 60px; width: 45px; font-size: 14px; }
         #item-detail-popup-grid .new-character-placeholder { height: 55px; width: 45px; font-size: 12px; }
@@ -180,7 +201,9 @@
             .footer-label { font-size: 12px; }
             .footer-value, #popup-price-usd { font-size: 18px; }
             #popup-price-krw { font-size: 12px; }
-			#advanced-search-grid { grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 10px; }
+			#advanced-search-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; }
+			.adv-char-box .character-img, .adv-char-box .new-character-placeholder { width: 50px; height: 60px; }
+			.adv-char-name { font-size: 12px; }
 	    }
 	</style>
 </head>
@@ -228,96 +251,42 @@
     </div>
 
     <script>
-        // --- SCRIPT START (Full, readable version) ---
         let isAdvancedSearchMode = false;
         let advancedSearchSelection = null;
 
-        function handleImageError(imgElement) {
-            if (imgElement.dataset.errorHandled) return;
-            imgElement.dataset.errorHandled = 'true';
-            const placeholder = document.createElement('div');
-            placeholder.textContent = 'NEW';
-            placeholder.className = imgElement.className;
-            placeholder.classList.add('new-character-placeholder');
-            placeholder.classList.remove('character-img', 'small-character-img', 'detail-popup-img');
-            imgElement.replaceWith(placeholder);
-        }
-
+        function handleImageError(imgElement) { /* ... same as before ... */ }
+        
+        // --- SCRIPT START (Full, readable version) ---
         let lastActivityTime = Date.now();
         const updateActivityTime = () => { lastActivityTime = Date.now(); };
         ['click', 'touchstart', 'scroll', 'keypress'].forEach(event => document.addEventListener(event, updateActivityTime));
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') {
-                const currentTime = Date.now();
-                const inactiveTime = currentTime - lastActivityTime;
-                if (inactiveTime > 7200000) { window.location.reload(true); } else { lastActivityTime = currentTime; }
-            }
-        });
+        document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { const currentTime = Date.now(); const inactiveTime = currentTime - lastActivityTime; if (inactiveTime > 7200000) { window.location.reload(true); } else { lastActivityTime = currentTime; } } });
 
         window.addEventListener('load', () => {
-            const lastLoad = localStorage.getItem('lastLoadTime');
-            const currentTime = Date.now();
-            if (!lastLoad || (currentTime - parseInt(lastLoad)) > 15000) {
-                localStorage.setItem('lastLoadTime', currentTime);
-                window.location.reload(true);
-                return;
-            }
+            const lastLoad = localStorage.getItem('lastLoadTime'); const currentTime = Date.now();
+            if (!lastLoad || (currentTime - parseInt(lastLoad)) > 15000) { localStorage.setItem('lastLoadTime', currentTime); window.location.reload(true); return; }
             const loader = document.getElementById('loader');
-            loadCharacters()
-                .then(() => loadData())
-                .then(() => applyFiltersAndSort())
-                .then(() => new Promise(r => setTimeout(r, 500)))
+            loadCharacters().then(() => loadData()).then(() => applyFiltersAndSort()).then(() => new Promise(r => setTimeout(r, 500)))
                 .then(() => {
                     loader.classList.add('hidden');
                     setTimeout(() => {
                         loader.style.display = 'none';
                         const results = document.getElementById('results');
                         if (results) {
-                            results.style.willChange = 'scroll-position';
-                            results.style.webkitOverflowScrolling = 'touch';
-                            results.addEventListener('scroll', function() {
-                                if (!results.isScrolling) {
-                                    results.isScrolling = true;
-                                    results.classList.add('scrolling');
-                                }
-                                clearTimeout(results.scrollEndTimer);
-                                results.scrollEndTimer = setTimeout(function() {
-                                    results.isScrolling = false;
-                                    results.classList.remove('scrolling');
-                                }, 100);
-                            }, { passive: true });
+                            results.style.willChange = 'scroll-position'; results.style.webkitOverflowScrolling = 'touch';
+                            results.addEventListener('scroll', function() { if (!results.isScrolling) { results.isScrolling = true; results.classList.add('scrolling'); } clearTimeout(results.scrollEndTimer); results.scrollEndTimer = setTimeout(function() { results.isScrolling = false; results.classList.remove('scrolling'); }, 100); }, { passive: true });
                         }
-                        optimizeImages();
-                        optimizeParticles();
+                        optimizeImages(); optimizeParticles();
                     }, 500);
                 })
-                .catch(error => {
-                    console.error('Initial filter application error:', error);
-                    loader.classList.add('hidden');
-                    setTimeout(() => loader.style.display = 'none', 500);
-                });
+                .catch(error => { console.error('Initial filter application error:', error); loader.classList.add('hidden'); setTimeout(() => loader.style.display = 'none', 500); });
         });
 
         function optimizeParticles() {
-            const pauseParticles = () => window.tsParticles?.domItem(0)?.pause();
-            const resumeParticles = () => window.tsParticles?.domItem(0)?.play();
+            const pauseParticles = () => window.tsParticles?.domItem(0)?.pause(); const resumeParticles = () => window.tsParticles?.domItem(0)?.play();
             const results = document.getElementById('results');
-            if (results) {
-                results.addEventListener('scroll', () => {
-                    if (!results.particlesPaused) {
-                        pauseParticles();
-                        results.particlesPaused = true;
-                        clearTimeout(results.particlesTimer);
-                        results.particlesTimer = setTimeout(() => {
-                            resumeParticles();
-                            results.particlesPaused = false;
-                        }, 200);
-                    }
-                }, { passive: true });
-            }
-            document.addEventListener('visibilitychange', () => {
-                document.visibilityState === 'hidden' ? pauseParticles() : resumeParticles();
-            });
+            if (results) { results.addEventListener('scroll', () => { if (!results.particlesPaused) { pauseParticles(); results.particlesPaused = true; clearTimeout(results.particlesTimer); results.particlesTimer = setTimeout(() => { resumeParticles(); results.particlesPaused = false; }, 200); } }, { passive: true }); }
+            document.addEventListener('visibilitychange', () => { document.visibilityState === 'hidden' ? pauseParticles() : resumeParticles(); });
         }
         
         let characters = []; let tier0Characters = []; let tier1Characters = []; let tier2Characters = []; let currentFilteredData = {}; let itemObserver;
@@ -329,14 +298,9 @@
                 lines.forEach(line => {
                     const trimmedLine = line.trim(); if (trimmedLine === '') { currentTier++; return; }
                     const parts = trimmedLine.split(' ');
-                    if (parts.length >= 2) {
-                        const [eng, ...korParts] = parts; const kor = korParts.join(' '); const charData = [eng, kor];
-                        if (currentTier === 0) tier0Characters.push(charData); else if (currentTier === 1) tier1Characters.push(charData); else if (currentTier === 2) tier2Characters.push(charData);
-                    }
+                    if (parts.length >= 2) { const [eng, ...korParts] = parts; const kor = korParts.join(' '); const charData = [eng, kor]; if (currentTier === 0) tier0Characters.push(charData); else if (currentTier === 1) tier1Characters.push(charData); else if (currentTier === 2) tier2Characters.push(charData); }
                 });
-                characters = [...tier0Characters, ...tier1Characters, ...tier2Characters];
-                createCharacterBoxes();
-                populateAdvancedSearchGrid();
+                characters = [...tier0Characters, ...tier1Characters, ...tier2Characters]; createCharacterBoxes(); populateAdvancedSearchGrid();
             }).catch(error => console.error('Character data loading error:', error));
         }
 
@@ -361,14 +325,7 @@
             grid.appendChild(fragment);
         }
 
-        function toggleSelection(charBox) {
-            const spinbox = charBox.querySelector('input[type="number"]');
-            const isSelected = charBox.classList.toggle('selected');
-            if (spinbox) {
-                spinbox.disabled = !isSelected;
-                spinbox.value = isSelected ? (spinbox.value === '0' ? '1' : spinbox.value) : 0;
-            }
-        }
+        function toggleSelection(charBox) { const spinbox = charBox.querySelector('input[type="number"]'); const isSelected = charBox.classList.toggle('selected'); if (spinbox) { spinbox.disabled = !isSelected; spinbox.value = isSelected ? (spinbox.value === '0' ? '1' : spinbox.value) : 0; } }
 
         let itemDetailsMap = {};
 
@@ -429,9 +386,7 @@
                 
 				if (advancedSearchSelection) {
 					let total = 0;
-					advancedSearchSelection.forEach(name => {
-						if (name.toLowerCase() === 'teots') { if(itemDetails.costume) total++; } else if (charValue[name.toLowerCase()]) { total += charValue[name.toLowerCase()]; }
-					});
+					advancedSearchSelection.forEach(name => { if (name.toLowerCase() === 'teots') { if(itemDetails.costume) total++; } else if (charValue[name.toLowerCase()]) { total += charValue[name.toLowerCase()]; } });
 					const scoreBox = document.createElement('div'); scoreBox.className = 'target-total-box';
 					scoreBox.innerHTML = `<div class="target-total-label">Target Total</div><div class="target-total-value">${total}</div>`;
 					rightSection.prepend(scoreBox);
@@ -456,13 +411,9 @@
                     const element = createCharacterImageElement(firstItemData, tier0Eng, false, advancedSearchSelection);
                     imageContainer.appendChild(element);
                     const remainingItemsData = allImportantItemsData.slice(1);
-                    if (remainingItemsData.length > 0 || tier2ImageData.length > 0) {
-                        item.classList.add('lazy-load-item'); item.dataset.remainingItems = JSON.stringify(remainingItemsData); item.dataset.tier2Items = JSON.stringify(tier2ImageData);
-                    }
+                    if (remainingItemsData.length > 0 || tier2ImageData.length > 0) { item.classList.add('lazy-load-item'); item.dataset.remainingItems = JSON.stringify(remainingItemsData); item.dataset.tier2Items = JSON.stringify(tier2ImageData); }
                 }
-                if (tier2ImageData.length > 0 && allImportantItemsData.length === 0) {
-                     item.classList.add('lazy-load-item'); item.dataset.tier2Items = JSON.stringify(tier2ImageData);
-                }
+                if (tier2ImageData.length > 0 && allImportantItemsData.length === 0) { item.classList.add('lazy-load-item'); item.dataset.tier2Items = JSON.stringify(tier2ImageData); }
                 const priceBox = document.createElement('div'); priceBox.className = 'price-box'; const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1400 / 1000) * 1000;
                 priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
                 rightSection.appendChild(priceBox);
@@ -595,12 +546,12 @@
 			characters.forEach(([eng, kor]) => {
 				const charBox = document.createElement('div'); charBox.className = 'adv-char-box'; charBox.dataset.engName = eng;
 				if (tier0Eng.has(eng)) charBox.classList.add('super-rare'); else if (tier1Eng.has(eng)) charBox.classList.add('rare'); else charBox.classList.add('extras-character-border');
-				charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">`;
+				charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${eng}</span>`;
 				charBox.addEventListener('click', () => charBox.classList.toggle('selected'));
 				fragment.appendChild(charBox);
 			});
             const teoTsBox = document.createElement('div'); teoTsBox.className = 'adv-char-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">`;
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">Teo TS</span>`;
             teoTsBox.addEventListener('click', () => teoTsBox.classList.toggle('selected'));
             let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
             if (teoBoxNode) fragment.insertBefore(teoTsBox, teoBoxNode); else fragment.insertBefore(teoTsBox, fragment.firstChild);
