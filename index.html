@@ -571,7 +571,7 @@
 			advancedSearchSelection = Array.from(selectedCharElements).map(el => el.dataset.engName);
 			closeAdvancedSearchModal();
 			isAdvancedSearchMode = true; document.body.classList.add('advanced-search-active');
-			const advBtn = document.getElementById('advancedSearchBtn'); advBtn.innerHTML = '↩️ Back to Normal'; advBtn.classList.add('exit-mode');
+			const advBtn = document.getElementById('advancedSearchBtn'); advBtn.innerHTML = '↩️ Back'; advBtn.classList.add('exit-mode');
 			const analyticsString = 'adv:' + advancedSearchSelection.join(','); gtag('event', 'advanced_search', { 'selected_characters': analyticsString });
             displayAdvancedSearchResults(advancedSearchSelection);
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
