@@ -24,9 +24,6 @@
 	        position: relative;
 	        overflow-y: scroll;
 	    }
-        body.modal-open {
-            overflow: hidden;
-        }
 	    h1 {
 	        text-align: center;
 	        margin-bottom: 30px;
@@ -164,7 +161,7 @@
 	        justify-content: center;
 	        width: 100%;
 	        padding: 15px;
-	        margin: 25px 0 15px 0;
+	        margin: 25px 0;
 	        font-size: 18px;
 	        cursor: pointer;
 	        background: linear-gradient(45deg, #ff4081, #f50057);
@@ -188,36 +185,6 @@
 	        transform: translateY(0);
 	        box-shadow: 0 4px 16px rgba(255,64,129,0.6);
 	    }
-		/* --- NEW --- Advanced Search Button */
-		#advancedSearchBtn {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 100%;
-			padding: 15px;
-			margin-bottom: 25px;
-			font-size: 18px;
-			cursor: pointer;
-			background: linear-gradient(45deg, #2979FF, #448AFF);
-			color: #fff;
-			border: none;
-			border-radius: 30px;
-			box-shadow: 0 4px 16px rgba(41, 121, 255, 0.5);
-			transition: all 0.3s;
-			font-family: 'Poppins', sans-serif;
-			font-weight: 600;
-			position: relative;
-			z-index: 1;
-		}
-		#advancedSearchBtn:hover {
-			box-shadow: 0 6px 20px rgba(41, 121, 255, 0.7);
-			transform: translateY(-3px);
-		}
-		#advancedSearchBtn.exit-mode {
-			background: linear-gradient(45deg, #616161, #757575);
-			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-		}
-		/* --- END NEW --- */
 	    #copyInstruction {
 	        margin-bottom: 15px;
 	        font-style: italic;
@@ -369,15 +336,10 @@
             min-width: 45px;
 			object-fit: contain;
 			border-radius: 10px;
-			transition: filter 0.3s, opacity 0.3s, transform 0.2s;
+			transition: transform 0.2s;
 			border: 1px solid rgba(255, 255, 255, 0.1);
             flex-shrink: 0;
 	    }
-		/* --- NEW --- Dimmed image style */
-		.small-character-img.dimmed, .extras-box.dimmed {
-			filter: grayscale(80%);
-			opacity: 0.6;
-		}
 		.extras-box {
 			display: flex;
 			justify-content: center;
@@ -389,7 +351,7 @@
 			border: 1px dashed rgba(176, 176, 176, 0.5);
 			border-radius: 10px;
 			cursor: pointer;
-			transition: background 0.2s, border-color 0.2s, filter 0.3s, opacity 0.3s;
+			transition: background 0.2s, border-color 0.2s;
             flex-shrink: 0;
 		}
 	    .small-character-img.rare { /* Tier 1 */
@@ -491,29 +453,6 @@
 		.price-box .price-krw {
 			font-size: 14px;
 			color: #bdc3c7;
-		}
-		/* --- NEW --- Combination Score Box */
-		.combo-score-box {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			height: 60px;
-			min-width: 100px;
-			padding: 0 12px;
-			background: linear-gradient(270deg, rgba(41, 121, 255, 0.2), transparent);
-			border-radius: 10px;
-			font-family: 'Poppins', sans-serif;
-		}
-		.combo-score-label {
-			font-size: 14px;
-			color: #bdc3c7;
-		}
-		.combo-score-value {
-			font-size: 22px;
-			font-weight: 700;
-			color: #448AFF;
-			text-shadow: 0 0 8px rgba(68, 138, 255, 0.6);
 		}
 	    .sort-container {
 	        display: flex;
@@ -705,24 +644,19 @@
             scrollbar-width: thin;
             scrollbar-color: #ff4081 #1e1e1e;
         }
-		/* --- Scrollbar Styles --- */
-        #item-detail-popup-grid::-webkit-scrollbar,
-		#advanced-search-grid::-webkit-scrollbar {
+        #item-detail-popup-grid::-webkit-scrollbar {
             width: 8px;
         }
-        #item-detail-popup-grid::-webkit-scrollbar-track,
-		#advanced-search-grid::-webkit-scrollbar-track {
+        #item-detail-popup-grid::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
         }
-        #item-detail-popup-grid::-webkit-scrollbar-thumb,
-		#advanced-search-grid::-webkit-scrollbar-thumb {
+        #item-detail-popup-grid::-webkit-scrollbar-thumb {
             background-color: #ff4081;
             border-radius: 10px;
             border: 2px solid #1e1e1e;
         }
-        #item-detail-popup-grid::-webkit-scrollbar-thumb:hover,
-		#advanced-search-grid::-webkit-scrollbar-thumb:hover {
+        #item-detail-popup-grid::-webkit-scrollbar-thumb:hover {
             background-color: #f50057;
         }
         .detail-popup-img {
@@ -731,154 +665,218 @@
             object-fit: contain;
             border-radius: 8px;
         }
-        .detail-popup-img.rare { border: 2px solid #ff9800; box-shadow: 0 0 8px rgba(255, 152, 0, 0.6); }
-        .detail-popup-img.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 8px rgba(211, 47, 47, 0.6); }
-        .detail-popup-img.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 8px rgba(212, 175, 55, 0.7); }
-        .detail-popup-img.extras-character-border { border: 2px solid #b0b0b0; box-shadow: 0 0 6px rgba(176, 176, 176, 0.3); }
-        .item-detail-popup-footer { margin-top: 15px; padding-top: 15px; border-top: 1px solid #444; display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 15px; text-align: center; }
-        .popup-info-box { font-family: 'Poppins', sans-serif; flex: 1; }
-        .footer-label { font-size: 14px; color: #bdc3c7; }
-        .footer-value { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-        #popup-total-count-value { color: #ff9800; text-shadow: 0 0 8px rgba(255, 152, 0, 0.6); }
-        #popup-ruby-info-value { color: #ff5252; text-shadow: 0 0 8px rgba(255, 82, 82, 0.6); }
-        #popup-price-usd { font-size: 22px; font-weight: 700; color: #2ecc71; text-shadow: 0 0 8px rgba(46, 204, 113, 0.5); margin-bottom: 4px; }
-        #popup-price-krw { font-size: 14px; color: #bdc3c7; }
-        /* --- NEW --- Screen Overlay and Advanced Search Modal */
-		#screenOverlay {
-			display: none;
-			position: fixed;
-			top: 0; left: 0;
-			width: 100%; height: 100%;
-			background-color: rgba(0, 0, 0, 0.7);
-			backdrop-filter: blur(8px);
-			-webkit-backdrop-filter: blur(8px);
-			z-index: 3000;
-			opacity: 0;
-			transition: opacity 0.3s ease-in-out;
-		}
-		#screenOverlay.visible {
-			display: block;
-			opacity: 1;
-		}
-		#advancedSearchModal {
-			display: none;
-			position: fixed;
-			z-index: 4000;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%) scale(0.95);
-			width: 90%;
-			max-width: 900px;
-			opacity: 0;
-			transition: opacity 0.3s ease, transform 0.3s ease;
-		}
-		#advancedSearchModal.visible {
-			display: block;
-			opacity: 1;
-			transform: translate(-50%, -50%) scale(1);
-		}
-		.advanced-search-content {
-			background-color: #1e1e1e;
-			padding: 25px;
-			border: 1px solid #555;
-			border-radius: 15px;
-			box-shadow: 0 5px 25px rgba(0,0,0,0.7);
-			display: flex;
-			flex-direction: column;
-			max-height: 85vh;
-		}
-		.advanced-search-header h2 {
-			margin-top: 0;
-			margin-bottom: 10px;
-			color: #448AFF;
-			font-family: 'Poppins', sans-serif;
-		}
-		.advanced-search-header p {
-			margin-top: 0;
-			margin-bottom: 20px;
-			line-height: 1.6;
+        .detail-popup-img.rare {
+            border: 2px solid #ff9800;
+            box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+        }
+        .detail-popup-img.super-rare {
+            border: 2px solid #D32F2F;
+            box-shadow: 0 0 8px rgba(211, 47, 47, 0.6);
+        }
+        .detail-popup-img.legendary-item {
+            border: 2px solid #D4AF37;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
+        }
+        .detail-popup-img.extras-character-border {
+             border: 2px solid #b0b0b0;
+             box-shadow: 0 0 6px rgba(176, 176, 176, 0.3);
+        }
+        .item-detail-popup-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            text-align: center;
+        }
+        .popup-info-box {
+            font-family: 'Poppins', sans-serif;
+            flex: 1;
+        }
+        .footer-label {
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+        .footer-value {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        #popup-total-count-value {
+            color: #ff9800;
+            text-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+        }
+        #popup-ruby-info-value {
+            color: #ff5252;
+            text-shadow: 0 0 8px rgba(255, 82, 82, 0.6);
+        }
+        #popup-price-usd {
+			font-size: 22px;
+			font-weight: 700;
+			color: #2ecc71;
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+            margin-bottom: 4px;
+        }
+        #popup-price-krw {
+			font-size: 14px;
 			color: #bdc3c7;
-			font-size: 15px;
-		}
-		#advanced-search-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
-			gap: 15px;
-			overflow-y: auto;
-			padding: 10px;
-			margin: 0 -10px 20px; /* To align scrollbar nicely */
-			flex-grow: 1;
-		}
-		.adv-char-box {
-			cursor: pointer;
-			border-radius: 10px;
-			transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-			position: relative;
-			border: 2px solid transparent;
-		}
-		.adv-char-box:hover {
-			transform: scale(1.05);
-		}
-		.adv-char-box.selected {
-			border-color: #448AFF;
-			box-shadow: 0 0 15px rgba(68, 138, 255, 0.6);
-		}
-		.adv-char-box .character-img {
-			width: 100%;
-			height: auto;
-			display: block;
-			margin-bottom: 0;
-		}
-		.advanced-search-footer {
-			display: flex;
-			justify-content: flex-end;
-			gap: 15px;
-			padding-top: 20px;
-			border-top: 1px solid #444;
-		}
-		.adv-search-btn {
-			padding: 10px 25px;
-			font-size: 16px;
-			border-radius: 20px;
-			border: none;
-			cursor: pointer;
-			font-family: 'Poppins', sans-serif;
-			font-weight: 600;
-			transition: all 0.2s;
-		}
-		#adv-search-execute {
-			background-color: #2979FF;
-			color: white;
-		}
-		#adv-search-execute:hover { background-color: #448AFF; }
-		#adv-search-cancel {
-			background-color: #424242;
-			color: #e0e0e0;
-		}
-		#adv-search-cancel:hover { background-color: #616161; }
-		/* --- END NEW --- */
+        }
         /* --- MODIFIED --- */
-        .new-character-placeholder { display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: 'Poppins', sans-serif; border-radius: 10px; background-color: rgba(0, 0, 0, 0.3); box-sizing: border-box; text-transform: uppercase; }
-        .character-box.super-rare .new-character-placeholder, .detail-popup-img.super-rare.new-character-placeholder, .small-character-img.super-rare.new-character-placeholder, .adv-char-box.super-rare .new-character-placeholder { border: 2px solid #D32F2F; color: #ff5252; text-shadow: 0 0 8px rgba(255, 82, 82, 0.7); box-shadow: inset 0 0 10px rgba(211, 47, 47, 0.5); }
-        .character-box.rare .new-character-placeholder, .detail-popup-img.rare.new-character-placeholder, .small-character-img.rare.new-character-placeholder, .adv-char-box.rare .new-character-placeholder { border: 2px solid #ff9800; color: #ffc107; text-shadow: 0 0 8px rgba(255, 193, 7, 0.7); box-shadow: inset 0 0 10px rgba(255, 152, 0, 0.5); }
-        .character-box.legendary-item .new-character-placeholder, .detail-popup-img.legendary-item.new-character-placeholder, .small-character-img.legendary-item.new-character-placeholder, .adv-char-box.legendary-item .new-character-placeholder { border: 2px solid #D4AF37; color: #FFD700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.8); box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.6); }
-        .character-box.extras-character-border .new-character-placeholder, .detail-popup-img.extras-character-border.new-character-placeholder, .small-character-img.extras-character-border.new-character-placeholder, .adv-char-box.extras-character-border .new-character-placeholder { border: 2px solid #b0b0b0; color: #e0e0e0; text-shadow: 0 0 5px rgba(224, 224, 224, 0.5); box-shadow: inset 0 0 8px rgba(176, 176, 176, 0.3); }
-        .character-box .new-character-placeholder { width: 80px; height: 90px; font-size: 22px; margin-bottom: 10px; }
-        .adv-char-box .new-character-placeholder { width: 100%; height: auto; aspect-ratio: 80 / 90; font-size: 18px; }
-        .image-with-count-container .new-character-placeholder { height: 60px; width: 45px; min-width: 45px; font-size: 14px; }
-        #extras-popup-grid .new-character-placeholder { height: 60px; width: 45px; font-size: 14px; }
-        #item-detail-popup-grid .new-character-placeholder { height: 55px; width: 45px; font-size: 12px; }
+        .new-character-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            text-transform: uppercase;
+        }
+        .character-box.super-rare .new-character-placeholder,
+        .detail-popup-img.super-rare.new-character-placeholder,
+        .small-character-img.super-rare.new-character-placeholder {
+            border: 2px solid #D32F2F;
+            color: #ff5252;
+            text-shadow: 0 0 8px rgba(255, 82, 82, 0.7);
+            box-shadow: inset 0 0 10px rgba(211, 47, 47, 0.5);
+        }
+        .character-box.rare .new-character-placeholder,
+        .detail-popup-img.rare.new-character-placeholder,
+        .small-character-img.rare.new-character-placeholder {
+            border: 2px solid #ff9800;
+            color: #ffc107;
+            text-shadow: 0 0 8px rgba(255, 193, 7, 0.7);
+            box-shadow: inset 0 0 10px rgba(255, 152, 0, 0.5);
+        }
+        .character-box.legendary-item .new-character-placeholder,
+        .detail-popup-img.legendary-item.new-character-placeholder,
+        .small-character-img.legendary-item.new-character-placeholder {
+            border: 2px solid #D4AF37;
+            color: #FFD700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.6);
+        }
+        .character-box.extras-character-border .new-character-placeholder,
+        .detail-popup-img.extras-character-border.new-character-placeholder,
+        .small-character-img.extras-character-border.new-character-placeholder {
+            border: 2px solid #b0b0b0;
+            color: #e0e0e0;
+            text-shadow: 0 0 5px rgba(224, 224, 224, 0.5);
+            box-shadow: inset 0 0 8px rgba(176, 176, 176, 0.3);
+        }
+        .character-box .new-character-placeholder {
+            width: 80px;
+            height: 90px;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .image-with-count-container .new-character-placeholder {
+            height: 60px;
+            width: 45px;
+            min-width: 45px;
+            font-size: 14px;
+        }
+        #extras-popup-grid .new-character-placeholder {
+            height: 60px;
+            width: 45px;
+            font-size: 14px;
+        }
+        #item-detail-popup-grid .new-character-placeholder {
+            height: 55px;
+            width: 45px;
+            font-size: 12px;
+        }
 	    @media (max-width: 768px) {
-			/* ... existing responsive styles ... */
-			#advancedSearchBtn, #filterButton { font-size: 16px; padding: 12px; }
-			.advanced-search-content { padding: 20px; }
-			#advanced-search-grid { grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 10px; }
-			.combo-score-box { min-width: 80px; }
-			.combo-score-value { font-size: 19px; }
-			.combo-score-label { font-size: 12px; }
-			.result-item { flex-wrap: wrap; }
-			.result-info-right { justify-content: flex-end; flex-basis: 100%; }
-			.item-images-wrapper { flex-basis: 100%; }
+	        .character-grid {
+	            grid-template-columns: repeat(auto-fill, minmax(80px,1fr));
+	            gap: 10px;
+	        }
+	        .character-box {
+	            height: 125px; 
+	            padding: 8px;
+	        }
+	        .character-box .character-img, .character-box .new-character-placeholder {
+	            width: 60px;
+	            height: 70px;
+	            margin-bottom: 5px;
+	        }
+	        .character-box .character-name {
+	            font-size: 14px;
+	        }
+	        .spinbox-container input[type="number"] {
+	            width: 45px;
+	        }
+	        #filterButton {
+	            font-size: 16px;
+	            padding: 12px;
+	        }
+	        .result-item {
+	            padding: 12px;
+				flex-wrap: wrap;
+	        }
+            .item-images-wrapper, .result-info-right {
+				flex-basis: 100%;
+			}
+			.result-info-right {
+				justify-content: flex-end;
+			}
+			.price-box {
+			    flex-grow: 1;
+			    align-items: center;
+			    background: rgba(39, 174, 96, 0.1);
+			    min-width: 0;
+			}
+			.small-character-img, .extras-box, .price-box,
+            .image-with-count-container .new-character-placeholder {
+				height: 54px;
+			}
+	        .item-images {
+	            gap: 6px;
+	        }
+			.scroll-indicator {
+				display: none !important;
+			}
+            .item-images-wrapper.has-scroll::before,
+            .item-images-wrapper.has-scroll::after {
+                width: 60px;
+            }
+	        #copyInstruction {
+	            font-size: 1em;
+	        }
+	        #copyMessage {
+	            font-size: 1em;
+	            padding: 15px 20px;
+	        }
+			.extras-box .item-title {
+				font-size: 12px;
+			}
+			.price-box .price-usd {
+				font-size: 19px;
+			}
+			.price-box .price-krw {
+				font-size: 12px;
+			}
+			.extras-popup-content, .item-detail-popup-content {
+				width: 95%;
+				padding: 15px;
+			}
+            #item-detail-popup-grid {
+                gap: 5px;
+                padding: 15px 5px 15px;
+            }
+            .detail-popup-img, #item-detail-popup-grid .new-character-placeholder {
+                height: 45px;
+            }
+            .item-detail-popup-footer {
+                gap: 10px;
+            }
+            .footer-label { font-size: 12px; }
+            .footer-value, #popup-price-usd { font-size: 18px; }
+            #popup-price-krw { font-size: 12px; }
 	    }
 	</style>
 </head>
@@ -890,8 +888,6 @@
     <h1>SEVEN KNIGHTS RE:BIRTH</h1>
     <div class="character-grid" id="characterGrid"></div>
     <button id="filterButton">Apply Filter</button>
-	<button id="advancedSearchBtn">💎 Advanced Search</button>
-
 	<div id="copyInstruction">
 	  ※ Click item to copy
 	</div>
@@ -910,24 +906,6 @@
         </div>
         <span>Copied</span>
     </div>
-
-	<!-- --- NEW --- Screen Overlay -->
-	<div id="screenOverlay"></div>
-
-	<!-- --- NEW --- Advanced Search Modal -->
-	<div id="advancedSearchModal">
-		<div class="advanced-search-content">
-			<div class="advanced-search-header">
-				<h2>Smart Combination Rater</h2>
-				<p>This tool scores and ranks items based on the total quantity of your selected characters. An item will still appear in the results even if it contains zero of some characters you've selected. Simply pick all characters you find valuable.</p>
-			</div>
-			<div id="advanced-search-grid"></div>
-			<div class="advanced-search-footer">
-				<button class="adv-search-btn" id="adv-search-cancel">Cancel</button>
-				<button class="adv-search-btn" id="adv-search-execute">🚀 Search</button>
-			</div>
-		</div>
-	</div>
 
 	<div id="extrasPopup">
 		<div class="extras-popup-content">
@@ -958,9 +936,6 @@
     </div>
 
     <script>
-        // --- NEW --- State variable for Advanced Search mode
-		let isAdvancedSearchMode = false;
-
         function handleImageError(imgElement) {
             if (imgElement.dataset.errorHandled) return;
             imgElement.dataset.errorHandled = 'true';
@@ -1087,7 +1062,6 @@
                     });
                     characters = [...tier0Characters, ...tier1Characters, ...tier2Characters];
                     createCharacterBoxes();
-					populateAdvancedSearchGrid(); // --- NEW --- Populate the modal grid
                 })
                 .catch(error => { console.error('Character data loading error:', error); });
         }
@@ -1226,7 +1200,7 @@
                     return (itemB.price - itemA.price) || (itemB.totalCount - itemA.totalCount);
                 });
                 
-                displayResults({ data: currentFilteredData, sortedKeys });
+                displayResults(currentFilteredData, sortedKeys);
                 
                 resultsDiv.classList.remove('sorting');
                 window.tsParticles?.domItem(0)?.play();
@@ -1252,7 +1226,7 @@
             });
         }
 		
-		function displayResults({ data, sortedKeys, advancedSearchSelection = null }) {
+		function displayResults(data, sortedKeys) {
 			const res = document.getElementById('results');
 			res.scrollTop = 0;
 			const fragment = document.createDocumentFragment();
@@ -1287,28 +1261,8 @@
                 const rightSection = document.createElement('div');
                 rightSection.className = 'result-info-right';
 
-				const charValue = luaData[k]; // --- MODIFIED --- Always use full luaData
+				const charValue = data[k];
                 const itemDetails = itemDetailsMap[k];
-
-				// --- NEW --- If in advanced search mode, calculate score and prepend the box
-				if (advancedSearchSelection) {
-					let comboScore = 0;
-					advancedSearchSelection.forEach(name => {
-						if (name.toLowerCase() === 'teots') {
-							if(itemDetails.costume) comboScore++;
-						} else if (charValue[name.toLowerCase()]) {
-							comboScore += charValue[name.toLowerCase()];
-						}
-					});
-					const scoreBox = document.createElement('div');
-					scoreBox.className = 'combo-score-box';
-					scoreBox.innerHTML = `
-						<div class="combo-score-label">Score</div>
-						<div class="combo-score-value">${comboScore}</div>`;
-					rightSection.prepend(scoreBox);
-				}
-
-
                 let allImportantItemsData = [];
                 const tier2ImageData = [];
 
@@ -1338,12 +1292,9 @@
 
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
-                const combinedItems = [...allImportantItemsData]; // For lazy loading logic
-
                 if (allImportantItemsData.length > 0) {
                     const firstItemData = allImportantItemsData[0];
-                    const element = createCharacterImageElement(firstItemData, tier0Eng, false, advancedSearchSelection);
-                    imageContainer.appendChild(element);
+                    imageContainer.appendChild(createCharacterImageElement(firstItemData, tier0Eng));
 
                     const remainingItemsData = allImportantItemsData.slice(1);
                     if (remainingItemsData.length > 0 || tier2ImageData.length > 0) {
@@ -1384,12 +1335,11 @@
 			res.appendChild(fragment);
 			document.getElementById('copyInstruction').style.display = 'block';
             
-            document.querySelectorAll('#results .result-item').forEach(item => setupScrollControlsForItem(item, advancedSearchSelection));
-            setupItemObserver(advancedSearchSelection);
+            document.querySelectorAll('#results .result-item').forEach(setupScrollControlsForItem);
+            setupItemObserver();
 		}
 
-		// --- MODIFIED --- to accept advancedSearchSelection for dimming logic
-        function createCharacterImageElement(charData, tier0Eng, isLazy = false, advancedSearchSelection = null) {
+        function createCharacterImageElement(charData, tier0Eng, isLazy = false) {
             const container = document.createElement('div');
             container.className = 'image-with-count-container';
             if (isLazy) container.classList.add('js-lazy-loaded');
@@ -1399,11 +1349,6 @@
             img.alt = charData.alt;
             img.className = 'small-character-img';
             img.onerror = function() { handleImageError(this); };
-
-			// --- NEW --- Dimming logic
-			if (advancedSearchSelection && !advancedSearchSelection.includes(charData.engName)) {
-				img.classList.add('dimmed');
-			}
 
             const badge = document.createElement('div');
             badge.className = 'image-count-badge';
@@ -1425,13 +1370,13 @@
             return container;
         }
 
-        function setupItemObserver(advancedSearchSelection = null) {
+        function setupItemObserver() {
             if (itemObserver) itemObserver.disconnect();
             itemObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         clearTimeout(entry.target.revertTimer);
-                        entry.target.renderTimer = setTimeout(() => renderFullItem(entry.target, advancedSearchSelection), 100);
+                        entry.target.renderTimer = setTimeout(() => renderFullItem(entry.target), 100);
                     } else {
                         clearTimeout(entry.target.renderTimer);
                         entry.target.revertTimer = setTimeout(() => revertToLazyItem(entry.target), 100);
@@ -1440,9 +1385,8 @@
             }, { root: document.getElementById('results'), rootMargin: '400px 0px' });
             document.querySelectorAll('.lazy-load-item').forEach(item => itemObserver.observe(item));
         }
-		
-		// --- MODIFIED --- to pass advancedSearchSelection down
-        function renderFullItem(item, advancedSearchSelection = null) {
+
+        function renderFullItem(item) {
             if (item.querySelector('.js-lazy-loaded')) return;
             const remainingItemsJSON = item.dataset.remainingItems;
             const tier2ItemsJSON = item.dataset.tier2Items;
@@ -1452,7 +1396,7 @@
             if (remainingItemsJSON) {
                 const remainingItems = JSON.parse(remainingItemsJSON);
                 remainingItems.forEach(itemData => {
-                    const element = createCharacterImageElement(itemData, tier0Eng, true, advancedSearchSelection);
+                    const element = createCharacterImageElement(itemData, tier0Eng, true);
                     imageContainer.appendChild(element);
                 });
             }
@@ -1463,12 +1407,11 @@
                     const extrasBox = document.createElement('div');
                     extrasBox.className = 'extras-box js-lazy-loaded'; 
                     extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
-					if (advancedSearchSelection) extrasBox.classList.add('dimmed'); // Dim extras box too
                     extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2Items); });
                     imageContainer.appendChild(extrasBox);
                 }
             }
-            setupScrollControlsForItem(item, advancedSearchSelection);
+            setupScrollControlsForItem(item);
         }
 
         function revertToLazyItem(item) {
@@ -1478,7 +1421,7 @@
             setupScrollControlsForItem(item);
         }
         
-        function setupScrollControlsForItem(item, advancedSearchSelection = null) {
+        function setupScrollControlsForItem(item) {
             const wrapper = item.querySelector('.item-images-wrapper');
             const imagesContainer = item.querySelector('.item-images');
             const scrollLeftBtn = item.querySelector('.scroll-indicator-left');
@@ -1544,9 +1487,6 @@
 		}
 
         function showItemDetailPopup(itemKey) {
-            // This function remains largely the same
-            // For a more advanced implementation, you could also highlight selected characters here.
-            // But for now, we'll keep it as is for simplicity.
             const popup = document.getElementById('itemDetailPopup');
             const grid = document.getElementById('item-detail-popup-grid');
             grid.innerHTML = '';
@@ -1648,121 +1588,13 @@
             }, 2000);
         }
 
-		// --- NEW --- All functions related to Advanced Search
-		function populateAdvancedSearchGrid() {
-			const grid = document.getElementById('advanced-search-grid');
-			grid.innerHTML = '';
-			const fragment = document.createDocumentFragment();
-			const allSearchableChars = [...characters, ['TeoTS', '태오ts스킨']];
-			
-			const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-            const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
-
-			allSearchableChars.forEach(([eng, kor]) => {
-				const charBox = document.createElement('div');
-				charBox.className = 'adv-char-box';
-				charBox.dataset.engName = eng;
-
-				if (eng === 'TeoTS') charBox.classList.add('legendary-item');
-				else if (tier0Eng.has(eng)) charBox.classList.add('super-rare');
-                else if (tier1Eng.has(eng)) charBox.classList.add('rare');
-                else charBox.classList.add('extras-character-border');
-				
-				charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">`;
-				charBox.addEventListener('click', () => charBox.classList.toggle('selected'));
-				fragment.appendChild(charBox);
-			});
-			grid.appendChild(fragment);
-		}
-
-		function openAdvancedSearchModal() {
-			document.getElementById('screenOverlay').classList.add('visible');
-			document.getElementById('advancedSearchModal').classList.add('visible');
-			document.body.classList.add('modal-open');
-		}
-
-		function closeAdvancedSearchModal() {
-			document.getElementById('screenOverlay').classList.remove('visible');
-			document.getElementById('advancedSearchModal').classList.remove('visible');
-			document.body.classList.remove('modal-open');
-		}
-
-		function executeAdvancedSearch() {
-			const selectedCharElements = document.querySelectorAll('#advanced-search-grid .adv-char-box.selected');
-			if (selectedCharElements.length === 0) {
-				alert('Please select at least one character to search.');
-				return;
-			}
-			
-			const selectedChars = Array.from(selectedCharElements).map(el => el.dataset.engName);
-			closeAdvancedSearchModal();
-			
-			// Enter the mode
-			isAdvancedSearchMode = true;
-			document.getElementById('screenOverlay').classList.add('visible'); // Keep overlay
-			const advBtn = document.getElementById('advancedSearchBtn');
-			advBtn.innerHTML = '↩️ Back to Normal';
-			advBtn.classList.add('exit-mode');
-			
-			// Hide normal controls
-			document.querySelector('.character-grid').style.display = 'none';
-			document.getElementById('filterButton').style.display = 'none';
-			document.querySelector('.sort-container').style.display = 'none';
-
-			// Perform search and display
-			displayAdvancedSearchResults(selectedChars);
-		}
-
-		function displayAdvancedSearchResults(selectedChars) {
-			const resultsDiv = document.getElementById('results');
-            resultsDiv.classList.add('sorting'); 
-            window.tsParticles?.domItem(0)?.pause();
-			
-			setTimeout(() => {
-				const scoredItems = Object.keys(luaData).map(key => {
-					const itemChars = luaData[key];
-					const itemDetails = itemDetailsMap[key];
-					let comboScore = 0;
-					
-					selectedChars.forEach(name => {
-						if (name.toLowerCase() === 'teots') {
-							if (itemDetails.costume) comboScore++;
-						} else if (itemChars[name.toLowerCase()]) {
-							comboScore += itemChars[name.toLowerCase()];
-						}
-					});
-					return { key, comboScore, price: itemDetails.price };
-				});
-
-				const sortedKeys = scoredItems
-					.filter(item => item.comboScore > 0)
-					.sort((a, b) => {
-						if (b.comboScore !== a.comboScore) return b.comboScore - a.comboScore;
-						return b.price - a.price; // Secondary sort by price
-					})
-					.map(item => item.key);
-				
-				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selectedChars });
-
-				resultsDiv.classList.remove('sorting');
-				window.tsParticles?.domItem(0)?.play();
-			}, 200);
-		}
-
-		function exitAdvancedSearchMode() {
-			isAdvancedSearchMode = false;
-			document.getElementById('screenOverlay').classList.remove('visible');
-			const advBtn = document.getElementById('advancedSearchBtn');
-			advBtn.innerHTML = '💎 Advanced Search';
-			advBtn.classList.remove('exit-mode');
-
-			// Restore normal controls
-			document.querySelector('.character-grid').style.display = 'grid';
-			document.getElementById('filterButton').style.display = 'flex';
-			document.querySelector('.sort-container').style.display = 'flex';
-
-			// Restore default results
-			applyFiltersAndSort();
+		function getSelectedCharacters(){
+		    return [...document.querySelectorAll('.character-box.selected')]
+		        .map(b => {
+		            const value = b.querySelector('input')?.value ?? '1';
+		            return `${b.dataset.engName}:${value}`;
+		        })
+		        .join(',');
 		}
 
         const throttle = (func, delay) => {
@@ -1786,6 +1618,10 @@
 		const throttledFilterHandler = throttle(() => {
 		    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
             applyFiltersAndSort();
+            const selectedCharsString = getSelectedCharacters();
+            if (selectedCharsString) {
+                gtag('event', 'apply_filter', { 'selected_characters': selectedCharsString });
+            }
 		}, 300);
 
         document.getElementById('filterButton').addEventListener('click', throttledFilterHandler);
@@ -1796,18 +1632,6 @@
         });
 
 		document.addEventListener('DOMContentLoaded', () => {
-			// --- NEW --- Advanced search event listeners
-			const advSearchBtn = document.getElementById('advancedSearchBtn');
-			advSearchBtn.addEventListener('click', () => {
-				if (isAdvancedSearchMode) {
-					exitAdvancedSearchMode();
-				} else {
-					openAdvancedSearchModal();
-				}
-			});
-			document.getElementById('adv-search-cancel').addEventListener('click', closeAdvancedSearchModal);
-			document.getElementById('adv-search-execute').addEventListener('click', executeAdvancedSearch);
-
 			const extrasPopup = document.getElementById('extrasPopup');
 			const closeExtrasBtn = document.getElementById('closeExtrasPopup');
 			const hideExtrasPopup = () => { extrasPopup.style.display = 'none'; };
@@ -1821,14 +1645,12 @@
 			window.addEventListener('click', (event) => { 
                 if (event.target == extrasPopup) hideExtrasPopup(); 
                 if (event.target == itemDetailPopup) hideItemDetailPopup();
-				if (event.target == document.getElementById('advancedSearchModal')) closeAdvancedSearchModal();
             });
 
             window.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape') {
                     if (extrasPopup.style.display === 'flex') hideExtrasPopup();
                     if (itemDetailPopup.style.display === 'flex') hideItemDetailPopup();
-					if (document.getElementById('advancedSearchModal').classList.contains('visible')) closeAdvancedSearchModal();
                 }
             });
 
