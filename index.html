@@ -21,9 +21,9 @@
 	    h1 { text-align: center; margin-bottom: 30px; font-family: 'Poppins', sans-serif; font-size: 2.5em; color: #ff4081; text-shadow: 2px 2px 4px rgba(255,255,255,0.2); position: relative; z-index: 1; }
 	    .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); gap: 20px; margin-bottom: 30px; position: relative; z-index: 1; transform: translateZ(0); }
 	    .character-box { background: rgba(26,26,26,0.2); border: none; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; position: relative; height: 160px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1; transform: translateZ(0); }
-        .character-box.rare, .adv-char-box.rare { border: 2px solid #ff9800; box-shadow: 0 0 15px rgba(255,152,0,0.5), 0 4px 12px rgba(255,152,0,0.7); }
-        .character-box.super-rare, .adv-char-box.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 15px rgba(211, 47, 47, 0.5), 0 4px 12px rgba(211, 47, 47, 0.7); }
-        .character-box.legendary-item, .adv-char-box.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6), 0 4px 12px rgba(212, 175, 55, 0.7); }
+        .character-box.rare, .adv-char-box.rare { border: 2px solid #ff9800; box-shadow: 0 0 15px rgba(255,152,0,0.5); }
+        .character-box.super-rare, .adv-char-box.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 15px rgba(211, 47, 47, 0.5); }
+        .character-box.legendary-item, .adv-char-box.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
         .extras-character-border, .adv-char-box.extras-character-border { border: 2px solid #b0b0b0; box-shadow: 0 0 10px rgba(176, 176, 176, 0.3); }
 	    .character-box.selected { background-color: rgba(255,64,129,0.9); box-shadow: 0 0 20px rgba(255,64,129,0.7), 0 8px 20px rgba(255,64,129,0.8); transform: translateY(-5px); z-index: 2; }
 	    @media (hover: hover) and (pointer: fine) {
@@ -127,11 +127,12 @@
 		.advanced-search-content { background-color: #1e1e1e; padding: 25px; border: 1px solid #555; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.7); display: flex; flex-direction: column; max-height: 85vh; }
 		.advanced-search-header h2 { margin-top: 0; margin-bottom: 10px; color: #448AFF; font-family: 'Poppins', sans-serif; }
 		.advanced-search-header p { margin-top: 0; margin-bottom: 20px; line-height: 1.6; color: #bdc3c7; font-size: 15px; }
-		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 15px; overflow-y: auto; padding: 10px; margin: 0 -10px 20px; flex-grow: 1; }
-		.adv-char-box { cursor: pointer; border-radius: 10px; transition: transform 0.2s, box-shadow 0.2s; position: relative; background-color: rgba(26,26,26,0.2); backdrop-filter: blur(5px); }
-		/* --- MODIFIED --- adv-char-box hover and selected styles */
-		.adv-char-box:hover { transform: scale(1.08); }
-		.adv-char-box.selected { transform: scale(1.05); box-shadow: 0 0 20px #448AFF, inset 0 0 10px rgba(68, 138, 255, 0.5); }
+		/* --- MODIFIED --- Advanced Search Grid size */
+		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 12px; overflow-y: auto; padding: 10px; margin: 0 -10px 20px; flex-grow: 1; }
+		/* --- MODIFIED --- Advanced Search Box selection effect */
+		.adv-char-box { cursor: pointer; border-radius: 10px; position: relative; background-color: rgba(26,26,26,0.2); backdrop-filter: blur(5px); filter: brightness(0.7); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, filter 0.2s ease-out; }
+		.adv-char-box:not(.selected):hover { transform: scale(1.08); filter: brightness(0.9); }
+		.adv-char-box.selected { filter: brightness(1); transform: scale(1.1); box-shadow: 0 0 20px #448AFF, inset 0 0 10px rgba(68, 138, 255, 0.5); z-index: 2; }
 		.adv-char-box .character-img { width: 100%; height: auto; display: block; margin-bottom: 0; }
 		.advanced-search-footer { display: flex; justify-content: flex-end; gap: 15px; padding-top: 20px; border-top: 1px solid #444; }
 		.adv-search-btn { padding: 10px 25px; font-size: 16px; border-radius: 20px; border: none; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600; transition: all 0.2s; }
@@ -140,10 +141,10 @@
 		#adv-search-reset { background-color: #424242; color: #e0e0e0; }
 		#adv-search-reset:hover { background-color: #616161; }
         .new-character-placeholder { display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: 'Poppins', sans-serif; border-radius: 10px; background-color: rgba(0, 0, 0, 0.3); box-sizing: border-box; text-transform: uppercase; }
-        .character-box.super-rare .new-character-placeholder, .detail-popup-img.super-rare.new-character-placeholder, .small-character-img.super-rare.new-character-placeholder, .adv-char-box.super-rare .new-character-placeholder { color: #ff5252; text-shadow: 0 0 8px rgba(255, 82, 82, 0.7); box-shadow: inset 0 0 10px rgba(211, 47, 47, 0.5); }
-        .character-box.rare .new-character-placeholder, .detail-popup-img.rare.new-character-placeholder, .small-character-img.rare.new-character-placeholder, .adv-char-box.rare .new-character-placeholder { color: #ffc107; text-shadow: 0 0 8px rgba(255, 193, 7, 0.7); box-shadow: inset 0 0 10px rgba(255, 152, 0, 0.5); }
-        .character-box.legendary-item .new-character-placeholder, .detail-popup-img.legendary-item.new-character-placeholder, .small-character-img.legendary-item.new-character-placeholder, .adv-char-box.legendary-item .new-character-placeholder { color: #FFD700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.8); box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.6); }
-        .character-box.extras-character-border .new-character-placeholder, .detail-popup-img.extras-character-border.new-character-placeholder, .small-character-img.extras-character-border.new-character-placeholder, .adv-char-box.extras-character-border .new-character-placeholder { color: #e0e0e0; text-shadow: 0 0 5px rgba(224, 224, 224, 0.5); box-shadow: inset 0 0 8px rgba(176, 176, 176, 0.3); }
+        .adv-char-box.super-rare .new-character-placeholder { color: #ff5252; text-shadow: 0 0 8px rgba(255, 82, 82, 0.7); box-shadow: inset 0 0 10px rgba(211, 47, 47, 0.5); }
+        .adv-char-box.rare .new-character-placeholder { color: #ffc107; text-shadow: 0 0 8px rgba(255, 193, 7, 0.7); box-shadow: inset 0 0 10px rgba(255, 152, 0, 0.5); }
+        .adv-char-box.legendary-item .new-character-placeholder { color: #FFD700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.8); box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.6); }
+        .adv-char-box.extras-character-border .new-character-placeholder { color: #e0e0e0; text-shadow: 0 0 5px rgba(224, 224, 224, 0.5); box-shadow: inset 0 0 8px rgba(176, 176, 176, 0.3); }
         .character-box .new-character-placeholder { width: 80px; height: 90px; font-size: 22px; margin-bottom: 10px; }
         .adv-char-box .new-character-placeholder { width: 100%; height: auto; aspect-ratio: 80 / 90; font-size: 18px; }
         .image-with-count-container .new-character-placeholder { height: 60px; width: 45px; min-width: 45px; font-size: 14px; }
@@ -227,6 +228,7 @@
     </div>
 
     <script>
+        // --- SCRIPT START (Full, readable version) ---
         let isAdvancedSearchMode = false;
         let advancedSearchSelection = null;
 
@@ -341,41 +343,21 @@
         let luaData = {};
 
         function createCharacterBoxes() {
-            const grid = document.getElementById('characterGrid');
-            grid.innerHTML = '';
-            const fragment = document.createDocumentFragment();
-            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-            const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
+            const grid = document.getElementById('characterGrid'); grid.innerHTML = ''; const fragment = document.createDocumentFragment();
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng)); const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
             characters.forEach(([eng, kor]) => {
-                const charBox = document.createElement('div');
-                charBox.className = 'character-box';
-                charBox.dataset.engName = eng;
-                if (tier0Eng.has(eng)) charBox.classList.add('super-rare');
-                else if (tier1Eng.has(eng)) charBox.classList.add('rare');
-                else charBox.classList.add('extras-character-border');
-                charBox.innerHTML = `
-                    <img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">
-                    <span class="character-name">${eng}</span>
-                    <div class="spinbox-container">
-                        <input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled>
-                    </div>`;
-                charBox.addEventListener('click', (e) => {
-                    if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox);
-                });
-                charBox.querySelector('input').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (!charBox.classList.contains('selected')) toggleSelection(charBox);
-                });
+                const charBox = document.createElement('div'); charBox.className = 'character-box'; charBox.dataset.engName = eng;
+                if (tier0Eng.has(eng)) charBox.classList.add('super-rare'); else if (tier1Eng.has(eng)) charBox.classList.add('rare'); else charBox.classList.add('extras-character-border');
+                charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${eng}</span><div class="spinbox-container"><input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled></div>`;
+                charBox.addEventListener('click', (e) => { if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox); });
+                charBox.querySelector('input').addEventListener('click', (e) => { e.stopPropagation(); if (!charBox.classList.contains('selected')) toggleSelection(charBox); });
                 fragment.appendChild(charBox);
             });
-            const teoTsBox = document.createElement('div');
-            teoTsBox.className = 'character-box legendary-item';
-            teoTsBox.dataset.engName = 'TeoTS';
+            const teoTsBox = document.createElement('div'); teoTsBox.className = 'character-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
             teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">Teo TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
             let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
-            if (teoBoxNode) fragment.insertBefore(teoTsBox, teoBoxNode);
-            else fragment.insertBefore(teoTsBox, fragment.firstChild);
+            if (teoBoxNode) fragment.insertBefore(teoTsBox, teoBoxNode); else fragment.insertBefore(teoTsBox, fragment.firstChild);
             grid.appendChild(fragment);
         }
 
@@ -393,154 +375,79 @@
         function loadData() {
             const ts = new Date().getTime();
             return fetch(`account_prices.txt?t=${ts}`).then(r => r.text()).then(text => {
-                luaData = {};
-                itemDetailsMap = {};
+                luaData = {}; itemDetailsMap = {};
                 const lines = text.split('\n');
                 lines.forEach(line => {
                     if (!line.trim() || !line.includes('=')) return;
-                    const parts = line.split('=');
-                    const pricePart = parts.pop().trim();
-                    const contentPart = parts.join('=').trim();
-                    const contentWords = contentPart.split(/\s+/);
-                    const key = contentWords.shift();
-                    const itemDetails = {
-                        originalText: line,
-                        price: parseFloat(pricePart.replace('$', '')),
-                        costume: line.toLowerCase().includes('[teo legend costume]'),
-                        totalCount: 0,
-                    };
+                    const parts = line.split('='); const pricePart = parts.pop().trim(); const contentPart = parts.join('=').trim(); const contentWords = contentPart.split(/\s+/); const key = contentWords.shift();
+                    const itemDetails = { originalText: line, price: parseFloat(pricePart.replace('$', '')), costume: line.toLowerCase().includes('[teo legend costume]'), totalCount: 0 };
                     const currentItemChars = {};
-                    contentWords.forEach(word => {
-                        const match = word.match(/^([a-zA-Z]+)(\d+)$/);
-                        if (match) {
-                            const charName = match[1].toLowerCase();
-                            const count = parseInt(match[2]);
-                            currentItemChars[charName] = (currentItemChars[charName] || 0) + count;
-                        }
-                    });
-                    for (const charName in currentItemChars) {
-                        itemDetails.totalCount += currentItemChars[charName];
-                    }
-                    if (itemDetails.costume) {
-                        itemDetails.totalCount++;
-                    }
-                    luaData[key] = currentItemChars;
-                    itemDetailsMap[key] = itemDetails;
+                    contentWords.forEach(word => { const match = word.match(/^([a-zA-Z]+)(\d+)$/); if (match) { const charName = match[1].toLowerCase(); const count = parseInt(match[2]); currentItemChars[charName] = (currentItemChars[charName] || 0) + count; } });
+                    for (const charName in currentItemChars) { itemDetails.totalCount += currentItemChars[charName]; }
+                    if (itemDetails.costume) { itemDetails.totalCount++; }
+                    luaData[key] = currentItemChars; itemDetailsMap[key] = itemDetails;
                 });
             }).catch(error => console.error('Data loading error:', error));
         }
 
         function applyFiltersAndSort() {
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.classList.add('sorting');
-            window.tsParticles?.domItem(0)?.pause();
+            const resultsDiv = document.getElementById('results'); resultsDiv.classList.add('sorting'); window.tsParticles?.domItem(0)?.pause();
             setTimeout(() => {
                 currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v, k)));
                 const sortKey = document.getElementById('sortDropdown')?.value || 'price-high';
                 const sortedKeys = Object.keys(currentFilteredData).sort((a, b) => {
-                    const itemA = itemDetailsMap[a];
-                    const itemB = itemDetailsMap[b];
-                    if (sortKey === 'price-low') {
-                        return (itemA.price - itemB.price) || (itemB.totalCount - itemA.totalCount);
-                    }
+                    const itemA = itemDetailsMap[a]; const itemB = itemDetailsMap[b];
+                    if (sortKey === 'price-low') { return (itemA.price - itemB.price) || (itemB.totalCount - itemA.totalCount); }
                     return (itemB.price - itemA.price) || (itemB.totalCount - itemA.totalCount);
                 });
                 displayResults({ data: currentFilteredData, sortedKeys });
-                resultsDiv.classList.remove('sorting');
-                window.tsParticles?.domItem(0)?.play();
+                resultsDiv.classList.remove('sorting'); window.tsParticles?.domItem(0)?.play();
             }, 200);
         }
 
         function checkConditions(itemChars, itemKey) {
-            const allCharsMatch = characters.every(([eng]) => {
-                const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`);
-                return !box || !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value);
-            });
+            const allCharsMatch = characters.every(([eng]) => { const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`); return !box || !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value); });
             if (!allCharsMatch) return false;
             const teoTsBox = document.querySelector('.character-box[data-eng-name="TeoTS"]');
             return !teoTsBox || !teoTsBox.classList.contains('selected') || itemDetailsMap[itemKey].costume;
         }
 
-        function optimizeImages() {
-            document.querySelectorAll('img').forEach(img => {
-                if (!img.hasAttribute('loading')) img.loading = 'lazy';
-                if (!img.hasAttribute('decoding')) img.decoding = 'async';
-            });
-        }
+        function optimizeImages() { document.querySelectorAll('img').forEach(img => { if (!img.hasAttribute('loading')) img.loading = 'lazy'; if (!img.hasAttribute('decoding')) img.decoding = 'async'; }); }
 		
 		function displayResults({ data, sortedKeys, advancedSearchSelection = null }) {
-			const res = document.getElementById('results');
-			res.scrollTop = 0;
-			const fragment = document.createDocumentFragment();
-			const container = document.createElement('div');
-			container.className = 'content-container';
-			fragment.appendChild(container);
+			const res = document.getElementById('results'); res.scrollTop = 0; const fragment = document.createDocumentFragment(); const container = document.createElement('div'); container.className = 'content-container'; fragment.appendChild(container);
             const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
 			
 			sortedKeys.forEach(k => {
-				const item = document.createElement('div');
-				item.className = 'result-item';
-				item.dataset.itemKey = k;
-				item.addEventListener('click', (e) => {
-					if (e.target.closest('.extras-box') || e.target.closest('.scroll-indicator')) return;
-                    showItemDetailPopup(k);
-				});
+				const item = document.createElement('div'); item.className = 'result-item'; item.dataset.itemKey = k;
+				item.addEventListener('click', (e) => { if (e.target.closest('.extras-box') || e.target.closest('.scroll-indicator')) return; showItemDetailPopup(k); });
                 item.addEventListener('mouseenter', () => resetOtherScrolledItems(item));
-                item.addEventListener('mouseleave', () => {
-                    const imgContainer = item.querySelector('.item-images-wrapper.has-scroll .item-images');
-                    if (imgContainer && imgContainer.scrollLeft > 0) {
-                        imgContainer.scroll({ left: 0, behavior: 'smooth' });
-                    }
-                });
+                item.addEventListener('mouseleave', () => { const imgContainer = item.querySelector('.item-images-wrapper.has-scroll .item-images'); if (imgContainer && imgContainer.scrollLeft > 0) { imgContainer.scroll({ left: 0, behavior: 'smooth' }); } });
                 
-                const imagesWrapper = document.createElement('div');
-                imagesWrapper.className = 'item-images-wrapper';
-				const imageContainer = document.createElement('div');
-				imageContainer.className = 'item-images'; 
-                const rightSection = document.createElement('div');
-                rightSection.className = 'result-info-right';
-				const charValue = luaData[k];
-                const itemDetails = itemDetailsMap[k];
+                const imagesWrapper = document.createElement('div'); imagesWrapper.className = 'item-images-wrapper'; const imageContainer = document.createElement('div'); imageContainer.className = 'item-images'; const rightSection = document.createElement('div'); rightSection.className = 'result-info-right';
+				const charValue = luaData[k]; const itemDetails = itemDetailsMap[k];
                 
 				if (advancedSearchSelection) {
 					let total = 0;
 					advancedSearchSelection.forEach(name => {
-						if (name.toLowerCase() === 'teots') {
-							if(itemDetails.costume) total++;
-						} else if (charValue[name.toLowerCase()]) {
-							total += charValue[name.toLowerCase()];
-						}
+						if (name.toLowerCase() === 'teots') { if(itemDetails.costume) total++; } else if (charValue[name.toLowerCase()]) { total += charValue[name.toLowerCase()]; }
 					});
-					const scoreBox = document.createElement('div');
-					scoreBox.className = 'target-total-box';
+					const scoreBox = document.createElement('div'); scoreBox.className = 'target-total-box';
 					scoreBox.innerHTML = `<div class="target-total-label">Target Total</div><div class="target-total-value">${total}</div>`;
 					rightSection.prepend(scoreBox);
 				}
-
-                let allImportantItemsData = [];
-                const tier2ImageData = [];
+                let allImportantItemsData = []; const tier2ImageData = [];
                 for (const charName in charValue) {
-                    const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName);
-                    if (!charInfo) continue;
-                    const [engName, korName] = charInfo;
-                    const originalIndex = characters.findIndex(([eng]) => eng === engName);
+                    const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName); if (!charInfo) continue;
+                    const [engName, korName] = charInfo; const originalIndex = characters.findIndex(([eng]) => eng === engName);
                     const imageData = { type: 'character', src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: charValue[charName], originalIndex: originalIndex };
-                    if (tier0Characters.some(c => c[0] === engName) || tier1Characters.some(c => c[0] === engName)) {
-                        allImportantItemsData.push(imageData);
-                    } else {
-                        tier2ImageData.push(imageData);
-                    }
+                    if (tier0Characters.some(c => c[0] === engName) || tier1Characters.some(c => c[0] === engName)) { allImportantItemsData.push(imageData); } else { tier2ImageData.push(imageData); }
                 }
                 allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
-
                 if (itemDetails.costume) {
                     const teoTsData = { type: 'character', src: 'Portrait/태오ts스킨.png', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1 };
                     const teoIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
-                    if (teoIndex !== -1) {
-                        allImportantItemsData.splice(teoIndex, 0, teoTsData);
-                    } else {
-                        allImportantItemsData.unshift(teoTsData);
-                    }
+                    if (teoIndex !== -1) { allImportantItemsData.splice(teoIndex, 0, teoTsData); } else { allImportantItemsData.unshift(teoTsData); }
                 }
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
@@ -550,20 +457,13 @@
                     imageContainer.appendChild(element);
                     const remainingItemsData = allImportantItemsData.slice(1);
                     if (remainingItemsData.length > 0 || tier2ImageData.length > 0) {
-                        item.classList.add('lazy-load-item');
-                        item.dataset.remainingItems = JSON.stringify(remainingItemsData);
-                        item.dataset.tier2Items = JSON.stringify(tier2ImageData);
+                        item.classList.add('lazy-load-item'); item.dataset.remainingItems = JSON.stringify(remainingItemsData); item.dataset.tier2Items = JSON.stringify(tier2ImageData);
                     }
                 }
                 if (tier2ImageData.length > 0 && allImportantItemsData.length === 0) {
-                     item.classList.add('lazy-load-item');
-                     item.dataset.tier2Items = JSON.stringify(tier2ImageData);
+                     item.classList.add('lazy-load-item'); item.dataset.tier2Items = JSON.stringify(tier2ImageData);
                 }
-
-                const priceBox = document.createElement('div');
-                priceBox.className = 'price-box';
-                const usdPrice = itemDetails.price.toFixed(2);
-                const krwPriceRounded = Math.round(itemDetails.price * 1400 / 1000) * 1000;
+                const priceBox = document.createElement('div'); priceBox.className = 'price-box'; const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1400 / 1000) * 1000;
                 priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
                 rightSection.appendChild(priceBox);
                 
@@ -573,7 +473,6 @@
 				item.appendChild(imagesWrapper); item.appendChild(rightSection);
 				container.appendChild(item);
 			});
-
 			res.innerHTML = ''; res.appendChild(fragment); document.getElementById('copyInstruction').style.display = 'block';
             document.querySelectorAll('#results .result-item').forEach(item => setupScrollControlsForItem(item, advancedSearchSelection)); setupItemObserver(advancedSearchSelection);
 		}
@@ -604,10 +503,7 @@
             const remainingItemsJSON = item.dataset.remainingItems; const tier2ItemsJSON = item.dataset.tier2Items; const imageContainer = item.querySelector('.item-images'); const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
             if (remainingItemsJSON) {
                 const remainingItems = JSON.parse(remainingItemsJSON);
-                remainingItems.forEach(itemData => {
-                    const element = createCharacterImageElement(itemData, tier0Eng, true, advSel);
-                    imageContainer.appendChild(element);
-                });
+                remainingItems.forEach(itemData => { const element = createCharacterImageElement(itemData, tier0Eng, true, advSel); imageContainer.appendChild(element); });
             }
             if (tier2ItemsJSON) {
                 const tier2Items = JSON.parse(tier2ItemsJSON);
@@ -655,8 +551,7 @@
 		function showExtrasPopup(images) { const popup = document.getElementById('extrasPopup'); const grid = document.getElementById('extras-popup-grid'); grid.innerHTML = ''; images.forEach(charData => { const container = document.createElement('div'); container.className = 'image-with-count-container'; container.innerHTML = `<img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`; grid.appendChild(container); }); popup.style.display = 'flex'; }
 
         function showItemDetailPopup(itemKey) {
-            const popup = document.getElementById('itemDetailPopup');
-            const grid = document.getElementById('item-detail-popup-grid');
+            const popup = document.getElementById('itemDetailPopup'); const grid = document.getElementById('item-detail-popup-grid');
             grid.innerHTML = ''; grid.scrollTop = 0;
             const charValue = luaData[itemKey]; const itemDetails = itemDetailsMap[itemKey]; let allItemsData = [];
             const tier0Eng = new Set(tier0Characters.map(([e]) => e)); const tier1Eng = new Set(tier1Characters.map(([e]) => e));
@@ -676,9 +571,7 @@
                 for (let i = 0; i < charData.count; i++) {
                     const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
                     img.loading = 'lazy'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
-                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName)) {
-                        img.classList.add('dimmed');
-                    }
+                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName)) { img.classList.add('dimmed'); }
                     if (charData.engName === 'TeoTS') img.classList.add('legendary-item');
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
                     else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
@@ -698,30 +591,19 @@
 		function populateAdvancedSearchGrid() {
 			const grid = document.getElementById('advanced-search-grid'); grid.innerHTML = '';
 			const fragment = document.createDocumentFragment();
-			const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-            const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
-
+			const tier0Eng = new Set(tier0Characters.map(([eng]) => eng)); const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 			characters.forEach(([eng, kor]) => {
-				const charBox = document.createElement('div');
-				charBox.className = 'adv-char-box';
-				charBox.dataset.engName = eng;
-				if (tier0Eng.has(eng)) charBox.classList.add('super-rare');
-                else if (tier1Eng.has(eng)) charBox.classList.add('rare');
-                else charBox.classList.add('extras-character-border');
+				const charBox = document.createElement('div'); charBox.className = 'adv-char-box'; charBox.dataset.engName = eng;
+				if (tier0Eng.has(eng)) charBox.classList.add('super-rare'); else if (tier1Eng.has(eng)) charBox.classList.add('rare'); else charBox.classList.add('extras-character-border');
 				charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">`;
 				charBox.addEventListener('click', () => charBox.classList.toggle('selected'));
 				fragment.appendChild(charBox);
 			});
-
-            const teoTsBox = document.createElement('div');
-            teoTsBox.className = 'adv-char-box legendary-item';
-            teoTsBox.dataset.engName = 'TeoTS';
+            const teoTsBox = document.createElement('div'); teoTsBox.className = 'adv-char-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
             teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">`;
             teoTsBox.addEventListener('click', () => teoTsBox.classList.toggle('selected'));
             let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
-            if (teoBoxNode) fragment.insertBefore(teoTsBox, teoBoxNode);
-            else fragment.insertBefore(teoTsBox, fragment.firstChild);
-
+            if (teoBoxNode) fragment.insertBefore(teoTsBox, teoBoxNode); else fragment.insertBefore(teoTsBox, fragment.firstChild);
 			grid.appendChild(fragment);
 		}
 
@@ -735,10 +617,7 @@
 			closeAdvancedSearchModal();
 			isAdvancedSearchMode = true; document.body.classList.add('advanced-search-active');
 			const advBtn = document.getElementById('advancedSearchBtn'); advBtn.innerHTML = '↩️ Back to Normal'; advBtn.classList.add('exit-mode');
-			
-            const analyticsString = 'adv:' + advancedSearchSelection.join(',');
-            gtag('event', 'advanced_search', { 'selected_characters': analyticsString });
-            
+			const analyticsString = 'adv:' + advancedSearchSelection.join(','); gtag('event', 'advanced_search', { 'selected_characters': analyticsString });
             displayAdvancedSearchResults(advancedSearchSelection);
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
 		}
@@ -748,16 +627,10 @@
 			setTimeout(() => {
 				const scoredItems = Object.keys(luaData).map(key => {
 					const itemChars = luaData[key]; const itemDetails = itemDetailsMap[key]; let total = 0;
-					selectedChars.forEach(name => {
-						if (name.toLowerCase() === 'teots') { if (itemDetails.costume) total++; }
-                        else if (itemChars[name.toLowerCase()]) { total += itemChars[name.toLowerCase()]; }
-					});
+					selectedChars.forEach(name => { if (name.toLowerCase() === 'teots') { if (itemDetails.costume) total++; } else if (itemChars[name.toLowerCase()]) { total += itemChars[name.toLowerCase()]; } });
 					return { key, total, price: itemDetails.price };
 				});
-				const sortedKeys = scoredItems.filter(item => item.total > 0).sort((a, b) => {
-                    if (b.total !== a.total) return b.total - a.total;
-                    return b.price - a.price;
-                }).map(item => item.key);
+				const sortedKeys = scoredItems.filter(item => item.total > 0).sort((a, b) => { if (b.total !== a.total) return b.total - a.total; return b.price - a.price; }).map(item => item.key);
 				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selectedChars });
 				resultsDiv.classList.remove('sorting'); window.tsParticles?.domItem(0)?.play();
 			}, 200);
@@ -775,7 +648,7 @@
 		const throttledFilterHandler = throttle(() => { document.getElementById('results').scrollIntoView({ behavior: 'smooth' }); applyFiltersAndSort(); }, 300);
 
         document.getElementById('filterButton').addEventListener('click', throttledFilterHandler);
-        document.getElementById('sortDropdown').addEventListener('change', function() { if (!isAdvancedSearchMode) applyFiltersAndSort(); this.blur(); });
+        document.getElementById('sortDropdown').addEventListener('change', function() { if (!isAdvancedSearchMode) { applyFiltersAndSort(); } this.blur(); });
 
 		document.addEventListener('DOMContentLoaded', () => {
 			const advBtn = document.getElementById('advancedSearchBtn');
