@@ -92,7 +92,6 @@
 	    #filterButton { display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px; margin: 25px 0 15px 0; font-size: 18px; cursor: pointer; background: linear-gradient(45deg, #ff4081, #f50057); color: #fff; border: none; border-radius: 30px; box-shadow: 0 4px 16px rgba(255,64,129,0.6); transition: all 0.3s; font-family: 'Poppins', sans-serif; font-weight: 600; position: relative; z-index: 1; transform: translateZ(0); }
 	    #filterButton:hover { background: linear-gradient(45deg, #ff4081, #f50057); box-shadow: 0 6px 20px rgba(255,64,129,0.8); transform: translateY(-3px); }
 	    #filterButton:active { transform: translateY(0); box-shadow: 0 4px 16px rgba(255,64,129,0.6); }
-		/* --- MODIFIED --- Advanced Search Button Style */
 		#advancedSearchBtn {
 			display: flex; align-items: center; justify-content: center;
 			width: 100%; padding: 15px; margin-bottom: 25px;
@@ -153,7 +152,6 @@
 		.price-box { display: flex; flex-direction: column; justify-content: center; align-items: flex-end; height: 60px; min-width: 114px; padding: 0 12px; background: linear-gradient(270deg, rgba(39, 174, 96, 0.2), transparent); border-radius: 10px; font-family: 'Poppins', sans-serif; }
 		.price-box .price-usd { font-size: 22px; font-weight: 700; color: #2ecc71; text-shadow: 0 0 8px rgba(46, 204, 113, 0.5); }
 		.price-box .price-krw { font-size: 14px; color: #bdc3c7; }
-		/* --- MODIFIED --- .target-total-box */
 		.target-total-box { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60px; min-width: 100px; padding: 0 12px; background: linear-gradient(270deg, rgba(41, 121, 255, 0.2), transparent); border-radius: 10px; font-family: 'Poppins', sans-serif; }
 		.target-total-label { font-size: 14px; color: #bdc3c7; }
 		.target-total-value { font-size: 22px; font-weight: 700; color: #448AFF; text-shadow: 0 0 8px rgba(68, 138, 255, 0.6); }
@@ -300,14 +298,19 @@
 
     <script>
         let isAdvancedSearchMode = false;
-        let advancedSearchSelection = null; // --- NEW --- Global variable to store selection
+        let advancedSearchSelection = null;
 
-        function handleImageError(imgElement) { /* ... same as before ... */ }
-        // ... all helper functions up to showItemDetailPopup ...
-        // (The following code is a condensed version of the full script for brevity,
-        // but the downloadable file will be complete)
-        
-        // --- SCRIPT START --- (Keep everything from here to SCRIPT END)
+        function handleImageError(imgElement) {
+            if (imgElement.dataset.errorHandled) return;
+            imgElement.dataset.errorHandled = 'true';
+            const placeholder = document.createElement('div');
+            placeholder.textContent = 'NEW';
+            placeholder.className = imgElement.className;
+            placeholder.classList.add('new-character-placeholder');
+            placeholder.classList.remove('character-img', 'small-character-img', 'detail-popup-img');
+            imgElement.replaceWith(placeholder);
+        }
+
         let lastActivityTime = Date.now();
         const updateActivityTime = () => { lastActivityTime = Date.now(); };
         ['click', 'touchstart', 'scroll', 'keypress'].forEach(event => document.addEventListener(event, updateActivityTime));
@@ -399,133 +402,307 @@
                         if (currentTier === 0) tier0Characters.push(charData); else if (currentTier === 1) tier1Characters.push(charData); else if (currentTier === 2) tier2Characters.push(charData);
                     }
                 });
-                characters = [...tier0Characters, ...tier1Characters, ...tier2Characters]; createCharacterBoxes(); populateAdvancedSearchGrid();
+                characters = [...tier0Characters, ...tier1Characters, ...tier2Characters];
+                createCharacterBoxes();
+                populateAdvancedSearchGrid();
             }).catch(error => console.error('Character data loading error:', error));
         }
 
         let luaData = {};
 
         function createCharacterBoxes() {
-            const grid = document.getElementById('characterGrid'); grid.innerHTML = ''; const fragment = document.createDocumentFragment(); const t0 = new Set(tier0Characters.map(([e]) => e)); const t1 = new Set(tier1Characters.map(([e]) => e));
+            const grid = document.getElementById('characterGrid');
+            grid.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+            const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
             characters.forEach(([eng, kor]) => {
-                const box = document.createElement('div'); box.className = 'character-box'; box.dataset.engName = eng;
-                if (t0.has(eng)) box.classList.add('super-rare'); else if (t1.has(eng)) box.classList.add('rare'); else box.classList.add('extras-character-border');
-                box.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${eng}</span><div class="spinbox-container"><input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled></div>`;
-                box.addEventListener('click', e => { if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(box); });
-                box.querySelector('input').addEventListener('click', e => { e.stopPropagation(); if (!box.classList.contains('selected')) toggleSelection(box); });
-                fragment.appendChild(box);
+                const charBox = document.createElement('div');
+                charBox.className = 'character-box';
+                charBox.dataset.engName = eng;
+                if (tier0Eng.has(eng)) charBox.classList.add('super-rare');
+                else if (tier1Eng.has(eng)) charBox.classList.add('rare');
+                else charBox.classList.add('extras-character-border');
+                charBox.innerHTML = `
+                    <img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">
+                    <span class="character-name">${eng}</span>
+                    <div class="spinbox-container">
+                        <input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled>
+                    </div>`;
+                charBox.addEventListener('click', (e) => {
+                    if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox);
+                });
+                charBox.querySelector('input').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (!charBox.classList.contains('selected')) toggleSelection(charBox);
+                });
+                fragment.appendChild(charBox);
             });
-            const teoBox = document.createElement('div'); teoBox.className = 'character-box legendary-item'; teoBox.dataset.engName = 'TeoTS';
-            teoBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">Teo TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
-            teoBox.addEventListener('click', () => toggleSelection(teoBox));
-            let teoNode = Array.from(fragment.children).find(c => c.dataset.engName?.toLowerCase() === 'teo');
-            if (teoNode) fragment.insertBefore(teoBox, teoNode); else fragment.insertBefore(teoBox, fragment.firstChild);
+            const teoTsBox = document.createElement('div');
+            teoTsBox.className = 'character-box legendary-item';
+            teoTsBox.dataset.engName = 'TeoTS';
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">Teo TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
+            let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
+            if (teoBoxNode) fragment.insertBefore(teoTsBox, teoBoxNode);
+            else fragment.insertBefore(teoTsBox, fragment.firstChild);
             grid.appendChild(fragment);
         }
 
-        function toggleSelection(box) { const spin = box.querySelector('input[type="number"]'); const isSel = box.classList.toggle('selected'); if (spin) { spin.disabled = !isSel; spin.value = isSel ? (spin.value === '0' ? '1' : spin.value) : 0; } }
+        function toggleSelection(charBox) {
+            const spinbox = charBox.querySelector('input[type="number"]');
+            const isSelected = charBox.classList.toggle('selected');
+            if (spinbox) {
+                spinbox.disabled = !isSelected;
+                spinbox.value = isSelected ? (spinbox.value === '0' ? '1' : spinbox.value) : 0;
+            }
+        }
 
         let itemDetailsMap = {};
 
         function loadData() {
             const ts = new Date().getTime();
             return fetch(`account_prices.txt?t=${ts}`).then(r => r.text()).then(text => {
-                luaData = {}; itemDetailsMap = {}; const lines = text.split('\n');
+                luaData = {};
+                itemDetailsMap = {};
+                const lines = text.split('\n');
                 lines.forEach(line => {
                     if (!line.trim() || !line.includes('=')) return;
-                    const parts = line.split('='); const pricePart = parts.pop().trim(); const contentPart = parts.join('=').trim(); const words = contentPart.split(/\s+/); const key = words.shift();
-                    const details = { originalText: line, price: parseFloat(pricePart.replace('$', '')), costume: line.toLowerCase().includes('[teo legend costume]'), totalCount: 0 };
-                    const items = {};
-                    words.forEach(word => { const match = word.match(/^([a-zA-Z]+)(\d+)$/); if (match) { const name = match[1].toLowerCase(); const count = parseInt(match[2]); items[name] = (items[name] || 0) + count; } });
-                    for (const name in items) { details.totalCount += items[name]; }
-                    if (details.costume) details.totalCount++;
-                    luaData[key] = items; itemDetailsMap[key] = details;
+                    const parts = line.split('=');
+                    const pricePart = parts.pop().trim();
+                    const contentPart = parts.join('=').trim();
+                    const contentWords = contentPart.split(/\s+/);
+                    const key = contentWords.shift();
+                    const itemDetails = {
+                        originalText: line,
+                        price: parseFloat(pricePart.replace('$', '')),
+                        costume: line.toLowerCase().includes('[teo legend costume]'),
+                        totalCount: 0,
+                    };
+                    const currentItemChars = {};
+                    contentWords.forEach(word => {
+                        const match = word.match(/^([a-zA-Z]+)(\d+)$/);
+                        if (match) {
+                            const charName = match[1].toLowerCase();
+                            const count = parseInt(match[2]);
+                            currentItemChars[charName] = (currentItemChars[charName] || 0) + count;
+                        }
+                    });
+                    for (const charName in currentItemChars) {
+                        itemDetails.totalCount += currentItemChars[charName];
+                    }
+                    if (itemDetails.costume) {
+                        itemDetails.totalCount++;
+                    }
+                    luaData[key] = currentItemChars;
+                    itemDetailsMap[key] = itemDetails;
                 });
             }).catch(error => console.error('Data loading error:', error));
         }
 
         function applyFiltersAndSort() {
-            const resultsDiv = document.getElementById('results'); resultsDiv.classList.add('sorting'); window.tsParticles?.domItem(0)?.pause();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.add('sorting');
+            window.tsParticles?.domItem(0)?.pause();
             setTimeout(() => {
                 currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v, k)));
                 const sortKey = document.getElementById('sortDropdown')?.value || 'price-high';
                 const sortedKeys = Object.keys(currentFilteredData).sort((a, b) => {
-                    const itemA = itemDetailsMap[a]; const itemB = itemDetailsMap[b];
-                    if (sortKey === 'price-low') return (itemA.price - itemB.price) || (itemB.totalCount - itemA.totalCount);
+                    const itemA = itemDetailsMap[a];
+                    const itemB = itemDetailsMap[b];
+                    if (sortKey === 'price-low') {
+                        return (itemA.price - itemB.price) || (itemB.totalCount - itemA.totalCount);
+                    }
                     return (itemB.price - itemA.price) || (itemB.totalCount - itemA.totalCount);
                 });
                 displayResults({ data: currentFilteredData, sortedKeys });
-                resultsDiv.classList.remove('sorting'); window.tsParticles?.domItem(0)?.play();
+                resultsDiv.classList.remove('sorting');
+                window.tsParticles?.domItem(0)?.play();
             }, 200);
         }
 
         function checkConditions(itemChars, itemKey) {
-            const allMatch = characters.every(([eng]) => { const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`); return !box || !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value); });
-            if (!allMatch) return false;
-            const teoBox = document.querySelector('.character-box[data-eng-name="TeoTS"]');
-            return !teoBox || !teoBox.classList.contains('selected') || itemDetailsMap[itemKey].costume;
+            const allCharsMatch = characters.every(([eng]) => {
+                const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`);
+                return !box || !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value);
+            });
+            if (!allCharsMatch) return false;
+            const teoTsBox = document.querySelector('.character-box[data-eng-name="TeoTS"]');
+            return !teoTsBox || !teoTsBox.classList.contains('selected') || itemDetailsMap[itemKey].costume;
         }
 
-        function optimizeImages() { document.querySelectorAll('img').forEach(img => { if (!img.hasAttribute('loading')) img.loading = 'lazy'; if (!img.hasAttribute('decoding')) img.decoding = 'async'; }); }
+        function optimizeImages() {
+            document.querySelectorAll('img').forEach(img => {
+                if (!img.hasAttribute('loading')) img.loading = 'lazy';
+                if (!img.hasAttribute('decoding')) img.decoding = 'async';
+            });
+        }
 		
 		function displayResults({ data, sortedKeys, advancedSearchSelection = null }) {
-			const res = document.getElementById('results'); res.scrollTop = 0; const fragment = document.createDocumentFragment(); const container = document.createElement('div'); container.className = 'content-container'; fragment.appendChild(container); const t0 = new Set(tier0Characters.map(([e]) => e));
+			const res = document.getElementById('results');
+			res.scrollTop = 0;
+			const fragment = document.createDocumentFragment();
+			const container = document.createElement('div');
+			container.className = 'content-container';
+			fragment.appendChild(container);
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+			
 			sortedKeys.forEach(k => {
-				const item = document.createElement('div'); item.className = 'result-item'; item.dataset.itemKey = k;
-				item.addEventListener('click', e => { if (e.target.closest('.extras-box') || e.target.closest('.scroll-indicator')) return; showItemDetailPopup(k); });
+				const item = document.createElement('div');
+				item.className = 'result-item';
+				item.dataset.itemKey = k;
+				item.addEventListener('click', (e) => {
+					if (e.target.closest('.extras-box') || e.target.closest('.scroll-indicator')) return;
+                    showItemDetailPopup(k);
+				});
                 item.addEventListener('mouseenter', () => resetOtherScrolledItems(item));
-                item.addEventListener('mouseleave', () => { const imgContainer = item.querySelector('.item-images-wrapper.has-scroll .item-images'); if (imgContainer && imgContainer.scrollLeft > 0) imgContainer.scroll({ left: 0, behavior: 'smooth' }); });
-                const imagesWrapper = document.createElement('div'); imagesWrapper.className = 'item-images-wrapper'; const imageContainer = document.createElement('div'); imageContainer.className = 'item-images'; const rightSection = document.createElement('div'); rightSection.className = 'result-info-right';
-				const charValue = luaData[k]; const itemDetails = itemDetailsMap[k];
+                item.addEventListener('mouseleave', () => {
+                    const imgContainer = item.querySelector('.item-images-wrapper.has-scroll .item-images');
+                    if (imgContainer && imgContainer.scrollLeft > 0) {
+                        imgContainer.scroll({ left: 0, behavior: 'smooth' });
+                    }
+                });
+                
+                const imagesWrapper = document.createElement('div');
+                imagesWrapper.className = 'item-images-wrapper';
+				const imageContainer = document.createElement('div');
+				imageContainer.className = 'item-images'; 
+                const rightSection = document.createElement('div');
+                rightSection.className = 'result-info-right';
+				const charValue = luaData[k];
+                const itemDetails = itemDetailsMap[k];
+                
 				if (advancedSearchSelection) {
 					let total = 0;
 					advancedSearchSelection.forEach(name => {
-						if (name.toLowerCase() === 'teots') { if(itemDetails.costume) total++; } else if (charValue[name.toLowerCase()]) { total += charValue[name.toLowerCase()]; }
+						if (name.toLowerCase() === 'teots') {
+							if(itemDetails.costume) total++;
+						} else if (charValue[name.toLowerCase()]) {
+							total += charValue[name.toLowerCase()];
+						}
 					});
-					const scoreBox = document.createElement('div'); scoreBox.className = 'target-total-box';
+					const scoreBox = document.createElement('div');
+					scoreBox.className = 'target-total-box';
 					scoreBox.innerHTML = `<div class="target-total-label">Target Total</div><div class="target-total-value">${total}</div>`;
 					rightSection.prepend(scoreBox);
 				}
-                let important = []; let tier2 = [];
-                for (const name in charValue) {
-                    const info = characters.find(([e]) => e.toLowerCase() === name); if (!info) continue; const [eng, kor] = info; const idx = characters.findIndex(([e]) => e === eng);
-                    const imgData = { type: 'char', src: `Portrait/${kor}.png`, alt: kor, engName: eng, count: charValue[name], idx: idx };
-                    if (t0.has(eng) || tier1Characters.some(c => c[0] === eng)) important.push(imgData); else tier2.push(imgData);
+
+                let allImportantItemsData = [];
+                const tier2ImageData = [];
+                for (const charName in charValue) {
+                    const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName);
+                    if (!charInfo) continue;
+                    const [engName, korName] = charInfo;
+                    const originalIndex = characters.findIndex(([eng]) => eng === engName);
+                    const imageData = { type: 'character', src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: charValue[charName], originalIndex: originalIndex };
+                    if (tier0Characters.some(c => c[0] === engName) || tier1Characters.some(c => c[0] === engName)) {
+                        allImportantItemsData.push(imageData);
+                    } else {
+                        tier2ImageData.push(imageData);
+                    }
                 }
-                important.sort((a, b) => a.idx - b.idx);
-                if (itemDetails.costume) { const teoData = { type: 'char', src: 'Portrait/태오ts스킨.png', alt: 'TS', engName: 'TeoTS', count: 1 }; const teoIdx = important.findIndex(i => i.engName.toLowerCase() === 'teo'); if (teoIdx !== -1) important.splice(teoIdx, 0, teoData); else important.unshift(teoData); }
-                tier2.sort((a, b) => a.idx - b.idx);
-                if (important.length > 0) {
-                    imageContainer.appendChild(createCharacterImageElement(important[0], t0, false, advancedSearchSelection));
-                    const remaining = important.slice(1);
-                    if (remaining.length > 0 || tier2.length > 0) { item.classList.add('lazy-load-item'); item.dataset.remainingItems = JSON.stringify(remaining); item.dataset.tier2Items = JSON.stringify(tier2); }
+                allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
+
+                if (itemDetails.costume) {
+                    const teoTsData = { type: 'character', src: 'Portrait/태오ts스킨.png', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1 };
+                    const teoIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
+                    if (teoIndex !== -1) {
+                        allImportantItemsData.splice(teoIndex, 0, teoTsData);
+                    } else {
+                        allImportantItemsData.unshift(teoTsData);
+                    }
                 }
-                if (tier2.length > 0 && important.length === 0) { item.classList.add('lazy-load-item'); item.dataset.tier2Items = JSON.stringify(tier2); }
-                const priceBox = document.createElement('div'); priceBox.className = 'price-box'; const usd = itemDetails.price.toFixed(2); const krw = Math.round(itemDetails.price * 1400 / 1000) * 1000;
-                priceBox.innerHTML = `<div class="price-usd">$${usd}</div><div class="price-krw">₩ ${krw.toLocaleString()}</div>`; rightSection.appendChild(priceBox);
-                const l = document.createElement('div'); l.className = 'scroll-indicator scroll-indicator-left'; l.innerHTML = '‹'; const r = document.createElement('div'); r.className = 'scroll-indicator scroll-indicator-right'; r.innerHTML = '›';
-                imagesWrapper.appendChild(imageContainer); imagesWrapper.appendChild(l); imagesWrapper.appendChild(r);
-				item.appendChild(imagesWrapper); item.appendChild(rightSection); container.appendChild(item);
+                tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
+                
+                if (allImportantItemsData.length > 0) {
+                    const firstItemData = allImportantItemsData[0];
+                    const element = createCharacterImageElement(firstItemData, tier0Eng, false, advancedSearchSelection);
+                    imageContainer.appendChild(element);
+                    const remainingItemsData = allImportantItemsData.slice(1);
+                    if (remainingItemsData.length > 0 || tier2ImageData.length > 0) {
+                        item.classList.add('lazy-load-item');
+                        item.dataset.remainingItems = JSON.stringify(remainingItemsData);
+                        item.dataset.tier2Items = JSON.stringify(tier2ImageData);
+                    }
+                }
+                if (tier2ImageData.length > 0 && allImportantItemsData.length === 0) {
+                     item.classList.add('lazy-load-item');
+                     item.dataset.tier2Items = JSON.stringify(tier2ImageData);
+                }
+
+                const priceBox = document.createElement('div');
+                priceBox.className = 'price-box';
+                const usdPrice = itemDetails.price.toFixed(2);
+                const krwPriceRounded = Math.round(itemDetails.price * 1400 / 1000) * 1000;
+                priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
+                rightSection.appendChild(priceBox);
+                
+                const scrollIndicatorLeft = document.createElement('div');
+                scrollIndicatorLeft.className = 'scroll-indicator scroll-indicator-left';
+                scrollIndicatorLeft.innerHTML = '‹';
+                const scrollIndicatorRight = document.createElement('div');
+                scrollIndicatorRight.className = 'scroll-indicator scroll-indicator-right';
+                scrollIndicatorRight.innerHTML = '›';
+                imagesWrapper.appendChild(imageContainer);
+                imagesWrapper.appendChild(scrollIndicatorLeft);
+                imagesWrapper.appendChild(scrollIndicatorRight);
+				item.appendChild(imagesWrapper);
+                item.appendChild(rightSection);
+				container.appendChild(item);
 			});
-			res.innerHTML = ''; res.appendChild(fragment); document.getElementById('copyInstruction').style.display = 'block';
-            document.querySelectorAll('#results .result-item').forEach(item => setupScrollControlsForItem(item, advancedSearchSelection)); setupItemObserver(advancedSearchSelection);
+
+			res.innerHTML = '';
+			res.appendChild(fragment);
+			document.getElementById('copyInstruction').style.display = 'block';
+            document.querySelectorAll('#results .result-item').forEach(item => setupScrollControlsForItem(item, advancedSearchSelection));
+            setupItemObserver(advancedSearchSelection);
 		}
 
-        function createCharacterImageElement(charData, t0, isLazy = false, advSel = null) {
-            const container = document.createElement('div'); container.className = 'image-with-count-container'; if (isLazy) container.classList.add('js-lazy-loaded');
-            const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'small-character-img'; img.onerror = function() { handleImageError(this); };
-			if (advSel && !advSel.includes(charData.engName)) img.classList.add('dimmed');
-            const badge = document.createElement('div'); badge.className = 'image-count-badge';
-            if (charData.engName === 'TeoTS') { img.classList.add('legendary-item'); badge.classList.add('legendary-badge'); } else { const isT0 = t0.has(charData.engName); img.classList.add(isT0 ? 'super-rare' : 'rare'); badge.classList.add(isT0 ? 'super-rare-badge' : 'rare-badge'); }
-            container.appendChild(img); if (charData.count > 1) { badge.textContent = `x${charData.count}`; container.appendChild(badge); } return container;
+        function createCharacterImageElement(charData, tier0Eng, isLazy = false, advSel = null) {
+            const container = document.createElement('div');
+            container.className = 'image-with-count-container';
+            if (isLazy) {
+                container.classList.add('js-lazy-loaded');
+            }
+            const img = document.createElement('img');
+            img.src = charData.src;
+            img.alt = charData.alt;
+            img.className = 'small-character-img';
+            img.onerror = function() { handleImageError(this); };
+			if (advSel && !advSel.includes(charData.engName)) {
+				img.classList.add('dimmed');
+			}
+            const badge = document.createElement('div');
+            badge.className = 'image-count-badge';
+            if (charData.engName === 'TeoTS') {
+                img.classList.add('legendary-item');
+                badge.classList.add('legendary-badge');
+            } else {
+                const isTier0 = tier0Eng.has(charData.engName);
+                img.classList.add(isTier0 ? 'super-rare' : 'rare');
+                badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge');
+            }
+            container.appendChild(img);
+            if (charData.count > 1) {
+                badge.textContent = `x${charData.count}`;
+                container.appendChild(badge);
+            }
+            return container;
         }
 
         function setupItemObserver(advSel = null) {
-            if (itemObserver) itemObserver.disconnect();
-            itemObserver = new IntersectionObserver(entries => {
+            if (itemObserver) {
+                itemObserver.disconnect();
+            }
+            itemObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) { clearTimeout(entry.target.revertTimer); entry.target.renderTimer = setTimeout(() => renderFullItem(entry.target, advSel), 100); }
-                    else { clearTimeout(entry.target.renderTimer); entry.target.revertTimer = setTimeout(() => revertToLazyItem(entry.target), 100); }
+                    if (entry.isIntersecting) {
+                        clearTimeout(entry.target.revertTimer);
+                        entry.target.renderTimer = setTimeout(() => renderFullItem(entry.target, advSel), 100);
+                    } else {
+                        clearTimeout(entry.target.renderTimer);
+                        entry.target.revertTimer = setTimeout(() => revertToLazyItem(entry.target), 100);
+                    }
                 });
             }, { root: document.getElementById('results'), rootMargin: '400px 0px' });
             document.querySelectorAll('.lazy-load-item').forEach(item => itemObserver.observe(item));
@@ -533,61 +710,144 @@
 		
         function renderFullItem(item, advSel = null) {
             if (item.querySelector('.js-lazy-loaded')) return;
-            const remaining = item.dataset.remainingItems ? JSON.parse(item.dataset.remainingItems) : [];
-            const tier2 = item.dataset.tier2Items ? JSON.parse(item.dataset.tier2Items) : [];
-            const imgContainer = item.querySelector('.item-images'); const t0 = new Set(tier0Characters.map(([e]) => e));
-            remaining.forEach(d => imgContainer.appendChild(createCharacterImageElement(d, t0, true, advSel)));
-            if (tier2.length > 0) {
-                const extras = document.createElement('div'); extras.className = 'extras-box js-lazy-loaded'; extras.innerHTML = `<div class="item-title">Extras</div>`;
-				if (advSel) extras.classList.add('dimmed');
-                extras.addEventListener('click', e => { e.stopPropagation(); showExtrasPopup(tier2); });
-                imgContainer.appendChild(extras);
+            const remainingItemsJSON = item.dataset.remainingItems;
+            const tier2ItemsJSON = item.dataset.tier2Items;
+            const imageContainer = item.querySelector('.item-images');
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+
+            if (remainingItemsJSON) {
+                const remainingItems = JSON.parse(remainingItemsJSON);
+                remainingItems.forEach(itemData => {
+                    const element = createCharacterImageElement(itemData, tier0Eng, true, advSel);
+                    imageContainer.appendChild(element);
+                });
+            }
+
+            if (tier2ItemsJSON) {
+                const tier2Items = JSON.parse(tier2ItemsJSON);
+                if(tier2Items.length > 0) {
+                    const extrasBox = document.createElement('div');
+                    extrasBox.className = 'extras-box js-lazy-loaded'; 
+                    extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
+					if (advSel) {
+                        extrasBox.classList.add('dimmed');
+                    }
+                    extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2Items); });
+                    imageContainer.appendChild(extrasBox);
+                }
             }
             setupScrollControlsForItem(item, advSel);
         }
 
-        function revertToLazyItem(item) { const lazy = item.querySelectorAll('.js-lazy-loaded'); if (lazy.length === 0) return; lazy.forEach(el => el.remove()); setupScrollControlsForItem(item); }
+        function revertToLazyItem(item) {
+            const lazyElements = item.querySelectorAll('.js-lazy-loaded');
+            if (lazyElements.length === 0) return;
+            lazyElements.forEach(el => el.remove());
+            setupScrollControlsForItem(item);
+        }
         
         function setupScrollControlsForItem(item, advSel = null) {
-            const wrapper = item.querySelector('.item-images-wrapper'); const container = item.querySelector('.item-images'); const left = item.querySelector('.scroll-indicator-left'); const right = item.querySelector('.scroll-indicator-right'); if (!wrapper || !container || !left || !right) return;
+            const wrapper = item.querySelector('.item-images-wrapper');
+            const imagesContainer = item.querySelector('.item-images');
+            const scrollLeftBtn = item.querySelector('.scroll-indicator-left');
+            const scrollRightBtn = item.querySelector('.scroll-indicator-right');
+            if (!wrapper || !imagesContainer || !scrollLeftBtn || !scrollRightBtn) return;
+
             requestAnimationFrame(() => {
-                const hasScroll = container.scrollWidth > container.clientWidth; wrapper.classList.toggle('has-scroll', hasScroll);
+                const hasScroll = imagesContainer.scrollWidth > imagesContainer.clientWidth;
+                wrapper.classList.toggle('has-scroll', hasScroll);
                 if (hasScroll) {
-                    right.onclick = e => { e.stopPropagation(); container.scrollBy({ left: container.clientWidth * 0.8, behavior: 'smooth' }); };
-                    left.onclick = e => { e.stopPropagation(); container.scrollBy({ left: -container.clientWidth * 0.8, behavior: 'smooth' }); };
-                    container.onscroll = () => { const { scrollLeft, scrollWidth, clientWidth } = container; const tol = 5; const atStart = scrollLeft < tol; const atEnd = scrollLeft + clientWidth >= scrollWidth - tol; left.classList.toggle('visible', !atStart); right.classList.toggle('visible', !atEnd); wrapper.classList.toggle('scrolled-from-start', !atStart); wrapper.classList.toggle('scrolled-to-end', atEnd); };
-                    container.dispatchEvent(new Event('scroll'));
-                } else { left.classList.remove('visible'); right.classList.remove('visible'); container.onscroll = null; }
+                    scrollRightBtn.onclick = (e) => { e.stopPropagation(); imagesContainer.scrollBy({ left: imagesContainer.clientWidth * 0.8, behavior: 'smooth' }); };
+                    scrollLeftBtn.onclick = (e) => { e.stopPropagation(); imagesContainer.scrollBy({ left: -imagesContainer.clientWidth * 0.8, behavior: 'smooth' }); };
+                    imagesContainer.onscroll = () => {
+                        const { scrollLeft, scrollWidth, clientWidth } = imagesContainer;
+                        const tolerance = 5;
+                        const isAtStart = scrollLeft < tolerance;
+                        const isAtEnd = scrollLeft + clientWidth >= scrollWidth - tolerance;
+                        scrollLeftBtn.classList.toggle('visible', !isAtStart);
+                        scrollRightBtn.classList.toggle('visible', !isAtEnd);
+                        wrapper.classList.toggle('scrolled-from-start', !isAtStart);
+                        wrapper.classList.toggle('scrolled-to-end', isAtEnd);
+                    };
+                    imagesContainer.dispatchEvent(new Event('scroll'));
+                } else {
+                    scrollLeftBtn.classList.remove('visible');
+                    scrollRightBtn.classList.remove('visible');
+                    imagesContainer.onscroll = null;
+                }
             });
         }
         
-		function resetAllScrolledItems() { document.querySelectorAll('.item-images-wrapper.has-scroll .item-images').forEach(c => { if (c.scrollLeft > 0) c.scroll({ left: 0, behavior: 'smooth' }); }); }
-        function resetOtherScrolledItems(currentItem) { document.querySelectorAll('.result-item').forEach(item => { if (item !== currentItem) { const c = item.querySelector('.item-images-wrapper.has-scroll .item-images'); if (c && c.scrollLeft > 0) c.scroll({ left: 0, behavior: 'smooth' }); } }); }
-		function showExtrasPopup(images) { const p = document.getElementById('extrasPopup'); const g = document.getElementById('extras-popup-grid'); g.innerHTML = ''; images.forEach(d => { const c = document.createElement('div'); c.className = 'image-with-count-container'; c.innerHTML = `<img src="${d.src}" alt="${d.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">${d.count > 1 ? `<div class="image-count-badge">x${d.count}</div>` : ''}`; g.appendChild(c); }); p.style.display = 'flex'; }
+		function resetAllScrolledItems() {
+		    document.querySelectorAll('.item-images-wrapper.has-scroll .item-images').forEach(container => {
+		        if (container.scrollLeft > 0) {
+                    container.scroll({ left: 0, behavior: 'smooth' });
+                }
+		    });
+		}
 
-        // --- MODIFIED --- showItemDetailPopup to handle dimming
+        function resetOtherScrolledItems(currentItem) {
+            document.querySelectorAll('.result-item').forEach(item => {
+                if (item !== currentItem) {
+                    const container = item.querySelector('.item-images-wrapper.has-scroll .item-images');
+                    if (container && container.scrollLeft > 0) {
+                        container.scroll({ left: 0, behavior: 'smooth' });
+                    }
+                }
+            });
+        }
+
+		function showExtrasPopup(images) {
+            const popup = document.getElementById('extrasPopup');
+            const grid = document.getElementById('extras-popup-grid');
+            grid.innerHTML = '';
+            images.forEach(charData => {
+                const container = document.createElement('div');
+                container.className = 'image-with-count-container';
+                container.innerHTML = `<img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`;
+                grid.appendChild(container);
+            });
+            popup.style.display = 'flex';
+        }
+
         function showItemDetailPopup(itemKey) {
             const popup = document.getElementById('itemDetailPopup');
             const grid = document.getElementById('item-detail-popup-grid');
-            grid.innerHTML = ''; grid.scrollTop = 0;
-            const charValue = luaData[itemKey]; const itemDetails = itemDetailsMap[itemKey]; let allItemsData = [];
-            const tier0Eng = new Set(tier0Characters.map(([e]) => e)); const tier1Eng = new Set(tier1Characters.map(([e]) => e));
+            grid.innerHTML = '';
+            grid.scrollTop = 0;
+            const charValue = luaData[itemKey];
+            const itemDetails = itemDetailsMap[itemKey];
+            let allItemsData = [];
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+            const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
             for (const charName in charValue) {
-                const charInfo = characters.find(([e]) => e.toLowerCase() === charName); if (!charInfo) continue;
-                const [engName, korName] = charInfo; const originalIndex = characters.findIndex(([e]) => e === engName);
+                const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName);
+                if (!charInfo) continue;
+                const [engName, korName] = charInfo;
+                const originalIndex = characters.findIndex(([eng]) => eng === engName);
                 allItemsData.push({ src: `Portrait/${korName}.png`, alt: korName, engName, count: charValue[charName], originalIndex });
             }
             if (itemDetails.costume) {
-                const teoTsData = { src: 'Portrait/태오ts스킨.png', alt: 'TS', engName: 'TeoTS', count: 1 };
+                const teoTsData = { src: 'Portrait/태오ts스킨.png', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1 };
                 const teoIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
-                if (teoIndex !== -1) allItemsData.splice(teoIndex, 0, teoTsData); else allItemsData.unshift(teoTsData);
+                if (teoIndex !== -1) allItemsData.splice(teoIndex, 0, teoTsData);
+                else allItemsData.unshift(teoTsData);
             }
             allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
             allItemsData.forEach(charData => {
                 for (let i = 0; i < charData.count; i++) {
-                    const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
-                    img.loading = 'lazy'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
-                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName)) img.classList.add('dimmed');
+                    const img = document.createElement('img');
+                    img.src = charData.src;
+                    img.alt = charData.alt;
+                    img.className = 'detail-popup-img';
+                    img.loading = 'lazy';
+                    img.decoding = 'async';
+                    img.onerror = function() { handleImageError(this); };
+                    
+                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName)) {
+                        img.classList.add('dimmed');
+                    }
+                    
                     if (charData.engName === 'TeoTS') img.classList.add('legendary-item');
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
                     else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
@@ -595,58 +855,144 @@
                     grid.appendChild(img);
                 }
             });
-            document.getElementById('popup-total-count-value').textContent = itemDetails.totalCount; document.getElementById('popup-ruby-info-value').textContent = '210,000+';
-            const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1400 / 1000) * 1000;
-            document.getElementById('popup-price-usd').textContent = `$${usdPrice}`; document.getElementById('popup-price-krw').textContent = `₩ ${krwPriceRounded.toLocaleString()}`;
-            popup.style.display = 'flex'; copyToClipboard(itemKey);
+            document.getElementById('popup-total-count-value').textContent = itemDetails.totalCount;
+            document.getElementById('popup-ruby-info-value').textContent = '210,000+';
+            const usdPrice = itemDetails.price.toFixed(2);
+            const krwPriceRounded = Math.round(itemDetails.price * 1400 / 1000) * 1000;
+            document.getElementById('popup-price-usd').textContent = `$${usdPrice}`;
+            document.getElementById('popup-price-krw').textContent = `₩ ${krwPriceRounded.toLocaleString()}`;
+            popup.style.display = 'flex';
+            copyToClipboard(itemKey);
         }
 
-        function copyToClipboard(key) { const d = itemDetailsMap[key]; if (!d) return; navigator.clipboard.writeText(d.originalText).then(() => showCopyMessage(), err => console.error('Copy fail', err)); }
-        function showCopyMessage(){ const msg = document.getElementById('copyMessage'); const p = document.getElementById('itemDetailPopup'); const c = p.querySelector('.item-detail-popup-content'); if (p && p.style.display === 'flex' && c) { const r = c.getBoundingClientRect(); msg.style.top = `${r.bottom + 15}px`; msg.style.setProperty('--copy-translate-y', '0'); } else { msg.style.top = '50%'; msg.style.setProperty('--copy-translate-y', '-50%'); } msg.classList.add('show'); setTimeout(() => { msg.classList.remove('show'); setTimeout(() => { msg.style.top = ''; msg.style.removeProperty('--copy-translate-y'); }, 300); }, 2000); }
+        function copyToClipboard(itemKey) {
+            const itemDetails = itemDetailsMap[itemKey];
+            if (!itemDetails) return;
+            navigator.clipboard.writeText(itemDetails.originalText).then(
+                () => showCopyMessage(),
+                err => console.error('Copy failed: ', err)
+            );
+        }
+
+        function showCopyMessage(){
+            const msg = document.getElementById('copyMessage');
+            const popup = document.getElementById('itemDetailPopup');
+            const popupContent = popup.querySelector('.item-detail-popup-content');
+            if (popup && popup.style.display === 'flex' && popupContent) {
+                const popupRect = popupContent.getBoundingClientRect();
+                msg.style.top = `${popupRect.bottom + 15}px`;
+                msg.style.setProperty('--copy-translate-y', '0');
+            } else {
+                msg.style.top = '50%';
+                msg.style.setProperty('--copy-translate-y', '-50%');
+            }
+            msg.classList.add('show');
+            setTimeout(() => {
+                msg.classList.remove('show');
+                setTimeout(() => {
+                    msg.style.top = '';
+                    msg.style.removeProperty('--copy-translate-y');
+                }, 300);
+            }, 2000);
+        }
 
 		function populateAdvancedSearchGrid() {
-			const grid = document.getElementById('advanced-search-grid'); grid.innerHTML = ''; const fragment = document.createDocumentFragment(); const allChars = [...characters, ['TeoTS', '태오ts스킨']];
-			const t0 = new Set(tier0Characters.map(([e]) => e)); const t1 = new Set(tier1Characters.map(([e]) => e));
-			allChars.forEach(([eng, kor]) => {
-				const box = document.createElement('div'); box.className = 'adv-char-box'; box.dataset.engName = eng;
-				if (eng === 'TeoTS') box.classList.add('legendary-item'); else if (t0.has(eng)) box.classList.add('super-rare'); else if (t1.has(eng)) box.classList.add('rare'); else box.classList.add('extras-character-border');
-				box.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">`;
-				box.addEventListener('click', () => box.classList.toggle('selected')); fragment.appendChild(box);
+			const grid = document.getElementById('advanced-search-grid');
+			grid.innerHTML = '';
+			const fragment = document.createDocumentFragment();
+			const allSearchableChars = [...characters, ['TeoTS', '태오ts스킨']];
+			const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+            const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
+			allSearchableChars.forEach(([eng, kor]) => {
+				const charBox = document.createElement('div');
+				charBox.className = 'adv-char-box';
+				charBox.dataset.engName = eng;
+				if (eng === 'TeoTS') charBox.classList.add('legendary-item');
+				else if (tier0Eng.has(eng)) charBox.classList.add('super-rare');
+                else if (tier1Eng.has(eng)) charBox.classList.add('rare');
+                else charBox.classList.add('extras-character-border');
+				charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)">`;
+				charBox.addEventListener('click', () => charBox.classList.toggle('selected'));
+				fragment.appendChild(charBox);
 			});
 			grid.appendChild(fragment);
 		}
 
-		function openAdvancedSearchModal() { document.getElementById('screenOverlay').classList.add('visible'); document.getElementById('advancedSearchModal').classList.add('visible'); document.body.classList.add('modal-open'); }
-		function closeAdvancedSearchModal() { document.getElementById('screenOverlay').classList.remove('visible'); document.getElementById('advancedSearchModal').classList.remove('visible'); document.body.classList.remove('modal-open'); }
+		function openAdvancedSearchModal() {
+            document.getElementById('screenOverlay').classList.add('visible');
+            document.getElementById('advancedSearchModal').classList.add('visible');
+            document.body.classList.add('modal-open');
+        }
+
+		function closeAdvancedSearchModal() {
+            document.getElementById('screenOverlay').classList.remove('visible');
+            document.getElementById('advancedSearchModal').classList.remove('visible');
+            document.body.classList.remove('modal-open');
+        }
 
 		function executeAdvancedSearch() {
-			const selected = document.querySelectorAll('#advanced-search-grid .adv-char-box.selected');
-			if (selected.length === 0) { alert('Please select at least one character.'); return; }
-			advancedSearchSelection = Array.from(selected).map(el => el.dataset.engName);
+			const selectedCharElements = document.querySelectorAll('#advanced-search-grid .adv-char-box.selected');
+			if (selectedCharElements.length === 0) {
+				alert('Please select at least one character.');
+				return;
+			}
+			advancedSearchSelection = Array.from(selectedCharElements).map(el => el.dataset.engName);
 			closeAdvancedSearchModal();
-			isAdvancedSearchMode = true; document.body.classList.add('advanced-search-active');
-			const btn = document.getElementById('advancedSearchBtn'); btn.innerHTML = '↩️ Back to Normal'; btn.classList.add('exit-mode');
-			displayAdvancedSearchResults(advancedSearchSelection); document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+			
+			isAdvancedSearchMode = true;
+            document.body.classList.add('advanced-search-active');
+			
+			const advBtn = document.getElementById('advancedSearchBtn');
+			advBtn.innerHTML = '↩️ Back to Normal';
+			advBtn.classList.add('exit-mode');
+			
+			displayAdvancedSearchResults(advancedSearchSelection);
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
 		}
 
-		function displayAdvancedSearchResults(selChars) {
-			const resDiv = document.getElementById('results'); resDiv.classList.add('sorting'); window.tsParticles?.domItem(0)?.pause();
+		function displayAdvancedSearchResults(selectedChars) {
+			const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.add('sorting'); 
+            window.tsParticles?.domItem(0)?.pause();
+			
 			setTimeout(() => {
-				const scored = Object.keys(luaData).map(key => {
-					const chars = luaData[key]; const details = itemDetailsMap[key]; let total = 0;
-					selChars.forEach(name => { if (name.toLowerCase() === 'teots') { if (details.costume) total++; } else if (chars[name.toLowerCase()]) { total += chars[name.toLowerCase()]; } });
-					return { key, total, price: details.price };
+				const scoredItems = Object.keys(luaData).map(key => {
+					const itemChars = luaData[key];
+					const itemDetails = itemDetailsMap[key];
+					let total = 0;
+					selectedChars.forEach(name => {
+						if (name.toLowerCase() === 'teots') {
+							if (itemDetails.costume) total++;
+						} else if (itemChars[name.toLowerCase()]) {
+							total += itemChars[name.toLowerCase()];
+						}
+					});
+					return { key, total, price: itemDetails.price };
 				});
-				const sortedKeys = scored.filter(i => i.total > 0).sort((a, b) => { if (b.total !== a.total) return b.total - a.total; return b.price - a.price; }).map(i => i.key);
-				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selChars });
-				resDiv.classList.remove('sorting'); window.tsParticles?.domItem(0)?.play();
+
+				const sortedKeys = scoredItems
+					.filter(item => item.total > 0)
+					.sort((a, b) => {
+						if (b.total !== a.total) return b.total - a.total;
+						return b.price - a.price;
+					})
+					.map(item => item.key);
+				
+				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selectedChars });
+				resultsDiv.classList.remove('sorting');
+				window.tsParticles?.domItem(0)?.play();
 			}, 200);
 		}
 
 		function exitAdvancedSearchMode() {
-			isAdvancedSearchMode = false; advancedSearchSelection = null;
+			isAdvancedSearchMode = false;
+            advancedSearchSelection = null;
 			document.body.classList.remove('advanced-search-active');
-			const btn = document.getElementById('advancedSearchBtn'); btn.innerHTML = 'Advanced Search'; btn.classList.remove('exit-mode');
+            
+			const advBtn = document.getElementById('advancedSearchBtn');
+			advBtn.innerHTML = 'Advanced Search';
+			advBtn.classList.remove('exit-mode');
+
 			applyFiltersAndSort();
 		}
 
@@ -655,25 +1001,61 @@
 		const throttledFilterHandler = throttle(() => { document.getElementById('results').scrollIntoView({ behavior: 'smooth' }); applyFiltersAndSort(); }, 300);
 
         document.getElementById('filterButton').addEventListener('click', throttledFilterHandler);
-        document.getElementById('sortDropdown').addEventListener('change', function() { if (!isAdvancedSearchMode) applyFiltersAndSort(); this.blur(); });
+        document.getElementById('sortDropdown').addEventListener('change', function() {
+            if (!isAdvancedSearchMode) {
+                applyFiltersAndSort();
+            }
+            this.blur(); 
+        });
 
 		document.addEventListener('DOMContentLoaded', () => {
 			const advBtn = document.getElementById('advancedSearchBtn');
-			advBtn.addEventListener('click', () => { if (isAdvancedSearchMode) exitAdvancedSearchMode(); else openAdvancedSearchModal(); });
+			advBtn.addEventListener('click', () => {
+                if (isAdvancedSearchMode) {
+                    exitAdvancedSearchMode();
+                } else {
+                    openAdvancedSearchModal();
+                }
+            });
 			document.getElementById('adv-search-cancel').addEventListener('click', closeAdvancedSearchModal);
 			document.getElementById('adv-search-execute').addEventListener('click', executeAdvancedSearch);
 
-			const extrasPopup = document.getElementById('extrasPopup'); const closeExtras = document.getElementById('closeExtrasPopup'); const hideExtras = () => { extrasPopup.style.display = 'none'; }; closeExtras.addEventListener('click', hideExtras);
-            const detailPopup = document.getElementById('itemDetailPopup'); const closeDetail = document.getElementById('closeItemDetailPopup'); const hideDetail = () => { detailPopup.style.display = 'none'; }; closeDetail.addEventListener('click', hideDetail);
-			window.addEventListener('click', e => { if (e.target == extrasPopup) hideExtras(); if (e.target == detailPopup) hideDetail(); if (e.target == document.getElementById('screenOverlay')) closeAdvancedSearchModal(); });
-            window.addEventListener('keydown', e => { if (e.key === 'Escape') { if (extrasPopup.style.display === 'flex') hideExtras(); if (detailPopup.style.display === 'flex') hideDetail(); if (document.getElementById('advancedSearchModal').classList.contains('visible')) closeAdvancedSearchModal(); } });
-            const resultsContainer = document.getElementById('results'); if (resultsContainer) resultsContainer.addEventListener('scroll', resetAllScrolledItems);
-            document.body.addEventListener('click', e => { if (!e.target.closest('.result-item')) resetAllScrolledItems(); });
-			window.addEventListener('scroll', throttle(resetAllScrolledItems, 100));
-			window.addEventListener('resize', debounce(() => { document.querySelectorAll('#results .result-item').forEach(setupScrollControlsForItem); }, 50));
-		});
-        // --- SCRIPT END ---
+			const extrasPopup = document.getElementById('extrasPopup');
+            const closeExtrasBtn = document.getElementById('closeExtrasPopup');
+            const hideExtrasPopup = () => { extrasPopup.style.display = 'none'; };
+			closeExtrasBtn.addEventListener('click', hideExtrasPopup);
+			
+            const itemDetailPopup = document.getElementById('itemDetailPopup');
+			const closeItemDetailBtn = document.getElementById('closeItemDetailPopup');
+			const hideItemDetailPopup = () => { itemDetailPopup.style.display = 'none'; };
+			closeItemDetailBtn.addEventListener('click', hideItemDetailPopup);
 
+			window.addEventListener('click', (event) => { 
+                if (event.target == extrasPopup) hideExtrasPopup(); 
+                if (event.target == itemDetailPopup) hideItemDetailPopup();
+				if (event.target == document.getElementById('screenOverlay')) closeAdvancedSearchModal();
+            });
+
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    if (extrasPopup.style.display === 'flex') hideExtrasPopup();
+                    if (itemDetailPopup.style.display === 'flex') hideItemDetailPopup();
+					if (document.getElementById('advancedSearchModal').classList.contains('visible')) closeAdvancedSearchModal();
+                }
+            });
+
+            const resultsContainer = document.getElementById('results');
+            if (resultsContainer) {
+                resultsContainer.addEventListener('scroll', resetAllScrolledItems);
+            }
+            document.body.addEventListener('click', (e) => {
+                if (!e.target.closest('.result-item')) resetAllScrolledItems();
+            });
+			window.addEventListener('scroll', throttle(resetAllScrolledItems, 100));
+			window.addEventListener('resize', debounce(() => {
+                document.querySelectorAll('#results .result-item').forEach(setupScrollControlsForItem);
+            }, 50));
+		});
     </script>
 </body>
 </html>
