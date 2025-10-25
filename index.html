@@ -574,16 +574,39 @@
 		}
 
 		function displayAdvancedSearchResults(selectedChars) {
-			const resultsDiv = document.getElementById('results'); resultsDiv.classList.add('sorting'); window.tsParticles?.domItem(0)?.pause();
+			const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.add('sorting'); 
+            window.tsParticles?.domItem(0)?.pause();
+			
 			setTimeout(() => {
 				const scoredItems = Object.keys(luaData).map(key => {
-					const itemChars = luaData[key]; const itemDetails = itemDetailsMap[key]; let total = 0;
-					selectedChars.forEach(name => { if (name.toLowerCase() === 'teots') { if (itemDetails.costume) total++; } else if (itemChars[name.toLowerCase()]) { total += itemChars[name.toLowerCase()]; } });
+					const itemChars = luaData[key]; 
+					const itemDetails = itemDetailsMap[key]; 
+					let total = 0;
+					selectedChars.forEach(name => {
+						if (name.toLowerCase() === 'teots') {
+							if (itemDetails.costume) total++;
+						} else if (itemChars[name.toLowerCase()]) {
+							total += itemChars[name.toLowerCase()];
+						}
+					});
 					return { key, total, price: itemDetails.price };
 				});
-				const sortedKeys = scoredItems.filter(item => item.total > 0).sort((a, b) => { if (b.total !== a.total) return b.total - a.total; return b.price - a.price; }).map(item => item.key);
+
+				// --- MODIFIED ---
+				// .filter(item => item.total > 0) 부분을 제거하여 0점짜리 아이템도 포함시킵니다.
+				const sortedKeys = scoredItems
+					.sort((a, b) => {
+						// 1. Target Total이 높은 순서로 정렬
+						if (b.total !== a.total) return b.total - a.total;
+						// 2. Target Total이 같으면 가격이 높은 순서로 정렬
+						return b.price - a.price;
+					})
+					.map(item => item.key);
+				
 				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selectedChars });
-				resultsDiv.classList.remove('sorting'); window.tsParticles?.domItem(0)?.play();
+				resultsDiv.classList.remove('sorting');
+				window.tsParticles?.domItem(0)?.play();
 			}, 200);
 		}
 
