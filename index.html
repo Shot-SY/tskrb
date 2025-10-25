@@ -579,6 +579,7 @@
             window.tsParticles?.domItem(0)?.pause();
 			
 			setTimeout(() => {
+				// 1. luaData의 모든 아이템을 가져와 점수를 계산합니다.
 				const scoredItems = Object.keys(luaData).map(key => {
 					const itemChars = luaData[key]; 
 					const itemDetails = itemDetailsMap[key]; 
@@ -593,18 +594,21 @@
 					return { key, total, price: itemDetails.price };
 				});
 
-				// --- MODIFIED ---
-				// .filter(item => item.total > 0) 부분을 제거하여 0점짜리 아이템도 포함시킵니다.
+				// 2. 'total'이 0인 아이템을 필터링하는 코드 없이, 모든 아이템을 정렬합니다.
 				const sortedKeys = scoredItems
 					.sort((a, b) => {
-						// 1. Target Total이 높은 순서로 정렬
-						if (b.total !== a.total) return b.total - a.total;
-						// 2. Target Total이 같으면 가격이 높은 순서로 정렬
+						// 주 정렬: Target Total이 높은 순서
+						if (b.total !== a.total) {
+                            return b.total - a.total;
+                        }
+						// 부 정렬: Target Total이 같으면 가격이 높은 순서
 						return b.price - a.price;
 					})
 					.map(item => item.key);
 				
+				// 3. 정렬된 전체 키 목록을 사용하여 결과를 표시합니다.
 				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selectedChars });
+
 				resultsDiv.classList.remove('sorting');
 				window.tsParticles?.domItem(0)?.play();
 			}, 200);
