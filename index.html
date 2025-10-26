@@ -625,9 +625,26 @@
 			applyFiltersAndSort();
 		}
 
+		function getSelectedCharacters(){
+		    return [...document.querySelectorAll('.character-box.selected')]
+		        .map(b => {
+		            const value = b.querySelector('input')?.value ?? '1';
+		            return `${b.dataset.engName}:${value}`;
+		        })
+		        .join(',');
+		}
+
         const throttle = (func, delay) => { let last = 0; return (...args) => { const now = Date.now(); if (now - last < delay) return; last = now; func(...args); }; };
         const debounce = (func, delay) => { let id; return (...args) => { clearTimeout(id); id = setTimeout(() => func(...args), delay); }; };
-		const throttledFilterHandler = throttle(() => { document.getElementById('results').scrollIntoView({ behavior: 'smooth' }); applyFiltersAndSort(); }, 300);
+		
+		const throttledFilterHandler = throttle(() => {
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+            applyFiltersAndSort();
+            const selectedCharsString = getSelectedCharacters();
+            if (selectedCharsString) {
+                gtag('event', 'apply_filter', { 'selected_characters': selectedCharsString });
+            }
+        }, 300);
 
         document.getElementById('filterButton').addEventListener('click', throttledFilterHandler);
         document.getElementById('sortDropdown').addEventListener('change', function() { if (!isAdvancedSearchMode) { applyFiltersAndSort(); } this.blur(); });
