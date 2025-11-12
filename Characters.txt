@@ -16,6 +16,7 @@ colt 콜트
 vanessa 바네사
 karma 카르마
 platen 플라튼
+kiriel 키리엘
 akila 아킬라
 klahan 클라한
 miho 미호
