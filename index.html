@@ -534,7 +534,7 @@
                     grid.appendChild(img);
                 }
             });
-            document.getElementById('popup-total-count-value').textContent = itemDetails.totalCount; document.getElementById('popup-ruby-info-value').textContent = '280,000+';
+            document.getElementById('popup-total-count-value').textContent = itemDetails.totalCount; document.getElementById('popup-ruby-info-value').textContent = '290,000+';
             const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1400 / 1000) * 1000;
             document.getElementById('popup-price-usd').textContent = `$${usdPrice}`; document.getElementById('popup-price-krw').textContent = `₩ ${krwPriceRounded.toLocaleString()}`;
             popup.style.display = 'flex'; copyToClipboard(itemKey);
