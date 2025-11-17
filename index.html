@@ -161,6 +161,17 @@
 		#adv-search-execute:hover { background-color: #448AFF; }
 		#adv-search-reset { background-color: #424242; color: #e0e0e0; }
 		#adv-search-reset:hover { background-color: #616161; }
+        /* --- NEW --- Recommend button styles and animation */
+        #adv-search-recommend { background-color: #26a69a; color: white; }
+        #adv-search-recommend:hover { background-color: #2bbbad; }
+        @keyframes recommendGlow {
+            0% { box-shadow: 0 0 0 0 rgba(38, 166, 154, 0.0); transform: scale(1); }
+            50% { box-shadow: 0 0 15px 5px rgba(38, 166, 154, 0.7); transform: scale(1.05); }
+            100% { box-shadow: 0 0 0 0 rgba(38, 166, 154, 0.0); transform: scale(1); }
+        }
+        .recommend-highlight {
+            animation: recommendGlow 1.2s cubic-bezier(0.25, 1, 0.5, 1) 1;
+        }
         .new-character-placeholder { display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: 'Poppins', sans-serif; border-radius: 10px; background-color: rgba(0, 0, 0, 0.3); box-sizing: border-box; text-transform: uppercase; }
         .adv-char-box.super-rare .new-character-placeholder { color: #ff5252; text-shadow: 0 0 8px rgba(255, 82, 82, 0.7); box-shadow: inset 0 0 10px rgba(211, 47, 47, 0.5); }
         .adv-char-box.rare .new-character-placeholder { color: #ffc107; text-shadow: 0 0 8px rgba(255, 193, 7, 0.7); box-shadow: inset 0 0 10px rgba(255, 152, 0, 0.5); }
@@ -237,6 +248,8 @@
 			<div id="advanced-search-grid"></div>
 			<div class="advanced-search-footer">
 				<button class="adv-search-btn" id="adv-search-reset">Reset</button>
+				<!-- --- NEW --- Recommend button added -->
+                <button class="adv-search-btn" id="adv-search-recommend">Recommend</button>
 				<button class="adv-search-btn" id="adv-search-execute">Search</button>
 			</div>
 		</div>
@@ -359,7 +372,7 @@
                 const sortedKeys = Object.keys(currentFilteredData).sort((a, b) => {
                     const itemA = itemDetailsMap[a]; const itemB = itemDetailsMap[b];
                     if (sortKey === 'price-low') { return (itemA.price - itemB.price) || (itemB.totalCount - itemA.totalCount); }
-                    return (itemB.price - itemA.price) || (itemB.totalCount - itemA.totalCount);
+                    return (itemB.price - a.price) || (itemB.totalCount - a.totalCount);
                 });
                 displayResults({ data: currentFilteredData, sortedKeys });
                 resultsDiv.classList.remove('sorting'); window.tsParticles?.domItem(0)?.play();
@@ -562,7 +575,20 @@
 			grid.appendChild(fragment);
 		}
 
-		function openAdvancedSearchModal() { document.getElementById('screenOverlay').classList.add('visible'); document.getElementById('advancedSearchModal').classList.add('visible'); document.body.classList.add('modal-open'); }
+		// --- MODIFIED --- Added animation trigger for recommend button
+		function openAdvancedSearchModal() {
+            document.getElementById('screenOverlay').classList.add('visible');
+            document.getElementById('advancedSearchModal').classList.add('visible');
+            document.body.classList.add('modal-open');
+
+            const recommendBtn = document.getElementById('adv-search-recommend');
+            if (recommendBtn) {
+                recommendBtn.classList.remove('recommend-highlight');
+                setTimeout(() => {
+                    recommendBtn.classList.add('recommend-highlight');
+                }, 500);
+            }
+        }
 		function closeAdvancedSearchModal() { document.getElementById('screenOverlay').classList.remove('visible'); document.getElementById('advancedSearchModal').classList.remove('visible'); document.body.classList.remove('modal-open'); }
 
 		function executeAdvancedSearch() {
@@ -583,7 +609,6 @@
             window.tsParticles?.domItem(0)?.pause();
 			
 			setTimeout(() => {
-				// 1. luaData의 모든 아이템을 가져와 점수를 계산합니다.
 				const scoredItems = Object.keys(luaData).map(key => {
 					const itemChars = luaData[key]; 
 					const itemDetails = itemDetailsMap[key]; 
@@ -598,19 +623,15 @@
 					return { key, total, price: itemDetails.price };
 				});
 
-				// 2. 'total'이 0인 아이템을 필터링하는 코드 없이, 모든 아이템을 정렬합니다.
 				const sortedKeys = scoredItems
 					.sort((a, b) => {
-						// 주 정렬: Target Total이 높은 순서
 						if (b.total !== a.total) {
                             return b.total - a.total;
                         }
-						// 부 정렬: Target Total이 같으면 가격이 높은 순서
 						return b.price - a.price;
 					})
 					.map(item => item.key);
 				
-				// 3. 정렬된 전체 키 목록을 사용하여 결과를 표시합니다.
 				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selectedChars });
 
 				resultsDiv.classList.remove('sorting');
@@ -654,6 +675,21 @@
 			advBtn.addEventListener('click', () => { if (isAdvancedSearchMode) exitAdvancedSearchMode(); else openAdvancedSearchModal(); });
 			document.getElementById('adv-search-reset').addEventListener('click', () => { document.querySelectorAll('#advanced-search-grid .adv-char-box.selected').forEach(box => box.classList.remove('selected')); });
 			document.getElementById('adv-search-execute').addEventListener('click', executeAdvancedSearch);
+            // --- NEW --- Event listener for the recommend button
+            document.getElementById('adv-search-recommend').addEventListener('click', () => {
+                const recommendedChars = ['pye', 'rosie', 'jury', 'teots', 'teo', 'kyle', 'yeonhee', 'biscuit', 'lina', 'pascal', 'shane', 'espada'];
+                const allCharBoxes = document.querySelectorAll('#advanced-search-grid .adv-char-box');
+                
+                allCharBoxes.forEach(box => {
+                    const charName = box.dataset.engName.toLowerCase();
+                    if (recommendedChars.includes(charName)) {
+                        box.classList.add('selected');
+                    } else {
+                        box.classList.remove('selected');
+                    }
+                });
+            });
+
 			const extrasPopup = document.getElementById('extrasPopup'); const closeExtras = document.getElementById('closeExtrasPopup'); const hideExtras = () => { extrasPopup.style.display = 'none'; }; closeExtras.addEventListener('click', hideExtras);
             const detailPopup = document.getElementById('itemDetailPopup'); const closeDetail = document.getElementById('closeItemDetailPopup'); const hideDetail = () => { detailPopup.style.display = 'none'; }; closeDetail.addEventListener('click', hideDetail);
 			window.addEventListener('click', e => { if (e.target == extrasPopup) hideExtras(); if (e.target == detailPopup) hideDetail(); if (e.target == document.getElementById('screenOverlay')) closeAdvancedSearchModal(); });
