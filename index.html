@@ -466,16 +466,13 @@
                     if (teoIndex !== -1) { allImportantItemsData.splice(teoIndex, 0, teoTsData); } else { allImportantItemsData.unshift(teoTsData); }
                 }
                 
-                // --- FIXED LOGIC FOR YEONHEE IDOL POSITIONING ---
                 if (itemDetails.yeonheeCostume) {
                     const yhIdolData = { type: 'character', src: 'Portrait/연희idol스킨.png', alt: '연희 IDOL', engName: 'YeonheeIDOL', count: 1 };
                     const teoTsIndex = allImportantItemsData.findIndex(item => item.engName === 'TeoTS');
                     
                     if (teoTsIndex !== -1) {
-                         // If TeoTS exists, put right after it
                          allImportantItemsData.splice(teoTsIndex + 1, 0, yhIdolData);
                     } else {
-                         // If TeoTS is missing, put it BEFORE Teo (or at start if Teo missing)
                          const teoIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
                          if (teoIndex !== -1) {
                              allImportantItemsData.splice(teoIndex, 0, yhIdolData);
@@ -486,6 +483,10 @@
                 }
                 
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
+                
+                // Add Selector to the end of important items so it shows up
+                const selectorData = { type: 'character', src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 };
+                allImportantItemsData.push(selectorData);
                 
                 if (allImportantItemsData.length > 0) {
                     const firstItemData = allImportantItemsData[0];
@@ -512,10 +513,10 @@
         function createCharacterImageElement(charData, tier0Eng, isLazy = false, advSel = null) {
             const container = document.createElement('div'); container.className = 'image-with-count-container'; if (isLazy) { container.classList.add('js-lazy-loaded'); }
             const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'small-character-img'; img.onerror = function() { handleImageError(this); };
-			if (advSel && !advSel.includes(charData.engName)) { img.classList.add('dimmed'); }
+			if (advSel && !advSel.includes(charData.engName) && charData.engName !== 'Selector') { img.classList.add('dimmed'); }
             const badge = document.createElement('div'); badge.className = 'image-count-badge';
             
-            if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL') { 
+            if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'Selector') { 
                 img.classList.add('legendary-item'); badge.classList.add('legendary-badge'); 
             } else { 
                 const isTier0 = tier0Eng.has(charData.engName); img.classList.add(isTier0 ? 'super-rare' : 'rare'); badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge'); 
@@ -604,7 +605,6 @@
                 if (teoIndex !== -1) allItemsData.splice(teoIndex, 0, teoTsData); else allItemsData.unshift(teoTsData);
             }
             
-            // --- FIXED LOGIC FOR POPUP YEONHEE IDOL ---
             if (itemDetails.yeonheeCostume) {
                 const yhIdolData = { src: 'Portrait/연희idol스킨.png', alt: 'IDOL', engName: 'YeonheeIDOL', count: 1 };
                 const teoTsIndex = allItemsData.findIndex(item => item.engName === 'TeoTS');
@@ -621,12 +621,16 @@
             }
 
             allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
+            
+            // Add Selector to popup as well
+            allItemsData.push({ src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 });
+
             allItemsData.forEach(charData => {
                 for (let i = 0; i < charData.count; i++) {
                     const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
                     img.loading = 'lazy'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
-                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName)) { img.classList.add('dimmed'); }
-                    if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL') img.classList.add('legendary-item');
+                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && charData.engName !== 'Selector') { img.classList.add('dimmed'); }
+                    if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'Selector') img.classList.add('legendary-item');
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
                     else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
                     else img.classList.add('extras-character-border');
