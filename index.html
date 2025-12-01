@@ -465,15 +465,20 @@
                     const teoIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
                     if (teoIndex !== -1) { allImportantItemsData.splice(teoIndex, 0, teoTsData); } else { allImportantItemsData.unshift(teoTsData); }
                 }
+                
+                // --- FIXED LOGIC FOR YEONHEE IDOL POSITIONING ---
                 if (itemDetails.yeonheeCostume) {
                     const yhIdolData = { type: 'character', src: 'Portrait/연희idol스킨.png', alt: '연희 IDOL', engName: 'YeonheeIDOL', count: 1 };
                     const teoTsIndex = allImportantItemsData.findIndex(item => item.engName === 'TeoTS');
+                    
                     if (teoTsIndex !== -1) {
+                         // If TeoTS exists, put right after it
                          allImportantItemsData.splice(teoTsIndex + 1, 0, yhIdolData);
                     } else {
-                         const yhIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'yeonhee');
-                         if(yhIndex !== -1) {
-                             allImportantItemsData.splice(yhIndex, 0, yhIdolData);
+                         // If TeoTS is missing, put it BEFORE Teo (or at start if Teo missing)
+                         const teoIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
+                         if (teoIndex !== -1) {
+                             allImportantItemsData.splice(teoIndex, 0, yhIdolData);
                          } else {
                              allImportantItemsData.unshift(yhIdolData);
                          }
@@ -598,14 +603,20 @@
                 const teoIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
                 if (teoIndex !== -1) allItemsData.splice(teoIndex, 0, teoTsData); else allItemsData.unshift(teoTsData);
             }
+            
+            // --- FIXED LOGIC FOR POPUP YEONHEE IDOL ---
             if (itemDetails.yeonheeCostume) {
                 const yhIdolData = { src: 'Portrait/연희idol스킨.png', alt: 'IDOL', engName: 'YeonheeIDOL', count: 1 };
                 const teoTsIndex = allItemsData.findIndex(item => item.engName === 'TeoTS');
                 if (teoTsIndex !== -1) {
                     allItemsData.splice(teoTsIndex + 1, 0, yhIdolData);
                 } else {
-                    const yhIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'yeonhee');
-                    if (yhIndex !== -1) allItemsData.splice(yhIndex, 0, yhIdolData); else allItemsData.unshift(yhIdolData);
+                    const teoIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
+                    if (teoIndex !== -1) {
+                         allItemsData.splice(teoIndex, 0, yhIdolData);
+                    } else {
+                         allItemsData.unshift(yhIdolData);
+                    }
                 }
             }
 
