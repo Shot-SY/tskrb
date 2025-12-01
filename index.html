@@ -34,7 +34,6 @@
 	    }
 	    .character-img { width: 80px; height: 90px; object-fit: cover; margin-bottom: 10px; border-radius: 10px; transition: transform 0.3s; transform: translateZ(0); backface-visibility: hidden; }
 	    .character-name { font-size: 16px; margin-bottom: 10px; font-weight: 700; color: #fff; line-height: 1.2; }
-        /* --- ADDED --- Style for the limited costume label */
         .costume-label { display: block; font-size: 10px; font-weight: normal; color: #FFD700; margin-top: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
         
 	    .spinbox-container { width: 80%; visibility: hidden; opacity: 0; transition: visibility 0.3s, opacity 0.3s, transform 0.3s; justify-content: center; margin-top: -5px; transform: translateY(-10px); }
@@ -349,7 +348,7 @@
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
             
             const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'character-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
-            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희IDOL.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">yeonhee IDOL<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">yeonhee IDOL<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             yeonheeIdolBox.addEventListener('click', () => toggleSelection(yeonheeIdolBox));
 
             let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
@@ -467,7 +466,7 @@
                     if (teoIndex !== -1) { allImportantItemsData.splice(teoIndex, 0, teoTsData); } else { allImportantItemsData.unshift(teoTsData); }
                 }
                 if (itemDetails.yeonheeCostume) {
-                    const yhIdolData = { type: 'character', src: 'Portrait/연희IDOL.png', alt: '연희 IDOL', engName: 'YeonheeIDOL', count: 1 };
+                    const yhIdolData = { type: 'character', src: 'Portrait/연희idol스킨.png', alt: '연희 IDOL', engName: 'YeonheeIDOL', count: 1 };
                     const teoTsIndex = allImportantItemsData.findIndex(item => item.engName === 'TeoTS');
                     if (teoTsIndex !== -1) {
                          allImportantItemsData.splice(teoTsIndex + 1, 0, yhIdolData);
@@ -600,7 +599,7 @@
                 if (teoIndex !== -1) allItemsData.splice(teoIndex, 0, teoTsData); else allItemsData.unshift(teoTsData);
             }
             if (itemDetails.yeonheeCostume) {
-                const yhIdolData = { src: 'Portrait/연희IDOL.png', alt: 'IDOL', engName: 'YeonheeIDOL', count: 1 };
+                const yhIdolData = { src: 'Portrait/연희idol스킨.png', alt: 'IDOL', engName: 'YeonheeIDOL', count: 1 };
                 const teoTsIndex = allItemsData.findIndex(item => item.engName === 'TeoTS');
                 if (teoTsIndex !== -1) {
                     allItemsData.splice(teoTsIndex + 1, 0, yhIdolData);
@@ -649,7 +648,7 @@
             teoTsBox.addEventListener('click', () => teoTsBox.classList.toggle('selected'));
             
             const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'adv-char-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
-            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희IDOL.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">yeonhee IDOL<span class="costume-label">(Limited Costume)</span></span>`;
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">yeonhee IDOL<span class="costume-label">(Limited Costume)</span></span>`;
             yeonheeIdolBox.addEventListener('click', () => yeonheeIdolBox.classList.toggle('selected'));
 
             let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
