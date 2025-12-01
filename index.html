@@ -33,7 +33,10 @@
 			.extras-box:hover { background: rgba(176, 176, 176, 0.2); border-color: rgba(176, 176, 176, 0.8); }
 	    }
 	    .character-img { width: 80px; height: 90px; object-fit: cover; margin-bottom: 10px; border-radius: 10px; transition: transform 0.3s; transform: translateZ(0); backface-visibility: hidden; }
-	    .character-name { font-size: 16px; margin-bottom: 10px; font-weight: 700; color: #fff; }
+	    .character-name { font-size: 16px; margin-bottom: 10px; font-weight: 700; color: #fff; line-height: 1.2; }
+        /* --- ADDED --- Style for the limited costume label */
+        .costume-label { display: block; font-size: 10px; font-weight: normal; color: #FFD700; margin-top: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+        
 	    .spinbox-container { width: 80%; visibility: hidden; opacity: 0; transition: visibility 0.3s, opacity 0.3s, transform 0.3s; justify-content: center; margin-top: -5px; transform: translateY(-10px); }
 	    .character-box.selected .spinbox-container { visibility: visible; opacity: 1; transform: translateY(0); }
 	    .spinbox-container input[type="number"] { width: 50px; padding: 5px; border: 1px solid #555; border-radius: 8px; text-align: center; font-size: 14px; background-color: #1e1e1e; color: #e0e0e0; transition: border-color 0.3s, box-shadow 0.3s; }
@@ -128,7 +131,6 @@
 		.advanced-search-header h2 { margin-top: 0; margin-bottom: 10px; color: #448AFF; font-family: 'Poppins', sans-serif; }
 		.advanced-search-header p { margin-top: 0; margin-bottom: 20px; line-height: 1.6; color: #bdc3c7; font-size: 15px; }
 		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 15px; overflow-y: auto; padding: 10px; margin: 0 -10px 20px; flex-grow: 1; }
-		/* --- MODIFIED --- Advanced Search Box Styles */
 		.adv-char-box {
 			cursor: pointer;
 			border-radius: 10px;
@@ -147,7 +149,7 @@
 			margin-bottom: 8px;
 			border-radius: 8px;
 		}
-		.adv-char-name { font-size: 13px; font-weight: 600; color: #fff; text-align: center; }
+		.adv-char-name { font-size: 13px; font-weight: 600; color: #fff; text-align: center; line-height: 1.2; }
 		.adv-char-box:hover { transform: scale(1.05); }
 		.adv-char-box.selected {
 			background-color: rgba(255, 64, 129, 0.9);
@@ -161,7 +163,6 @@
 		#adv-search-execute:hover { background-color: #448AFF; }
 		#adv-search-reset { background-color: #424242; color: #e0e0e0; }
 		#adv-search-reset:hover { background-color: #616161; }
-        /* --- NEW --- Recommend button styles and animation */
         #adv-search-recommend { background-color: #26a69a; color: white; }
         #adv-search-recommend:hover { background-color: #2bbbad; }
         @keyframes recommendGlow {
@@ -187,6 +188,7 @@
 	        .character-box { height: 125px; padding: 8px; }
 	        .character-box .character-img, .character-box .new-character-placeholder { width: 60px; height: 70px; margin-bottom: 5px; }
 	        .character-box .character-name { font-size: 14px; }
+            .costume-label { font-size: 8px; }
 	        .spinbox-container input[type="number"] { width: 45px; }
 	        #filterButton, #advancedSearchBtn { font-size: 16px; padding: 12px; }
 	        .result-item { padding: 12px; flex-wrap: wrap; }
@@ -248,7 +250,6 @@
 			<div id="advanced-search-grid"></div>
 			<div class="advanced-search-footer">
 				<button class="adv-search-btn" id="adv-search-reset">Reset</button>
-				<!-- --- NEW --- Recommend button added -->
                 <button class="adv-search-btn" id="adv-search-recommend">Recommend</button>
 				<button class="adv-search-btn" id="adv-search-execute">Search</button>
 			</div>
@@ -271,9 +272,17 @@
         let isAdvancedSearchMode = false;
         let advancedSearchSelection = null;
 
-        function handleImageError(imgElement) { /* ... same as before ... */ }
+        function handleImageError(imgElement) {
+            if (imgElement.getAttribute('data-error-handled')) return;
+            imgElement.setAttribute('data-error-handled', 'true');
+            const placeholder = document.createElement('div');
+            placeholder.className = 'new-character-placeholder';
+            placeholder.textContent = imgElement.alt || '?';
+            if (imgElement.parentElement) {
+                imgElement.parentElement.replaceChild(placeholder, imgElement);
+            }
+        }
         
-        // --- SCRIPT START (Full, readable version) ---
         let lastActivityTime = Date.now();
         const updateActivityTime = () => { lastActivityTime = Date.now(); };
         ['click', 'touchstart', 'scroll', 'keypress'].forEach(event => document.addEventListener(event, updateActivityTime));
@@ -334,11 +343,23 @@
                 charBox.querySelector('input').addEventListener('click', (e) => { e.stopPropagation(); if (!charBox.classList.contains('selected')) toggleSelection(charBox); });
                 fragment.appendChild(charBox);
             });
+            
             const teoTsBox = document.createElement('div'); teoTsBox.className = 'character-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">Teo TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">Teo TS<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
+            
+            const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'character-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희IDOL.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">yeonhee IDOL<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            yeonheeIdolBox.addEventListener('click', () => toggleSelection(yeonheeIdolBox));
+
             let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
-            if (teoBoxNode) fragment.insertBefore(teoTsBox, teoBoxNode); else fragment.insertBefore(teoTsBox, fragment.firstChild);
+            if (teoBoxNode) {
+                fragment.insertBefore(teoTsBox, teoBoxNode);
+                fragment.insertBefore(yeonheeIdolBox, teoBoxNode);
+            } else {
+                fragment.insertBefore(teoTsBox, fragment.firstChild);
+                fragment.insertBefore(yeonheeIdolBox, fragment.firstChild.nextSibling);
+            }
             grid.appendChild(fragment);
         }
 
@@ -354,11 +375,24 @@
                 lines.forEach(line => {
                     if (!line.trim() || !line.includes('=')) return;
                     const parts = line.split('='); const pricePart = parts.pop().trim(); const contentPart = parts.join('=').trim(); const contentWords = contentPart.split(/\s+/); const key = contentWords.shift();
-                    const itemDetails = { originalText: line, price: parseFloat(pricePart.replace('$', '')), costume: line.toLowerCase().includes('[teo legend costume]'), totalCount: 0 };
+                    
+                    const teoCostume = line.toLowerCase().includes('[teo legend costume]');
+                    const yeonheeCostume = line.toLowerCase().includes('[yeonhee legend costume]');
+                    
+                    const itemDetails = { 
+                        originalText: line, 
+                        price: parseFloat(pricePart.replace('$', '')), 
+                        teoCostume: teoCostume,
+                        yeonheeCostume: yeonheeCostume,
+                        totalCount: 0 
+                    };
                     const currentItemChars = {};
                     contentWords.forEach(word => { const match = word.match(/^([a-zA-Z]+)(\d+)$/); if (match) { const charName = match[1].toLowerCase(); const count = parseInt(match[2]); currentItemChars[charName] = (currentItemChars[charName] || 0) + count; } });
                     for (const charName in currentItemChars) { itemDetails.totalCount += currentItemChars[charName]; }
-                    if (itemDetails.costume) { itemDetails.totalCount++; }
+                    
+                    if (itemDetails.teoCostume) itemDetails.totalCount++;
+                    if (itemDetails.yeonheeCostume) itemDetails.totalCount++;
+                    
                     luaData[key] = currentItemChars; itemDetailsMap[key] = itemDetails;
                 });
             }).catch(error => console.error('Data loading error:', error));
@@ -382,8 +416,14 @@
         function checkConditions(itemChars, itemKey) {
             const allCharsMatch = characters.every(([eng]) => { const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`); return !box || !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value); });
             if (!allCharsMatch) return false;
+            
             const teoTsBox = document.querySelector('.character-box[data-eng-name="TeoTS"]');
-            return !teoTsBox || !teoTsBox.classList.contains('selected') || itemDetailsMap[itemKey].costume;
+            if (teoTsBox && teoTsBox.classList.contains('selected') && !itemDetailsMap[itemKey].teoCostume) return false;
+            
+            const yeonheeIdolBox = document.querySelector('.character-box[data-eng-name="YeonheeIDOL"]');
+            if (yeonheeIdolBox && yeonheeIdolBox.classList.contains('selected') && !itemDetailsMap[itemKey].yeonheeCostume) return false;
+
+            return true;
         }
 
         function optimizeImages() { document.querySelectorAll('img').forEach(img => { if (!img.hasAttribute('loading')) img.loading = 'lazy'; if (!img.hasAttribute('decoding')) img.decoding = 'async'; }); }
@@ -403,7 +443,11 @@
                 
 				if (advancedSearchSelection) {
 					let total = 0;
-					advancedSearchSelection.forEach(name => { if (name.toLowerCase() === 'teots') { if(itemDetails.costume) total++; } else if (charValue[name.toLowerCase()]) { total += charValue[name.toLowerCase()]; } });
+					advancedSearchSelection.forEach(name => { 
+                        if (name.toLowerCase() === 'teots') { if(itemDetails.teoCostume) total++; }
+                        else if (name.toLowerCase() === 'yeonheeidol') { if(itemDetails.yeonheeCostume) total++; }
+                        else if (charValue[name.toLowerCase()]) { total += charValue[name.toLowerCase()]; } 
+                    });
 					const scoreBox = document.createElement('div'); scoreBox.className = 'target-total-box';
 					scoreBox.innerHTML = `<div class="target-total-label">Target Total</div><div class="target-total-value">${total}</div>`;
 					rightSection.prepend(scoreBox);
@@ -416,11 +460,27 @@
                     if (tier0Characters.some(c => c[0] === engName) || tier1Characters.some(c => c[0] === engName)) { allImportantItemsData.push(imageData); } else { tier2ImageData.push(imageData); }
                 }
                 allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
-                if (itemDetails.costume) {
+                
+                if (itemDetails.teoCostume) {
                     const teoTsData = { type: 'character', src: 'Portrait/태오ts스킨.png', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1 };
                     const teoIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
                     if (teoIndex !== -1) { allImportantItemsData.splice(teoIndex, 0, teoTsData); } else { allImportantItemsData.unshift(teoTsData); }
                 }
+                if (itemDetails.yeonheeCostume) {
+                    const yhIdolData = { type: 'character', src: 'Portrait/연희IDOL.png', alt: '연희 IDOL', engName: 'YeonheeIDOL', count: 1 };
+                    const teoTsIndex = allImportantItemsData.findIndex(item => item.engName === 'TeoTS');
+                    if (teoTsIndex !== -1) {
+                         allImportantItemsData.splice(teoTsIndex + 1, 0, yhIdolData);
+                    } else {
+                         const yhIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'yeonhee');
+                         if(yhIndex !== -1) {
+                             allImportantItemsData.splice(yhIndex, 0, yhIdolData);
+                         } else {
+                             allImportantItemsData.unshift(yhIdolData);
+                         }
+                    }
+                }
+                
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
                 if (allImportantItemsData.length > 0) {
@@ -450,7 +510,12 @@
             const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'small-character-img'; img.onerror = function() { handleImageError(this); };
 			if (advSel && !advSel.includes(charData.engName)) { img.classList.add('dimmed'); }
             const badge = document.createElement('div'); badge.className = 'image-count-badge';
-            if (charData.engName === 'TeoTS') { img.classList.add('legendary-item'); badge.classList.add('legendary-badge'); } else { const isTier0 = tier0Eng.has(charData.engName); img.classList.add(isTier0 ? 'super-rare' : 'rare'); badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge'); }
+            
+            if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL') { 
+                img.classList.add('legendary-item'); badge.classList.add('legendary-badge'); 
+            } else { 
+                const isTier0 = tier0Eng.has(charData.engName); img.classList.add(isTier0 ? 'super-rare' : 'rare'); badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge'); 
+            }
             container.appendChild(img); if (charData.count > 1) { badge.textContent = `x${charData.count}`; container.appendChild(badge); }
             return container;
         }
@@ -528,19 +593,30 @@
                 const [engName, korName] = charInfo; const originalIndex = characters.findIndex(([e]) => e === engName);
                 allItemsData.push({ src: `Portrait/${korName}.png`, alt: korName, engName, count: charValue[charName], originalIndex });
             }
-            if (itemDetails.costume) {
+            
+            if (itemDetails.teoCostume) {
                 const teoTsData = { src: 'Portrait/태오ts스킨.png', alt: 'TS', engName: 'TeoTS', count: 1 };
                 const teoIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
-                if (teoIndex !== -1) allItemsData.splice(teoIndex, 0, teoTsData);
-                else allItemsData.unshift(teoTsData);
+                if (teoIndex !== -1) allItemsData.splice(teoIndex, 0, teoTsData); else allItemsData.unshift(teoTsData);
             }
+            if (itemDetails.yeonheeCostume) {
+                const yhIdolData = { src: 'Portrait/연희IDOL.png', alt: 'IDOL', engName: 'YeonheeIDOL', count: 1 };
+                const teoTsIndex = allItemsData.findIndex(item => item.engName === 'TeoTS');
+                if (teoTsIndex !== -1) {
+                    allItemsData.splice(teoTsIndex + 1, 0, yhIdolData);
+                } else {
+                    const yhIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'yeonhee');
+                    if (yhIndex !== -1) allItemsData.splice(yhIndex, 0, yhIdolData); else allItemsData.unshift(yhIdolData);
+                }
+            }
+
             allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
             allItemsData.forEach(charData => {
                 for (let i = 0; i < charData.count; i++) {
                     const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
                     img.loading = 'lazy'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
                     if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName)) { img.classList.add('dimmed'); }
-                    if (charData.engName === 'TeoTS') img.classList.add('legendary-item');
+                    if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL') img.classList.add('legendary-item');
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
                     else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
                     else img.classList.add('extras-character-border');
@@ -567,15 +643,26 @@
 				charBox.addEventListener('click', () => charBox.classList.toggle('selected'));
 				fragment.appendChild(charBox);
 			});
+            
             const teoTsBox = document.createElement('div'); teoTsBox.className = 'adv-char-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">Teo TS</span>`;
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">Teo TS<span class="costume-label">(Limited Costume)</span></span>`;
             teoTsBox.addEventListener('click', () => teoTsBox.classList.toggle('selected'));
+            
+            const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'adv-char-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희IDOL.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">yeonhee IDOL<span class="costume-label">(Limited Costume)</span></span>`;
+            yeonheeIdolBox.addEventListener('click', () => yeonheeIdolBox.classList.toggle('selected'));
+
             let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
-            if (teoBoxNode) fragment.insertBefore(teoTsBox, teoBoxNode); else fragment.insertBefore(teoTsBox, fragment.firstChild);
+            if (teoBoxNode) {
+                fragment.insertBefore(teoTsBox, teoBoxNode);
+                fragment.insertBefore(yeonheeIdolBox, teoBoxNode);
+            } else {
+                fragment.insertBefore(teoTsBox, fragment.firstChild);
+                fragment.insertBefore(yeonheeIdolBox, fragment.firstChild.nextSibling);
+            }
 			grid.appendChild(fragment);
 		}
 
-		// --- MODIFIED --- Added animation trigger for recommend button
 		function openAdvancedSearchModal() {
             document.getElementById('screenOverlay').classList.add('visible');
             document.getElementById('advancedSearchModal').classList.add('visible');
@@ -614,11 +701,9 @@
 					const itemDetails = itemDetailsMap[key]; 
 					let total = 0;
 					selectedChars.forEach(name => {
-						if (name.toLowerCase() === 'teots') {
-							if (itemDetails.costume) total++;
-						} else if (itemChars[name.toLowerCase()]) {
-							total += itemChars[name.toLowerCase()];
-						}
+						if (name.toLowerCase() === 'teots') { if (itemDetails.teoCostume) total++; }
+                        else if (name.toLowerCase() === 'yeonheeidol') { if (itemDetails.yeonheeCostume) total++; }
+                        else if (itemChars[name.toLowerCase()]) { total += itemChars[name.toLowerCase()]; }
 					});
 					return { key, total, price: itemDetails.price };
 				});
@@ -675,9 +760,8 @@
 			advBtn.addEventListener('click', () => { if (isAdvancedSearchMode) exitAdvancedSearchMode(); else openAdvancedSearchModal(); });
 			document.getElementById('adv-search-reset').addEventListener('click', () => { document.querySelectorAll('#advanced-search-grid .adv-char-box.selected').forEach(box => box.classList.remove('selected')); });
 			document.getElementById('adv-search-execute').addEventListener('click', executeAdvancedSearch);
-            // --- NEW --- Event listener for the recommend button
             document.getElementById('adv-search-recommend').addEventListener('click', () => {
-                const recommendedChars = ['pye', 'rosie', 'jury', 'teots', 'teo', 'kyle', 'yeonhee', 'biscuit', 'lina', 'pascal', 'shane', 'espada'];
+                const recommendedChars = ['pye', 'rosie', 'jury', 'teots', 'teo', 'kyle', 'yeonhee', 'biscuit', 'lina', 'pascal', 'shane', 'espada', 'yeonheeidol'];
                 const allCharBoxes = document.querySelectorAll('#advanced-search-grid .adv-char-box');
                 
                 allCharBoxes.forEach(box => {
