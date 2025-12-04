@@ -16,7 +16,7 @@
 	<style>
 	    body { font-family: 'Roboto', sans-serif; background-color: #121212; max-width: 1200px; margin: 0 auto; padding: 30px 20px; color: #e0e0e0; position: relative; overflow-y: scroll; }
         body.modal-open { overflow: hidden; }
-        body.advanced-search-active > *:not(#results):not(#advancedSearchBtn):not(#tsparticles):not(#loader):not(#copyMessage):not([id*="Popup"]) { filter: blur(8px) brightness(0.4); pointer-events: none; transition: filter 0.3s ease; }
+        body.advanced-search-active > *:not(#results):not(#advancedSearchBtn):not(#tsparticles):not(#loader):not(#copyMessage):not([id*="Popup"]):not(#selectorTooltip) { filter: blur(8px) brightness(0.4); pointer-events: none; transition: filter 0.3s ease; }
         body.advanced-search-active #results { opacity: 1 !important; }
 	    h1 { text-align: center; margin-bottom: 30px; font-family: 'Poppins', sans-serif; font-size: 2.5em; color: #ff4081; text-shadow: 2px 2px 4px rgba(255,255,255,0.2); position: relative; z-index: 1; }
 	    .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); gap: 20px; margin-bottom: 30px; position: relative; z-index: 1; transform: translateZ(0); }
@@ -57,7 +57,7 @@
         #results.sorting { opacity: 0; }
 	    #results .content-container { transform: translateZ(0); will-change: opacity; transition: opacity 0.2s ease; contain: layout paint style; backface-visibility: hidden; }
 	    #results.scrolling .result-item { transition: none !important; }
-		.result-item { margin-bottom: 18px; padding: 14px 24px; background: linear-gradient(135deg, #202228, #1a1c20); cursor: pointer; transition: background 0.3s, box-shadow 0.3s, transform 0.2s; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 18px; position: relative; overflow: hidden; }
+		.result-item { margin-bottom: 18px; padding: 14px 24px; background: linear-gradient(135deg, #202228, #1a1c20); cursor: pointer; transition: background 0.3s, box-shadow 0.3s, transform 0.2s; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 18px; position: relative; overflow: visible; }
 		.result-item::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, #ff4081, #f50057); opacity: 0.6; transition: opacity 0.3s; }
         .item-images-wrapper { flex-grow: 1; position: relative; overflow: hidden; display: flex; }
 		.item-images { display: flex; align-items: center; flex-wrap: nowrap; gap: 10px; overflow-x: auto; padding: 6px; scrollbar-width: none; }
@@ -182,6 +182,57 @@
         .image-with-count-container .new-character-placeholder { height: 60px; width: 45px; min-width: 45px; font-size: 14px; }
         #extras-popup-grid .new-character-placeholder { height: 60px; width: 45px; font-size: 14px; }
         #item-detail-popup-grid .new-character-placeholder { height: 55px; width: 45px; font-size: 12px; }
+        
+        /* NEW: Selector Tooltip Styles */
+        #selectorTooltip {
+            position: fixed;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #FFD700;
+            padding: 15px;
+            border-radius: 12px;
+            z-index: 6000;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            pointer-events: none;
+            width: 240px;
+            transform: translateZ(0);
+        }
+        #selectorTooltip .tooltip-title {
+            color: #FFD700;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-size: 16px;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        #selectorTooltip .tooltip-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            width: 100%;
+        }
+        #selectorTooltip .tooltip-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #selectorTooltip .tooltip-img {
+            width: 45px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #ff5252; /* All Seven Knights are typically rare/red or special */
+            margin-bottom: 4px;
+        }
+        #selectorTooltip .tooltip-name {
+            font-size: 10px;
+            color: #e0e0e0;
+            text-align: center;
+        }
+
 	    @media (max-width: 768px) {
 			.character-grid { grid-template-columns: repeat(auto-fill, minmax(80px,1fr)); gap: 10px; }
 	        .character-box { height: 125px; padding: 8px; }
@@ -266,6 +317,12 @@
             </div>
         </div>
     </div>
+    
+    <!-- NEW: Tooltip Container -->
+    <div id="selectorTooltip">
+        <div class="tooltip-title">Seven Knights Selector</div>
+        <div class="tooltip-grid" id="selectorTooltipGrid"></div>
+    </div>
 
     <script>
         let isAdvancedSearchMode = false;
@@ -291,6 +348,8 @@
             const lastLoad = localStorage.getItem('lastLoadTime'); const currentTime = Date.now();
             if (!lastLoad || (currentTime - parseInt(lastLoad)) > 15000) { localStorage.setItem('lastLoadTime', currentTime); window.location.reload(true); return; }
             const loader = document.getElementById('loader');
+            // Initialize the selector tooltip data
+            initSelectorTooltip();
             loadCharacters().then(() => loadData()).then(() => applyFiltersAndSort()).then(() => new Promise(r => setTimeout(r, 500)))
                 .then(() => {
                     loader.classList.add('hidden');
@@ -306,6 +365,76 @@
                 })
                 .catch(error => { console.error('Initial filter application error:', error); loader.classList.add('hidden'); setTimeout(() => loader.style.display = 'none', 500); });
         });
+
+        // --- NEW: Selector Tooltip Logic ---
+        const sevenKnightsList = [
+            { eng: 'Rudy', kor: '루디' },
+            { eng: 'Kris', kor: '크리스' },
+            { eng: 'Dellons', kor: '델론즈' },
+            { eng: 'Eileene', kor: '아일린' },
+            { eng: 'Rachel', kor: '레이첼' },
+            { eng: 'Jave', kor: '제이브' },
+            { eng: 'Spike', kor: '스파이크' },
+            { eng: 'Vanessa', kor: '바네사' }
+        ];
+
+        function initSelectorTooltip() {
+            const grid = document.getElementById('selectorTooltipGrid');
+            sevenKnightsList.forEach(char => {
+                const item = document.createElement('div');
+                item.className = 'tooltip-item';
+                item.innerHTML = `<img src="Portrait/${char.kor}.png" class="tooltip-img" onerror="this.style.display='none'"><span class="tooltip-name">${char.eng}</span>`;
+                grid.appendChild(item);
+            });
+        }
+
+        function showSelectorTooltip(targetElement) {
+            const tooltip = document.getElementById('selectorTooltip');
+            if (!tooltip || !targetElement) return;
+
+            const rect = targetElement.getBoundingClientRect();
+            const tooltipWidth = 240; 
+            const tooltipHeight = 220; // Approx height
+            
+            // Default position: above the item
+            let top = rect.top - tooltipHeight - 10;
+            let left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
+
+            // If goes off top screen, put below
+            if (top < 10) {
+                top = rect.bottom + 10;
+            }
+
+            // Keep within horizontal bounds
+            if (left < 10) left = 10;
+            if (left + tooltipWidth > window.innerWidth - 10) left = window.innerWidth - tooltipWidth - 10;
+
+            tooltip.style.top = `${top}px`;
+            tooltip.style.left = `${left}px`;
+            tooltip.style.display = 'flex';
+        }
+
+        function hideSelectorTooltip() {
+            const tooltip = document.getElementById('selectorTooltip');
+            if (tooltip) tooltip.style.display = 'none';
+        }
+
+        function handleSelectorHover(e) {
+            showSelectorTooltip(e.currentTarget);
+        }
+
+        function handleSelectorLeave() {
+            hideSelectorTooltip();
+        }
+
+        function handleSelectorClick(e) {
+            // Prevent opening the main popup or other interactions
+            e.stopPropagation(); 
+            // Show the tooltip
+            showSelectorTooltip(e.currentTarget);
+        }
+
+        // -----------------------------------
 
         function optimizeParticles() {
             const pauseParticles = () => window.tsParticles?.domItem(0)?.pause(); const resumeParticles = () => window.tsParticles?.domItem(0)?.play();
@@ -522,6 +651,21 @@
                 const isTier0 = tier0Eng.has(charData.engName); img.classList.add(isTier0 ? 'super-rare' : 'rare'); badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge'); 
             }
             container.appendChild(img); if (charData.count > 1) { badge.textContent = `x${charData.count}`; container.appendChild(badge); }
+            
+            // NEW: Attach events for Selector Tooltip
+            if (charData.engName === 'Selector') {
+                container.addEventListener('mouseenter', handleSelectorHover);
+                container.addEventListener('mouseleave', handleSelectorLeave);
+                // Tap to show
+                container.addEventListener('click', handleSelectorClick);
+                // Long press (contextmenu) to show and block system menu
+                container.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showSelectorTooltip(e.currentTarget);
+                });
+            }
+
             return container;
         }
 
@@ -634,6 +778,21 @@
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
                     else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
                     else img.classList.add('extras-character-border');
+                    
+                    // NEW: Attach tooltip events to images in popup
+                    if (charData.engName === 'Selector') {
+                        img.addEventListener('mouseenter', handleSelectorHover);
+                        img.addEventListener('mouseleave', handleSelectorLeave);
+                        // Tap to show
+                        img.addEventListener('click', handleSelectorClick);
+                        // Long press to show and block menu
+                        img.addEventListener('contextmenu', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showSelectorTooltip(e.currentTarget);
+                        });
+                    }
+                    
                     grid.appendChild(img);
                 }
             });
@@ -790,7 +949,20 @@
 
 			const extrasPopup = document.getElementById('extrasPopup'); const closeExtras = document.getElementById('closeExtrasPopup'); const hideExtras = () => { extrasPopup.style.display = 'none'; }; closeExtras.addEventListener('click', hideExtras);
             const detailPopup = document.getElementById('itemDetailPopup'); const closeDetail = document.getElementById('closeItemDetailPopup'); const hideDetail = () => { detailPopup.style.display = 'none'; }; closeDetail.addEventListener('click', hideDetail);
-			window.addEventListener('click', e => { if (e.target == extrasPopup) hideExtras(); if (e.target == detailPopup) hideDetail(); if (e.target == document.getElementById('screenOverlay')) closeAdvancedSearchModal(); });
+			
+            window.addEventListener('click', e => { 
+                if (e.target == extrasPopup) hideExtras(); 
+                if (e.target == detailPopup) hideDetail(); 
+                if (e.target == document.getElementById('screenOverlay')) closeAdvancedSearchModal();
+                
+                // Hide tooltip if clicking outside
+                if (!e.target.closest('#selectorTooltip') && 
+                    !e.target.closest('.image-with-count-container') && 
+                    !e.target.closest('.detail-popup-img')) {
+                    hideSelectorTooltip();
+                }
+            });
+
             window.addEventListener('keydown', e => { if (e.key === 'Escape') { if (extrasPopup.style.display === 'flex') hideExtras(); if (detailPopup.style.display === 'flex') hideDetail(); if (document.getElementById('advancedSearchModal').classList.contains('visible')) closeAdvancedSearchModal(); } });
             const resultsContainer = document.getElementById('results'); if (resultsContainer) resultsContainer.addEventListener('scroll', resetAllScrolledItems);
             document.body.addEventListener('click', e => { if (!e.target.closest('.result-item')) resetAllScrolledItems(); });
