@@ -625,7 +625,7 @@
                     if (remainingItemsData.length > 0 || tier2ImageData.length > 0) { item.classList.add('lazy-load-item'); item.dataset.remainingItems = JSON.stringify(remainingItemsData); item.dataset.tier2Items = JSON.stringify(tier2ImageData); }
                 }
                 if (tier2ImageData.length > 0 && allImportantItemsData.length === 0) { item.classList.add('lazy-load-item'); item.dataset.tier2Items = JSON.stringify(tier2ImageData); }
-                const priceBox = document.createElement('div'); priceBox.className = 'price-box'; const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1400 / 1000) * 1000;
+                const priceBox = document.createElement('div'); priceBox.className = 'price-box'; const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1450 / 1000) * 1000;
                 priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
                 rightSection.appendChild(priceBox);
                 
@@ -797,7 +797,7 @@
                 }
             });
             document.getElementById('popup-total-count-value').textContent = itemDetails.totalCount; document.getElementById('popup-ruby-info-value').textContent = '340,000+';
-            const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1400 / 1000) * 1000;
+            const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1450 / 1000) * 1000;
             document.getElementById('popup-price-usd').textContent = `$${usdPrice}`; document.getElementById('popup-price-krw').textContent = `₩ ${krwPriceRounded.toLocaleString()}`;
             popup.style.display = 'flex'; copyToClipboard(itemKey);
         }
