@@ -19,27 +19,50 @@
         body.advanced-search-active > *:not(#results):not(#advancedSearchBtn):not(#tsparticles):not(#loader):not(#copyMessage):not([id*="Popup"]):not(#selectorTooltip) { filter: blur(8px) brightness(0.4); pointer-events: none; transition: filter 0.3s ease; }
         body.advanced-search-active #results { opacity: 1 !important; }
 	    h1 { text-align: center; margin-bottom: 30px; font-family: 'Poppins', sans-serif; font-size: 2.5em; color: #ff4081; text-shadow: 2px 2px 4px rgba(255,255,255,0.2); position: relative; z-index: 1; }
-	    .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); gap: 20px; margin-bottom: 30px; position: relative; z-index: 1; transform: translateZ(0); }
-	    .character-box { background: rgba(26,26,26,0.2); border: none; padding: 15px; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; position: relative; height: 160px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1; transform: translateZ(0); }
+	    
+        /* --- UPDATED CHARACTER GRID STYLES (Halfway Size) START --- */
+        /* Grid Column: 120px(Original) -> 90px(Compact) -> 105px(Current) */
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); gap: 18px; margin-bottom: 30px; position: relative; z-index: 1; transform: translateZ(0); }
+	    
+        /* Box Height: 160px(Original) -> 115px(Compact) -> 135px(Current) */
+        .character-box { 
+            background: rgba(26,26,26,0.2); border: none; padding: 12px 8px; 
+            text-align: center; display: flex; flex-direction: column; align-items: center; 
+            cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; 
+            position: relative; height: 135px; 
+            border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1; transform: translateZ(0); 
+        }
         .character-box.rare, .adv-char-box.rare { border: 2px solid #ff9800; box-shadow: 0 0 15px rgba(255,152,0,0.5); }
         .character-box.super-rare, .adv-char-box.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 15px rgba(211, 47, 47, 0.5); }
         .character-box.legendary-item, .adv-char-box.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
         .extras-character-border, .adv-char-box.extras-character-border { border: 2px solid #b0b0b0; box-shadow: 0 0 10px rgba(176, 176, 176, 0.3); }
-	    .character-box.selected { background-color: rgba(255,64,129,0.9); box-shadow: 0 0 20px rgba(255,64,129,0.7), 0 8px 20px rgba(255,64,129,0.8); transform: translateY(-5px); z-index: 2; }
-	    @media (hover: hover) and (pointer: fine) {
+	    .character-box.selected { background-color: rgba(255,64,129,0.9); box-shadow: 0 0 20px rgba(255,64,129,0.7), 0 8px 20px rgba(255,64,129,0.8); transform: translateY(-4px); z-index: 2; }
+	    
+        @media (hover: hover) and (pointer: fine) {
 	        .character-box:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255,255,255,0.2); z-index: 10; transition: transform 0.3s, box-shadow 0.3s; }
 	        .result-item:hover { background: linear-gradient(135deg, #33363d, #2a2c30); box-shadow: 0 6px 25px rgba(0,0,0,0.7), 0 0 10px rgba(255, 64, 129, 0.4); transform: translateY(-3px); border-color: rgba(255, 64, 129, 0.5); }
 			.result-item:hover::before { opacity: 1; }
 			.extras-box:hover { background: rgba(176, 176, 176, 0.2); border-color: rgba(176, 176, 176, 0.8); }
 	    }
-	    .character-img { width: 80px; height: 90px; object-fit: cover; margin-bottom: 10px; border-radius: 10px; transition: transform 0.3s; transform: translateZ(0); backface-visibility: hidden; }
-	    .character-name { font-size: 16px; margin-bottom: 10px; font-weight: 700; color: #fff; line-height: 1.2; }
-        .costume-label { display: block; font-size: 10px; font-weight: normal; color: #FFD700; margin-top: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+
+        /* Image Size: 80x90(Original) -> 60x70(Compact) -> 70x80(Current) */
+	    .character-img { width: 70px; height: 80px; object-fit: cover; margin-bottom: 8px; border-radius: 9px; transition: transform 0.3s; transform: translateZ(0); backface-visibility: hidden; }
+	    
+        /* Name Logic: Font 14px (Between 13px and 16px) */
+        .character-name { font-size: 14px; margin-bottom: 0; font-weight: 700; color: #fff; line-height: 1.2; display: block; word-break: break-word; padding: 0 2px; }
+        .character-box.selected .character-name { display: none; }
         
-	    .spinbox-container { width: 80%; visibility: hidden; opacity: 0; transition: visibility 0.3s, opacity 0.3s, transform 0.3s; justify-content: center; margin-top: -5px; transform: translateY(-10px); }
-	    .character-box.selected .spinbox-container { visibility: visible; opacity: 1; transform: translateY(0); }
-	    .spinbox-container input[type="number"] { width: 50px; padding: 5px; border: 1px solid #555; border-radius: 8px; text-align: center; font-size: 14px; background-color: #1e1e1e; color: #e0e0e0; transition: border-color 0.3s, box-shadow 0.3s; }
-	    .spinbox-container input[type="number"]:focus { border-color: #ff4081; box-shadow: 0 0 5px rgba(255,64,129,0.5); outline: none; background-color: #2a2a2a; }
+        .costume-label { display: block; font-size: 9px; font-weight: normal; color: #FFD700; margin-top: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+        
+        /* Spinbox Logic */
+	    .spinbox-container { width: 85%; display: none; justify-content: center; margin-top: 8px; }
+	    .character-box.selected .spinbox-container { display: flex; animation: fadeIn 0.2s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+	    .spinbox-container input[type="number"] { width: 100%; padding: 6px 2px; border: 1px solid #fff; border-radius: 6px; text-align: center; font-size: 16px; font-weight: bold; background-color: #fff; color: #000; transition: border-color 0.3s, box-shadow 0.3s; }
+	    .spinbox-container input[type="number"]:focus { border-color: #ff4081; box-shadow: 0 0 5px rgba(255,64,129,0.5); outline: none; }
+        /* --- UPDATED CHARACTER GRID STYLES END --- */
+
 	    #filterButton { display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px; margin: 25px 0 15px 0; font-size: 18px; cursor: pointer; background: linear-gradient(45deg, #ff4081, #f50057); color: #fff; border: none; border-radius: 30px; box-shadow: 0 4px 16px rgba(255,64,129,0.6); transition: all 0.3s; font-family: 'Poppins', sans-serif; font-weight: 600; position: relative; z-index: 1; transform: translateZ(0); }
 	    #filterButton:hover { background: linear-gradient(45deg, #ff4081, #f50057); box-shadow: 0 6px 20px rgba(255,64,129,0.8); transform: translateY(-3px); }
 	    #filterButton:active { transform: translateY(0); box-shadow: 0 4px 16px rgba(255,64,129,0.6); }
@@ -73,7 +96,7 @@
         .small-character-img.legendary-item, .detail-popup-img.legendary-item { border: 2px solid #D4AF37; }
         .detail-popup-img.extras-character-border { border: 2px solid #b0b0b0; }
 	    body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/dark-matter.png') repeat; opacity: 0.1; z-index: -1; }
-	    .character-box::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/gplay.png') repeat; opacity: 0.5; border-radius: 15px; pointer-events: none; z-index: 0; }
+	    .character-box::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/gplay.png') repeat; opacity: 0.5; border-radius: 14px; pointer-events: none; z-index: 0; }
 	    .character-box > * { position: relative; z-index: 1; }
         .image-with-count-container { position: relative; display: inline-block; vertical-align: middle; flex-shrink: 0; }
 		.image-count-badge { position: absolute; bottom: -5px; right: -5px; min-width: 22px; text-align: center; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); color: #fff; padding: 2px 7px; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; line-height: 1.4; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0,0,0,0.6); pointer-events: none; }
@@ -177,13 +200,13 @@
         .adv-char-box.rare .new-character-placeholder { color: #ffc107; text-shadow: 0 0 8px rgba(255, 193, 7, 0.7); box-shadow: inset 0 0 10px rgba(255, 152, 0, 0.5); }
         .adv-char-box.legendary-item .new-character-placeholder { color: #FFD700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.8); box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.6); }
         .adv-char-box.extras-character-border .new-character-placeholder { color: #e0e0e0; text-shadow: 0 0 5px rgba(224, 224, 224, 0.5); box-shadow: inset 0 0 8px rgba(176, 176, 176, 0.3); }
-        .character-box .new-character-placeholder { width: 80px; height: 90px; font-size: 22px; margin-bottom: 10px; }
+        .character-box .new-character-placeholder { width: 70px; height: 80px; font-size: 18px; margin-bottom: 8px; }
         .adv-char-box .new-character-placeholder { width: 60px; height: 70px; margin-bottom: 8px; font-size: 16px; }
         .image-with-count-container .new-character-placeholder { height: 60px; width: 45px; min-width: 45px; font-size: 14px; }
         #extras-popup-grid .new-character-placeholder { height: 60px; width: 45px; font-size: 14px; }
         #item-detail-popup-grid .new-character-placeholder { height: 55px; width: 45px; font-size: 12px; }
         
-        /* NEW: Selector Tooltip Styles */
+        /* Selector Tooltip Styles */
         #selectorTooltip {
             position: fixed;
             display: none;
@@ -234,12 +257,12 @@
         }
 
 	    @media (max-width: 768px) {
-			.character-grid { grid-template-columns: repeat(auto-fill, minmax(80px,1fr)); gap: 10px; }
-	        .character-box { height: 125px; padding: 8px; }
-	        .character-box .character-img, .character-box .new-character-placeholder { width: 60px; height: 70px; margin-bottom: 5px; }
-	        .character-box .character-name { font-size: 14px; }
+			.character-grid { grid-template-columns: repeat(auto-fill, minmax(85px,1fr)); gap: 10px; }
+	        .character-box { height: 115px; padding: 6px 4px; }
+	        .character-box .character-img, .character-box .new-character-placeholder { width: 55px; height: 65px; margin-bottom: 6px; }
+	        .character-box .character-name { font-size: 12px; }
             .costume-label { font-size: 8px; }
-	        .spinbox-container input[type="number"] { width: 45px; }
+	        .spinbox-container input[type="number"] { font-size: 14px; padding: 4px 2px; }
 	        #filterButton, #advancedSearchBtn { font-size: 16px; padding: 12px; }
 	        .result-item { padding: 12px; flex-wrap: wrap; }
             .item-images-wrapper, .result-info-right { flex-basis: 100%; }
@@ -318,7 +341,7 @@
         </div>
     </div>
     
-    <!-- NEW: Tooltip Container -->
+    <!-- Tooltip Container -->
     <div id="selectorTooltip">
         <div class="tooltip-title">Seven Knights Selector</div>
         <div class="tooltip-grid" id="selectorTooltipGrid"></div>
@@ -366,7 +389,7 @@
                 .catch(error => { console.error('Initial filter application error:', error); loader.classList.add('hidden'); setTimeout(() => loader.style.display = 'none', 500); });
         });
 
-        // --- NEW: Selector Tooltip Logic ---
+        // --- Selector Tooltip Logic ---
         const sevenKnightsList = [
             { eng: 'Rudy', kor: '루디' },
             { eng: 'Kris', kor: '크리스' },
@@ -652,7 +675,7 @@
             }
             container.appendChild(img); if (charData.count > 1) { badge.textContent = `x${charData.count}`; container.appendChild(badge); }
             
-            // NEW: Attach events for Selector Tooltip
+            // Attach events for Selector Tooltip
             if (charData.engName === 'Selector') {
                 container.addEventListener('mouseenter', handleSelectorHover);
                 container.addEventListener('mouseleave', handleSelectorLeave);
@@ -779,7 +802,7 @@
                     else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
                     else img.classList.add('extras-character-border');
                     
-                    // NEW: Attach tooltip events to images in popup
+                    // Attach tooltip events to images in popup
                     if (charData.engName === 'Selector') {
                         img.addEventListener('mouseenter', handleSelectorHover);
                         img.addEventListener('mouseleave', handleSelectorLeave);
