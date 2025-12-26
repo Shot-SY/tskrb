@@ -46,7 +46,13 @@
 	    .character-img { width: 70px; height: 80px; object-fit: cover; margin-bottom: 8px; border-radius: 9px; transition: transform 0.3s; transform: translateZ(0); backface-visibility: hidden; }
 	    
         .character-name { font-size: 14px; margin-bottom: 0; font-weight: 700; color: #fff; line-height: 1.2; display: block; word-break: break-word; padding: 0 2px; }
+        
+        /* Default: Hide name when selected to show spinbox */
         .character-box.selected .character-name { display: none; }
+
+        /* EXCEPTION: Keep name visible for Teo TS and Yeonhee IDOL when selected */
+        .character-box.selected[data-eng-name="TeoTS"] .character-name,
+        .character-box.selected[data-eng-name="YeonheeIDOL"] .character-name { display: block; }
         
         .costume-label { display: block; font-size: 9px; font-weight: normal; color: #FFD700; margin-top: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
         
