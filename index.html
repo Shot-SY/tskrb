@@ -159,8 +159,10 @@
         .popup-info-box { font-family: 'Poppins', sans-serif; flex: 1; }
         .footer-label { font-size: 14px; color: #bdc3c7; }
         .footer-value { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-        #popup-total-count-value { color: #ff9800; text-shadow: 0 0 8px rgba(255, 152, 0, 0.6); }
-        #popup-ruby-info-value { color: #ff5252; text-shadow: 0 0 8px rgba(255, 82, 82, 0.6); }
+        /* NEW STYLES for Popup Footer */
+        #popup-ruby-value { color: #ff5252; text-shadow: 0 0 8px rgba(255, 82, 82, 0.6); }
+        #popup-keybox-value { color: #d500f9; text-shadow: 0 0 8px rgba(213, 0, 249, 0.6); } /* Purple for KeyBoxes */
+        #popup-ticket-value { color: #ff9800; text-shadow: 0 0 8px rgba(255, 152, 0, 0.6); }
         #popup-price-usd { font-size: 22px; font-weight: 700; color: #2ecc71; text-shadow: 0 0 8px rgba(46, 204, 113, 0.5); margin-bottom: 4px; }
         #popup-price-krw { font-size: 14px; color: #bdc3c7; }
 		#screenOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 3000; opacity: 0; transition: opacity 0.3s ease-in-out; }
@@ -352,8 +354,19 @@
             <span class="close-button" id="closeItemDetailPopup">×</span>
             <div id="item-detail-popup-grid"></div>
             <div class="item-detail-popup-footer">
-                <div class="popup-info-box"><div class="footer-value" id="popup-total-count-value"></div><div class="footer-label">Items</div></div>
-                <div class="popup-info-box"><div class="footer-value" id="popup-ruby-info-value"></div><div class="footer-label">Ruby</div></div>
+                <div class="popup-info-box">
+                    <div class="footer-value" id="popup-ruby-value"></div>
+                    <div class="footer-label">Ruby</div>
+                </div>
+                <!-- Added KeyBoxes Section -->
+                <div class="popup-info-box">
+                    <div class="footer-value" id="popup-keybox-value"></div>
+                    <div class="footer-label">KeyBoxes</div>
+                </div>
+                <div class="popup-info-box">
+                    <div class="footer-value" id="popup-ticket-value"></div>
+                    <div class="footer-label">Tickets</div>
+                </div>
                 <div class="popup-info-box"><div id="popup-price-usd"></div><div id="popup-price-krw"></div></div>
             </div>
         </div>
@@ -774,6 +787,12 @@
 		function showExtrasPopup(images) { const popup = document.getElementById('extrasPopup'); const grid = document.getElementById('extras-popup-grid'); grid.innerHTML = ''; images.forEach(charData => { const container = document.createElement('div'); container.className = 'image-with-count-container'; container.innerHTML = `<img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`; grid.appendChild(container); }); popup.style.display = 'flex'; }
 
         function showItemDetailPopup(itemKey) {
+            // --- Configuration for Popup Values ---
+            const displayRubyCount = '230,000';
+            const displayKeyBoxCount = '300';
+            const displayTicketCount = '2,300';
+            // --------------------------------------
+
             const popup = document.getElementById('itemDetailPopup'); const grid = document.getElementById('item-detail-popup-grid');
             grid.innerHTML = ''; grid.scrollTop = 0;
             const charValue = luaData[itemKey]; const itemDetails = itemDetailsMap[itemKey]; let allItemsData = [];
@@ -837,7 +856,12 @@
                     grid.appendChild(img);
                 }
             });
-            document.getElementById('popup-total-count-value').textContent = itemDetails.totalCount; document.getElementById('popup-ruby-info-value').textContent = '470,000+';
+            
+            // Set values based on configuration variables
+            document.getElementById('popup-ruby-value').textContent = displayRubyCount;
+            document.getElementById('popup-keybox-value').textContent = displayKeyBoxCount; // Set KeyBox Value
+            document.getElementById('popup-ticket-value').textContent = displayTicketCount;
+            
             const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1450 / 1000) * 1000;
             document.getElementById('popup-price-usd').textContent = `$${usdPrice}`; document.getElementById('popup-price-krw').textContent = `₩ ${krwPriceRounded.toLocaleString()}`;
             popup.style.display = 'flex'; copyToClipboard(itemKey);
