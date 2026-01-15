@@ -163,8 +163,8 @@
         #popup-ruby-value { color: #ff5252; text-shadow: 0 0 8px rgba(255, 82, 82, 0.6); }
         #popup-keybox-value { color: #d500f9; text-shadow: 0 0 8px rgba(213, 0, 249, 0.6); } /* Purple for KeyBoxes */
         #popup-ticket-value { color: #ff9800; text-shadow: 0 0 8px rgba(255, 152, 0, 0.6); }
-        #popup-price-usd { font-size: 22px; font-weight: 700; color: #2ecc71; text-shadow: 0 0 8px rgba(46, 204, 113, 0.5); margin-bottom: 4px; }
-        #popup-price-krw { font-size: 14px; color: #bdc3c7; }
+        #popup-heroes-value { color: #00e5ff; text-shadow: 0 0 8px rgba(0, 229, 255, 0.6); } /* Cyan for Hero Count */
+        
 		#screenOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 3000; opacity: 0; transition: opacity 0.3s ease-in-out; }
 		#screenOverlay.visible { display: block; opacity: 1; }
 		#advancedSearchModal { display: none; position: fixed; z-index: 4000; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.95); width: 90%; max-width: 900px; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; }
@@ -277,39 +277,40 @@
         }
 
 	    @media (max-width: 768px) {
-			.character-grid { grid-template-columns: repeat(auto-fill, minmax(85px,1fr)); gap: 10px; }
-	        .character-box { height: 115px; padding: 6px 4px; }
-	        .character-box .character-img, .character-box .new-character-placeholder { width: 55px; height: 65px; margin-bottom: 6px; }
-	        .character-box .character-name { font-size: 12px; }
-            .costume-label { font-size: 8px; }
-	        .spinbox-container input[type="number"] { font-size: 14px; padding: 4px 2px; }
+            body { padding: 20px 5px; } 
+			.character-grid { grid-template-columns: repeat(auto-fill, minmax(66px,1fr)); gap: 4px; }
+	        .character-box { height: 105px; padding: 5px 2px; }
+	        .character-box .character-img, .character-box .new-character-placeholder { width: 46px; height: 56px; margin-bottom: 4px; }
+	        .character-box .character-name { font-size: 10px; letter-spacing: -0.5px; }
+            .costume-label { font-size: 7px; }
+	        .spinbox-container input[type="number"] { font-size: 12px; padding: 2px 0; height: 20px; }
 	        #filterButton, #advancedSearchBtn { font-size: 16px; padding: 12px; }
-	        .result-item { padding: 12px; flex-wrap: wrap; }
+	        .result-item { padding: 10px; flex-wrap: wrap; gap: 10px; }
             .item-images-wrapper, .result-info-right { flex-basis: 100%; }
 			.result-info-right { justify-content: flex-end; }
 			.price-box { flex-grow: 1; align-items: center; background: rgba(39, 174, 96, 0.1); min-width: 0; }
-			.small-character-img, .extras-box, .price-box, .image-with-count-container .new-character-placeholder { height: 54px; }
+			.small-character-img, .extras-box, .price-box, .image-with-count-container .new-character-placeholder { height: 50px; }
 	        .item-images { gap: 6px; }
 			.scroll-indicator { display: none !important; }
-            .item-images-wrapper.has-scroll::before, .item-images-wrapper.has-scroll::after { width: 60px; }
-	        #copyInstruction { font-size: 1em; }
-	        #copyMessage { font-size: 1em; padding: 15px 20px; }
-			.extras-box .item-title { font-size: 12px; }
-			.price-box .price-usd { font-size: 19px; }
-			.price-box .price-krw { font-size: 12px; }
-			.target-total-box { min-width: 80px; }
-			.target-total-value { font-size: 19px; }
-			.target-total-label { font-size: 12px; }
-			.extras-popup-content, .item-detail-popup-content, .advanced-search-content { width: 95%; padding: 15px; }
-            #item-detail-popup-grid { gap: 5px; padding: 15px 5px 15px; }
-            .detail-popup-img, #item-detail-popup-grid .new-character-placeholder { height: 45px; }
-            .item-detail-popup-footer { gap: 10px; }
-            .footer-label { font-size: 12px; }
-            .footer-value, #popup-price-usd { font-size: 18px; }
-            #popup-price-krw { font-size: 12px; }
-			#advanced-search-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; }
-			.adv-char-box .character-img, .adv-char-box .new-character-placeholder { width: 50px; height: 60px; }
-			.adv-char-name { font-size: 12px; }
+            .item-images-wrapper.has-scroll::before, .item-images-wrapper.has-scroll::after { width: 50px; }
+	        #copyInstruction { font-size: 0.9em; }
+	        #copyMessage { font-size: 0.9em; padding: 12px 18px; }
+			.extras-box .item-title { font-size: 11px; }
+			.price-box .price-usd { font-size: 18px; }
+			.price-box .price-krw { font-size: 11px; }
+			.target-total-box { min-width: 70px; }
+			.target-total-value { font-size: 18px; }
+			.target-total-label { font-size: 11px; }
+			.extras-popup-content, .item-detail-popup-content, .advanced-search-content { width: 96%; padding: 12px; }
+            #item-detail-popup-grid { gap: 4px; padding: 10px 2px; }
+            .detail-popup-img, #item-detail-popup-grid .new-character-placeholder { height: 42px; }
+            .item-detail-popup-footer { gap: 8px; }
+            .footer-label { font-size: 11px; }
+            .footer-value { font-size: 16px; }
+            
+			#advanced-search-grid { grid-template-columns: repeat(auto-fill, minmax(66px, 1fr)); gap: 5px; }
+			.adv-char-box .character-img, .adv-char-box .new-character-placeholder { width: 46px; height: 56px; }
+			.adv-char-name { font-size: 10px; }
 			#results {
                 height: 75vh;
                 max-height: 75vh;
@@ -367,7 +368,10 @@
                     <div class="footer-value" id="popup-ticket-value"></div>
                     <div class="footer-label">Tickets</div>
                 </div>
-                <div class="popup-info-box"><div id="popup-price-usd"></div><div id="popup-price-krw"></div></div>
+                <div class="popup-info-box">
+                    <div class="footer-value" id="popup-heroes-value"></div>
+                    <div class="footer-label">Heroes</div>
+                </div>
             </div>
         </div>
     </div>
@@ -862,8 +866,16 @@
             document.getElementById('popup-keybox-value').textContent = displayKeyBoxCount; // Set KeyBox Value
             document.getElementById('popup-ticket-value').textContent = displayTicketCount;
             
-            const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1450 / 1000) * 1000;
-            document.getElementById('popup-price-usd').textContent = `$${usdPrice}`; document.getElementById('popup-price-krw').textContent = `₩ ${krwPriceRounded.toLocaleString()}`;
+            // Calculate Hero Count (Sum of all character counts in luaData)
+            // Note: luaData contains raw counts like Rudy1, Kris2.
+            // It does NOT include Costumes (stored as separate bools) or Selector (hardcoded).
+            const heroCount = Object.values(charValue).reduce((a, b) => a + b, 0);
+            
+            // Update the Heroes element
+            document.getElementById('popup-heroes-value').textContent = heroCount;
+            
+            // Original price code removed from popup as requested
+            
             popup.style.display = 'flex'; copyToClipboard(itemKey);
         }
 
