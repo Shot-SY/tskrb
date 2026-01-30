@@ -797,7 +797,7 @@
 		function showExtrasPopup(images) { const popup = document.getElementById('extrasPopup'); const grid = document.getElementById('extras-popup-grid'); grid.innerHTML = ''; images.forEach(charData => { const container = document.createElement('div'); container.className = 'image-with-count-container'; container.innerHTML = `<img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`; grid.appendChild(container); }); popup.style.display = 'flex'; }
 
         function showItemDetailPopup(itemKey) {
-            const displayRubyCount = '280,000';
+            const displayRubyCount = '290,000';
             const displayKeyBoxCount = '200';
             const displayTicketCount = '2,700';
 
