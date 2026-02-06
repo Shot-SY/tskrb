@@ -11,6 +11,7 @@ freyja 프레이야
 kyle 카일
 melkir 멜키르
 biscuit 비스킷
+lubu 여포
 pallanus 팔라누스
 trude 트루드
 kagura 카구라
@@ -28,6 +29,7 @@ karma 카르마
 platen 플라튼
 kiriel 키리엘
 akila 아킬라
+xiaoqiao 소교
 diaochan 초선
 baijiao 백각
 ryan 라이언
