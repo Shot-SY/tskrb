@@ -17,7 +17,6 @@ trude 트루드
 kagura 카구라
 elysia 엘리시아
 branzebransel 브란즈브란셀
-amelia 아멜리아
 lina 리나
 pascal 파스칼
 shane 세인
@@ -29,6 +28,7 @@ karma 카르마
 platen 플라튼
 kiriel 키리엘
 akila 아킬라
+amelia 아멜리아
 xiaoqiao 소교
 diaochan 초선
 baijiao 백각
