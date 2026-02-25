@@ -547,25 +547,22 @@
             yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">yeonhee IDOL<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             yeonheeIdolBox.addEventListener('click', () => toggleSelection(yeonheeIdolBox));
             
-            // TRUDE ROCK 스킨 추가
             const trudeRockBox = document.createElement('div'); trudeRockBox.className = 'character-box legendary-item'; trudeRockBox.dataset.engName = 'TrudeROCK';
             trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">trude ROCK<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             trudeRockBox.addEventListener('click', () => toggleSelection(trudeRockBox));
 
-            let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
-            if (teoBoxNode) {
-                fragment.insertBefore(teoTsBox, teoBoxNode);
-                fragment.insertBefore(yeonheeIdolBox, teoBoxNode);
+            // 스킨들을 jury(쥬리) 뒤에 순서대로 배치 (태오 -> 연희 -> 트루드)
+            let juryBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'jury');
+            if (juryBoxNode) {
+                let nextNode = juryBoxNode.nextSibling;
+                fragment.insertBefore(teoTsBox, nextNode);
+                fragment.insertBefore(yeonheeIdolBox, nextNode);
+                fragment.insertBefore(trudeRockBox, nextNode);
             } else {
+                // fallback
                 fragment.insertBefore(teoTsBox, fragment.firstChild);
                 fragment.insertBefore(yeonheeIdolBox, fragment.firstChild.nextSibling);
-            }
-            
-            let trudeBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'trude');
-            if (trudeBoxNode) {
-                fragment.insertBefore(trudeRockBox, trudeBoxNode);
-            } else {
-                fragment.insertBefore(trudeRockBox, fragment.firstChild.nextSibling);
+                fragment.insertBefore(trudeRockBox, fragment.firstChild.nextSibling.nextSibling);
             }
             
             grid.appendChild(fragment);
@@ -674,36 +671,22 @@
                     const imageData = { type: 'character', src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: charValue[charName], originalIndex: originalIndex };
                     if (tier0Characters.some(c => c[0] === engName) || tier1Characters.some(c => c[0] === engName)) { allImportantItemsData.push(imageData); } else { tier2ImageData.push(imageData); }
                 }
-                allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
-                // 삽입 로직
+                // 스킨들의 인덱스를 jury 기준으로 할당하여 정렬시 딱 jury 다음에 위치하게 함
+                const juryIndex = characters.findIndex(([eng]) => eng.toLowerCase() === 'jury');
+                const baseSkinIndex = juryIndex !== -1 ? juryIndex : 4; // jury가 없으면 기본값 4
+                
                 if (itemDetails.teoCostume) {
-                    const teoTsData = { type: 'character', src: 'Portrait/태오ts스킨.png', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1 };
-                    const teoIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
-                    if (teoIndex !== -1) { allImportantItemsData.splice(teoIndex, 0, teoTsData); } else { allImportantItemsData.unshift(teoTsData); }
+                    allImportantItemsData.push({ type: 'character', src: 'Portrait/태오ts스킨.png', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1, originalIndex: baseSkinIndex + 0.1 });
                 }
-                
                 if (itemDetails.yeonheeCostume) {
-                    const yhIdolData = { type: 'character', src: 'Portrait/연희idol스킨.png', alt: '연희 IDOL', engName: 'YeonheeIDOL', count: 1 };
-                    const teoTsIndex = allImportantItemsData.findIndex(item => item.engName === 'TeoTS');
-                    
-                    if (teoTsIndex !== -1) {
-                         allImportantItemsData.splice(teoTsIndex + 1, 0, yhIdolData);
-                    } else {
-                         const teoIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
-                         if (teoIndex !== -1) {
-                             allImportantItemsData.splice(teoIndex, 0, yhIdolData);
-                         } else {
-                             allImportantItemsData.unshift(yhIdolData);
-                         }
-                    }
+                    allImportantItemsData.push({ type: 'character', src: 'Portrait/연희idol스킨.png', alt: '연희 IDOL', engName: 'YeonheeIDOL', count: 1, originalIndex: baseSkinIndex + 0.2 });
+                }
+                if (itemDetails.trudeCostume) {
+                    allImportantItemsData.push({ type: 'character', src: 'Portrait/트루드rockstar스킨.png', alt: '트루드 ROCK', engName: 'TrudeROCK', count: 1, originalIndex: baseSkinIndex + 0.3 });
                 }
 
-                if (itemDetails.trudeCostume) {
-                    const trudeRockData = { type: 'character', src: 'Portrait/트루드rockstar스킨.png', alt: '트루드 ROCK', engName: 'TrudeROCK', count: 1 };
-                    const trudeIndex = allImportantItemsData.findIndex(item => item.engName.toLowerCase() === 'trude');
-                    if (trudeIndex !== -1) { allImportantItemsData.splice(trudeIndex, 0, trudeRockData); } else { allImportantItemsData.unshift(trudeRockData); }
-                }
+                allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
@@ -839,31 +822,17 @@
                 allItemsData.push({ src: `Portrait/${korName}.png`, alt: korName, engName, count: charValue[charName], originalIndex });
             }
             
-            if (itemDetails.teoCostume) {
-                const teoTsData = { src: 'Portrait/태오ts스킨.png', alt: 'TS', engName: 'TeoTS', count: 1 };
-                const teoIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
-                if (teoIndex !== -1) allItemsData.splice(teoIndex, 0, teoTsData); else allItemsData.unshift(teoTsData);
-            }
-            
-            if (itemDetails.yeonheeCostume) {
-                const yhIdolData = { src: 'Portrait/연희idol스킨.png', alt: 'IDOL', engName: 'YeonheeIDOL', count: 1 };
-                const teoTsIndex = allItemsData.findIndex(item => item.engName === 'TeoTS');
-                if (teoTsIndex !== -1) {
-                    allItemsData.splice(teoTsIndex + 1, 0, yhIdolData);
-                } else {
-                    const teoIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'teo');
-                    if (teoIndex !== -1) {
-                         allItemsData.splice(teoIndex, 0, yhIdolData);
-                    } else {
-                         allItemsData.unshift(yhIdolData);
-                    }
-                }
-            }
+            const juryIndex = characters.findIndex(([e]) => e.toLowerCase() === 'jury');
+            const baseSkinIndex = juryIndex !== -1 ? juryIndex : 4;
 
+            if (itemDetails.teoCostume) {
+                allItemsData.push({ src: 'Portrait/태오ts스킨.png', alt: 'TS', engName: 'TeoTS', count: 1, originalIndex: baseSkinIndex + 0.1 });
+            }
+            if (itemDetails.yeonheeCostume) {
+                allItemsData.push({ src: 'Portrait/연희idol스킨.png', alt: 'IDOL', engName: 'YeonheeIDOL', count: 1, originalIndex: baseSkinIndex + 0.2 });
+            }
             if (itemDetails.trudeCostume) {
-                const trudeRockData = { src: 'Portrait/트루드rockstar스킨.png', alt: 'ROCK', engName: 'TrudeROCK', count: 1 };
-                const trudeIndex = allItemsData.findIndex(item => item.engName.toLowerCase() === 'trude');
-                if (trudeIndex !== -1) allItemsData.splice(trudeIndex, 0, trudeRockData); else allItemsData.unshift(trudeRockData);
+                allItemsData.push({ src: 'Portrait/트루드rockstar스킨.png', alt: 'ROCK', engName: 'TrudeROCK', count: 1, originalIndex: baseSkinIndex + 0.3 });
             }
 
             allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
@@ -930,20 +899,16 @@
             trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">trude ROCK<span class="costume-label">(Limited Costume)</span></span>`;
             trudeRockBox.addEventListener('click', () => trudeRockBox.classList.toggle('selected'));
 
-            let teoBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'teo');
-            if (teoBoxNode) {
-                fragment.insertBefore(teoTsBox, teoBoxNode);
-                fragment.insertBefore(yeonheeIdolBox, teoBoxNode);
+            let juryBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'jury');
+            if (juryBoxNode) {
+                let nextNode = juryBoxNode.nextSibling;
+                fragment.insertBefore(teoTsBox, nextNode);
+                fragment.insertBefore(yeonheeIdolBox, nextNode);
+                fragment.insertBefore(trudeRockBox, nextNode);
             } else {
                 fragment.insertBefore(teoTsBox, fragment.firstChild);
                 fragment.insertBefore(yeonheeIdolBox, fragment.firstChild.nextSibling);
-            }
-            
-            let trudeBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'trude');
-            if (trudeBoxNode) {
-                fragment.insertBefore(trudeRockBox, trudeBoxNode);
-            } else {
-                fragment.insertBefore(trudeRockBox, fragment.firstChild.nextSibling);
+                fragment.insertBefore(trudeRockBox, fragment.firstChild.nextSibling.nextSibling);
             }
             
 			grid.appendChild(fragment);
@@ -1048,7 +1013,6 @@
 			document.getElementById('adv-search-reset').addEventListener('click', () => { document.querySelectorAll('#advanced-search-grid .adv-char-box.selected').forEach(box => box.classList.remove('selected')); });
 			document.getElementById('adv-search-execute').addEventListener('click', executeAdvancedSearch);
             document.getElementById('adv-search-recommend').addEventListener('click', () => {
-                // 추천 검색에 트루드ROCK 추가
                 const recommendedChars = ['melia', 'gelidus', 'pye', 'rosie', 'jury', 'teots', 'yeonheeidol', 'truderock', 'freyja', 'kyle', 'biscuit', 'lina', 'pascal', 'shane', 'espada'];
                 const allCharBoxes = document.querySelectorAll('#advanced-search-grid .adv-char-box');
                 
