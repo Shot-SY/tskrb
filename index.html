@@ -160,11 +160,10 @@
         .popup-info-box { font-family: 'Poppins', sans-serif; flex: 1; }
         .footer-label { font-size: 14px; color: #bdc3c7; }
         .footer-value { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-        /* NEW STYLES for Popup Footer */
+        
         #popup-ruby-value { color: #ff5252; text-shadow: 0 0 8px rgba(255, 82, 82, 0.6); }
-        #popup-keybox-value { color: #d500f9; text-shadow: 0 0 8px rgba(213, 0, 249, 0.6); } /* Purple for KeyBoxes */
         #popup-ticket-value { color: #ff9800; text-shadow: 0 0 8px rgba(255, 152, 0, 0.6); }
-        #popup-heroes-value { color: #00e5ff; text-shadow: 0 0 8px rgba(0, 229, 255, 0.6); } /* Cyan for Hero Count */
+        #popup-heroes-value { color: #00e5ff; text-shadow: 0 0 8px rgba(0, 229, 255, 0.6); }
         
 		#screenOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 3000; opacity: 0; transition: opacity 0.3s ease-in-out; }
 		#screenOverlay.visible { display: block; opacity: 1; }
@@ -359,11 +358,6 @@
                 <div class="popup-info-box">
                     <div class="footer-value" id="popup-ruby-value"></div>
                     <div class="footer-label">Ruby</div>
-                </div>
-                <!-- Added KeyBoxes Section -->
-                <div class="popup-info-box">
-                    <div class="footer-value" id="popup-keybox-value"></div>
-                    <div class="footer-label">KeyBoxes</div>
                 </div>
                 <div class="popup-info-box">
                     <div class="footer-value" id="popup-ticket-value"></div>
@@ -579,19 +573,44 @@
                 const lines = text.split('\n');
                 lines.forEach(line => {
                     if (!line.trim() || !line.includes('=')) return;
-                    const parts = line.split('='); const pricePart = parts.pop().trim(); const contentPart = parts.join('=').trim(); const contentWords = contentPart.split(/\s+/); const key = contentWords.shift();
                     
-                    const teoCostume = line.toLowerCase().includes('[teo legend costume]');
-                    const yeonheeCostume = line.toLowerCase().includes('[yeonhee legend costume]');
-                    const trudeCostume = line.toLowerCase().includes('[trude legend costume]');
+                    // 재화 메타데이터 파싱
+                    const resMatch = line.match(/\[RES:(.*?)\]/);
+                    let resources = { ruby: 0, tickets: 0 };
+                    let originalTextForCopy = line;
+                    
+                    if (resMatch) {
+                        const resParts = resMatch[1].split(',');
+                        resParts.forEach(part => {
+                            const [k, v] = part.split('=');
+                            resources[k] = parseInt(v, 10) || 0;
+                        });
+                        
+                        // 복사용 문자열을 예쁘게 포맷팅
+                        const formattedRes = ` (Ruby: ${resources.ruby.toLocaleString()}, SummonTickets: ${resources.tickets.toLocaleString()})`;
+                        originalTextForCopy = line.replace(/\[RES:.*?\]/, formattedRes);
+                    }
+
+                    // 메타데이터 제거 후 영웅 정보만 남김
+                    const cleanLine = line.replace(/\[RES:.*?\]/, '');
+                    const parts = cleanLine.split('='); 
+                    const pricePart = parts.pop().trim(); 
+                    const contentPart = parts.join('=').trim(); 
+                    const contentWords = contentPart.split(/\s+/); 
+                    const key = contentWords.shift();
+                    
+                    const teoCostume = cleanLine.toLowerCase().includes('[teo legend costume]');
+                    const yeonheeCostume = cleanLine.toLowerCase().includes('[yeonhee legend costume]');
+                    const trudeCostume = cleanLine.toLowerCase().includes('[trude legend costume]');
                     
                     const itemDetails = { 
-                        originalText: line, 
+                        originalText: originalTextForCopy, 
                         price: parseFloat(pricePart.replace('$', '')), 
                         teoCostume: teoCostume,
                         yeonheeCostume: yeonheeCostume,
                         trudeCostume: trudeCostume,
-                        totalCount: 0 
+                        totalCount: 0,
+                        resources: resources
                     };
                     const currentItemChars = {};
                     contentWords.forEach(word => { const match = word.match(/^([a-zA-Z]+)(\d+)$/); if (match) { const charName = match[1].toLowerCase(); const count = parseInt(match[2]); currentItemChars[charName] = (currentItemChars[charName] || 0) + count; } });
@@ -808,14 +827,17 @@
 		function showExtrasPopup(images) { const popup = document.getElementById('extrasPopup'); const grid = document.getElementById('extras-popup-grid'); grid.innerHTML = ''; images.forEach(charData => { const container = document.createElement('div'); container.className = 'image-with-count-container'; container.innerHTML = `<img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`; grid.appendChild(container); }); popup.style.display = 'flex'; }
 
         function showItemDetailPopup(itemKey) {
-            const displayRubyCount = '320,000';
-            const displayKeyBoxCount = '200';
-            const displayTicketCount = '3,100';
+            const itemDetails = itemDetailsMap[itemKey];
+            const res = itemDetails.resources || { ruby: 0, tickets: 0 };
+            
+            const displayRubyCount = res.ruby.toLocaleString();
+            const displayTicketCount = res.tickets.toLocaleString();
 
             const popup = document.getElementById('itemDetailPopup'); const grid = document.getElementById('item-detail-popup-grid');
             grid.innerHTML = ''; grid.scrollTop = 0;
-            const charValue = luaData[itemKey]; const itemDetails = itemDetailsMap[itemKey]; let allItemsData = [];
+            const charValue = luaData[itemKey]; let allItemsData = [];
             const tier0Eng = new Set(tier0Characters.map(([e]) => e)); const tier1Eng = new Set(tier1Characters.map(([e]) => e));
+            
             for (const charName in charValue) {
                 const charInfo = characters.find(([e]) => e.toLowerCase() === charName); if (!charInfo) continue;
                 const [engName, korName] = charInfo; const originalIndex = characters.findIndex(([e]) => e === engName);
@@ -864,7 +886,6 @@
             });
             
             document.getElementById('popup-ruby-value').textContent = displayRubyCount;
-            document.getElementById('popup-keybox-value').textContent = displayKeyBoxCount;
             document.getElementById('popup-ticket-value').textContent = displayTicketCount;
             const heroCount = Object.values(charValue).reduce((a, b) => a + b, 0);
             document.getElementById('popup-heroes-value').textContent = heroCount;
