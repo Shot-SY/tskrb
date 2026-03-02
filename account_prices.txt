@@ -40,14 +40,14 @@ B1T5  [teo legend costume] [yeonhee legend costume] [RES:ruby=346950,tickets=327
 B1T7  [teo legend costume] [yeonhee legend costume] [RES:ruby=337930,tickets=3259] = $-27.60
 B1T8  [teo legend costume] [yeonhee legend costume] [RES:ruby=333990,tickets=3230] = $-27.60
 B1U9  [teo legend costume] [yeonhee legend costume] [RES:ruby=336440,tickets=3303] = $-27.60
-B1UG  [teo legend costume] [yeonhee legend costume] [RES:ruby=337320,tickets=3243] = $-27.60
 B1UB  [teo legend costume] [yeonhee legend costume] [RES:ruby=338280,tickets=3281] = $-27.60
+B1UG  [teo legend costume] [yeonhee legend costume] [RES:ruby=337320,tickets=3243] = $-27.60
 B1UI  [teo legend costume] [yeonhee legend costume] [RES:ruby=339790,tickets=3284] = $-27.60
 B1ZP  [teo legend costume] [yeonhee legend costume] [RES:ruby=340330,tickets=3265] = $-27.60
 B206  [teo legend costume] [yeonhee legend costume] [RES:ruby=339120,tickets=3249] = $-27.60
 B20O  [teo legend costume] [yeonhee legend costume] [RES:ruby=339510,tickets=3307] = $-27.60
-B24M  [teo legend costume] [yeonhee legend costume] [RES:ruby=346820,tickets=3327] = $-27.60
 B24I  [teo legend costume] [yeonhee legend costume] [RES:ruby=342610,tickets=3259] = $-27.60
+B24M  [teo legend costume] [yeonhee legend costume] [RES:ruby=346820,tickets=3327] = $-27.60
 B24T  [teo legend costume] [yeonhee legend costume] [RES:ruby=338910,tickets=3242] = $-27.60
 B26N  [teo legend costume] [yeonhee legend costume] [RES:ruby=342200,tickets=3276] = $-27.60
 B26X  [teo legend costume] [yeonhee legend costume] [RES:ruby=335930,tickets=3251] = $-27.60
@@ -58,8 +58,8 @@ B293  [teo legend costume] [yeonhee legend costume] [RES:ruby=338380,tickets=325
 B29C  [teo legend costume] [yeonhee legend costume] [RES:ruby=343610,tickets=3257] = $-27.60
 B29V  [teo legend costume] [yeonhee legend costume] [RES:ruby=339920,tickets=3278] = $-27.60
 B2B4  [teo legend costume] [yeonhee legend costume] [RES:ruby=344060,tickets=3253] = $-27.60
-B2BB  [teo legend costume] [yeonhee legend costume] [RES:ruby=330450,tickets=3266] = $-27.60
 B2BA  [teo legend costume] [yeonhee legend costume] [RES:ruby=334640,tickets=3289] = $-27.60
+B2BB  [teo legend costume] [yeonhee legend costume] [RES:ruby=330450,tickets=3266] = $-27.60
 B2BC  [teo legend costume] [yeonhee legend costume] [RES:ruby=331470,tickets=3286] = $-27.60
 B2CP  [teo legend costume] [yeonhee legend costume] [RES:ruby=339770,tickets=3278] = $-27.60
 B2CR  [teo legend costume] [yeonhee legend costume] [RES:ruby=340840,tickets=3245] = $-27.60
@@ -69,16 +69,16 @@ B2D2  [teo legend costume] [yeonhee legend costume] [RES:ruby=339480,tickets=330
 B2DL  [teo legend costume] [yeonhee legend costume] [RES:ruby=347630,tickets=3316] = $-27.60
 B2EA  [teo legend costume] [yeonhee legend costume] [RES:ruby=335860,tickets=3245] = $-27.60
 B2EE  [teo legend costume] [yeonhee legend costume] [RES:ruby=339250,tickets=3279] = $-27.60
-B2F1  [teo legend costume] [yeonhee legend costume] [RES:ruby=338330,tickets=3284] = $-27.60
 B2EG  [teo legend costume] [yeonhee legend costume] [RES:ruby=337730,tickets=3262] = $-27.60
 B2EY  [teo legend costume] [yeonhee legend costume] [RES:ruby=330190,tickets=3282] = $-27.60
+B2F1  [teo legend costume] [yeonhee legend costume] [RES:ruby=338330,tickets=3284] = $-27.60
 B2F3  [teo legend costume] [yeonhee legend costume] [RES:ruby=338030,tickets=3238] = $-27.60
 B2F4  [teo legend costume] [yeonhee legend costume] [RES:ruby=339650,tickets=3270] = $-27.60
-B2F8  [teo legend costume] [yeonhee legend costume] [RES:ruby=332010,tickets=3268] = $-27.60
 B2F7  [teo legend costume] [yeonhee legend costume] [RES:ruby=340000,tickets=3227] = $-27.60
+B2F8  [teo legend costume] [yeonhee legend costume] [RES:ruby=332010,tickets=3268] = $-27.60
 B2FB  [teo legend costume] [yeonhee legend costume] [RES:ruby=333240,tickets=3246] = $-27.60
-B2FV  [teo legend costume] [yeonhee legend costume] [RES:ruby=330550,tickets=3306] = $-27.60
 B2FU  [teo legend costume] [yeonhee legend costume] [RES:ruby=341460,tickets=3280] = $-27.60
+B2FV  [teo legend costume] [yeonhee legend costume] [RES:ruby=330550,tickets=3306] = $-27.60
 B2FW  [teo legend costume] [yeonhee legend costume] [RES:ruby=331750,tickets=3283] = $-27.60
 B2GU  [teo legend costume] [yeonhee legend costume] [RES:ruby=335050,tickets=3291] = $-27.60
 B2GV  [teo legend costume] [yeonhee legend costume] [RES:ruby=339300,tickets=3286] = $-27.60
@@ -112,8 +112,8 @@ B1UJ  [yeonhee legend costume] [RES:ruby=344140,tickets=3240] = $-37.90
 B1YA  [yeonhee legend costume] [RES:ruby=332550,tickets=3233] = $-37.90
 B28V  [yeonhee legend costume] [RES:ruby=337320,tickets=3210] = $-37.90
 B29T  [yeonhee legend costume] [RES:ruby=339790,tickets=3172] = $-37.90
-B2B3  [yeonhee legend costume] [RES:ruby=336410,tickets=3190] = $-37.90
 B29Z  [yeonhee legend costume] [RES:ruby=336470,tickets=3185] = $-37.90
+B2B3  [yeonhee legend costume] [RES:ruby=336410,tickets=3190] = $-37.90
 B2B8  [yeonhee legend costume] [RES:ruby=349120,tickets=3173] = $-37.90
 B2BD  [yeonhee legend costume] [RES:ruby=333600,tickets=3206] = $-37.90
 B2D0  [yeonhee legend costume] [RES:ruby=338150,tickets=3186] = $-37.90
