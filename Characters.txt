@@ -10,6 +10,7 @@ freyja 프레이야
 kyle 카일
 melkir 멜키르
 biscuit 비스킷
+radgrid 라드그리드
 teo 태오
 yeonhee 연희
 trude 트루드
@@ -29,6 +30,7 @@ platen 플라튼
 kiriel 키리엘
 akila 아킬라
 amelia 아멜리아
+bailong 백룡
 xiaoqiao 소교
 diaochan 초선
 baijiao 백각
