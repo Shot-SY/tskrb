@@ -4,6 +4,7 @@ pye 파이
 rosie 로지
 jury 쥬리
 
+reginleif 레긴레이프
 lubu 여포
 sunwukong 손오공
 freyja 프레이야
@@ -30,6 +31,7 @@ platen 플라튼
 kiriel 키리엘
 akila 아킬라
 amelia 아멜리아
+guanyo 관우
 bailong 백룡
 xiaoqiao 소교
 diaochan 초선
