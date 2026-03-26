@@ -15,6 +15,7 @@ radgrid 라드그리드
 teo 태오
 yeonhee 연희
 trude 트루드
+sungjinwoo 성진우
 pallanus 팔라누스
 kagura 카구라
 elysia 엘리시아
@@ -31,6 +32,7 @@ platen 플라튼
 kiriel 키리엘
 akila 아킬라
 amelia 아멜리아
+chahaein 차해인
 guanyo 관우
 bailong 백룡
 xiaoqiao 소교
