@@ -12,15 +12,14 @@
       gtag('js', new Date());
       gtag('config', 'G-CHQ2JPN68G');
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
 	<style>
 	    body { font-family: 'Roboto', sans-serif; background-color: #121212; max-width: 1200px; margin: 0 auto; padding: 30px 20px; color: #e0e0e0; position: relative; overflow-y: scroll; }
         body.modal-open { overflow: hidden; }
-        body.advanced-search-active > *:not(#results):not(#advancedSearchBtn):not(#tsparticles):not(#loader):not(#copyMessage):not([id*="Popup"]):not(#selectorTooltip) { filter: blur(8px) brightness(0.4); pointer-events: none; transition: filter 0.3s ease; }
+        body.advanced-search-active > *:not(#results):not(#advancedSearchBtn):not(#loader):not(#copyMessage):not([id*="Popup"]):not(#selectorTooltip) { filter: blur(8px) brightness(0.4); pointer-events: none; transition: filter 0.3s ease; }
         body.advanced-search-active #results { opacity: 1 !important; }
 	    h1 { text-align: center; margin-bottom: 30px; font-family: 'Poppins', sans-serif; font-size: 2.5em; color: #ff4081; text-shadow: 2px 2px 4px rgba(255,255,255,0.2); position: relative; z-index: 1; }
         .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); gap: 18px; margin-bottom: 30px; position: relative; z-index: 1; transform: translateZ(0); }
-        .character-box { background: rgba(26,26,26,0.2); border: none; padding: 12px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; position: relative; height: 135px; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1; transform: translateZ(0); }
+        .character-box { background: rgba(26,26,26,0.85); border: none; padding: 12px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; position: relative; height: 135px; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); z-index: 1; transform: translateZ(0); }
         .character-box.rare, .adv-char-box.rare { border: 2px solid #ff9800; box-shadow: 0 0 15px rgba(255,152,0,0.5); }
         .character-box.super-rare, .adv-char-box.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 15px rgba(211, 47, 47, 0.5); }
         .character-box.legendary-item, .adv-char-box.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
@@ -78,7 +77,7 @@
 	    .character-box::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/gplay.png') repeat; opacity: 0.5; border-radius: 14px; pointer-events: none; z-index: 0; }
 	    .character-box > * { position: relative; z-index: 1; }
         .image-with-count-container { position: relative; display: inline-block; vertical-align: middle; flex-shrink: 0; }
-		.image-count-badge { position: absolute; bottom: -5px; right: -5px; min-width: 22px; text-align: center; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); color: #fff; padding: 2px 7px; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; line-height: 1.4; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0,0,0,0.6); pointer-events: none; }
+		.image-count-badge { position: absolute; bottom: -5px; right: -5px; min-width: 22px; text-align: center; background: rgba(0, 0, 0, 0.85); color: #fff; padding: 2px 7px; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; line-height: 1.4; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0,0,0,0.6); pointer-events: none; }
 		.image-count-badge.rare-badge { color: #ffc107; text-shadow: 0 0 5px rgba(255, 193, 7, 0.7); }
 		.image-count-badge.super-rare-badge { color: #ff5252; text-shadow: 0 0 5px rgba(255, 82, 82, 0.7); }
         .image-count-badge.legendary-badge { color: #FFD700; text-shadow: 0 0 5px rgba(255, 215, 0, 0.8); }
@@ -91,7 +90,6 @@
 	    .sort-container { display: flex; justify-content: flex-end; margin-bottom: 15px; padding-right: 5px; transition: all 0.3s; }
 	    #sortDropdown { background-color: #2a2c30; color: #e0e0e0; border: 1px solid #555; padding: 8px 12px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; cursor: pointer; outline: none; transition: border-color 0.3s, box-shadow 0.3s; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 1em; padding-right: 35px; }
 	    #sortDropdown:focus, #sortDropdown:hover { border-color: #555; outline: none; box-shadow: none; }
-	    #tsparticles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 		.scroll-indicator { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; background: linear-gradient(135deg, rgba(40,40,40,0.8), rgba(20,20,20,0.8)); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 24px; line-height: 28px; font-weight: bold; cursor: pointer; z-index: 10; transition: opacity 0.2s; text-shadow: 0 0 4px rgba(0,0,0,0.5); user-select: none; }
         .scroll-indicator.visible { display: flex; }
         .scroll-indicator-left { left: 5px; }
@@ -131,7 +129,7 @@
 		.advanced-search-header h2 { margin-top: 0; margin-bottom: 10px; color: #448AFF; font-family: 'Poppins', sans-serif; }
 		.advanced-search-header p { margin-top: 0; margin-bottom: 20px; line-height: 1.6; color: #bdc3c7; font-size: 15px; }
 		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 15px; overflow-y: auto; padding: 10px; margin: 0 -10px 20px; flex-grow: 1; }
-		.adv-char-box { cursor: pointer; border-radius: 10px; position: relative; background-color: rgba(26,26,26,0.2); backdrop-filter: blur(5px); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out; display: flex; flex-direction: column; align-items: center; padding: 10px 5px; }
+		.adv-char-box { cursor: pointer; border-radius: 10px; position: relative; background-color: rgba(26,26,26,0.85); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out; display: flex; flex-direction: column; align-items: center; padding: 10px 5px; }
 		.adv-char-box .character-img { width: 60px; height: 70px; margin-bottom: 8px; border-radius: 8px; }
 		.adv-char-name { font-size: 13px; font-weight: 600; color: #fff; text-align: center; line-height: 1.2; }
 		.adv-char-box:hover { transform: scale(1.05); }
@@ -204,7 +202,6 @@
 </head>
 <body>
     <div id="loader"><div class="spinner"></div></div>
-    <div id="tsparticles"></div>
     <h1>SEVEN KNIGHTS RE:BIRTH</h1>
     <div class="character-grid" id="characterGrid"></div>
     <button id="filterButton">Apply Filter</button>
@@ -295,7 +292,7 @@
                             results.style.willChange = 'scroll-position'; results.style.webkitOverflowScrolling = 'touch';
                             results.addEventListener('scroll', function() { if (!results.isScrolling) { results.isScrolling = true; results.classList.add('scrolling'); } clearTimeout(results.scrollEndTimer); results.scrollEndTimer = setTimeout(function() { results.isScrolling = false; results.classList.remove('scrolling'); }, 100); }, { passive: true });
                         }
-                        optimizeImages(); optimizeParticles();
+                        optimizeImages();
                     }, 500);
                 })
                 .catch(error => { console.error('Initial filter application error:', error); loader.classList.add('hidden'); setTimeout(() => loader.style.display = 'none', 500); });
@@ -371,12 +368,6 @@
         function handleSelectorLeave() { hideSelectorTooltip(); }
         function handleSelectorClick(e) { e.stopPropagation(); showSelectorTooltip(e.currentTarget); }
 
-        function optimizeParticles() {
-            const pauseParticles = () => window.tsParticles?.domItem(0)?.pause(); const resumeParticles = () => window.tsParticles?.domItem(0)?.play();
-            const results = document.getElementById('results');
-            if (results) { results.addEventListener('scroll', () => { if (!results.particlesPaused) { pauseParticles(); results.particlesPaused = true; clearTimeout(results.particlesTimer); results.particlesTimer = setTimeout(() => { resumeParticles(); results.particlesPaused = false; }, 200); } }, { passive: true }); }
-            document.addEventListener('visibilitychange', () => { document.visibilityState === 'hidden' ? pauseParticles() : resumeParticles(); });
-        }
         
         let characters = []; let tier0Characters = []; let tier1Characters = []; let tier2Characters = []; let currentFilteredData = {}; let itemObserver;
 
@@ -493,7 +484,7 @@
         }
 
         function applyFiltersAndSort() {
-            const resultsDiv = document.getElementById('results'); resultsDiv.classList.add('sorting'); window.tsParticles?.domItem(0)?.pause();
+            const resultsDiv = document.getElementById('results'); resultsDiv.classList.add('sorting');
             setTimeout(() => {
                 currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v, k)));
                 const sortKey = document.getElementById('sortDropdown')?.value || 'price-high';
@@ -503,7 +494,7 @@
                     return (itemB.price - itemA.price) || (itemB.totalCount - itemA.totalCount);
                 });
                 displayResults({ data: currentFilteredData, sortedKeys });
-                resultsDiv.classList.remove('sorting'); window.tsParticles?.domItem(0)?.play();
+                resultsDiv.classList.remove('sorting');
             }, 200);
         }
 
@@ -817,8 +808,8 @@
 
 		function displayAdvancedSearchResults(selectedChars) {
 			const resultsDiv = document.getElementById('results');
-            resultsDiv.classList.add('sorting'); window.tsParticles?.domItem(0)?.pause();
-			
+            resultsDiv.classList.add('sorting');
+
 			setTimeout(() => {
 				const scoredItems = Object.keys(luaData).map(key => {
 					const itemChars = luaData[key]; const itemDetails = itemDetailsMap[key]; let total = 0;
@@ -834,7 +825,7 @@
 				const sortedKeys = scoredItems.sort((a, b) => { if (b.total !== a.total) { return b.total - a.total; } return b.price - a.price; }).map(item => item.key);
 				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selectedChars });
 
-				resultsDiv.classList.remove('sorting'); window.tsParticles?.domItem(0)?.play();
+				resultsDiv.classList.remove('sorting');
 			}, 200);
 		}
 
