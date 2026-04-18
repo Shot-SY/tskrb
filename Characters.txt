@@ -4,7 +4,6 @@ pye 파이
 rosie 로지
 jury 쥬리
 
-randgrid 란드그리드
 reginleif 레긴레이프
 lubu 여포
 sunwukong 손오공
@@ -12,6 +11,8 @@ freyja 프레이야
 kyle 카일
 melkir 멜키르
 biscuit 비스킷
+mist 미스트
+randgrid 란드그리드
 radgrid 라드그리드
 teo 태오
 yeonhee 연희
@@ -33,6 +34,7 @@ platen 플라튼
 kiriel 키리엘
 akila 아킬라
 amelia 아멜리아
+nezha 나타
 deo 돼오
 chahaein 차해인
 guanyo 관우
