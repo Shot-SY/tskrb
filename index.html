@@ -945,7 +945,7 @@
             allItemsData.forEach(charData => {
                 for (let i = 0; i < charData.count; i++) {
                     const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
-                    img.loading = 'lazy'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
+                    img.loading = 'eager'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
                     if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && !charData.isRing && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector') { img.classList.add('dimmed'); }
                     if (charData.tierClass) img.classList.add(charData.tierClass);
                     else if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector') img.classList.add('legendary-item');
@@ -970,7 +970,13 @@
             const heroCount = Object.values(charValue).reduce((a, b) => a + b, 0);
             document.getElementById('popup-heroes-value').textContent = heroCount;
             
-            popup.style.display = 'flex'; copyToClipboard(itemKey);
+            // 그리드 이미지 디코드 완료 후 팝업 표시 (최대 300ms 캡) — 내부가 채워지며 바뀌는 깜빡임 방지
+            const popupImgs = Array.from(grid.querySelectorAll('img'));
+            const imgsReady = Promise.all(popupImgs.map(im => im.decode().catch(() => {})));
+            Promise.race([imgsReady, new Promise(r => setTimeout(r, 300))]).then(() => {
+                popup.style.display = 'flex';
+                copyToClipboard(itemKey);
+            });
         }
 
         function copyToClipboard(itemKey) { const itemDetails = itemDetailsMap[itemKey]; if (!itemDetails) return; navigator.clipboard.writeText(itemDetails.originalText).then(() => showCopyMessage(), err => console.error('Copy failed: ', err)); }
