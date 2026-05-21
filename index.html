@@ -155,6 +155,29 @@
         #extras-popup-grid .new-character-placeholder { height: 60px; width: 45px; font-size: 14px; }
         #item-detail-popup-grid .new-character-placeholder { height: 55px; width: 45px; font-size: 12px; }
         
+        /* 반지/펫 합산 슬롯 placeholder (이미지 없을 때) */
+        .ring-slot .new-character-placeholder { border: 2px solid #D4AF37; border-radius: 9px; box-sizing: border-box; color: #FFD700; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; text-shadow: 0 0 6px rgba(255,215,0,0.7); box-shadow: inset 0 0 8px rgba(212,175,55,0.5); }
+        .ring-slot .image-count-badge { top: -5px; bottom: auto; }
+        .pet-slot .new-character-placeholder { border: 2px solid #ff9800; border-radius: 9px; box-sizing: border-box; color: #ffc107; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; text-shadow: 0 0 6px rgba(255,193,7,0.7); box-shadow: inset 0 0 8px rgba(255,152,0,0.5); }
+        .ring-slot, .pet-slot { cursor: pointer; }
+
+        /* 반지/펫 디테일 팝업 */
+        #ringPetPopup { position: fixed; display: none; flex-direction: column; align-items: center; background: rgba(26,26,26,0.96); border: 2px solid #ff4081; padding: 12px; border-radius: 12px; z-index: 6000; box-shadow: 0 8px 32px rgba(0,0,0,0.6); backdrop-filter: blur(8px); pointer-events: none; }
+        #ringPetPopup .rp-title { color: #ff4081; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px; margin-bottom: 10px; text-shadow: 0 0 5px rgba(255,64,129,0.5); text-align: center; }
+        #ringPetPopup .rp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; }
+        .rp-item { display: flex; flex-direction: column; align-items: center; }
+        .rp-icon { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; box-sizing: border-box; display: block; }
+        .rp-grade-4 .rp-icon { border: 2px solid #ff9800; box-shadow: 0 0 6px rgba(255,152,0,0.4); }
+        .rp-grade-5 .rp-icon { border: 2px solid #D32F2F; box-shadow: 0 0 6px rgba(211,47,47,0.4); }
+        .rp-grade-6 .rp-icon { border: 2px solid #D4AF37; box-shadow: 0 0 6px rgba(212,175,55,0.5); }
+        .rp-pet .rp-icon { border: 2px solid #ff9800; box-shadow: 0 0 6px rgba(255,152,0,0.4); }
+        .rp-item .new-character-placeholder { width: 48px; height: 48px; font-size: 10px; font-weight: 600; font-family: 'Poppins', sans-serif; border-radius: 8px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2px; line-height: 1.1; }
+        .rp-grade-4 .new-character-placeholder { border: 2px solid #ff9800; color: #ffc107; }
+        .rp-grade-5 .new-character-placeholder { border: 2px solid #D32F2F; color: #ff5252; }
+        .rp-grade-6 .new-character-placeholder { border: 2px solid #D4AF37; color: #FFD700; }
+        .rp-pet .new-character-placeholder { border: 2px solid #ff9800; color: #ffc107; }
+        .rp-count { font-size: 11px; color: #fff; margin-top: 4px; font-family: 'Poppins', sans-serif; font-weight: 600; }
+
         #selectorTooltip { position: fixed; display: none; flex-direction: column; align-items: center; background: rgba(26, 26, 26, 0.95); border: 2px solid #FFD700; padding: 15px; border-radius: 12px; z-index: 6000; box-shadow: 0 8px 32px rgba(0,0,0,0.6); backdrop-filter: blur(8px); pointer-events: none; width: 240px; transform: translateZ(0); }
         #selectorTooltip .tooltip-title { color: #FFD700; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 0px; font-size: 16px; text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); text-align: center; }
         #selectorTooltip .tooltip-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; margin-top: 12px; }
@@ -211,6 +234,7 @@
         <select id="sortDropdown">
             <option value="price-high" selected>Price High</option>
             <option value="price-low">Price Low</option>
+            <option value="ring-high">Ring High</option>
         </select>
     </div>
     <div id="results"></div>
@@ -252,6 +276,12 @@
         </div>
     </div>
     
+    <!-- 반지/펫 디테일 팝업 -->
+    <div id="ringPetPopup">
+        <div class="rp-title" id="ringPetPopupTitle"></div>
+        <div class="rp-grid" id="ringPetPopupGrid"></div>
+    </div>
+
     <!-- Tooltip Container -->
     <div id="selectorTooltip">
         <div class="tooltip-title" id="tooltipTitle">Seven Knights Selector</div>
@@ -371,6 +401,22 @@
         
         let characters = []; let tier0Characters = []; let tier1Characters = []; let tier2Characters = []; let currentFilteredData = {}; let itemObserver;
 
+        // 반지/펫 ─ english 키 → 한글 표시명. 이미지 파일 없으면 placeholder 폴백.
+        const RING_ORDER = ['authority4','authority5','authority6','immortality4','immortality5','immortality6','resurrection4','resurrection5','resurrection6'];
+        const RING_KOR = { authority: '권력', immortality: '불사', resurrection: '부활' };
+        // 전설펫 (Pets.txt 빈줄 이전). fetch race 회피 위해 하드코딩.
+        const legendPetOrder = ['ruu','eirin','richel','kree','pike','dello','windy','yu','yeonji','karam','merparrow','mick','eri','mole','jeb','jeo','yorang'];
+        const legendPetKor = { ruu:'루', eirin:'이린', richel:'리첼', kree:'크리', pike:'파이크', dello:'델로', windy:'윈디', yu:'유', yeonji:'연지', karam:'카람', merparrow:'멜패로', mick:'믹', eri:'에리', mole:'더지', jeb:'제브', jeo:'제오', yorang:'요랑' };
+        const legendPetSet = new Set(legendPetOrder);
+
+        function ringDisplay(key) {
+            // key: 'authority4' → { kor: '권력', grade: '4', label: '권력4' }
+            const m = key.match(/^([a-z]+)([456])$/);
+            if (!m) return { kor: key, grade: '', label: key };
+            const kor = RING_KOR[m[1]] || m[1];
+            return { kor, grade: m[2], label: kor + m[2] };
+        }
+
 		function loadCharacters() {
             const ts = new Date().getTime();
             return fetch(`Characters.txt?t=${ts}`).then(r => r.text()).then(text => {
@@ -427,6 +473,17 @@
                 fragment.insertBefore(trudeRockBox, fragment.firstChild.nextSibling.nextSibling);
                 fragment.insertBefore(lubuTsBox, fragment.firstChild.nextSibling.nextSibling.nextSibling);
             }
+
+            // 전설펫 박스 (그리드 맨 끝)
+            legendPetOrder.forEach(name => {
+                const kor = legendPetKor[name] || name;
+                const petBox = document.createElement('div'); petBox.className = 'character-box rare pet-box'; petBox.dataset.engName = name;
+                petBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${name}</span><div class="spinbox-container"><input type="number" id="${name}-spin" min="0" max="99" value="0" disabled></div>`;
+                petBox.addEventListener('click', (e) => { if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(petBox); });
+                petBox.querySelector('input').addEventListener('click', (e) => { e.stopPropagation(); if (!petBox.classList.contains('selected')) toggleSelection(petBox); });
+                fragment.appendChild(petBox);
+            });
+
             grid.appendChild(fragment);
         }
 
@@ -445,7 +502,7 @@
                     const resMatch = line.match(/\[RES:(.*?)\]/);
                     let resources = { ruby: 0, tickets: 0 };
                     let originalTextForCopy = line;
-                    
+
                     if (resMatch) {
                         const resParts = resMatch[1].split(',');
                         resParts.forEach(part => {
@@ -455,6 +512,10 @@
                         const formattedRes = ` (Ruby: ${resources.ruby.toLocaleString()}, SummonTickets: ${resources.tickets.toLocaleString()})`;
                         originalTextForCopy = line.replace(/\[RES:.*?\]/, formattedRes);
                     }
+
+                    // 반지/펫은 인라인 토큰 (캐릭터 파싱 시 분기), 카피본에 그대로 포함
+                    const rings = {};
+                    const pets = {};
 
                     const cleanLine = line.replace(/\[RES:.*?\]/, '');
                     const parts = cleanLine.split('='); 
@@ -476,10 +537,24 @@
                         trudeCostume: trudeCostume,
                         lubuCostume: lubuCostume,
                         totalCount: 0,
-                        resources: resources
+                        resources: resources,
+                        rings: rings,
+                        pets: pets
                     };
                     const currentItemChars = {};
-                    contentWords.forEach(word => { const match = word.match(/^([a-zA-Z]+)(\d+)$/); if (match) { const charName = match[1].toLowerCase(); const count = parseInt(match[2]); currentItemChars[charName] = (currentItemChars[charName] || 0) + count; } });
+                    contentWords.forEach(word => {
+                        // 반지 토큰: typeNxC  (예: authority4x2)
+                        const ringM = word.match(/^([a-z]+)([456])x(\d+)$/);
+                        if (ringM) { const k = ringM[1] + ringM[2]; rings[k] = (rings[k]||0) + parseInt(ringM[3]); return; }
+                        // 캐릭터/펫 토큰: nameN  (펫이면 legendPetOrder lookup으로 분기)
+                        const match = word.match(/^([a-zA-Z]+)(\d+)$/);
+                        if (match) {
+                            const name = match[1].toLowerCase();
+                            const count = parseInt(match[2]);
+                            if (legendPetSet.has(name)) { pets[name] = (pets[name]||0) + count; }
+                            else { currentItemChars[name] = (currentItemChars[name] || 0) + count; }
+                        }
+                    });
                     for (const charName in currentItemChars) { itemDetails.totalCount += currentItemChars[charName]; }
 
                     if (itemDetails.teoCostume) itemDetails.totalCount++;
@@ -497,9 +572,11 @@
             setTimeout(() => {
                 currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v, k)));
                 const sortKey = document.getElementById('sortDropdown')?.value || 'price-high';
+                const ringSum6 = (d) => Object.entries(d.rings || {}).reduce((s, [k, c]) => { const g = k.slice(-1); return s + c * (g === '6' ? 1 : g === '5' ? 1/3 : g === '4' ? 1/12 : 0); }, 0);
                 const sortedKeys = Object.keys(currentFilteredData).sort((a, b) => {
                     const itemA = itemDetailsMap[a]; const itemB = itemDetailsMap[b];
                     if (sortKey === 'price-low') { return (itemA.price - itemB.price) || (itemB.totalCount - itemA.totalCount); }
+                    if (sortKey === 'ring-high') { return (ringSum6(itemB) - ringSum6(itemA)) || (itemB.price - itemA.price); }
                     return (itemB.price - itemA.price) || (itemB.totalCount - itemA.totalCount);
                 });
                 displayResults({ data: currentFilteredData, sortedKeys });
@@ -523,6 +600,16 @@
             const lubuTsBox = document.querySelector('.character-box[data-eng-name="LubuTS"]');
             if (lubuTsBox && lubuTsBox.classList.contains('selected') && !itemDetailsMap[itemKey].lubuCostume) return false;
 
+            // 펫 필터: 선택된 펫 박스마다 spinbox 값 이상 보유 요구
+            const petsData = itemDetailsMap[itemKey].pets || {};
+            for (const name of legendPetOrder) {
+                const box = document.querySelector(`.character-box.pet-box[data-eng-name="${name}"]`);
+                if (box && box.classList.contains('selected')) {
+                    const required = parseInt(box.querySelector('input').value) || 0;
+                    if ((petsData[name] || 0) < required) return false;
+                }
+            }
+
             return true;
         }
 
@@ -544,11 +631,13 @@
 				if (advancedSearchSelection) {
 					let total = 0;
 					advancedSearchSelection.forEach(name => {
-                        if (name.toLowerCase() === 'teots') { if(itemDetails.teoCostume) total++; }
-                        else if (name.toLowerCase() === 'yeonheeidol') { if(itemDetails.yeonheeCostume) total++; }
-                        else if (name.toLowerCase() === 'truderock') { if(itemDetails.trudeCostume) total++; }
-                        else if (name.toLowerCase() === 'lubuts') { if(itemDetails.lubuCostume) total++; }
-                        else if (charValue[name.toLowerCase()]) { total += charValue[name.toLowerCase()]; }
+                        const ln = name.toLowerCase();
+                        if (ln === 'teots') { if(itemDetails.teoCostume) total++; }
+                        else if (ln === 'yeonheeidol') { if(itemDetails.yeonheeCostume) total++; }
+                        else if (ln === 'truderock') { if(itemDetails.trudeCostume) total++; }
+                        else if (ln === 'lubuts') { if(itemDetails.lubuCostume) total++; }
+                        else if (legendPetSet.has(ln)) { total += (itemDetails.pets || {})[ln] || 0; }
+                        else if (charValue[ln]) { total += charValue[ln]; }
                     });
 					const scoreBox = document.createElement('div'); scoreBox.className = 'target-total-box';
 					scoreBox.innerHTML = `<div class="target-total-label">Target Total</div><div class="target-total-value">${total}</div>`;
@@ -578,6 +667,12 @@
                     allImportantItemsData.push({ type: 'character', src: 'Portrait/여포ts스킨.png', alt: '여포 TS 스킨', engName: 'LubuTS', count: 1, originalIndex: baseSkinIndex + 0.4 });
                 }
 
+                // 반지: 결과 행은 대표 이미지 합산 슬롯 1개. 스킨 뒤.
+                const ringEntriesForSort = RING_ORDER.filter(k => (itemDetails.rings||{})[k] > 0).map(k => [k, itemDetails.rings[k]]);
+                if (ringEntriesForSort.length > 0) {
+                    allImportantItemsData.push({ type: 'ring', engName: 'Ring', count: 1, ringEntries: ringEntriesForSort, originalIndex: baseSkinIndex + 0.5 });
+                }
+
                 allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
@@ -597,30 +692,110 @@
                     if (remainingItemsData.length > 0 || tier2ImageData.length > 0) { item.classList.add('lazy-load-item'); item.dataset.remainingItems = JSON.stringify(remainingItemsData); item.dataset.tier2Items = JSON.stringify(tier2ImageData); }
                 }
                 if (tier2ImageData.length > 0 && allImportantItemsData.length === 0) { item.classList.add('lazy-load-item'); item.dataset.tier2Items = JSON.stringify(tier2ImageData); }
+
                 const priceBox = document.createElement('div'); priceBox.className = 'price-box'; const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1480 / 1000) * 1000;
                 priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
                 rightSection.appendChild(priceBox);
-                
+
                 const scrollIndicatorLeft = document.createElement('div'); scrollIndicatorLeft.className = 'scroll-indicator scroll-indicator-left'; scrollIndicatorLeft.innerHTML = '‹';
                 const scrollIndicatorRight = document.createElement('div'); scrollIndicatorRight.className = 'scroll-indicator scroll-indicator-right'; scrollIndicatorRight.innerHTML = '›';
                 imagesWrapper.appendChild(imageContainer); imagesWrapper.appendChild(scrollIndicatorLeft); imagesWrapper.appendChild(scrollIndicatorRight);
-				item.appendChild(imagesWrapper); item.appendChild(rightSection);
+
+                // 펫: 종류별 개별 슬롯 (맨 뒤, 캐릭터 형식). 반지는 allImportantItemsData에 marker로 삽입됨.
+                const petsData = itemDetails.pets || {};
+                legendPetOrder.forEach(name => {
+                    const c = petsData[name] || 0;
+                    if (c > 0) imageContainer.appendChild(createPetSlotElement(name, c));
+                });
+                item.appendChild(imagesWrapper); item.appendChild(rightSection);
 				container.appendChild(item);
 			});
 			res.innerHTML = ''; res.appendChild(fragment); document.getElementById('copyInstruction').style.display = 'block';
             document.querySelectorAll('#results .result-item').forEach(item => setupScrollControlsForItem(item, advancedSearchSelection)); setupItemObserver(advancedSearchSelection);
 		}
 
+        function createRingAggregateSlot(entries) {
+            // entries: [['authority4', 2], ['immortality5', 1], ...]  → 6★ 환산 (4=1/12, 5=1/3, 6=1)
+            const total6 = entries.reduce((s, [k, c]) => {
+                const g = k.slice(-1);
+                return s + c * (g === '6' ? 1 : g === '5' ? 1/3 : g === '4' ? 1/12 : 0);
+            }, 0);
+            const container = document.createElement('div'); container.className = 'image-with-count-container ring-slot';
+            const img = document.createElement('img');
+            img.src = 'Portrait/반지.png'; img.alt = 'Ring'; img.className = 'small-character-img legendary-item';
+            img.onerror = function() { handleImageError(this); };
+            container.appendChild(img);
+            const badge = document.createElement('div'); badge.className = 'image-count-badge legendary-badge';
+            badge.textContent = `x${total6.toFixed(1)}`;
+            container.appendChild(badge);
+            return container;
+        }
+
+        function createPetSlotElement(name, count) {
+            const kor = legendPetKor[name] || name;
+            const container = document.createElement('div'); container.className = 'image-with-count-container pet-slot';
+            const img = document.createElement('img');
+            img.src = `Portrait/${kor}.png`; img.alt = kor; img.className = 'small-character-img rare';
+            img.onerror = function() { handleImageError(this); };
+            container.appendChild(img);
+            if (count > 1) { const badge = document.createElement('div'); badge.className = 'image-count-badge rare-badge'; badge.textContent = `x${count}`; container.appendChild(badge); }
+            return container;
+        }
+
+        function showRingPetPopup(target, entries, type) {
+            const tt = document.getElementById('ringPetPopup');
+            const grid = document.getElementById('ringPetPopupGrid');
+            const title = document.getElementById('ringPetPopupTitle');
+            grid.innerHTML = '';
+            title.textContent = (type === 'ring') ? 'Rings' : 'Pets';
+            const ordered = (type === 'ring') ? [...entries].sort((a,b) => b[0].slice(-1).localeCompare(a[0].slice(-1))) : entries;
+            ordered.forEach(([key, count]) => {
+                const item = document.createElement('div'); item.className = 'rp-item';
+                let label, src;
+                if (type === 'ring') { const info = ringDisplay(key); item.classList.add(`rp-grade-${info.grade}`); label = info.label; src = `Portrait/${key}.png`; }
+                else { item.classList.add('rp-pet'); label = legendPetKor[key] || key; src = `Portrait/${label}.png`; }
+                const icon = document.createElement('img'); icon.className = 'rp-icon'; icon.src = src; icon.alt = label;
+                icon.onerror = function() { handleImageError(this); };
+                const cnt = document.createElement('div'); cnt.className = 'rp-count'; cnt.textContent = count > 1 ? `x${count}` : '';
+                item.appendChild(icon); item.appendChild(cnt);
+                grid.appendChild(item);
+            });
+            // position near target
+            const rect = target.getBoundingClientRect();
+            const popupW = Math.min(280, Math.max(160, entries.length * 60));
+            tt.style.width = popupW + 'px';
+            tt.style.visibility = 'hidden'; tt.style.display = 'flex';
+            const popupH = tt.offsetHeight || 120;
+            let top = rect.top - popupH - 10;
+            let left = rect.left + (rect.width / 2) - (popupW / 2);
+            if (top < 10) top = rect.bottom + 10;
+            if (left < 10) left = 10;
+            if (left + popupW > window.innerWidth - 10) left = window.innerWidth - popupW - 10;
+            tt.style.top = top + 'px';
+            tt.style.left = left + 'px';
+            tt.style.visibility = 'visible';
+        }
+
+        function hideRingPetPopup() {
+            const tt = document.getElementById('ringPetPopup');
+            if (tt) tt.style.display = 'none';
+        }
+
         function createCharacterImageElement(charData, tier0Eng, isLazy = false, advSel = null) {
+            if (charData.type === 'ring') {
+                const ringSlot = createRingAggregateSlot(charData.ringEntries);
+                if (isLazy) ringSlot.classList.add('js-lazy-loaded');
+                return ringSlot;
+            }
             const container = document.createElement('div'); container.className = 'image-with-count-container'; if (isLazy) { container.classList.add('js-lazy-loaded'); }
             const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'small-character-img'; img.onerror = function() { handleImageError(this); };
 			if (advSel && !advSel.includes(charData.engName) && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector') { img.classList.add('dimmed'); }
             const badge = document.createElement('div'); badge.className = 'image-count-badge';
-            
+
             if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector') {
                 img.classList.add('legendary-item'); badge.classList.add('legendary-badge');
             } else {
-                const isTier0 = tier0Eng.has(charData.engName); img.classList.add(isTier0 ? 'super-rare' : 'rare'); badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge'); 
+                const isTier0 = tier0Eng.has(charData.engName); img.classList.add(isTier0 ? 'super-rare' : 'rare'); badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge');
             }
             container.appendChild(img); if (charData.count > 1) { badge.textContent = `x${charData.count}`; container.appendChild(badge); }
             
@@ -649,9 +824,12 @@
         function renderFullItem(item, advSel = null) {
             if (item.querySelector('.js-lazy-loaded')) return;
             const remainingItemsJSON = item.dataset.remainingItems; const tier2ItemsJSON = item.dataset.tier2Items; const imageContainer = item.querySelector('.item-images'); const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+            // 펫 슬롯이 끝에 있으므로 lazy 캐릭터/Extras는 그 앞에 insertBefore
+            const firstPetSlot = imageContainer.querySelector('.pet-slot');
+            const placeBefore = (el) => { if (firstPetSlot) imageContainer.insertBefore(el, firstPetSlot); else imageContainer.appendChild(el); };
             if (remainingItemsJSON) {
                 const remainingItems = JSON.parse(remainingItemsJSON);
-                remainingItems.forEach(itemData => { const element = createCharacterImageElement(itemData, tier0Eng, true, advSel); imageContainer.appendChild(element); });
+                remainingItems.forEach(itemData => { const element = createCharacterImageElement(itemData, tier0Eng, true, advSel); placeBefore(element); });
             }
             if (tier2ItemsJSON) {
                 const tier2Items = JSON.parse(tier2ItemsJSON);
@@ -659,7 +837,7 @@
                     const extrasBox = document.createElement('div'); extrasBox.className = 'extras-box js-lazy-loaded'; extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
 					if (advSel) { extrasBox.classList.add('dimmed'); }
                     extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2Items); });
-                    imageContainer.appendChild(extrasBox);
+                    placeBefore(extrasBox);
                 }
             }
             setupScrollControlsForItem(item, advSel);
@@ -732,8 +910,20 @@
                 allItemsData.push({ src: 'Portrait/여포ts스킨.png', alt: 'TS', engName: 'LubuTS', count: 1, originalIndex: baseSkinIndex + 0.4 });
             }
 
+            // 반지: 스킨 뒤. 성급 내림차순.
+            const ringList = RING_ORDER.filter(k => (itemDetails.rings||{})[k] > 0).slice().sort((a,b) => b.slice(-1).localeCompare(a.slice(-1)));
+            ringList.forEach((key, i) => {
+                allItemsData.push({ src: `Portrait/${key}.png`, alt: key, engName: key, count: itemDetails.rings[key], originalIndex: baseSkinIndex + 0.5 + i * 0.001, tierClass: 'legendary-item', isRing: true });
+            });
+
             allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
-            
+
+            // 펫: legendPetOrder 순, 맨 뒤
+            legendPetOrder.forEach(name => {
+                const c = (itemDetails.pets||{})[name] || 0;
+                if (c > 0) { const kor = legendPetKor[name] || name; allItemsData.push({ src: `Portrait/${kor}.png`, alt: kor, engName: name, count: c, originalIndex: 9100, tierClass: 'rare' }); }
+            });
+
             // allItemsData.push({ src: 'Portrait/스페셜선택권.png', alt: 'Special Selector', engName: 'SpecialSelector', count: 1 });
             allItemsData.push({ src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 });
             allItemsData.push({ src: 'Portrait/스페셜선택권.png', alt: 'All Legend Selector', engName: 'AllLegendSelector', count: 1 }); // Placed right
@@ -742,8 +932,9 @@
                 for (let i = 0; i < charData.count; i++) {
                     const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
                     img.loading = 'lazy'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
-                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector') { img.classList.add('dimmed'); }
-                    if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector') img.classList.add('legendary-item');
+                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && !charData.isRing && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector') { img.classList.add('dimmed'); }
+                    if (charData.tierClass) img.classList.add(charData.tierClass);
+                    else if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector') img.classList.add('legendary-item');
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
                     else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
                     else img.classList.add('extras-character-border');
@@ -813,6 +1004,15 @@
                 fragment.insertBefore(lubuTsBox, fragment.firstChild.nextSibling.nextSibling.nextSibling);
             }
 
+            // 전설펫 박스 (Advanced Search 그리드 맨 끝)
+            legendPetOrder.forEach(name => {
+                const kor = legendPetKor[name] || name;
+                const petBox = document.createElement('div'); petBox.className = 'adv-char-box rare pet-box'; petBox.dataset.engName = name;
+                petBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${name}</span>`;
+                petBox.addEventListener('click', () => petBox.classList.toggle('selected'));
+                fragment.appendChild(petBox);
+            });
+
 			grid.appendChild(fragment);
 		}
 
@@ -839,11 +1039,13 @@
 				const scoredItems = Object.keys(luaData).map(key => {
 					const itemChars = luaData[key]; const itemDetails = itemDetailsMap[key]; let total = 0;
 					selectedChars.forEach(name => {
-						if (name.toLowerCase() === 'teots') { if (itemDetails.teoCostume) total++; }
-                        else if (name.toLowerCase() === 'yeonheeidol') { if (itemDetails.yeonheeCostume) total++; }
-                        else if (name.toLowerCase() === 'truderock') { if (itemDetails.trudeCostume) total++; }
-                        else if (name.toLowerCase() === 'lubuts') { if (itemDetails.lubuCostume) total++; }
-                        else if (itemChars[name.toLowerCase()]) { total += itemChars[name.toLowerCase()]; }
+                        const ln = name.toLowerCase();
+						if (ln === 'teots') { if (itemDetails.teoCostume) total++; }
+                        else if (ln === 'yeonheeidol') { if (itemDetails.yeonheeCostume) total++; }
+                        else if (ln === 'truderock') { if (itemDetails.trudeCostume) total++; }
+                        else if (ln === 'lubuts') { if (itemDetails.lubuCostume) total++; }
+                        else if (legendPetSet.has(ln)) { total += (itemDetails.pets || {})[ln] || 0; }
+                        else if (itemChars[ln]) { total += itemChars[ln]; }
 					});
 					return { key, total, price: itemDetails.price };
 				});
@@ -891,6 +1093,7 @@
                 if (e.target == detailPopup) hideDetail(); 
                 if (e.target == document.getElementById('screenOverlay')) closeAdvancedSearchModal();
                 if (!e.target.closest('#selectorTooltip') && !e.target.closest('.image-with-count-container') && !e.target.closest('.detail-popup-img')) { hideSelectorTooltip(); }
+                if (!e.target.closest('#ringPetPopup') && !e.target.closest('.ring-slot') && !e.target.closest('.pet-slot')) { hideRingPetPopup(); }
             });
 
             window.addEventListener('keydown', e => { if (e.key === 'Escape') { if (extrasPopup.style.display === 'flex') hideExtras(); if (detailPopup.style.display === 'flex') hideDetail(); if (document.getElementById('advancedSearchModal').classList.contains('visible')) closeAdvancedSearchModal(); } });
