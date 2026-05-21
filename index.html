@@ -312,7 +312,7 @@
             const lastLoad = localStorage.getItem('lastLoadTime'); const currentTime = Date.now();
             if (!lastLoad || (currentTime - parseInt(lastLoad)) > 15000) { localStorage.setItem('lastLoadTime', currentTime); window.location.reload(true); return; }
             const loader = document.getElementById('loader');
-            loadCharacters().then(() => loadLegendPets()).then(() => loadData()).then(() => applyFiltersAndSort()).then(() => new Promise(r => setTimeout(r, 500)))
+            loadLegendPets().then(() => loadCharacters()).then(() => loadData()).then(() => applyFiltersAndSort()).then(() => new Promise(r => setTimeout(r, 500)))
                 .then(() => {
                     loader.classList.add('hidden');
                     setTimeout(() => {
