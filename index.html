@@ -715,12 +715,12 @@
                 const scrollIndicatorRight = document.createElement('div'); scrollIndicatorRight.className = 'scroll-indicator scroll-indicator-right'; scrollIndicatorRight.innerHTML = '›';
                 imagesWrapper.appendChild(imageContainer); imagesWrapper.appendChild(scrollIndicatorLeft); imagesWrapper.appendChild(scrollIndicatorRight);
 
-                // 펫: 종류별 개별 슬롯 (맨 뒤, 캐릭터 형식). 반지는 allImportantItemsData에 marker로 삽입됨.
-                const petsData = itemDetails.pets || {};
-                legendPetOrder.forEach(name => {
-                    const c = petsData[name] || 0;
-                    if (c > 0) imageContainer.appendChild(createPetSlotElement(name, c));
-                });
+                // 펫: lazy 데이터로 저장 — eager 렌더 시 첫 로딩 lag 유발. renderFullItem이 교차 시 렌더.
+                const petEntries = legendPetOrder.filter(n => (itemDetails.pets||{})[n] > 0).map(n => [n, itemDetails.pets[n]]);
+                if (petEntries.length > 0) {
+                    item.classList.add('lazy-load-item');
+                    item.dataset.petItems = JSON.stringify(petEntries);
+                }
                 item.appendChild(imagesWrapper); item.appendChild(rightSection);
 				container.appendChild(item);
 			});
@@ -837,13 +837,10 @@
 		
         function renderFullItem(item, advSel = null) {
             if (item.querySelector('.js-lazy-loaded')) return;
-            const remainingItemsJSON = item.dataset.remainingItems; const tier2ItemsJSON = item.dataset.tier2Items; const imageContainer = item.querySelector('.item-images'); const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-            // 펫 슬롯이 끝에 있으므로 lazy 캐릭터/Extras는 그 앞에 insertBefore
-            const firstPetSlot = imageContainer.querySelector('.pet-slot');
-            const placeBefore = (el) => { if (firstPetSlot) imageContainer.insertBefore(el, firstPetSlot); else imageContainer.appendChild(el); };
+            const remainingItemsJSON = item.dataset.remainingItems; const tier2ItemsJSON = item.dataset.tier2Items; const petItemsJSON = item.dataset.petItems; const imageContainer = item.querySelector('.item-images'); const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
             if (remainingItemsJSON) {
                 const remainingItems = JSON.parse(remainingItemsJSON);
-                remainingItems.forEach(itemData => { const element = createCharacterImageElement(itemData, tier0Eng, true, advSel); placeBefore(element); });
+                remainingItems.forEach(itemData => { const element = createCharacterImageElement(itemData, tier0Eng, true, advSel); imageContainer.appendChild(element); });
             }
             if (tier2ItemsJSON) {
                 const tier2Items = JSON.parse(tier2ItemsJSON);
@@ -851,8 +848,12 @@
                     const extrasBox = document.createElement('div'); extrasBox.className = 'extras-box js-lazy-loaded'; extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
 					if (advSel) { extrasBox.classList.add('dimmed'); }
                     extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2Items); });
-                    placeBefore(extrasBox);
+                    imageContainer.appendChild(extrasBox);
                 }
+            }
+            if (petItemsJSON) {
+                const petItems = JSON.parse(petItemsJSON);
+                petItems.forEach(([name, c]) => { const petEl = createPetSlotElement(name, c); petEl.classList.add('js-lazy-loaded'); imageContainer.appendChild(petEl); });
             }
             setupScrollControlsForItem(item, advSel);
         }
