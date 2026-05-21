@@ -312,7 +312,7 @@
             const lastLoad = localStorage.getItem('lastLoadTime'); const currentTime = Date.now();
             if (!lastLoad || (currentTime - parseInt(lastLoad)) > 15000) { localStorage.setItem('lastLoadTime', currentTime); window.location.reload(true); return; }
             const loader = document.getElementById('loader');
-            loadLegendPets().then(() => loadCharacters()).then(() => loadData()).then(() => applyFiltersAndSort()).then(() => new Promise(r => setTimeout(r, 500)))
+            loadLegendPets().then(() => loadCharacters()).then(() => loadPetD0()).then(() => loadData()).then(() => applyFiltersAndSort()).then(() => new Promise(r => setTimeout(r, 500)))
                 .then(() => {
                     loader.classList.add('hidden');
                     setTimeout(() => {
@@ -342,8 +342,8 @@
             const title = document.getElementById('tooltipTitle');
             grid.innerHTML = '';
             
-            if (type === 'AllLegendSelector') {
-                title.textContent = 'All Legend Selector';
+            if (type === 'AllLegendSelector' || type === 'PetSelector') {
+                title.textContent = type === 'PetSelector' ? 'Pet Selector' : 'Hero Selector';
                 grid.style.display = 'none';
                 return;
             }
@@ -371,7 +371,7 @@
             let tooltipWidth = 240; 
             let tooltipHeight = (type === 'SpecialSelector') ? 130 : 220; 
             
-            if (type === 'AllLegendSelector') {
+            if (type === 'AllLegendSelector' || type === 'PetSelector') {
                 tooltipWidth = 180;
                 tooltipHeight = 60;
             }
@@ -403,7 +403,7 @@
 
         // 반지/펫 ─ english 키 → 한글 표시명. 이미지 파일 없으면 placeholder 폴백.
         const RING_ORDER = ['authority4','authority5','authority6','immortality4','immortality5','immortality6','resurrection4','resurrection5','resurrection6'];
-        const RING_KOR = { authority: '권력', immortality: '불사', resurrection: '부활' };
+        const RING_KOR = { authority: '권능', immortality: '불사', resurrection: '부활' };
         // 전설펫 (Pets.txt 빈줄 이전) — 웹 레포에서 fetch (캐릭터처럼 자동 동기화)
         let legendPetOrder = [];
         let legendPetKor = {};
@@ -423,8 +423,17 @@
             }).catch(e => console.error('Pets.txt load error:', e));
         }
 
+        // 전설펫선택권 보유 계정 (pet_d0_complete.txt — 계정 ID 1줄씩)
+        let petD0Set = new Set();
+        function loadPetD0() {
+            const ts = new Date().getTime();
+            return fetch(`pet_d0_complete.txt?t=${ts}`).then(r => r.text()).then(text => {
+                petD0Set = new Set(text.split('\n').map(s => s.trim()).filter(Boolean));
+            }).catch(e => console.error('pet_d0_complete.txt load error:', e));
+        }
+
         function ringDisplay(key) {
-            // key: 'authority4' → { kor: '권력', grade: '4', label: '권력4' }
+            // key: 'authority4' → { kor: '권능', grade: '4', label: '권능4' }
             const m = key.match(/^([a-z]+)([456])$/);
             if (!m) return { kor: key, grade: '', label: key };
             const kor = RING_KOR[m[1]] || m[1];
@@ -690,22 +699,15 @@
                 allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
                 
-                const specialSelectorData = { type: 'character', src: 'Portrait/스페셜선택권.png', alt: 'Special Selector', engName: 'SpecialSelector', count: 1 };
-                const selectorData = { type: 'character', src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 };
-                const allLegendSelectorData = { type: 'character', src: 'Portrait/스페셜선택권.png', alt: 'All Legend Selector', engName: 'AllLegendSelector', count: 1 };
-                
-                // allImportantItemsData.push(specialSelectorData);
-                allImportantItemsData.push(selectorData);
-                allImportantItemsData.push(allLegendSelectorData); // Placed right of Seven Knights Selector
-                
+                // 첫 고급 캐릭터만 eager 렌더 (lag 감소). 나머지(스킨/반지/나머지캐릭터/Extras/셀렉터/펫)는 renderFullItem이 교차 시 lazy 렌더.
                 if (allImportantItemsData.length > 0) {
-                    const firstItemData = allImportantItemsData[0];
-                    const element = createCharacterImageElement(firstItemData, tier0Eng, false, advancedSearchSelection);
-                    imageContainer.appendChild(element);
-                    const remainingItemsData = allImportantItemsData.slice(1);
-                    if (remainingItemsData.length > 0 || tier2ImageData.length > 0) { item.classList.add('lazy-load-item'); item.dataset.remainingItems = JSON.stringify(remainingItemsData); item.dataset.tier2Items = JSON.stringify(tier2ImageData); }
+                    imageContainer.appendChild(createCharacterImageElement(allImportantItemsData[0], tier0Eng, false, advancedSearchSelection));
                 }
-                if (tier2ImageData.length > 0 && allImportantItemsData.length === 0) { item.classList.add('lazy-load-item'); item.dataset.tier2Items = JSON.stringify(tier2ImageData); }
+                item.classList.add('lazy-load-item');
+                item.dataset.remainingItems = JSON.stringify(allImportantItemsData.slice(1));
+                item.dataset.tier2Items = JSON.stringify(tier2ImageData);
+                item.dataset.petItems = JSON.stringify(legendPetOrder.filter(n => (itemDetails.pets||{})[n] > 0).map(n => [n, itemDetails.pets[n]]));
+                if (petD0Set.has(k)) item.dataset.petSelector = '1';
 
                 const priceBox = document.createElement('div'); priceBox.className = 'price-box'; const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1480 / 1000) * 1000;
                 priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
@@ -715,12 +717,6 @@
                 const scrollIndicatorRight = document.createElement('div'); scrollIndicatorRight.className = 'scroll-indicator scroll-indicator-right'; scrollIndicatorRight.innerHTML = '›';
                 imagesWrapper.appendChild(imageContainer); imagesWrapper.appendChild(scrollIndicatorLeft); imagesWrapper.appendChild(scrollIndicatorRight);
 
-                // 펫: lazy 데이터로 저장 — eager 렌더 시 첫 로딩 lag 유발. renderFullItem이 교차 시 렌더.
-                const petEntries = legendPetOrder.filter(n => (itemDetails.pets||{})[n] > 0).map(n => [n, itemDetails.pets[n]]);
-                if (petEntries.length > 0) {
-                    item.classList.add('lazy-load-item');
-                    item.dataset.petItems = JSON.stringify(petEntries);
-                }
                 item.appendChild(imagesWrapper); item.appendChild(rightSection);
 				container.appendChild(item);
 			});
@@ -803,17 +799,17 @@
             }
             const container = document.createElement('div'); container.className = 'image-with-count-container'; if (isLazy) { container.classList.add('js-lazy-loaded'); }
             const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'small-character-img'; img.onerror = function() { handleImageError(this); };
-			if (advSel && !advSel.includes(charData.engName) && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector') { img.classList.add('dimmed'); }
+			if (advSel && !advSel.includes(charData.engName) && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector' && charData.engName !== 'PetSelector') { img.classList.add('dimmed'); }
             const badge = document.createElement('div'); badge.className = 'image-count-badge';
 
-            if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector') {
+            if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector') {
                 img.classList.add('legendary-item'); badge.classList.add('legendary-badge');
             } else {
                 const isTier0 = tier0Eng.has(charData.engName); img.classList.add(isTier0 ? 'super-rare' : 'rare'); badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge');
             }
             container.appendChild(img); if (charData.count > 1) { badge.textContent = `x${charData.count}`; container.appendChild(badge); }
             
-            if (charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector') {
+            if (charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector') {
                 container.dataset.selectorType = charData.engName;
                 container.addEventListener('mouseenter', handleSelectorHover);
                 container.addEventListener('mouseleave', handleSelectorLeave);
@@ -837,24 +833,23 @@
 		
         function renderFullItem(item, advSel = null) {
             if (item.querySelector('.js-lazy-loaded')) return;
-            const remainingItemsJSON = item.dataset.remainingItems; const tier2ItemsJSON = item.dataset.tier2Items; const petItemsJSON = item.dataset.petItems; const imageContainer = item.querySelector('.item-images'); const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-            if (remainingItemsJSON) {
-                const remainingItems = JSON.parse(remainingItemsJSON);
-                remainingItems.forEach(itemData => { const element = createCharacterImageElement(itemData, tier0Eng, true, advSel); imageContainer.appendChild(element); });
+            const imageContainer = item.querySelector('.item-images');
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
+            // 순서: 나머지 캐릭터/스킨/반지 → Extras → 펫셀렉터 → 펫 → 세나선택권 → 히어로셀렉터
+            JSON.parse(item.dataset.remainingItems || '[]').forEach(d => imageContainer.appendChild(createCharacterImageElement(d, tier0Eng, true, advSel)));
+            const tier2Items = JSON.parse(item.dataset.tier2Items || '[]');
+            if (tier2Items.length > 0) {
+                const extrasBox = document.createElement('div'); extrasBox.className = 'extras-box js-lazy-loaded'; extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
+                if (advSel) { extrasBox.classList.add('dimmed'); }
+                extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2Items); });
+                imageContainer.appendChild(extrasBox);
             }
-            if (tier2ItemsJSON) {
-                const tier2Items = JSON.parse(tier2ItemsJSON);
-                if(tier2Items.length > 0) {
-                    const extrasBox = document.createElement('div'); extrasBox.className = 'extras-box js-lazy-loaded'; extrasBox.innerHTML = `<div class="item-title">Extras</div>`;
-					if (advSel) { extrasBox.classList.add('dimmed'); }
-                    extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2Items); });
-                    imageContainer.appendChild(extrasBox);
-                }
+            if (item.dataset.petSelector === '1') {
+                imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/전설펫선택권.png', alt: 'Pet Selector', engName: 'PetSelector', count: 1 }, tier0Eng, true, advSel));
             }
-            if (petItemsJSON) {
-                const petItems = JSON.parse(petItemsJSON);
-                petItems.forEach(([name, c]) => { const petEl = createPetSlotElement(name, c); petEl.classList.add('js-lazy-loaded'); imageContainer.appendChild(petEl); });
-            }
+            JSON.parse(item.dataset.petItems || '[]').forEach(([name, c]) => { const petEl = createPetSlotElement(name, c); petEl.classList.add('js-lazy-loaded'); imageContainer.appendChild(petEl); });
+            imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 }, tier0Eng, true, advSel));
+            imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/스페셜선택권.png', alt: 'Hero Selector', engName: 'AllLegendSelector', count: 1 }, tier0Eng, true, advSel));
             setupScrollControlsForItem(item, advSel);
         }
 
@@ -933,28 +928,31 @@
 
             allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
 
-            // 펫: legendPetOrder 순, 맨 뒤
+            // 펫셀렉터 (pet_d0 계정만) — 펫 앞
+            if (petD0Set.has(itemKey)) {
+                allItemsData.push({ src: 'Portrait/전설펫선택권.png', alt: 'Pet Selector', engName: 'PetSelector', count: 1 });
+            }
+            // 펫: legendPetOrder 순
             legendPetOrder.forEach(name => {
                 const c = (itemDetails.pets||{})[name] || 0;
                 if (c > 0) { const kor = legendPetKor[name] || name; allItemsData.push({ src: `Portrait/${kor}.png`, alt: kor, engName: name, count: c, originalIndex: 9100, tierClass: 'rare' }); }
             });
-
-            // allItemsData.push({ src: 'Portrait/스페셜선택권.png', alt: 'Special Selector', engName: 'SpecialSelector', count: 1 });
+            // 세나선택권 · 히어로셀렉터 — 맨 뒤
             allItemsData.push({ src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 });
-            allItemsData.push({ src: 'Portrait/스페셜선택권.png', alt: 'All Legend Selector', engName: 'AllLegendSelector', count: 1 }); // Placed right
+            allItemsData.push({ src: 'Portrait/스페셜선택권.png', alt: 'Hero Selector', engName: 'AllLegendSelector', count: 1 });
 
             allItemsData.forEach(charData => {
                 for (let i = 0; i < charData.count; i++) {
                     const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
                     img.loading = 'eager'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
-                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && !charData.isRing && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector') { img.classList.add('dimmed'); }
+                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && !charData.isRing && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector' && charData.engName !== 'PetSelector') { img.classList.add('dimmed'); }
                     if (charData.tierClass) img.classList.add(charData.tierClass);
-                    else if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector') img.classList.add('legendary-item');
+                    else if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector') img.classList.add('legendary-item');
                     else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
                     else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
                     else img.classList.add('extras-character-border');
                     
-                    if (charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector') {
+                    if (charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector') {
                         img.dataset.selectorType = charData.engName;
                         img.addEventListener('mouseenter', handleSelectorHover);
                         img.addEventListener('mouseleave', handleSelectorLeave);
