@@ -312,7 +312,7 @@
             const lastLoad = localStorage.getItem('lastLoadTime'); const currentTime = Date.now();
             if (!lastLoad || (currentTime - parseInt(lastLoad)) > 15000) { localStorage.setItem('lastLoadTime', currentTime); window.location.reload(true); return; }
             const loader = document.getElementById('loader');
-            loadCharacters().then(() => loadData()).then(() => applyFiltersAndSort()).then(() => new Promise(r => setTimeout(r, 500)))
+            loadCharacters().then(() => loadLegendPets()).then(() => loadData()).then(() => applyFiltersAndSort()).then(() => new Promise(r => setTimeout(r, 500)))
                 .then(() => {
                     loader.classList.add('hidden');
                     setTimeout(() => {
@@ -404,10 +404,24 @@
         // 반지/펫 ─ english 키 → 한글 표시명. 이미지 파일 없으면 placeholder 폴백.
         const RING_ORDER = ['authority4','authority5','authority6','immortality4','immortality5','immortality6','resurrection4','resurrection5','resurrection6'];
         const RING_KOR = { authority: '권력', immortality: '불사', resurrection: '부활' };
-        // 전설펫 (Pets.txt 빈줄 이전). fetch race 회피 위해 하드코딩.
-        const legendPetOrder = ['ruu','eirin','richel','kree','pike','dello','windy','yu','yeonji','karam','merparrow','mick','eri','mole','jeb','jeo','yorang'];
-        const legendPetKor = { ruu:'루', eirin:'이린', richel:'리첼', kree:'크리', pike:'파이크', dello:'델로', windy:'윈디', yu:'유', yeonji:'연지', karam:'카람', merparrow:'멜패로', mick:'믹', eri:'에리', mole:'더지', jeb:'제브', jeo:'제오', yorang:'요랑' };
-        const legendPetSet = new Set(legendPetOrder);
+        // 전설펫 (Pets.txt 빈줄 이전) — 웹 레포에서 fetch (캐릭터처럼 자동 동기화)
+        let legendPetOrder = [];
+        let legendPetKor = {};
+        let legendPetSet = new Set();
+
+        function loadLegendPets() {
+            const ts = new Date().getTime();
+            return fetch(`Pets.txt?t=${ts}`).then(r => r.text()).then(text => {
+                legendPetOrder = []; legendPetKor = {};
+                for (const raw of text.split('\n')) {
+                    const s = raw.trim();
+                    if (s === '') break; // 빈줄 이전이 전설펫
+                    const parts = s.split(/\s+/);
+                    if (parts.length >= 2) { legendPetOrder.push(parts[0]); legendPetKor[parts[0]] = parts.slice(1).join(' '); }
+                }
+                legendPetSet = new Set(legendPetOrder);
+            }).catch(e => console.error('Pets.txt load error:', e));
+        }
 
         function ringDisplay(key) {
             // key: 'authority4' → { kor: '권력', grade: '4', label: '권력4' }
