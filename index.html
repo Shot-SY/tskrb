@@ -1099,7 +1099,7 @@
 			document.getElementById('adv-search-reset').addEventListener('click', () => { document.querySelectorAll('#advanced-search-grid .adv-char-box.selected').forEach(box => box.classList.remove('selected')); });
 			document.getElementById('adv-search-execute').addEventListener('click', executeAdvancedSearch);
             document.getElementById('adv-search-recommend').addEventListener('click', () => {
-                const recommendedChars = ['melia', 'gelidus', 'pye', 'rosie', 'jury', 'teots', 'yeonheeidol', 'truderock', 'lubuts', 'freyja', 'kyle', 'biscuit', 'lina', 'pascal', 'shane', 'espada'];
+                const recommendedChars = ['melia', 'gelidus', 'pye', 'rosie', 'jury', 'teots', 'yeonheeidol', 'truderock', 'lubuts', 'freyja', 'lubu', 'biscuit'];
                 const allCharBoxes = document.querySelectorAll('#advanced-search-grid .adv-char-box');
                 allCharBoxes.forEach(box => { const charName = box.dataset.engName.toLowerCase(); if (recommendedChars.includes(charName)) { box.classList.add('selected'); } else { box.classList.remove('selected'); } });
             });
