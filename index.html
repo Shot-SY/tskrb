@@ -942,26 +942,29 @@
             allItemsData.push({ src: 'Portrait/스페셜선택권.png', alt: 'Hero Selector', engName: 'AllLegendSelector', count: 1 });
 
             allItemsData.forEach(charData => {
-                for (let i = 0; i < charData.count; i++) {
-                    const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
-                    img.loading = 'eager'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
-                    if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && !charData.isRing && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector' && charData.engName !== 'PetSelector') { img.classList.add('dimmed'); }
-                    if (charData.tierClass) img.classList.add(charData.tierClass);
-                    else if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector') img.classList.add('legendary-item');
-                    else if (tier0Eng.has(charData.engName)) img.classList.add('super-rare');
-                    else if (tier1Eng.has(charData.engName)) img.classList.add('rare');
-                    else img.classList.add('extras-character-border');
-                    
-                    if (charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector') {
-                        img.dataset.selectorType = charData.engName;
-                        img.addEventListener('mouseenter', handleSelectorHover);
-                        img.addEventListener('mouseleave', handleSelectorLeave);
-                        img.addEventListener('click', handleSelectorClick);
-                        img.addEventListener('contextmenu', function(e) { e.preventDefault(); e.stopPropagation(); showSelectorTooltip(e.currentTarget); });
-                    }
-                    
-                    grid.appendChild(img);
+                const isSelector = charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector';
+                const container = document.createElement('div'); container.className = charData.isRing ? 'image-with-count-container ring-slot' : 'image-with-count-container';
+                const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
+                img.loading = 'eager'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
+                const badge = document.createElement('div'); badge.className = 'image-count-badge';
+                if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && !charData.isRing && !isSelector) { img.classList.add('dimmed'); }
+                if (charData.tierClass) { img.classList.add(charData.tierClass); badge.classList.add(charData.tierClass === 'rare' ? 'rare-badge' : charData.tierClass === 'super-rare' ? 'super-rare-badge' : 'legendary-badge'); }
+                else if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || isSelector) { img.classList.add('legendary-item'); badge.classList.add('legendary-badge'); }
+                else if (tier0Eng.has(charData.engName)) { img.classList.add('super-rare'); badge.classList.add('super-rare-badge'); }
+                else if (tier1Eng.has(charData.engName)) { img.classList.add('rare'); badge.classList.add('rare-badge'); }
+                else img.classList.add('extras-character-border');
+
+                if (isSelector) {
+                    img.dataset.selectorType = charData.engName;
+                    img.addEventListener('mouseenter', handleSelectorHover);
+                    img.addEventListener('mouseleave', handleSelectorLeave);
+                    img.addEventListener('click', handleSelectorClick);
+                    img.addEventListener('contextmenu', function(e) { e.preventDefault(); e.stopPropagation(); showSelectorTooltip(e.currentTarget); });
                 }
+
+                container.appendChild(img);
+                if (charData.count > 1) { badge.textContent = `x${charData.count}`; container.appendChild(badge); }
+                grid.appendChild(container);
             });
             
             document.getElementById('popup-ruby-value').textContent = displayRubyCount;
