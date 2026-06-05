@@ -18,8 +18,8 @@
         body.advanced-search-active > *:not(#results):not(#advancedSearchBtn):not(#loader):not(#copyMessage):not([id*="Popup"]):not(#selectorTooltip) { filter: blur(8px) brightness(0.4); pointer-events: none; transition: filter 0.3s ease; }
         body.advanced-search-active #results { opacity: 1 !important; }
 	    h1 { text-align: center; margin-bottom: 30px; font-family: 'Poppins', sans-serif; font-size: 2.5em; color: #ff4081; text-shadow: 2px 2px 4px rgba(255,255,255,0.2); position: relative; z-index: 1; }
-        .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(105px,1fr)); gap: 18px; margin-bottom: 30px; position: relative; z-index: 1; transform: translateZ(0); }
-        .character-box { background: rgba(26,26,26,0.85); border: none; padding: 12px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; position: relative; height: 135px; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); z-index: 1; transform: translateZ(0); }
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(94px,1fr)); gap: 10px; margin-bottom: 16px; position: relative; z-index: 1; transform: translateZ(0); }
+        .character-box { background: rgba(26,26,26,0.85); border: none; padding: 8px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; position: relative; height: 102px; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); z-index: 1; transform: translateZ(0); }
         .character-box.rare, .adv-char-box.rare { border: 2px solid #ff9800; box-shadow: 0 0 15px rgba(255,152,0,0.5); }
         .character-box.super-rare, .adv-char-box.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 15px rgba(211, 47, 47, 0.5); }
         .character-box.legendary-item, .adv-char-box.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
@@ -31,15 +31,14 @@
 			.result-item:hover::before { opacity: 1; }
 			.extras-box:hover { background: rgba(176, 176, 176, 0.2); border-color: rgba(176, 176, 176, 0.8); }
 	    }
-	    .character-img { width: 70px; height: 80px; object-fit: cover; margin-bottom: 8px; border-radius: 9px; transition: transform 0.3s; transform: translateZ(0); backface-visibility: hidden; }
-        .character-name { font-size: 14px; margin-bottom: 0; font-weight: 700; color: #fff; line-height: 1.2; display: block; word-break: break-word; padding: 0 2px; }
+	    .character-img { width: 70px; height: 80px; flex-shrink: 0; object-fit: cover; margin-bottom: 5px; border-radius: 9px; transition: transform 0.3s; transform: translateZ(0); backface-visibility: hidden; }
+        .character-name { font-size: 14px; margin-bottom: 0; font-weight: 700; color: #fff; line-height: 1.2; display: block; width: 100%; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; }
         .character-box.selected .character-name { display: none; }
         .character-box.selected[data-eng-name="TeoTS"] .character-name, .character-box.selected[data-eng-name="YeonheeIDOL"] .character-name, .character-box.selected[data-eng-name="TrudeROCK"] .character-name, .character-box.selected[data-eng-name="LubuTS"] .character-name { display: block; }
-        .costume-label { display: block; font-size: 9px; font-weight: normal; color: #FFD700; margin-top: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
-	    .spinbox-container { width: 85%; display: none; justify-content: center; margin-top: 8px; }
+	    .spinbox-container { width: 85%; display: none; justify-content: center; margin-top: 0; }
 	    .character-box.selected .spinbox-container { display: flex; animation: fadeIn 0.2s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-	    .spinbox-container input[type="number"] { width: 100%; padding: 6px 2px; border: 1px solid #555; border-radius: 6px; text-align: center; font-size: 16px; font-weight: bold; background-color: #1e1e1e; color: #e0e0e0; transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s; }
+	    .spinbox-container input[type="number"] { width: 100%; padding: 4px 2px; border: 1px solid #555; border-radius: 6px; text-align: center; font-size: 13px; font-weight: bold; background-color: #1e1e1e; color: #e0e0e0; transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s; }
 	    .spinbox-container input[type="number"]:focus { border-color: #ff4081; box-shadow: 0 0 5px rgba(255,64,129,0.5); outline: none; background-color: #2a2a2a; }
 	    #filterButton { display: flex; align-items: center; justify-content: center; width: 100%; padding: 15px; margin: 25px 0 15px 0; font-size: 18px; cursor: pointer; background: linear-gradient(45deg, #ff4081, #f50057); color: #fff; border: none; border-radius: 30px; box-shadow: 0 4px 16px rgba(255,64,129,0.6); transition: all 0.3s; font-family: 'Poppins', sans-serif; font-weight: 600; position: relative; z-index: 1; transform: translateZ(0); }
 	    #filterButton:hover { background: linear-gradient(45deg, #ff4081, #f50057); box-shadow: 0 6px 20px rgba(255,64,129,0.8); transform: translateY(-3px); }
@@ -128,10 +127,10 @@
 		.advanced-search-content { background-color: #1e1e1e; padding: 25px; border: 1px solid #555; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.7); display: flex; flex-direction: column; max-height: 85vh; }
 		.advanced-search-header h2 { margin-top: 0; margin-bottom: 10px; color: #448AFF; font-family: 'Poppins', sans-serif; }
 		.advanced-search-header p { margin-top: 0; margin-bottom: 20px; line-height: 1.6; color: #bdc3c7; font-size: 15px; }
-		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 15px; overflow-y: auto; padding: 10px; margin: 0 -10px 20px; flex-grow: 1; }
-		.adv-char-box { cursor: pointer; border-radius: 10px; position: relative; background-color: rgba(26,26,26,0.85); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out; display: flex; flex-direction: column; align-items: center; padding: 10px 5px; }
-		.adv-char-box .character-img { width: 60px; height: 70px; margin-bottom: 8px; border-radius: 8px; }
-		.adv-char-name { font-size: 13px; font-weight: 600; color: #fff; text-align: center; line-height: 1.2; }
+		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; overflow-y: auto; padding: 8px; margin: 0 -10px 20px; flex-grow: 1; }
+		.adv-char-box { cursor: pointer; border-radius: 10px; position: relative; background-color: rgba(26,26,26,0.85); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out; display: flex; flex-direction: column; align-items: center; padding: 7px 5px; }
+		.adv-char-box .character-img { width: 60px; height: 70px; margin-bottom: 5px; border-radius: 8px; }
+		.adv-char-name { font-size: 13px; font-weight: 600; color: #fff; text-align: center; line-height: 1.2; width: 100%; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 		.adv-char-box:hover { transform: scale(1.05); }
 		.adv-char-box.selected { background-color: rgba(255, 64, 129, 0.9); box-shadow: 0 0 20px rgba(255, 64, 129, 0.7), 0 4px 10px rgba(255, 64, 129, 0.5); transform: translateY(-5px); z-index: 2; }
 		.advanced-search-footer { display: flex; justify-content: flex-end; gap: 15px; padding-top: 20px; border-top: 1px solid #444; }
@@ -187,12 +186,11 @@
 
 	    @media (max-width: 768px) {
             body { padding: 20px 5px; } 
-			.character-grid { grid-template-columns: repeat(auto-fill, minmax(66px,1fr)); gap: 4px; }
-	        .character-box { height: 90px; padding: 5px 2px; }
-	        .character-box .character-img, .character-box .new-character-placeholder { width: 46px; height: 56px; margin-bottom: 4px; }
+			.character-grid { grid-template-columns: repeat(auto-fill, minmax(58px,1fr)); gap: 3px; }
+	        .character-box { height: 72px; padding: 4px 2px; }
+	        .character-box .character-img, .character-box .new-character-placeholder { width: 46px; height: 56px; margin-bottom: 3px; }
 	        .character-box .character-name { font-size: 10px; letter-spacing: -0.5px; }
-            .costume-label { font-size: 7px; }
-	        .spinbox-container input[type="number"] { font-size: 12px; padding: 2px 0; height: 20px; }
+	        .spinbox-container input[type="number"] { font-size: 11px; padding: 1px 0; height: 16px; }
 	        #filterButton, #advancedSearchBtn { font-size: 16px; padding: 12px; }
 	        .result-item { padding: 10px; flex-wrap: wrap; gap: 10px; }
             .item-images-wrapper, .result-info-right { flex-basis: 100%; }
@@ -216,7 +214,7 @@
             .item-detail-popup-footer { gap: 8px; }
             .footer-label { font-size: 11px; }
             .footer-value { font-size: 16px; }
-			#advanced-search-grid { grid-template-columns: repeat(auto-fill, minmax(66px, 1fr)); gap: 5px; }
+			#advanced-search-grid { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 3px; }
 			.adv-char-box .character-img, .adv-char-box .new-character-placeholder { width: 46px; height: 56px; }
 			.adv-char-name { font-size: 10px; }
 			#results { height: 75vh; max-height: 75vh; }
@@ -455,6 +453,23 @@
 
         let luaData = {};
 
+        // 이름이 박스 폭을 넘치면 그 박스만 폰트를 비례 축소해 항상 한 줄 + 잘림 없이 표시 (짧은 이름은 CSS 기본값 유지)
+        function fitNamesOneLine(root) {
+            (root || document).querySelectorAll('.character-name, .adv-char-name').forEach(el => {
+                el.style.fontSize = '';
+                if (!el.clientWidth) return;                      // 숨김/미배치 상태면 건너뜀 (모달은 열릴 때 재측정)
+                if (el.scrollWidth <= el.clientWidth + 1) return; // 기본 크기로 한 줄에 들어가면 그대로
+                const base = parseFloat(getComputedStyle(el).fontSize);
+                let size = Math.max(6, base * el.clientWidth / el.scrollWidth - 0.5); // 비례로 한 번에 맞춤 (+여유)
+                el.style.fontSize = size + 'px';
+                let guard = 0;                                    // 서브픽셀 잔여 오버플로우 정리
+                while (el.scrollWidth > el.clientWidth + 1 && size > 5 && guard++ < 10) { size -= 0.5; el.style.fontSize = size + 'px'; }
+            });
+        }
+        let _fitResizeTimer;
+        window.addEventListener('resize', () => { clearTimeout(_fitResizeTimer); _fitResizeTimer = setTimeout(() => fitNamesOneLine(), 150); });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitNamesOneLine());
+
         function createCharacterBoxes() {
             const grid = document.getElementById('characterGrid'); grid.innerHTML = ''; const fragment = document.createDocumentFragment();
             const tier0Eng = new Set(tier0Characters.map(([eng]) => eng)); const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
@@ -468,19 +483,19 @@
             });
             
             const teoTsBox = document.createElement('div'); teoTsBox.className = 'character-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">teo TS<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">teo TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
             
             const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'character-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
-            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">yeonhee IDOL<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">yeonhee IDOL</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             yeonheeIdolBox.addEventListener('click', () => toggleSelection(yeonheeIdolBox));
             
             const trudeRockBox = document.createElement('div'); trudeRockBox.className = 'character-box legendary-item'; trudeRockBox.dataset.engName = 'TrudeROCK';
-            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">trude ROCK<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">trude ROCK</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             trudeRockBox.addEventListener('click', () => toggleSelection(trudeRockBox));
 
             const lubuTsBox = document.createElement('div'); lubuTsBox.className = 'character-box legendary-item'; lubuTsBox.dataset.engName = 'LubuTS';
-            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">lubu TS<span class="costume-label">(Limited Costume)</span></span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">lubu TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             lubuTsBox.addEventListener('click', () => toggleSelection(lubuTsBox));
 
             let juryBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'jury');
@@ -508,6 +523,7 @@
             });
 
             grid.appendChild(fragment);
+            fitNamesOneLine(grid);
         }
 
         function toggleSelection(charBox) { const spinbox = charBox.querySelector('input[type="number"]'); const isSelected = charBox.classList.toggle('selected'); if (spinbox) { spinbox.disabled = !isSelected; spinbox.value = isSelected ? (spinbox.value === '0' ? '1' : spinbox.value) : 0; } }
@@ -997,19 +1013,19 @@
 			});
             
             const teoTsBox = document.createElement('div'); teoTsBox.className = 'adv-char-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">teo TS<span class="costume-label">(Limited Costume)</span></span>`;
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">teo TS</span>`;
             teoTsBox.addEventListener('click', () => teoTsBox.classList.toggle('selected'));
             
             const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'adv-char-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
-            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">yeonhee IDOL<span class="costume-label">(Limited Costume)</span></span>`;
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">yeonhee IDOL</span>`;
             yeonheeIdolBox.addEventListener('click', () => yeonheeIdolBox.classList.toggle('selected'));
 
             const trudeRockBox = document.createElement('div'); trudeRockBox.className = 'adv-char-box legendary-item'; trudeRockBox.dataset.engName = 'TrudeROCK';
-            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">trude ROCK<span class="costume-label">(Limited Costume)</span></span>`;
+            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">trude ROCK</span>`;
             trudeRockBox.addEventListener('click', () => trudeRockBox.classList.toggle('selected'));
 
             const lubuTsBox = document.createElement('div'); lubuTsBox.className = 'adv-char-box legendary-item'; lubuTsBox.dataset.engName = 'LubuTS';
-            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">lubu TS<span class="costume-label">(Limited Costume)</span></span>`;
+            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">lubu TS</span>`;
             lubuTsBox.addEventListener('click', () => lubuTsBox.classList.toggle('selected'));
 
             let juryBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'jury');
@@ -1038,7 +1054,7 @@
 			grid.appendChild(fragment);
 		}
 
-		function openAdvancedSearchModal() { document.getElementById('screenOverlay').classList.add('visible'); document.getElementById('advancedSearchModal').classList.add('visible'); document.body.classList.add('modal-open'); const recommendBtn = document.getElementById('adv-search-recommend'); if (recommendBtn) { recommendBtn.classList.remove('recommend-highlight'); setTimeout(() => { recommendBtn.classList.add('recommend-highlight'); }, 500); } }
+		function openAdvancedSearchModal() { document.getElementById('screenOverlay').classList.add('visible'); document.getElementById('advancedSearchModal').classList.add('visible'); document.body.classList.add('modal-open'); fitNamesOneLine(document.getElementById('advanced-search-grid')); const recommendBtn = document.getElementById('adv-search-recommend'); if (recommendBtn) { recommendBtn.classList.remove('recommend-highlight'); setTimeout(() => { recommendBtn.classList.add('recommend-highlight'); }, 500); } }
 		function closeAdvancedSearchModal() { document.getElementById('screenOverlay').classList.remove('visible'); document.getElementById('advancedSearchModal').classList.remove('visible'); document.body.classList.remove('modal-open'); }
 
 		function executeAdvancedSearch() {
