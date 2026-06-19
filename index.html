@@ -15,7 +15,7 @@
 	<style>
 	    body { font-family: 'Roboto', sans-serif; background-color: #121212; max-width: 1200px; margin: 0 auto; padding: 30px 20px; color: #e0e0e0; position: relative; overflow-y: scroll; }
         body.modal-open { overflow: hidden; }
-        body.advanced-search-active > *:not(#results):not(#advancedSearchBtn):not(#loader):not(#copyMessage):not([id*="Popup"]):not(#selectorTooltip) { filter: blur(8px) brightness(0.4); pointer-events: none; transition: filter 0.3s ease; }
+        body.advanced-search-active > *:not(#results):not(#advancedSearchBtn):not(#loader):not(#copyMessage):not([id*="Popup"]):not(#selectorTooltip):not(.sort-container) { filter: blur(8px) brightness(0.4); pointer-events: none; transition: filter 0.3s ease; }
         body.advanced-search-active #results { opacity: 1 !important; }
 	    .app-header { text-align: center; padding: 4px 0 18px; margin-bottom: 22px; border-bottom: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1; }
 	    .app-title { font-family: 'Poppins', sans-serif; font-size: 1.45rem; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
@@ -1099,7 +1099,7 @@
 					return { key, total, price: itemDetails.price };
 				});
 
-				const sortedKeys = scoredItems.sort((a, b) => { if (b.total !== a.total) { return b.total - a.total; } return b.price - a.price; }).map(item => item.key);
+				const advSortKey = document.getElementById('sortDropdown')?.value || 'price-high'; const rs6 = (d) => Object.entries(d.rings || {}).reduce((s, [k, c]) => { const g = k.slice(-1); return s + c * (g === '6' ? 1 : g === '5' ? 1/3 : g === '4' ? 1/12 : 0); }, 0); const sortedKeys = scoredItems.sort((a, b) => { if (b.total !== a.total) return b.total - a.total; const dA = itemDetailsMap[a.key], dB = itemDetailsMap[b.key]; if (advSortKey === 'price-low') return dA.price - dB.price; if (advSortKey === 'ring-high') return (rs6(dB) - rs6(dA)) || (dB.price - dA.price); return dB.price - dA.price; }).map(item => item.key);
 				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selectedChars });
 
 				resultsDiv.classList.remove('sorting');
@@ -1121,7 +1121,7 @@
 		const throttledFilterHandler = throttle(() => { document.getElementById('results').scrollIntoView({ behavior: 'smooth' }); applyFiltersAndSort(); const selectedCharsString = getSelectedCharacters(); if (selectedCharsString) { gtag('event', 'apply_filter', { 'selected_characters': selectedCharsString }); } }, 300);
 
         document.getElementById('filterButton').addEventListener('click', throttledFilterHandler);
-        document.getElementById('sortDropdown').addEventListener('change', function() { if (!isAdvancedSearchMode) { applyFiltersAndSort(); } this.blur(); });
+        document.getElementById('sortDropdown').addEventListener('change', function() { if (isAdvancedSearchMode) { if (advancedSearchSelection) displayAdvancedSearchResults(advancedSearchSelection); } else { applyFiltersAndSort(); } this.blur(); });
 
 		document.addEventListener('DOMContentLoaded', () => {
 			const advBtn = document.getElementById('advancedSearchBtn');
