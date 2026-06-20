@@ -432,12 +432,16 @@
             }).catch(e => console.error('Pets.txt load error:', e));
         }
 
-        // 전설펫선택권 보유 계정 (pet_d0_complete.txt — 계정 ID 1줄씩)
-        let petD0Set = new Set();
+        // 전설펫선택권 보유 {계정ID: 개수} (pet_d0_complete.txt — 1줄 'ID count', 개수 생략 시 1)
+        let petD0Map = new Map();
         function loadPetD0() {
             const ts = new Date().getTime();
             return fetch(`pet_d0_complete.txt?t=${ts}`).then(r => r.text()).then(text => {
-                petD0Set = new Set(text.split('\n').map(s => s.trim()).filter(Boolean));
+                petD0Map = new Map();
+                text.split('\n').forEach(line => {
+                    const p = line.trim().split(/\s+/);
+                    if (p[0]) petD0Map.set(p[0], p.length > 1 ? parseInt(p[1]) : 1);
+                });
             }).catch(e => console.error('pet_d0_complete.txt load error:', e));
         }
 
@@ -734,7 +738,7 @@
                 item.dataset.remainingItems = JSON.stringify(allImportantItemsData.slice(1));
                 item.dataset.tier2Items = JSON.stringify(tier2ImageData);
                 item.dataset.petItems = JSON.stringify(legendPetOrder.filter(n => (itemDetails.pets||{})[n] > 0).map(n => [n, itemDetails.pets[n]]));
-                if (petD0Set.has(k)) item.dataset.petSelector = '1';
+                { const pc = petD0Map.get(k) || 0; if (pc > 0) item.dataset.petSelector = String(pc); }
 
                 const priceBox = document.createElement('div'); priceBox.className = 'price-box'; const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1480 / 1000) * 1000;
                 priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
@@ -871,9 +875,9 @@
                 extrasBox.addEventListener('click', (e) => { e.stopPropagation(); showExtrasPopup(tier2Items); });
                 imageContainer.appendChild(extrasBox);
             }
-            if (item.dataset.petSelector === '1') {
-                imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/전설펫선택권.png', alt: 'Pet Selector', engName: 'PetSelector', count: 1 }, tier0Eng, true, advSel));
-            }
+            { const pc = parseInt(item.dataset.petSelector || '0'); if (pc > 0) {
+                imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/전설펫선택권.png', alt: 'Pet Selector', engName: 'PetSelector', count: pc }, tier0Eng, true, advSel));
+            } }
             JSON.parse(item.dataset.petItems || '[]').forEach(([name, c]) => { const petEl = createPetSlotElement(name, c); petEl.classList.add('js-lazy-loaded'); imageContainer.appendChild(petEl); });
             imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 }, tier0Eng, true, advSel));
             imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/스페셜선택권.png', alt: 'Hero Selector', engName: 'AllLegendSelector', count: 1 }, tier0Eng, true, advSel));
@@ -956,9 +960,9 @@
             allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
 
             // 펫셀렉터 (pet_d0 계정만) — 펫 앞
-            if (petD0Set.has(itemKey)) {
-                allItemsData.push({ src: 'Portrait/전설펫선택권.png', alt: 'Pet Selector', engName: 'PetSelector', count: 1 });
-            }
+            { const pc = petD0Map.get(itemKey) || 0; if (pc > 0) {
+                allItemsData.push({ src: 'Portrait/전설펫선택권.png', alt: 'Pet Selector', engName: 'PetSelector', count: pc });
+            } }
             // 펫: legendPetOrder 순
             legendPetOrder.forEach(name => {
                 const c = (itemDetails.pets||{})[name] || 0;
