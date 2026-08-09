@@ -549,6 +549,8 @@
             const ts = new Date().getTime();
             return fetch(`account_prices.txt?t=${ts}`).then(r => r.text()).then(text => {
                 luaData = {}; itemDetailsMap = {};
+                // Characters.txt에 없는 캐릭터 토큰은 조용히 버림 (totalCount/카피본 오염 방지)
+                const knownCharSet = new Set(characters.map(([eng]) => eng.toLowerCase()));
                 const lines = text.split('\n');
                 lines.forEach(line => {
                     if (!line.trim() || !line.includes('=')) return;
@@ -596,6 +598,7 @@
                         pets: pets
                     };
                     const currentItemChars = {};
+                    const droppedWords = [];
                     contentWords.forEach(word => {
                         // 반지 토큰: typeNxC  (예: authority4x2)
                         const ringM = word.match(/^([a-z]+)([456])x(\d+)$/);
@@ -606,9 +609,13 @@
                             const name = match[1].toLowerCase();
                             const count = parseInt(match[2]);
                             if (legendPetSet.has(name)) { pets[name] = (pets[name]||0) + count; }
-                            else { currentItemChars[name] = (currentItemChars[name] || 0) + count; }
+                            else if (knownCharSet.has(name)) { currentItemChars[name] = (currentItemChars[name] || 0) + count; }
+                            else { droppedWords.push(word); }
                         }
                     });
+                    // 버려진 토큰은 카피본에서도 제거 (선행 공백까지 같이 삭제)
+                    droppedWords.forEach(w => { itemDetails.originalText = itemDetails.originalText.replace(new RegExp(`\\s*\\b${w}\\b`), ''); });
+
                     for (const charName in currentItemChars) { itemDetails.totalCount += currentItemChars[charName]; }
 
                     if (itemDetails.teoCostume) itemDetails.totalCount++;
