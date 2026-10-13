@@ -271,7 +271,7 @@
             <div class="item-detail-popup-footer">
                 <div class="popup-info-box">
                     <div class="footer-value" id="popup-ruby-value"></div>
-                    <div class="footer-label">Ruby</div>
+                    <div class="footer-label">(Ruby + KeyBox*80)</div>
                 </div>
                 <div class="popup-info-box">
                     <div class="footer-value" id="popup-ticket-value"></div>
@@ -556,7 +556,7 @@
                     if (!line.trim() || !line.includes('=')) return;
                     
                     const resMatch = line.match(/\[RES:(.*?)\]/);
-                    let resources = { ruby: 0, tickets: 0 };
+                    let resources = { ruby: 0, tickets: 0, keybox: 0 };
                     let originalTextForCopy = line;
 
                     if (resMatch) {
@@ -565,7 +565,7 @@
                             const [k, v] = part.split('=');
                             resources[k] = parseInt(v, 10) || 0;
                         });
-                        const formattedRes = ` (Ruby: ${resources.ruby.toLocaleString()}, SummonTickets: ${resources.tickets.toLocaleString()})`;
+                        const formattedRes = ` (Ruby + KeyBox*80: ${(resources.ruby + resources.keybox * 80).toLocaleString()}, SummonTickets: ${resources.tickets.toLocaleString()})`;
                         originalTextForCopy = line.replace(/\[RES:.*?\]/, formattedRes);
                     }
 
@@ -926,9 +926,9 @@
 
         function showItemDetailPopup(itemKey) {
             const itemDetails = itemDetailsMap[itemKey];
-            const res = itemDetails.resources || { ruby: 0, tickets: 0 };
-            
-            const displayRubyCount = res.ruby.toLocaleString();
+            const res = itemDetails.resources || { ruby: 0, tickets: 0, keybox: 0 };
+
+            const displayRubyCount = (res.ruby + (res.keybox || 0) * 80).toLocaleString();
             const displayTicketCount = res.tickets.toLocaleString();
 
             const popup = document.getElementById('itemDetailPopup'); const grid = document.getElementById('item-detail-popup-grid');
