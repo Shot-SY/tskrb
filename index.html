@@ -33,14 +33,16 @@
         .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px,1fr)); gap: 10px; margin-bottom: 16px; position: relative; z-index: 1; transform: translateZ(0); }
         /* Grid boxes are full-bleed cards: the portrait fills the box edge to edge, the name sits in a fixed strip under it. */
         .character-box { background: rgba(26,26,26,0.85); border: none; padding: 0; overflow: hidden; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; position: relative; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); z-index: 1; transform: translateZ(0); }
-        .character-box.rare, .adv-char-box.rare { border: 2px solid #ff9800; box-shadow: 0 0 15px rgba(255,152,0,0.5); }
-        .character-box.super-rare, .adv-char-box.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 15px rgba(211, 47, 47, 0.5); }
-        .character-box.legendary-item, .adv-char-box.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+        .character-box.rare, .adv-char-box.rare { border: 2px solid rgba(255, 152, 0, 0.5); }
+        .character-box.super-rare, .adv-char-box.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 10px rgba(211, 47, 47, 0.35); }
+        .character-box.legendary-item, .adv-char-box.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 10px rgba(212, 175, 55, 0.35); }
         .extras-character-border, .adv-char-box.extras-character-border { border: 2px solid #b0b0b0; box-shadow: 0 0 10px rgba(176, 176, 176, 0.3); }
 	    .character-box.selected { background-color: rgba(255,64,129,0.9); box-shadow: 0 0 20px rgba(255,64,129,0.7), 0 8px 20px rgba(255,64,129,0.8); transform: translateY(-4px); z-index: 2; }
         @media (hover: hover) and (pointer: fine) {
 	        .character-box:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255,255,255,0.2); z-index: 10; transition: transform 0.3s, box-shadow 0.3s; }
-	        .result-item:hover { background: linear-gradient(135deg, #33363d, #2a2c30); box-shadow: 0 6px 25px rgba(0,0,0,0.7), 0 0 10px rgba(255, 64, 129, 0.4); transform: translateY(-3px); border-color: rgba(255, 64, 129, 0.5); }
+	        .result-item:hover { background: var(--card-bg-hover); box-shadow: 0 4px 16px rgba(0,0,0,0.5); transform: translateY(-2px); border-color: rgba(255, 64, 129, 0.4); }
+	        .result-item:hover .item-images-wrapper.has-scroll::before { background: linear-gradient(to left, transparent, var(--card-bg-hover) 80%); }
+	        .result-item:hover .item-images-wrapper.has-scroll::after { background: linear-gradient(to right, transparent, var(--card-bg-hover) 80%); }
 			.result-item:hover::before { opacity: 1; }
 			.extras-box:hover { background: rgba(176, 176, 176, 0.2); border-color: rgba(176, 176, 176, 0.8); }
 	    }
@@ -59,44 +61,50 @@
 	    #filterButton:active { transform: translateY(0); box-shadow: 0 2px 10px rgba(255,64,129,0.3); }
 		#advancedSearchBtn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; margin-bottom: 24px; font-size: 17px; cursor: pointer; color: #e0e0e0; background: #1a1a1a; border: 1px solid rgba(255,64,129,0.4); border-radius: 10px; box-shadow: none; transition: all 0.2s ease; font-family: 'Poppins', sans-serif; font-weight: 600; position: relative; z-index: 1; }
 		#advancedSearchBtn:hover { background: #222; border-color: #ff4081; transform: translateY(-2px); }
-	    #copyInstruction { margin-bottom: 15px; font-style: italic; color: #ff4081; text-align: center; font-size: 1.2em; font-weight: 600; position: relative; z-index: 1; }
+	    #copyInstruction { margin-bottom: 14px; color: rgba(255, 64, 129, 0.8); text-align: center; font-size: 14px; font-weight: 600; letter-spacing: 0.2px; position: relative; z-index: 1; }
 	    #copyMessage { position: fixed; top: 50%; left: 50%; --copy-translate-y: -50%; transform: translate(-50%, var(--copy-translate-y)) scale(0.8); background: linear-gradient(135deg, #232526 0%, #414345 100%); color: #fff; padding: 20px 30px; border-radius: 12px; display: none; opacity: 0; font-family: 'Poppins', sans-serif; font-size: 1.1em; box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 5000; transition: opacity 0.3s ease, transform 0.3s ease; border-left: 4px solid #ff4081; will-change: transform, opacity; }
 	    #copyMessage.show { display: flex; align-items: center; gap: 15px; animation: messagePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 	    @keyframes messagePop { 0% { opacity: 0; transform: translate(-50%, var(--copy-translate-y)) scale(0.8); } 50% { opacity: 1; transform: translate(-50%, var(--copy-translate-y)) scale(1.05); } 100% { opacity: 1; transform: translate(-50%, var(--copy-translate-y)) scale(1); } }
 	    .copy-icon { width: 24px; height: 24px; background-color: #ff4081; border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: pulse 1s infinite; transform: translateZ(0); }
 	    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 64, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0); } }
 	    .copy-icon svg { width: 14px; height: 14px; fill: white; transform: translateZ(0); }
-		#results { padding: 20px; background-color: rgba(20,20,20,0.8); border-radius: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); position: relative; z-index: 1; transform: translateZ(0); transition: opacity 0.2s ease-in-out, filter 0.3s ease; }
+		#results { position: relative; z-index: 1; transform: translateZ(0); transition: opacity 0.2s ease-in-out, filter 0.3s ease; }
         #results.sorting { opacity: 0; }
 	    #results .content-container { transform: translateZ(0); will-change: opacity; transition: opacity 0.2s ease; contain: layout paint style; backface-visibility: hidden; }
 	    #results.scrolling .result-item { transition: none !important; }
-		.result-item { margin-bottom: 14px; padding: 10px 20px; background: linear-gradient(135deg, #202228, #1a1c20); cursor: pointer; transition: background 0.3s, box-shadow 0.3s, transform 0.2s; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 18px; position: relative; overflow: visible; }
-		.result-item::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, #ff4081, #f50057); opacity: 0.6; transition: opacity 0.3s; }
+	    /* off-screen rows skip layout/paint; 'auto' remembers each row's last real height */
+	    #results .result-item { content-visibility: auto; contain-intrinsic-size: auto 132px; } /* content-box height (row 154 = 132 + padding/border) */
+		/* Cards sit straight on the page background: flat lighter surface + wider gaps so each account reads as one block */
+		:root { --card-bg: #1c1f25; --card-bg-hover: #23272e; --card-line: rgba(255, 255, 255, 0.07); }
+		.result-item { margin-bottom: 20px; padding: 10px 18px; background: var(--card-bg); cursor: pointer; transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s; border-radius: 14px; border: 1px solid var(--card-line); box-shadow: 0 2px 10px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 18px; position: relative; overflow: visible; }
+		.result-item::before { content: ''; position: absolute; top: 12px; bottom: 12px; left: 0; width: 3px; border-radius: 0 3px 3px 0; background: #ff4081; opacity: 0; transition: opacity 0.2s; }
         /* Portraits are 130x140 with a 22px star strip at the bottom; icons crop 23px of it (130:117). Rings keep their stars and lose the top instead. */
         :root { --icon-w: 56px; --icon-h: calc(var(--icon-w) * 117 / 130); }
-        .item-lines { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+        .item-lines { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 0; }
         .item-images-wrapper { position: relative; overflow: hidden; display: flex; }
 		.item-images { display: flex; align-items: center; flex-wrap: nowrap; gap: 10px; overflow-x: auto; padding: 5px 6px; min-height: calc(var(--icon-h) + 4px); scrollbar-width: none; }
         .item-images::-webkit-scrollbar { display: none; }
 		.result-info-right { display: flex; align-items: center; flex-wrap: nowrap; gap: 10px; justify-content: flex-end; flex-shrink: 0; }
 	    .small-character-img, .detail-popup-img { transition: filter 0.3s, opacity 0.3s, transform 0.2s; }
-		.small-character-img { width: var(--icon-w); height: auto; aspect-ratio: 130 / 117; object-fit: cover; object-position: center top; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); flex-shrink: 0; }
-		.detail-popup-img { width: 52px; height: auto; aspect-ratio: 130 / 117; object-fit: cover; object-position: center top; border-radius: 8px; }
+		/* border-box: the frame is drawn inside the fixed size, so 1px (tier1) and 2px (tier0/gold) icons stay the same size */
+		.small-character-img { box-sizing: border-box; width: var(--icon-w); height: auto; aspect-ratio: 130 / 117; object-fit: cover; object-position: center top; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); flex-shrink: 0; }
+		.detail-popup-img { box-sizing: border-box; width: 52px; height: auto; aspect-ratio: 130 / 117; object-fit: cover; object-position: center top; border-radius: 8px; }
         .ring-slot img { object-position: center bottom; }
 		.small-character-img.dimmed, .extras-box.dimmed, .detail-popup-img.dimmed { filter: grayscale(65%); opacity: 0.7; }
 		.extras-box { display: flex; justify-content: center; align-items: center; height: var(--icon-h); min-width: 84px; padding: 0 12px; background: rgba(176, 176, 176, 0.1); border: 1px dashed rgba(176, 176, 176, 0.5); border-radius: 10px; cursor: pointer; transition: background 0.2s, border-color 0.2s, filter 0.3s, opacity 0.3s; flex-shrink: 0; }
-	    .small-character-img.rare, .detail-popup-img.rare { border: 2px solid #ff9800; }
+	    /* tier1 is most of every row, so it gets a quiet frame; only tier0 (red) and skins/rings/selectors (gold) keep a strong one */
+	    .small-character-img.rare, .detail-popup-img.rare { border: 1px solid rgba(255, 152, 0, 0.4); }
 	    .small-character-img.super-rare, .detail-popup-img.super-rare { border: 2px solid #D32F2F; }
         .small-character-img.legendary-item, .detail-popup-img.legendary-item { border: 2px solid #D4AF37; }
         .detail-popup-img.extras-character-border { border: 2px solid #b0b0b0; }
-	    body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/dark-matter.png') repeat; opacity: 0.1; z-index: -1; }
-	    .character-box::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/gplay.png') repeat; opacity: 0.5; border-radius: 14px; pointer-events: none; z-index: 0; }
+	    body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('textures/dark-matter.webp') repeat; opacity: 0.1; z-index: -1; }
+	    .character-box::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('textures/gplay.webp') repeat; opacity: 0.5; border-radius: 14px; pointer-events: none; z-index: 0; }
 	    .character-box > * { position: relative; z-index: 1; }
         .image-with-count-container { position: relative; display: inline-block; vertical-align: middle; flex-shrink: 0; }
-		.image-count-badge { position: absolute; bottom: -5px; right: -5px; min-width: 19px; text-align: center; background: rgba(0, 0, 0, 0.85); color: #fff; padding: 1px 6px; border-radius: 9px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; line-height: 1.35; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 5px rgba(0,0,0,0.6); pointer-events: none; }
-		.image-count-badge.rare-badge { color: #ffc107; text-shadow: 0 0 5px rgba(255, 193, 7, 0.7); }
-		.image-count-badge.super-rare-badge { color: #ff5252; text-shadow: 0 0 5px rgba(255, 82, 82, 0.7); }
-        .image-count-badge.legendary-badge { color: #FFD700; text-shadow: 0 0 5px rgba(255, 215, 0, 0.8); }
+		.image-count-badge { position: absolute; bottom: -5px; right: -5px; min-width: 18px; text-align: center; background: rgba(12, 12, 14, 0.88); color: #e0e0e0; padding: 0 5px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600; line-height: 17px; border: 1px solid rgba(255, 255, 255, 0.06); pointer-events: none; }
+		.image-count-badge.rare-badge { color: #f5c26b; }
+		.image-count-badge.super-rare-badge { color: #ff8a80; }
+        .image-count-badge.legendary-badge { color: #ffd54f; }
 		.image-with-count-container img.dimmed ~ .image-count-badge { filter: grayscale(70%) brightness(0.8); }
 		.price-box { display: flex; flex-direction: column; justify-content: center; align-items: flex-end; height: 60px; min-width: 114px; padding: 0 12px; background: linear-gradient(270deg, rgba(39, 174, 96, 0.2), transparent); border-radius: 10px; font-family: 'Poppins', sans-serif; }
 		/* Ruby / tickets / heroes stacked above the price; colors follow the detail popup footer, the marker shape stands in for a label. */
@@ -110,7 +118,7 @@
 		.ticket-chip::before { width: 10px; height: 7px; border-radius: 2px; background: #ff9800; box-shadow: 0 0 6px rgba(255, 152, 0, 0.6); }
 		.hero-chip { background: rgba(0, 229, 255, 0.08); color: #4dd0e1; }
 		.hero-chip::before { width: 8px; height: 8px; border-radius: 50%; background: #00e5ff; box-shadow: 0 0 6px rgba(0, 229, 255, 0.6); }
-		.price-box .price-usd { font-size: 22px; font-weight: 700; color: #2ecc71; text-shadow: 0 0 8px rgba(46, 204, 113, 0.5); }
+		.price-box .price-usd { font-size: 22px; font-weight: 700; color: #2ecc71; }
 		.price-box .price-krw { font-size: 14px; color: #bdc3c7; }
 		.target-total-box { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60px; min-width: 100px; padding: 0 12px; background: linear-gradient(270deg, rgba(41, 121, 255, 0.2), transparent); border-radius: 10px; font-family: 'Poppins', sans-serif; }
 		.target-total-label { font-size: 14px; color: #bdc3c7; }
@@ -122,8 +130,8 @@
         .scroll-indicator-left { left: 5px; }
         .scroll-indicator-right { right: 5px; }
         .item-images-wrapper.has-scroll::before, .item-images-wrapper.has-scroll::after { content: ''; position: absolute; top: 0; width: 70px; height: 100%; pointer-events: none; z-index: 5; transition: opacity 0.3s; opacity: 0; }
-        .item-images-wrapper.has-scroll::before { left: 0; background: linear-gradient(to left, rgba(26, 28, 32, 0), #1a1c20 80%); }
-        .item-images-wrapper.has-scroll::after { right: 0; background: linear-gradient(to right, rgba(26, 28, 32, 0), #1a1c20 80%); }
+        .item-images-wrapper.has-scroll::before { left: 0; background: linear-gradient(to left, transparent, var(--card-bg) 80%); }
+        .item-images-wrapper.has-scroll::after { right: 0; background: linear-gradient(to right, transparent, var(--card-bg) 80%); }
         .item-images-wrapper.scrolled-from-start::before { opacity: 1; }
         .item-images-wrapper:not(.scrolled-to-end)::after { opacity: 1; }
 	    #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(18,18,18,0.95); display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 2000; transition: opacity 0.5s ease, visibility 0.5s ease; }
@@ -226,6 +234,7 @@
 	        .spinbox-container input[type="number"] { font-size: 11px; padding: 0; height: 14px; }
 	        #filterButton, #advancedSearchBtn { font-size: 16px; padding: 12px; }
 	        .result-item { padding: 10px; flex-wrap: wrap; gap: 10px; }
+	        #results .result-item { contain-intrinsic-size: auto 171px; } /* row 193 = 171 + padding/border */
             :root { --icon-w: 46px; }
             .item-lines, .result-info-right { flex-basis: 100%; }
 			.result-info-right { justify-content: flex-end; }
@@ -233,12 +242,12 @@
 			.price-stack { flex-grow: 1; flex-direction: row; align-items: center; gap: 8px; }
 			.stat-chips { gap: 2px; }
 			.stat-chip { font-size: 11px; line-height: 15px; padding: 0 7px; }
-			.image-count-badge { font-size: 13px; line-height: 1.2; padding: 1px 4px; min-width: 14px; border-radius: 8px; bottom: -4px; right: -4px; }
+			.image-count-badge { font-size: 11px; line-height: 15px; padding: 0 4px; min-width: 14px; border-radius: 7px; bottom: -4px; right: -4px; }
 			.ring-slot .image-count-badge { top: -4px; bottom: auto; }
 	        .item-images { gap: 6px; }
 			.scroll-indicator { display: none !important; }
             .item-images-wrapper.has-scroll::before, .item-images-wrapper.has-scroll::after { width: 50px; }
-	        #copyInstruction { font-size: 0.9em; }
+	        #copyInstruction { font-size: 12px; }
 	        #copyMessage { font-size: 0.9em; padding: 12px 18px; }
 			.extras-box .item-title { font-size: 11px; }
 			.price-box .price-usd { font-size: 18px; }
@@ -257,7 +266,6 @@
 			.adv-char-name { font-size: 10px; line-height: 17px; }
 			.advanced-search-footer { gap: 8px; }
 			.adv-search-btn { flex: 1; padding: 10px 6px; font-size: 14px; }
-			#results { padding: 8px; }
 			.view-bar { grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 0; margin-bottom: 12px; }
 			.bar-title { display: none; }
 			.view-tab { padding: 6px 14px; font-size: 13px; }
@@ -350,6 +358,16 @@
 
         function handleImageError(imgElement) {
             if (imgElement.getAttribute('data-error-handled')) return;
+            // 일시적 실패(연결 끊김 등)는 0.6s, 1.8s 뒤 두 번 더 요청. 그래도 실패하면(파일 없음 등) 이름 칸으로 교체
+            const tries = parseInt(imgElement.dataset.retry || '0');
+            if (tries < 2) {
+                imgElement.dataset.retry = tries + 1;
+                setTimeout(() => {
+                    if (!imgElement.isConnected) return; // 레이지 렌더가 이미 걷어 간 아이콘
+                    imgElement.src = `${imgElement.getAttribute('src').split('?')[0]}?r=${tries + 1}`;
+                }, tries === 0 ? 600 : 1800);
+                return;
+            }
             imgElement.setAttribute('data-error-handled', 'true');
             const placeholder = document.createElement('div');
             placeholder.className = 'new-character-placeholder';
@@ -411,7 +429,7 @@
             list.forEach(char => {
                 const item = document.createElement('div');
                 item.className = 'tooltip-item';
-                item.innerHTML = `<img src="Portrait/${char.kor}.png" class="tooltip-img" onerror="this.style.display='none'"><span class="tooltip-name">${char.eng}</span>`;
+                item.innerHTML = `<img src="Portrait/${char.kor}.webp" class="tooltip-img" onerror="handleImageError(this)"><span class="tooltip-name">${char.eng}</span>`;
                 grid.appendChild(item);
             });
         }
@@ -455,6 +473,7 @@
         function handleSelectorClick(e) { e.stopPropagation(); showSelectorTooltip(e.currentTarget); }
 
         
+        let charInfoMap = new Map(); // lower eng → { eng, kor, index, tier } (계정 행을 그릴 때 characters 배열을 매번 뒤지지 않게)
         let characters = []; let tier0Characters = []; let tier1Characters = []; let tier2Characters = []; let currentFilteredData = {}; let itemObserver;
 
         // 반지/펫 ─ english 키 → 한글 표시명. 이미지 파일 없으면 placeholder 폴백.
@@ -509,7 +528,9 @@
                     const parts = trimmedLine.split(' ');
                     if (parts.length >= 2) { const [eng, ...korParts] = parts; const kor = korParts.join(' '); const charData = [eng, kor]; if (currentTier === 0) tier0Characters.push(charData); else if (currentTier === 1) tier1Characters.push(charData); else if (currentTier === 2) tier2Characters.push(charData); }
                 });
-                characters = [...tier0Characters, ...tier1Characters, ...tier2Characters]; createCharacterBoxes(); populateAdvancedSearchGrid();
+                characters = [...tier0Characters, ...tier1Characters, ...tier2Characters];
+                charInfoMap = new Map(characters.map(([eng, kor], index) => [eng.toLowerCase(), { eng, kor, index, tier: index < tier0Characters.length ? 0 : index < tier0Characters.length + tier1Characters.length ? 1 : 2 }]));
+                createCharacterBoxes(); populateAdvancedSearchGrid();
             }).catch(error => console.error('Character data loading error:', error));
         }
 
@@ -545,26 +566,26 @@
             characters.forEach(([eng, kor]) => {
                 const charBox = document.createElement('div'); charBox.className = 'character-box'; charBox.dataset.engName = eng;
                 if (tier0Eng.has(eng)) charBox.classList.add('super-rare'); else if (tier1Eng.has(eng)) charBox.classList.add('rare'); else charBox.classList.add('extras-character-border');
-                charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${kor}</span><div class="spinbox-container"><input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled></div>`;
+                charBox.innerHTML = `<img src="Portrait/${kor}.webp" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${kor}</span><div class="spinbox-container"><input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled></div>`;
                 charBox.addEventListener('click', (e) => { if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox); });
                 charBox.querySelector('input').addEventListener('click', (e) => { e.stopPropagation(); if (!charBox.classList.contains('selected')) toggleSelection(charBox); });
                 fragment.appendChild(charBox);
             });
             
             const teoTsBox = document.createElement('div'); teoTsBox.className = 'character-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">태오 TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.webp" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">태오 TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
             
             const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'character-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
-            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">연희 IDOL</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.webp" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">연희 IDOL</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             yeonheeIdolBox.addEventListener('click', () => toggleSelection(yeonheeIdolBox));
             
             const trudeRockBox = document.createElement('div'); trudeRockBox.className = 'character-box legendary-item'; trudeRockBox.dataset.engName = 'TrudeROCK';
-            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">트루드 ROCK</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.webp" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">트루드 ROCK</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             trudeRockBox.addEventListener('click', () => toggleSelection(trudeRockBox));
 
             const lubuTsBox = document.createElement('div'); lubuTsBox.className = 'character-box legendary-item'; lubuTsBox.dataset.engName = 'LubuTS';
-            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">여포 TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.webp" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">여포 TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             lubuTsBox.addEventListener('click', () => toggleSelection(lubuTsBox));
 
             let juryBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'jury');
@@ -585,7 +606,7 @@
             legendPetOrder.forEach(name => {
                 const kor = legendPetKor[name] || name;
                 const petBox = document.createElement('div'); petBox.className = 'character-box rare pet-box'; petBox.dataset.engName = name;
-                petBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${kor}</span><div class="spinbox-container"><input type="number" id="${name}-spin" min="0" max="99" value="0" disabled></div>`;
+                petBox.innerHTML = `<img src="Portrait/${kor}.webp" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${kor}</span><div class="spinbox-container"><input type="number" id="${name}-spin" min="0" max="99" value="0" disabled></div>`;
                 petBox.addEventListener('click', (e) => { if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(petBox); });
                 petBox.querySelector('input').addEventListener('click', (e) => { e.stopPropagation(); if (!petBox.classList.contains('selected')) toggleSelection(petBox); });
                 fragment.appendChild(petBox);
@@ -688,7 +709,8 @@
         function applyFiltersAndSort() {
             const resultsDiv = document.getElementById('results'); resultsDiv.classList.add('sorting');
             return new Promise(resolve => setTimeout(() => {
-                currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v, k)));
+                const req = readFilterRequirements();
+                currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v, k, req)));
                 const sortKey = document.getElementById('sortDropdown')?.value || 'price-high';
                 const ringSum6 = (d) => Object.entries(d.rings || {}).reduce((s, [k, c]) => { const g = k.slice(-1); return s + c * (g === '6' ? 1 : g === '5' ? 1/3 : g === '4' ? 1/12 : 0); }, 0);
                 const sortedKeys = Object.keys(currentFilteredData).sort((a, b) => {
@@ -704,40 +726,31 @@
             }, 200));
         }
 
-        function checkConditions(itemChars, itemKey) {
-            const allCharsMatch = characters.every(([eng]) => { const box = document.querySelector(`.character-box[data-eng-name="${eng}"]`); return !box || !box.classList.contains('selected') || (itemChars[eng.toLowerCase()] || 0) >= parseInt(box.querySelector('input').value); });
-            if (!allCharsMatch) return false;
-            
-            const teoTsBox = document.querySelector('.character-box[data-eng-name="TeoTS"]');
-            if (teoTsBox && teoTsBox.classList.contains('selected') && !itemDetailsMap[itemKey].teoCostume) return false;
-            
-            const yeonheeIdolBox = document.querySelector('.character-box[data-eng-name="YeonheeIDOL"]');
-            if (yeonheeIdolBox && yeonheeIdolBox.classList.contains('selected') && !itemDetailsMap[itemKey].yeonheeCostume) return false;
+        // 선택된 상단 박스를 필터 조건으로 한 번만 읽음 (계정마다 DOM을 다시 뒤지지 않게)
+        const SKIN_FLAGS = { TeoTS: 'teoCostume', YeonheeIDOL: 'yeonheeCostume', TrudeROCK: 'trudeCostume', LubuTS: 'lubuCostume' };
+        function readFilterRequirements() {
+            const req = { chars: [], skins: [], pets: [] };
+            document.querySelectorAll('#characterGrid .character-box.selected').forEach(box => {
+                const name = box.dataset.engName; const input = box.querySelector('input'); const min = input ? (parseInt(input.value) || 0) : 1;
+                if (SKIN_FLAGS[name]) req.skins.push(SKIN_FLAGS[name]);
+                else if (box.classList.contains('pet-box')) req.pets.push([name, min]); // 펫: spinbox 값 이상 보유
+                else req.chars.push([name.toLowerCase(), min]);
+            });
+            return req;
+        }
 
-            const trudeRockBox = document.querySelector('.character-box[data-eng-name="TrudeROCK"]');
-            if (trudeRockBox && trudeRockBox.classList.contains('selected') && !itemDetailsMap[itemKey].trudeCostume) return false;
-
-            const lubuTsBox = document.querySelector('.character-box[data-eng-name="LubuTS"]');
-            if (lubuTsBox && lubuTsBox.classList.contains('selected') && !itemDetailsMap[itemKey].lubuCostume) return false;
-
-            // 펫 필터: 선택된 펫 박스마다 spinbox 값 이상 보유 요구
-            const petsData = itemDetailsMap[itemKey].pets || {};
-            for (const name of legendPetOrder) {
-                const box = document.querySelector(`.character-box.pet-box[data-eng-name="${name}"]`);
-                if (box && box.classList.contains('selected')) {
-                    const required = parseInt(box.querySelector('input').value) || 0;
-                    if ((petsData[name] || 0) < required) return false;
-                }
-            }
-
-            return true;
+        function checkConditions(itemChars, itemKey, req) {
+            const d = itemDetailsMap[itemKey]; const pets = d.pets || {};
+            return req.chars.every(([n, min]) => (itemChars[n] || 0) >= min)
+                && req.skins.every(flag => d[flag])
+                && req.pets.every(([n, min]) => (pets[n] || 0) >= min);
         }
 
         function optimizeImages() { document.querySelectorAll('img').forEach(img => { if (!img.hasAttribute('loading')) img.loading = 'lazy'; if (!img.hasAttribute('decoding')) img.decoding = 'async'; }); }
 		
 		function displayResults({ data, sortedKeys, advancedSearchSelection = null }) {
 			const res = document.getElementById('results'); if (document.body.dataset.view === 'results') window.scrollTo(0, 0); const fragment = document.createDocumentFragment(); const container = document.createElement('div'); container.className = 'content-container'; fragment.appendChild(container);
-            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng)); const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
 
 			sortedKeys.forEach(k => {
 				const item = document.createElement('div'); item.className = 'result-item'; item.dataset.itemKey = k;
@@ -768,26 +781,25 @@
 				}
                 let allImportantItemsData = []; const tier2ImageData = [];
                 for (const charName in charValue) {
-                    const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName); if (!charInfo) continue;
-                    const [engName, korName] = charInfo; const originalIndex = characters.findIndex(([eng]) => eng === engName);
-                    const imageData = { type: 'character', src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: charValue[charName], originalIndex: originalIndex };
-                    if (tier0Eng.has(engName) || tier1Eng.has(engName)) { allImportantItemsData.push(imageData); } else { tier2ImageData.push(imageData); }
+                    const info = charInfoMap.get(charName); if (!info) continue;
+                    const imageData = { type: 'character', src: `Portrait/${info.kor}.webp`, alt: info.kor, engName: info.eng, count: charValue[charName], originalIndex: info.index };
+                    if (info.tier < 2) { allImportantItemsData.push(imageData); } else { tier2ImageData.push(imageData); }
                 }
-                
-                const juryIndex = characters.findIndex(([eng]) => eng.toLowerCase() === 'jury');
-                const baseSkinIndex = juryIndex !== -1 ? juryIndex : 4; 
+
+                const juryInfo = charInfoMap.get('jury');
+                const baseSkinIndex = juryInfo ? juryInfo.index : 4;
                 
                 if (itemDetails.teoCostume) {
-                    allImportantItemsData.push({ type: 'character', src: 'Portrait/태오ts스킨.png', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1, originalIndex: baseSkinIndex + 0.1 });
+                    allImportantItemsData.push({ type: 'character', src: 'Portrait/태오ts스킨.webp', alt: '태오 TS 스킨', engName: 'TeoTS', count: 1, originalIndex: baseSkinIndex + 0.1 });
                 }
                 if (itemDetails.yeonheeCostume) {
-                    allImportantItemsData.push({ type: 'character', src: 'Portrait/연희idol스킨.png', alt: '연희 IDOL', engName: 'YeonheeIDOL', count: 1, originalIndex: baseSkinIndex + 0.2 });
+                    allImportantItemsData.push({ type: 'character', src: 'Portrait/연희idol스킨.webp', alt: '연희 IDOL', engName: 'YeonheeIDOL', count: 1, originalIndex: baseSkinIndex + 0.2 });
                 }
                 if (itemDetails.trudeCostume) {
-                    allImportantItemsData.push({ type: 'character', src: 'Portrait/트루드rockstar스킨.png', alt: '트루드 ROCK', engName: 'TrudeROCK', count: 1, originalIndex: baseSkinIndex + 0.3 });
+                    allImportantItemsData.push({ type: 'character', src: 'Portrait/트루드rockstar스킨.webp', alt: '트루드 ROCK', engName: 'TrudeROCK', count: 1, originalIndex: baseSkinIndex + 0.3 });
                 }
                 if (itemDetails.lubuCostume) {
-                    allImportantItemsData.push({ type: 'character', src: 'Portrait/여포ts스킨.png', alt: '여포 TS 스킨', engName: 'LubuTS', count: 1, originalIndex: baseSkinIndex + 0.4 });
+                    allImportantItemsData.push({ type: 'character', src: 'Portrait/여포ts스킨.webp', alt: '여포 TS 스킨', engName: 'LubuTS', count: 1, originalIndex: baseSkinIndex + 0.4 });
                 }
 
                 // 반지: 결과 행은 대표 이미지 합산 슬롯 1개. 스킨 뒤.
@@ -825,7 +837,7 @@
 				container.appendChild(item);
 			});
 			res.innerHTML = ''; res.appendChild(fragment); document.getElementById('copyInstruction').style.display = 'block';
-            document.querySelectorAll('#results .result-item').forEach(item => setupScrollControlsForItem(item, advancedSearchSelection)); setupItemObserver(advancedSearchSelection);
+            setupItemObserver(advancedSearchSelection); // 스크롤 버튼은 행이 실제로 채워질 때(renderFullItem) 설정
 		}
 
         function createImageLine() {
@@ -854,7 +866,7 @@
             }, 0);
             const container = document.createElement('div'); container.className = 'image-with-count-container ring-slot';
             const img = document.createElement('img');
-            img.src = 'Portrait/반지.png'; img.alt = 'Ring'; img.className = 'small-character-img legendary-item';
+            img.src = 'Portrait/반지.webp'; img.alt = 'Ring'; img.className = 'small-character-img legendary-item';
             img.onerror = function() { handleImageError(this); };
             container.appendChild(img);
             const badge = document.createElement('div'); badge.className = 'image-count-badge legendary-badge';
@@ -867,7 +879,7 @@
             const kor = legendPetKor[name] || name;
             const container = document.createElement('div'); container.className = 'image-with-count-container pet-slot';
             const img = document.createElement('img');
-            img.src = `Portrait/${kor}.png`; img.alt = kor; img.className = 'small-character-img rare';
+            img.src = `Portrait/${kor}.webp`; img.alt = kor; img.className = 'small-character-img rare';
             img.onerror = function() { handleImageError(this); };
             container.appendChild(img);
             if (count > 1) { const badge = document.createElement('div'); badge.className = 'image-count-badge rare-badge'; badge.textContent = `x${count}`; container.appendChild(badge); }
@@ -884,8 +896,8 @@
             ordered.forEach(([key, count]) => {
                 const item = document.createElement('div'); item.className = 'rp-item';
                 let label, src;
-                if (type === 'ring') { const info = ringDisplay(key); item.classList.add(`rp-grade-${info.grade}`); label = info.label; src = `Portrait/${key}.png`; }
-                else { item.classList.add('rp-pet'); label = legendPetKor[key] || key; src = `Portrait/${label}.png`; }
+                if (type === 'ring') { const info = ringDisplay(key); item.classList.add(`rp-grade-${info.grade}`); label = info.label; src = `Portrait/${key}.webp`; }
+                else { item.classList.add('rp-pet'); label = legendPetKor[key] || key; src = `Portrait/${label}.webp`; }
                 const icon = document.createElement('img'); icon.className = 'rp-icon'; icon.src = src; icon.alt = label;
                 icon.onerror = function() { handleImageError(this); };
                 const cnt = document.createElement('div'); cnt.className = 'rp-count'; cnt.textContent = count > 1 ? `x${count}` : '';
@@ -967,11 +979,11 @@
                 imageContainer.appendChild(extrasBox);
             }
             { const pc = parseInt(item.dataset.petSelector || '0'); if (pc > 0) {
-                imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/전설펫선택권.png', alt: 'Pet Selector', engName: 'PetSelector', count: pc }, tier0Eng, true, advSel));
+                imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/전설펫선택권.webp', alt: 'Pet Selector', engName: 'PetSelector', count: pc }, tier0Eng, true, advSel));
             } }
             JSON.parse(item.dataset.petItems || '[]').forEach(([name, c]) => { const petEl = createPetSlotElement(name, c); petEl.classList.add('js-lazy-loaded'); imageContainer.appendChild(petEl); });
-            imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 }, tier0Eng, true, advSel));
-            imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/스페셜선택권.png', alt: 'Hero Selector', engName: 'AllLegendSelector', count: 1 }, tier0Eng, true, advSel));
+            imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/세나선택권.webp', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 }, tier0Eng, true, advSel));
+            imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/스페셜선택권.webp', alt: 'Hero Selector', engName: 'AllLegendSelector', count: 1 }, tier0Eng, true, advSel));
             splitItemLines(item);
             setupScrollControlsForItem(item, advSel);
         }
@@ -1028,45 +1040,45 @@
             for (const charName in charValue) {
                 const charInfo = characters.find(([e]) => e.toLowerCase() === charName); if (!charInfo) continue;
                 const [engName, korName] = charInfo; const originalIndex = characters.findIndex(([e]) => e === engName);
-                allItemsData.push({ src: `Portrait/${korName}.png`, alt: korName, engName, count: charValue[charName], originalIndex });
+                allItemsData.push({ src: `Portrait/${korName}.webp`, alt: korName, engName, count: charValue[charName], originalIndex });
             }
             
             const juryIndex = characters.findIndex(([e]) => e.toLowerCase() === 'jury');
             const baseSkinIndex = juryIndex !== -1 ? juryIndex : 4;
 
             if (itemDetails.teoCostume) {
-                allItemsData.push({ src: 'Portrait/태오ts스킨.png', alt: 'TS', engName: 'TeoTS', count: 1, originalIndex: baseSkinIndex + 0.1 });
+                allItemsData.push({ src: 'Portrait/태오ts스킨.webp', alt: 'TS', engName: 'TeoTS', count: 1, originalIndex: baseSkinIndex + 0.1 });
             }
             if (itemDetails.yeonheeCostume) {
-                allItemsData.push({ src: 'Portrait/연희idol스킨.png', alt: 'IDOL', engName: 'YeonheeIDOL', count: 1, originalIndex: baseSkinIndex + 0.2 });
+                allItemsData.push({ src: 'Portrait/연희idol스킨.webp', alt: 'IDOL', engName: 'YeonheeIDOL', count: 1, originalIndex: baseSkinIndex + 0.2 });
             }
             if (itemDetails.trudeCostume) {
-                allItemsData.push({ src: 'Portrait/트루드rockstar스킨.png', alt: 'ROCK', engName: 'TrudeROCK', count: 1, originalIndex: baseSkinIndex + 0.3 });
+                allItemsData.push({ src: 'Portrait/트루드rockstar스킨.webp', alt: 'ROCK', engName: 'TrudeROCK', count: 1, originalIndex: baseSkinIndex + 0.3 });
             }
             if (itemDetails.lubuCostume) {
-                allItemsData.push({ src: 'Portrait/여포ts스킨.png', alt: 'TS', engName: 'LubuTS', count: 1, originalIndex: baseSkinIndex + 0.4 });
+                allItemsData.push({ src: 'Portrait/여포ts스킨.webp', alt: 'TS', engName: 'LubuTS', count: 1, originalIndex: baseSkinIndex + 0.4 });
             }
 
             // 반지: 스킨 뒤. 성급 내림차순.
             const ringList = RING_ORDER.filter(k => (itemDetails.rings||{})[k] > 0).slice().sort((a,b) => b.slice(-1).localeCompare(a.slice(-1)));
             ringList.forEach((key, i) => {
-                allItemsData.push({ src: `Portrait/${key}.png`, alt: key, engName: key, count: itemDetails.rings[key], originalIndex: baseSkinIndex + 0.5 + i * 0.001, tierClass: 'legendary-item', isRing: true });
+                allItemsData.push({ src: `Portrait/${key}.webp`, alt: key, engName: key, count: itemDetails.rings[key], originalIndex: baseSkinIndex + 0.5 + i * 0.001, tierClass: 'legendary-item', isRing: true });
             });
 
             allItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
 
             // 펫셀렉터 (pet_d0 계정만) — 펫 앞
             { const pc = petD0Map.get(itemKey) || 0; if (pc > 0) {
-                allItemsData.push({ src: 'Portrait/전설펫선택권.png', alt: 'Pet Selector', engName: 'PetSelector', count: pc });
+                allItemsData.push({ src: 'Portrait/전설펫선택권.webp', alt: 'Pet Selector', engName: 'PetSelector', count: pc });
             } }
             // 펫: legendPetOrder 순
             legendPetOrder.forEach(name => {
                 const c = (itemDetails.pets||{})[name] || 0;
-                if (c > 0) { const kor = legendPetKor[name] || name; allItemsData.push({ src: `Portrait/${kor}.png`, alt: kor, engName: name, count: c, originalIndex: 9100, tierClass: 'rare' }); }
+                if (c > 0) { const kor = legendPetKor[name] || name; allItemsData.push({ src: `Portrait/${kor}.webp`, alt: kor, engName: name, count: c, originalIndex: 9100, tierClass: 'rare' }); }
             });
             // 세나선택권 · 히어로셀렉터 — 맨 뒤
-            allItemsData.push({ src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 });
-            allItemsData.push({ src: 'Portrait/스페셜선택권.png', alt: 'Hero Selector', engName: 'AllLegendSelector', count: 1 });
+            allItemsData.push({ src: 'Portrait/세나선택권.webp', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 });
+            allItemsData.push({ src: 'Portrait/스페셜선택권.webp', alt: 'Hero Selector', engName: 'AllLegendSelector', count: 1 });
 
             allItemsData.forEach(charData => {
                 const isSelector = charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector';
@@ -1118,25 +1130,25 @@
 			characters.forEach(([eng, kor]) => {
 				const charBox = document.createElement('div'); charBox.className = 'adv-char-box'; charBox.dataset.engName = eng;
 				if (tier0Eng.has(eng)) charBox.classList.add('super-rare'); else if (tier1Eng.has(eng)) charBox.classList.add('rare'); else charBox.classList.add('extras-character-border');
-				charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${kor}</span>`;
+				charBox.innerHTML = `<img src="Portrait/${kor}.webp" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${kor}</span>`;
 				charBox.addEventListener('click', () => charBox.classList.toggle('selected'));
 				fragment.appendChild(charBox);
 			});
             
             const teoTsBox = document.createElement('div'); teoTsBox.className = 'adv-char-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">태오 TS</span>`;
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.webp" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">태오 TS</span>`;
             teoTsBox.addEventListener('click', () => teoTsBox.classList.toggle('selected'));
             
             const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'adv-char-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
-            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">연희 IDOL</span>`;
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.webp" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">연희 IDOL</span>`;
             yeonheeIdolBox.addEventListener('click', () => yeonheeIdolBox.classList.toggle('selected'));
 
             const trudeRockBox = document.createElement('div'); trudeRockBox.className = 'adv-char-box legendary-item'; trudeRockBox.dataset.engName = 'TrudeROCK';
-            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">트루드 ROCK</span>`;
+            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.webp" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">트루드 ROCK</span>`;
             trudeRockBox.addEventListener('click', () => trudeRockBox.classList.toggle('selected'));
 
             const lubuTsBox = document.createElement('div'); lubuTsBox.className = 'adv-char-box legendary-item'; lubuTsBox.dataset.engName = 'LubuTS';
-            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">여포 TS</span>`;
+            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.webp" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">여포 TS</span>`;
             lubuTsBox.addEventListener('click', () => lubuTsBox.classList.toggle('selected'));
 
             let juryBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'jury');
@@ -1157,7 +1169,7 @@
             legendPetOrder.forEach(name => {
                 const kor = legendPetKor[name] || name;
                 const petBox = document.createElement('div'); petBox.className = 'adv-char-box rare pet-box'; petBox.dataset.engName = name;
-                petBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${kor}</span>`;
+                petBox.innerHTML = `<img src="Portrait/${kor}.webp" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${kor}</span>`;
                 petBox.addEventListener('click', () => petBox.classList.toggle('selected'));
                 fragment.appendChild(petBox);
             });
