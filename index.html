@@ -15,13 +15,24 @@
 	<style>
 	    body { font-family: 'Roboto', sans-serif; background-color: #121212; max-width: 1200px; margin: 0 auto; padding: 30px 20px; color: #e0e0e0; position: relative; overflow-y: scroll; }
         body.modal-open { overflow: hidden; }
-        body.advanced-search-active > *:not(#results):not(#advancedSearchBtn):not(#loader):not(#copyMessage):not([id*="Popup"]):not(#selectorTooltip):not(.sort-container) { filter: blur(8px) brightness(0.4); pointer-events: none; transition: filter 0.3s ease; }
-        body.advanced-search-active #results { opacity: 1 !important; }
-	    .app-header { text-align: center; padding: 4px 0 18px; margin-bottom: 22px; border-bottom: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1; }
+        /* Two views: character selection first, then the result list on the page scroll (no nested scroll box). */
+        body[data-view="select"] #resultsView, body[data-view="results"] #selectView { display: none; }
+        /* Desktop: tabs | title | sort on one sticky row. Mobile (no room for all three): the title stays in .app-header above the bar. */
+        .view-bar { position: sticky; top: 0; z-index: 50; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin-bottom: 16px; padding: 10px 0 12px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(18,18,18,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+        .view-bar .view-tabs { justify-self: start; }
+        .view-bar #sortDropdown { justify-self: end; }
+        .bar-title { white-space: nowrap; }
+        .view-tabs { display: flex; gap: 3px; padding: 3px; border-radius: 9px; border: 1px solid rgba(255,64,129,0.45); background: #1a1a1a; }
+        .view-tab { padding: 6px 18px; border: none; border-radius: 6px; background: transparent; color: #9e9e9e; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s, color 0.2s; }
+        .view-tab:hover { color: #e0e0e0; }
+        body[data-view="select"] .view-tab[data-view="select"], body[data-view="results"] .view-tab[data-view="results"] { background: #ff4081; color: #fff; }
+        body[data-view="select"] #sortDropdown { visibility: hidden; }
+	    .app-header { display: none; text-align: center; padding: 4px 0 18px; margin-bottom: 22px; border-bottom: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1; }
 	    .app-title { font-family: 'Poppins', sans-serif; font-size: 1.45rem; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
 	    .app-title span { color: #ff4081; }
-        .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(94px,1fr)); gap: 10px; margin-bottom: 16px; position: relative; z-index: 1; transform: translateZ(0); }
-        .character-box { background: rgba(26,26,26,0.85); border: none; padding: 8px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; position: relative; height: 102px; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); z-index: 1; transform: translateZ(0); }
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px,1fr)); gap: 10px; margin-bottom: 16px; position: relative; z-index: 1; transform: translateZ(0); }
+        /* Grid boxes are full-bleed cards: the portrait fills the box edge to edge, the name sits in a fixed strip under it. */
+        .character-box { background: rgba(26,26,26,0.85); border: none; padding: 0; overflow: hidden; text-align: center; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, z-index 0s 0.3s, filter 0.3s; position: relative; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.7); z-index: 1; transform: translateZ(0); }
         .character-box.rare, .adv-char-box.rare { border: 2px solid #ff9800; box-shadow: 0 0 15px rgba(255,152,0,0.5); }
         .character-box.super-rare, .adv-char-box.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 15px rgba(211, 47, 47, 0.5); }
         .character-box.legendary-item, .adv-char-box.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
@@ -33,21 +44,21 @@
 			.result-item:hover::before { opacity: 1; }
 			.extras-box:hover { background: rgba(176, 176, 176, 0.2); border-color: rgba(176, 176, 176, 0.8); }
 	    }
-	    .character-img { width: 70px; height: 80px; flex-shrink: 0; object-fit: cover; margin-bottom: 5px; border-radius: 9px; transition: transform 0.3s; transform: translateZ(0); backface-visibility: hidden; }
-        .character-name { font-size: 14px; margin-bottom: 0; font-weight: 700; color: #fff; line-height: 1.2; display: block; width: 100%; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; }
+	    .character-img { width: 100%; height: auto; aspect-ratio: 130 / 117; flex-shrink: 0; object-fit: cover; object-position: center top; margin-bottom: 0; border-radius: 0; transition: transform 0.3s; transform: translateZ(0); backface-visibility: hidden; }
+        .character-name { font-size: 14px; margin-bottom: 0; font-weight: 700; color: #fff; line-height: 22px; display: block; width: 100%; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; }
         .character-box.selected .character-name { display: none; }
         .character-box.selected[data-eng-name="TeoTS"] .character-name, .character-box.selected[data-eng-name="YeonheeIDOL"] .character-name, .character-box.selected[data-eng-name="TrudeROCK"] .character-name, .character-box.selected[data-eng-name="LubuTS"] .character-name { display: block; }
-	    .spinbox-container { width: 85%; display: none; justify-content: center; margin-top: -2px; }
+	    .spinbox-container { width: 85%; height: 22px; display: none; justify-content: center; align-items: center; }
+	    .character-box.legendary-item .spinbox-container { display: none !important; } /* skins keep their name strip when selected */
 	    .character-box.selected .spinbox-container { display: flex; animation: fadeIn 0.2s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-	    .spinbox-container input[type="number"] { width: 100%; padding: 4px 2px; border: 1px solid #555; border-radius: 6px; text-align: center; font-size: 13px; font-weight: bold; background-color: #1e1e1e; color: #e0e0e0; transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s; }
+	    .spinbox-container input[type="number"] { width: 100%; height: 18px; padding: 0 2px; border: 1px solid #555; border-radius: 6px; text-align: center; font-size: 13px; font-weight: bold; background-color: #1e1e1e; color: #e0e0e0; transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s; }
 	    .spinbox-container input[type="number"]:focus { border-color: #ff4081; box-shadow: 0 0 5px rgba(255,64,129,0.5); outline: none; background-color: #2a2a2a; }
 	    #filterButton { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; margin: 22px 0 12px 0; font-size: 17px; cursor: pointer; background: #ff4081; color: #fff; border: none; border-radius: 10px; box-shadow: 0 2px 10px rgba(255,64,129,0.3); transition: all 0.2s; font-family: 'Poppins', sans-serif; font-weight: 600; position: relative; z-index: 1; transform: translateZ(0); }
 	    #filterButton:hover { background: #f50057; box-shadow: 0 4px 14px rgba(255,64,129,0.45); transform: translateY(-2px); }
 	    #filterButton:active { transform: translateY(0); box-shadow: 0 2px 10px rgba(255,64,129,0.3); }
 		#advancedSearchBtn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; margin-bottom: 24px; font-size: 17px; cursor: pointer; color: #e0e0e0; background: #1a1a1a; border: 1px solid rgba(255,64,129,0.4); border-radius: 10px; box-shadow: none; transition: all 0.2s ease; font-family: 'Poppins', sans-serif; font-weight: 600; position: relative; z-index: 1; }
 		#advancedSearchBtn:hover { background: #222; border-color: #ff4081; transform: translateY(-2px); }
-		#advancedSearchBtn.exit-mode { background: linear-gradient(45deg, #616161, #757575); border-color: #9E9E9E; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); z-index: 3001; }
 	    #copyInstruction { margin-bottom: 15px; font-style: italic; color: #ff4081; text-align: center; font-size: 1.2em; font-weight: 600; position: relative; z-index: 1; }
 	    #copyMessage { position: fixed; top: 50%; left: 50%; --copy-translate-y: -50%; transform: translate(-50%, var(--copy-translate-y)) scale(0.8); background: linear-gradient(135deg, #232526 0%, #414345 100%); color: #fff; padding: 20px 30px; border-radius: 12px; display: none; opacity: 0; font-family: 'Poppins', sans-serif; font-size: 1.1em; box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 5000; transition: opacity 0.3s ease, transform 0.3s ease; border-left: 4px solid #ff4081; will-change: transform, opacity; }
 	    #copyMessage.show { display: flex; align-items: center; gap: 15px; animation: messagePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
@@ -55,21 +66,25 @@
 	    .copy-icon { width: 24px; height: 24px; background-color: #ff4081; border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: pulse 1s infinite; transform: translateZ(0); }
 	    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 64, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0); } }
 	    .copy-icon svg { width: 14px; height: 14px; fill: white; transform: translateZ(0); }
-		#results { padding: 20px; height: 800px; max-height: 800px; overflow-y: auto; background-color: rgba(20,20,20,0.8); border-radius: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); position: relative; z-index: 1; will-change: scroll-position; -webkit-overflow-scrolling: touch; transform: translateZ(0); transition: opacity 0.2s ease-in-out, filter 0.3s ease; }
+		#results { padding: 20px; background-color: rgba(20,20,20,0.8); border-radius: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); position: relative; z-index: 1; transform: translateZ(0); transition: opacity 0.2s ease-in-out, filter 0.3s ease; }
         #results.sorting { opacity: 0; }
 	    #results .content-container { transform: translateZ(0); will-change: opacity; transition: opacity 0.2s ease; contain: layout paint style; backface-visibility: hidden; }
 	    #results.scrolling .result-item { transition: none !important; }
-		.result-item { margin-bottom: 18px; padding: 14px 24px; background: linear-gradient(135deg, #202228, #1a1c20); cursor: pointer; transition: background 0.3s, box-shadow 0.3s, transform 0.2s; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 18px; position: relative; overflow: visible; }
+		.result-item { margin-bottom: 14px; padding: 10px 20px; background: linear-gradient(135deg, #202228, #1a1c20); cursor: pointer; transition: background 0.3s, box-shadow 0.3s, transform 0.2s; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 2px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 18px; position: relative; overflow: visible; }
 		.result-item::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, #ff4081, #f50057); opacity: 0.6; transition: opacity 0.3s; }
-        .item-images-wrapper { flex-grow: 1; position: relative; overflow: hidden; display: flex; }
-		.item-images { display: flex; align-items: center; flex-wrap: nowrap; gap: 10px; overflow-x: auto; padding: 6px; scrollbar-width: none; }
+        /* Portraits are 130x140 with a 22px star strip at the bottom; icons crop 23px of it (130:117). Rings keep their stars and lose the top instead. */
+        :root { --icon-w: 56px; --icon-h: calc(var(--icon-w) * 117 / 130); }
+        .item-lines { flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+        .item-images-wrapper { position: relative; overflow: hidden; display: flex; }
+		.item-images { display: flex; align-items: center; flex-wrap: nowrap; gap: 10px; overflow-x: auto; padding: 5px 6px; min-height: calc(var(--icon-h) + 4px); scrollbar-width: none; }
         .item-images::-webkit-scrollbar { display: none; }
 		.result-info-right { display: flex; align-items: center; flex-wrap: nowrap; gap: 10px; justify-content: flex-end; flex-shrink: 0; }
 	    .small-character-img, .detail-popup-img { transition: filter 0.3s, opacity 0.3s, transform 0.2s; }
-		.small-character-img { height: 60px; width: auto; min-width: 45px; object-fit: contain; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); flex-shrink: 0; }
-		.detail-popup-img { height: 55px; width: auto; object-fit: contain; border-radius: 8px; }
+		.small-character-img { width: var(--icon-w); height: auto; aspect-ratio: 130 / 117; object-fit: cover; object-position: center top; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); flex-shrink: 0; }
+		.detail-popup-img { width: 52px; height: auto; aspect-ratio: 130 / 117; object-fit: cover; object-position: center top; border-radius: 8px; }
+        .ring-slot img { object-position: center bottom; }
 		.small-character-img.dimmed, .extras-box.dimmed, .detail-popup-img.dimmed { filter: grayscale(65%); opacity: 0.7; }
-		.extras-box { display: flex; justify-content: center; align-items: center; height: 60px; min-width: 84px; padding: 0 12px; background: rgba(176, 176, 176, 0.1); border: 1px dashed rgba(176, 176, 176, 0.5); border-radius: 10px; cursor: pointer; transition: background 0.2s, border-color 0.2s, filter 0.3s, opacity 0.3s; flex-shrink: 0; }
+		.extras-box { display: flex; justify-content: center; align-items: center; height: var(--icon-h); min-width: 84px; padding: 0 12px; background: rgba(176, 176, 176, 0.1); border: 1px dashed rgba(176, 176, 176, 0.5); border-radius: 10px; cursor: pointer; transition: background 0.2s, border-color 0.2s, filter 0.3s, opacity 0.3s; flex-shrink: 0; }
 	    .small-character-img.rare, .detail-popup-img.rare { border: 2px solid #ff9800; }
 	    .small-character-img.super-rare, .detail-popup-img.super-rare { border: 2px solid #D32F2F; }
         .small-character-img.legendary-item, .detail-popup-img.legendary-item { border: 2px solid #D4AF37; }
@@ -84,12 +99,22 @@
         .image-count-badge.legendary-badge { color: #FFD700; text-shadow: 0 0 5px rgba(255, 215, 0, 0.8); }
 		.image-with-count-container img.dimmed ~ .image-count-badge { filter: grayscale(70%) brightness(0.8); }
 		.price-box { display: flex; flex-direction: column; justify-content: center; align-items: flex-end; height: 60px; min-width: 114px; padding: 0 12px; background: linear-gradient(270deg, rgba(39, 174, 96, 0.2), transparent); border-radius: 10px; font-family: 'Poppins', sans-serif; }
+		/* Ruby / tickets / heroes stacked above the price; colors follow the detail popup footer, the marker shape stands in for a label. */
+		.price-stack { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+		.stat-chips { display: flex; flex-direction: column; gap: 3px; }
+		.stat-chip { display: flex; align-items: center; justify-content: space-between; gap: 2.6em; padding: 1px 9px; border-radius: 6px; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; line-height: 18px; }
+		.stat-chip::before { content: ''; flex-shrink: 0; }
+		.ruby-chip { background: rgba(255, 82, 82, 0.1); color: #ff6b6b; }
+		.ruby-chip::before { width: 7px; height: 7px; border-radius: 1px; background: #ff5252; transform: rotate(45deg); box-shadow: 0 0 6px rgba(255, 82, 82, 0.7); }
+		.ticket-chip { background: rgba(255, 152, 0, 0.1); color: #ffa726; }
+		.ticket-chip::before { width: 10px; height: 7px; border-radius: 2px; background: #ff9800; box-shadow: 0 0 6px rgba(255, 152, 0, 0.6); }
+		.hero-chip { background: rgba(0, 229, 255, 0.08); color: #4dd0e1; }
+		.hero-chip::before { width: 8px; height: 8px; border-radius: 50%; background: #00e5ff; box-shadow: 0 0 6px rgba(0, 229, 255, 0.6); }
 		.price-box .price-usd { font-size: 22px; font-weight: 700; color: #2ecc71; text-shadow: 0 0 8px rgba(46, 204, 113, 0.5); }
 		.price-box .price-krw { font-size: 14px; color: #bdc3c7; }
 		.target-total-box { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60px; min-width: 100px; padding: 0 12px; background: linear-gradient(270deg, rgba(41, 121, 255, 0.2), transparent); border-radius: 10px; font-family: 'Poppins', sans-serif; }
 		.target-total-label { font-size: 14px; color: #bdc3c7; }
 		.target-total-value { font-size: 22px; font-weight: 700; color: #448AFF; text-shadow: 0 0 8px rgba(68, 138, 255, 0.6); }
-	    .sort-container { display: flex; justify-content: flex-end; margin-bottom: 15px; padding-right: 5px; transition: all 0.3s; }
 	    #sortDropdown { background-color: #2a2c30; color: #e0e0e0; border: 1px solid #555; padding: 8px 12px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; cursor: pointer; outline: none; transition: border-color 0.3s, box-shadow 0.3s; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 1em; padding-right: 35px; }
 	    #sortDropdown:focus, #sortDropdown:hover { border-color: #555; outline: none; box-shadow: none; }
 		.scroll-indicator { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; background: linear-gradient(135deg, rgba(40,40,40,0.8), rgba(20,20,20,0.8)); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 24px; line-height: 28px; font-weight: bold; cursor: pointer; z-index: 10; transition: opacity 0.2s; text-shadow: 0 0 4px rgba(0,0,0,0.5); user-select: none; }
@@ -103,6 +128,8 @@
         .item-images-wrapper:not(.scrolled-to-end)::after { opacity: 1; }
 	    #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(18,18,18,0.95); display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 2000; transition: opacity 0.5s ease, visibility 0.5s ease; }
 	    #loader.hidden { opacity: 0; visibility: hidden; }
+	    .select-actions { display: flex; gap: 10px; margin: 22px 0 24px; }
+	    .select-actions #filterButton, .select-actions #advancedSearchBtn { flex: 1; width: auto; margin: 0; }
 	    .spinner { border: 8px solid #f3f3f3; border-top: 8px solid #ff4081; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 20px; transform: translateZ(0); }
 	    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 		#extrasPopup, #itemDetailPopup { display: none; position: fixed; z-index: 4000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
@@ -130,10 +157,9 @@
 		.advanced-search-content { background-color: #1e1e1e; padding: 25px; border: 1px solid #555; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.7); display: flex; flex-direction: column; max-height: 85vh; }
 		.advanced-search-header h2 { margin-top: 0; margin-bottom: 10px; color: #448AFF; font-family: 'Poppins', sans-serif; }
 		.advanced-search-header p { margin-top: 0; margin-bottom: 20px; line-height: 1.6; color: #bdc3c7; font-size: 15px; }
-		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; overflow-y: auto; padding: 8px; margin: 0 -10px 20px; flex-grow: 1; }
-		.adv-char-box { cursor: pointer; border-radius: 10px; position: relative; background-color: rgba(26,26,26,0.85); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out; display: flex; flex-direction: column; align-items: center; padding: 7px 5px; }
-		.adv-char-box .character-img { width: 60px; height: 70px; margin-bottom: 5px; border-radius: 8px; }
-		.adv-char-name { font-size: 13px; font-weight: 600; color: #fff; text-align: center; line-height: 1.2; width: 100%; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+		#advanced-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); grid-auto-rows: max-content; gap: 10px; overflow-y: auto; padding: 8px; margin: 0 -10px 20px; flex-grow: 1; }
+		.adv-char-box { cursor: pointer; border-radius: 10px; position: relative; background-color: rgba(26,26,26,0.85); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out; display: flex; flex-direction: column; align-items: center; padding: 0; overflow: hidden; }
+		.adv-char-name { font-size: 13px; font-weight: 600; color: #fff; text-align: center; line-height: 20px; width: 100%; box-sizing: border-box; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; }
 		.adv-char-box:hover { transform: scale(1.05); }
 		.adv-char-box.selected { background-color: rgba(255, 64, 129, 0.9); box-shadow: 0 0 20px rgba(255, 64, 129, 0.7), 0 4px 10px rgba(255, 64, 129, 0.5); transform: translateY(-5px); z-index: 2; }
 		.advanced-search-footer { display: flex; justify-content: flex-end; gap: 15px; padding-top: 20px; border-top: 1px solid #444; }
@@ -151,11 +177,10 @@
         .adv-char-box.rare .new-character-placeholder { color: #ffc107; text-shadow: 0 0 8px rgba(255, 193, 7, 0.7); box-shadow: inset 0 0 10px rgba(255, 152, 0, 0.5); }
         .adv-char-box.legendary-item .new-character-placeholder { color: #FFD700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.8); box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.6); }
         .adv-char-box.extras-character-border .new-character-placeholder { color: #e0e0e0; text-shadow: 0 0 5px rgba(224, 224, 224, 0.5); box-shadow: inset 0 0 8px rgba(176, 176, 176, 0.3); }
-        .character-box .new-character-placeholder { width: 70px; height: 80px; font-size: 18px; margin-bottom: 8px; }
-        .adv-char-box .new-character-placeholder { width: 60px; height: 70px; margin-bottom: 8px; font-size: 16px; }
-        .image-with-count-container .new-character-placeholder { height: 60px; width: 45px; min-width: 45px; font-size: 14px; }
-        #extras-popup-grid .new-character-placeholder { height: 60px; width: 45px; font-size: 14px; }
-        #item-detail-popup-grid .new-character-placeholder { height: 55px; width: 45px; font-size: 12px; }
+        .character-box .new-character-placeholder, .adv-char-box .new-character-placeholder { width: 100%; height: auto; aspect-ratio: 130 / 117; border-radius: 0; font-size: 16px; }
+        .image-with-count-container .new-character-placeholder { height: var(--icon-h); width: var(--icon-w); font-size: 14px; }
+        #extras-popup-grid .new-character-placeholder { height: var(--icon-h); width: var(--icon-w); font-size: 14px; }
+        #item-detail-popup-grid .new-character-placeholder { height: 47px; width: 52px; font-size: 12px; }
         
         /* 반지/펫 합산 슬롯 placeholder (이미지 없을 때) */
         .ring-slot .new-character-placeholder { border: 2px solid #D4AF37; border-radius: 9px; box-sizing: border-box; color: #FFD700; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; text-shadow: 0 0 6px rgba(255,215,0,0.7); box-shadow: inset 0 0 8px rgba(212,175,55,0.5); }
@@ -191,19 +216,23 @@
 
 	    @media (max-width: 768px) {
             body { padding: 20px 5px; }
-            .app-header { padding-bottom: 12px; margin-bottom: 16px; }
+            .app-header { display: block; padding-bottom: 12px; margin-bottom: 8px; border-bottom: none; }
             .app-title { font-size: 1.2rem; }
 			.character-grid { grid-template-columns: repeat(auto-fill, minmax(58px,1fr)); gap: 3px; }
-	        .character-box { height: 72px; padding: 4px 2px; }
-	        .character-box .character-img, .character-box .new-character-placeholder { width: 46px; height: 56px; margin-bottom: 3px; }
-	        .character-box .character-name { font-size: 10px; letter-spacing: -0.5px; }
-	        .spinbox-container input[type="number"] { font-size: 11px; padding: 1px 0; height: 16px; }
+	        .character-box { border-radius: 10px; }
+	        .character-box .new-character-placeholder, .adv-char-box .new-character-placeholder { font-size: 12px; }
+	        .character-box .character-name { font-size: 10px; letter-spacing: -0.5px; line-height: 17px; }
+	        .spinbox-container { height: 17px; }
+	        .spinbox-container input[type="number"] { font-size: 11px; padding: 0; height: 14px; }
 	        #filterButton, #advancedSearchBtn { font-size: 16px; padding: 12px; }
 	        .result-item { padding: 10px; flex-wrap: wrap; gap: 10px; }
-            .item-images-wrapper, .result-info-right { flex-basis: 100%; }
+            :root { --icon-w: 46px; }
+            .item-lines, .result-info-right { flex-basis: 100%; }
 			.result-info-right { justify-content: flex-end; }
-			.price-box { flex-grow: 1; align-items: center; background: rgba(39, 174, 96, 0.1); min-width: 0; }
-			.small-character-img, .extras-box, .price-box, .image-with-count-container .new-character-placeholder { height: 50px; }
+			.price-box { flex-grow: 1; align-items: center; background: rgba(39, 174, 96, 0.1); min-width: 0; height: 50px; }
+			.price-stack { flex-grow: 1; flex-direction: row; align-items: center; gap: 8px; }
+			.stat-chips { gap: 2px; }
+			.stat-chip { font-size: 11px; line-height: 15px; padding: 0 7px; }
 			.image-count-badge { font-size: 13px; line-height: 1.2; padding: 1px 4px; min-width: 14px; border-radius: 8px; bottom: -4px; right: -4px; }
 			.ring-slot .image-count-badge { top: -4px; bottom: auto; }
 	        .item-images { gap: 6px; }
@@ -219,34 +248,52 @@
 			.target-total-label { font-size: 11px; }
 			.extras-popup-content, .item-detail-popup-content, .advanced-search-content { width: 96%; padding: 12px; }
             #item-detail-popup-grid { gap: 4px; padding: 10px 2px; }
-            .detail-popup-img, #item-detail-popup-grid .new-character-placeholder { height: 42px; }
+            .detail-popup-img { width: 40px; }
+            #item-detail-popup-grid .new-character-placeholder { width: 40px; height: 36px; }
             .item-detail-popup-footer { gap: 8px; }
             .footer-label { font-size: 11px; }
             .footer-value { font-size: 16px; }
 			#advanced-search-grid { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 3px; }
-			.adv-char-box .character-img, .adv-char-box .new-character-placeholder { width: 46px; height: 56px; }
-			.adv-char-name { font-size: 10px; }
-			#results { height: 75vh; max-height: 75vh; }
+			.adv-char-name { font-size: 10px; line-height: 17px; }
+			.advanced-search-footer { gap: 8px; }
+			.adv-search-btn { flex: 1; padding: 10px 6px; font-size: 14px; }
+			#results { padding: 8px; }
+			.view-bar { grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 0; margin-bottom: 12px; }
+			.bar-title { display: none; }
+			.view-tab { padding: 6px 14px; font-size: 13px; }
+			#sortDropdown { font-size: 13px; padding: 7px 30px 7px 10px; }
 	    }
 	</style>
 </head>
-<body>
+<body data-view="select">
     <div id="loader"><div class="spinner"></div></div>
     <header class="app-header">
         <div class="app-title">Seven Knights <span>Re:BIRTH</span></div>
     </header>
-    <div class="character-grid" id="characterGrid"></div>
-    <button id="filterButton">Apply Filter</button>
-	<button id="advancedSearchBtn">Advanced Search</button>
-	<div id="copyInstruction">※ Click item to copy</div>
-    <div class="sort-container">
+    <div class="view-bar">
+        <div class="view-tabs">
+            <button class="view-tab" data-view="select" type="button">Select</button>
+            <button class="view-tab" data-view="results" type="button">List</button>
+        </div>
+        <div class="app-title bar-title">Seven Knights <span>Re:BIRTH</span></div>
         <select id="sortDropdown">
             <option value="price-high" selected>Price High</option>
             <option value="price-low">Price Low</option>
             <option value="ring-high">Ring High</option>
+            <option value="ruby-high">Ruby High</option>
         </select>
     </div>
-    <div id="results"></div>
+    <div id="selectView">
+        <div class="character-grid" id="characterGrid"></div>
+        <div class="select-actions">
+            <button id="filterButton">Apply Filter</button>
+            <button id="advancedSearchBtn">Advanced Search</button>
+        </div>
+    </div>
+    <div id="resultsView">
+        <div id="copyInstruction">※ Click item to copy</div>
+        <div id="results"></div>
+    </div>
     <div id="copyMessage"><div class="copy-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><span>Copied</span></div>
 	<div id="screenOverlay"></div>
 	<div id="advancedSearchModal">
@@ -275,7 +322,7 @@
                 </div>
                 <div class="popup-info-box">
                     <div class="footer-value" id="popup-ticket-value"></div>
-                    <div class="footer-label">SummonTickets</div>
+                    <div class="footer-label">(Wish + Pet Tickets)</div>
                 </div>
                 <div class="popup-info-box">
                     <div class="footer-value" id="popup-heroes-value"></div>
@@ -328,8 +375,8 @@
                         loader.style.display = 'none';
                         const results = document.getElementById('results');
                         if (results) {
-                            results.style.willChange = 'scroll-position'; results.style.webkitOverflowScrolling = 'touch';
-                            results.addEventListener('scroll', function() { if (!results.isScrolling) { results.isScrolling = true; results.classList.add('scrolling'); } clearTimeout(results.scrollEndTimer); results.scrollEndTimer = setTimeout(function() { results.isScrolling = false; results.classList.remove('scrolling'); }, 100); }, { passive: true });
+                            // 결과 목록은 페이지 스크롤을 씀 → 스크롤 중 hover 트랜지션 끄기도 window 기준
+                            window.addEventListener('scroll', function() { if (!results.isScrolling) { results.isScrolling = true; results.classList.add('scrolling'); } clearTimeout(results.scrollEndTimer); results.scrollEndTimer = setTimeout(function() { results.isScrolling = false; results.classList.remove('scrolling'); }, 100); }, { passive: true });
                         }
                         optimizeImages();
                     }, 500);
@@ -473,12 +520,19 @@
             (root || document).querySelectorAll('.character-name, .adv-char-name').forEach(el => {
                 el.style.fontSize = '';
                 if (!el.clientWidth) return;                      // 숨김/미배치 상태면 건너뜀 (모달은 열릴 때 재측정)
-                if (el.scrollWidth <= el.clientWidth + 1) return; // 기본 크기로 한 줄에 들어가면 그대로
-                const base = parseFloat(getComputedStyle(el).fontSize);
-                let size = Math.max(6, base * el.clientWidth / el.scrollWidth - 0.5); // 비례로 한 번에 맞춤 (+여유)
+                // scrollWidth/clientWidth는 정수 반올림이라 0.x px 넘침을 놓치고 말줄임(…)이 뜸 → 박스·글자 폭을 둘 다 소수점(화면 좌표)으로 잼
+                const cs = getComputedStyle(el);
+                const rect = el.getBoundingClientRect();
+                const scale = rect.width / el.offsetWidth || 1;   // hover scale 등 transform 보정 (패딩 항에만 쓰임)
+                const avail = rect.width - (parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight)) * scale - 0.5; // 0.5px 여유
+                const range = document.createRange(); range.selectNodeContents(el);
+                const textW = () => range.getBoundingClientRect().width;
+                const w = textW();
+                if (w <= avail) return;                           // 기본 크기로 한 줄에 들어가면 그대로
+                let size = Math.max(6, parseFloat(cs.fontSize) * avail / w - 0.2); // 비례로 한 번에 맞춤 (+여유)
                 el.style.fontSize = size + 'px';
-                let guard = 0;                                    // 서브픽셀 잔여 오버플로우 정리
-                while (el.scrollWidth > el.clientWidth + 1 && size > 5 && guard++ < 10) { size -= 0.5; el.style.fontSize = size + 'px'; }
+                let guard = 0;
+                while (textW() > avail && size > 5 && guard++ < 10) { size -= 0.25; el.style.fontSize = size + 'px'; }
             });
         }
         let _fitResizeTimer;
@@ -491,26 +545,26 @@
             characters.forEach(([eng, kor]) => {
                 const charBox = document.createElement('div'); charBox.className = 'character-box'; charBox.dataset.engName = eng;
                 if (tier0Eng.has(eng)) charBox.classList.add('super-rare'); else if (tier1Eng.has(eng)) charBox.classList.add('rare'); else charBox.classList.add('extras-character-border');
-                charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${eng}</span><div class="spinbox-container"><input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled></div>`;
+                charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${kor}</span><div class="spinbox-container"><input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled></div>`;
                 charBox.addEventListener('click', (e) => { if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox); });
                 charBox.querySelector('input').addEventListener('click', (e) => { e.stopPropagation(); if (!charBox.classList.contains('selected')) toggleSelection(charBox); });
                 fragment.appendChild(charBox);
             });
             
             const teoTsBox = document.createElement('div'); teoTsBox.className = 'character-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">teo TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">태오 TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             teoTsBox.addEventListener('click', () => toggleSelection(teoTsBox));
             
             const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'character-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
-            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">yeonhee IDOL</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">연희 IDOL</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             yeonheeIdolBox.addEventListener('click', () => toggleSelection(yeonheeIdolBox));
             
             const trudeRockBox = document.createElement('div'); trudeRockBox.className = 'character-box legendary-item'; trudeRockBox.dataset.engName = 'TrudeROCK';
-            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">trude ROCK</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">트루드 ROCK</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             trudeRockBox.addEventListener('click', () => toggleSelection(trudeRockBox));
 
             const lubuTsBox = document.createElement('div'); lubuTsBox.className = 'character-box legendary-item'; lubuTsBox.dataset.engName = 'LubuTS';
-            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">lubu TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
+            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">여포 TS</span><div class="spinbox-container" style="visibility: hidden;"></div>`;
             lubuTsBox.addEventListener('click', () => toggleSelection(lubuTsBox));
 
             let juryBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'jury');
@@ -531,7 +585,7 @@
             legendPetOrder.forEach(name => {
                 const kor = legendPetKor[name] || name;
                 const petBox = document.createElement('div'); petBox.className = 'character-box rare pet-box'; petBox.dataset.engName = name;
-                petBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${name}</span><div class="spinbox-container"><input type="number" id="${name}-spin" min="0" max="99" value="0" disabled></div>`;
+                petBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${kor}</span><div class="spinbox-container"><input type="number" id="${name}-spin" min="0" max="99" value="0" disabled></div>`;
                 petBox.addEventListener('click', (e) => { if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(petBox); });
                 petBox.querySelector('input').addEventListener('click', (e) => { e.stopPropagation(); if (!petBox.classList.contains('selected')) toggleSelection(petBox); });
                 fragment.appendChild(petBox);
@@ -541,7 +595,7 @@
             fitNamesOneLine(grid);
         }
 
-        function toggleSelection(charBox) { const spinbox = charBox.querySelector('input[type="number"]'); const isSelected = charBox.classList.toggle('selected'); if (spinbox) { spinbox.disabled = !isSelected; spinbox.value = isSelected ? (spinbox.value === '0' ? '1' : spinbox.value) : 0; } }
+        function toggleSelection(charBox) { const spinbox = charBox.querySelector('input[type="number"]'); const isSelected = charBox.classList.toggle('selected'); if (spinbox) { spinbox.disabled = !isSelected; spinbox.value = isSelected ? (spinbox.value === '0' ? '1' : spinbox.value) : 0; } if (!isSelected) fitNamesOneLine(charBox); }
 
         let itemDetailsMap = {};
 
@@ -551,7 +605,7 @@
                 luaData = {}; itemDetailsMap = {};
                 // Characters.txt에 없는 캐릭터 토큰은 조용히 버림 (totalCount/카피본 오염 방지)
                 const knownCharSet = new Set(characters.map(([eng]) => eng.toLowerCase()));
-                const lines = text.split('\n');
+                const lines = text.split(/\r?\n/); // CRLF 파일: \r이 카피본 끝에 남지 않게
                 lines.forEach(line => {
                     if (!line.trim() || !line.includes('=')) return;
                     
@@ -565,7 +619,7 @@
                             const [k, v] = part.split('=');
                             resources[k] = parseInt(v, 10) || 0;
                         });
-                        const formattedRes = ` (Ruby + KeyBox*80: ${(resources.ruby + resources.keybox * 80).toLocaleString()}, SummonTickets: ${resources.tickets.toLocaleString()})`;
+                        const formattedRes = ` (Ruby + KeyBox*80: ${(resources.ruby + resources.keybox * 80).toLocaleString()}, Tickets: ${resources.tickets.toLocaleString()})`;
                         originalTextForCopy = line.replace(/\[RES:.*?\]/, formattedRes);
                     }
 
@@ -628,9 +682,12 @@
             }).catch(error => console.error('Data loading error:', error));
         }
 
+        // Ruby + KeyBox*80 (상세 팝업·가격 위 루비 칩과 같은 값)
+        const rubyTotalOf = (d) => (d.resources?.ruby || 0) + (d.resources?.keybox || 0) * 80;
+
         function applyFiltersAndSort() {
             const resultsDiv = document.getElementById('results'); resultsDiv.classList.add('sorting');
-            setTimeout(() => {
+            return new Promise(resolve => setTimeout(() => {
                 currentFilteredData = Object.fromEntries(Object.entries(luaData).filter(([k, v]) => checkConditions(v, k)));
                 const sortKey = document.getElementById('sortDropdown')?.value || 'price-high';
                 const ringSum6 = (d) => Object.entries(d.rings || {}).reduce((s, [k, c]) => { const g = k.slice(-1); return s + c * (g === '6' ? 1 : g === '5' ? 1/3 : g === '4' ? 1/12 : 0); }, 0);
@@ -638,11 +695,13 @@
                     const itemA = itemDetailsMap[a]; const itemB = itemDetailsMap[b];
                     if (sortKey === 'price-low') { return (itemA.price - itemB.price) || (itemB.totalCount - itemA.totalCount); }
                     if (sortKey === 'ring-high') { return (ringSum6(itemB) - ringSum6(itemA)) || (itemB.price - itemA.price); }
+                    if (sortKey === 'ruby-high') { return (rubyTotalOf(itemB) - rubyTotalOf(itemA)) || (itemB.price - itemA.price); }
                     return (itemB.price - itemA.price) || (itemB.totalCount - itemA.totalCount);
                 });
                 displayResults({ data: currentFilteredData, sortedKeys });
                 resultsDiv.classList.remove('sorting');
-            }, 200);
+                resolve();
+            }, 200));
         }
 
         function checkConditions(itemChars, itemKey) {
@@ -677,16 +736,19 @@
         function optimizeImages() { document.querySelectorAll('img').forEach(img => { if (!img.hasAttribute('loading')) img.loading = 'lazy'; if (!img.hasAttribute('decoding')) img.decoding = 'async'; }); }
 		
 		function displayResults({ data, sortedKeys, advancedSearchSelection = null }) {
-			const res = document.getElementById('results'); res.scrollTop = 0; const fragment = document.createDocumentFragment(); const container = document.createElement('div'); container.className = 'content-container'; fragment.appendChild(container);
-            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-			
+			const res = document.getElementById('results'); if (document.body.dataset.view === 'results') window.scrollTo(0, 0); const fragment = document.createDocumentFragment(); const container = document.createElement('div'); container.className = 'content-container'; fragment.appendChild(container);
+            const tier0Eng = new Set(tier0Characters.map(([eng]) => eng)); const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
+
 			sortedKeys.forEach(k => {
 				const item = document.createElement('div'); item.className = 'result-item'; item.dataset.itemKey = k;
 				item.addEventListener('click', (e) => { if (e.target.closest('.extras-box') || e.target.closest('.scroll-indicator')) return; showItemDetailPopup(k); });
                 item.addEventListener('mouseenter', () => resetOtherScrolledItems(item));
-                item.addEventListener('mouseleave', () => { const imgContainer = item.querySelector('.item-images-wrapper.has-scroll .item-images'); if (imgContainer && imgContainer.scrollLeft > 0) { imgContainer.scroll({ left: 0, behavior: 'smooth' }); } });
-                
-                const imagesWrapper = document.createElement('div'); imagesWrapper.className = 'item-images-wrapper'; const imageContainer = document.createElement('div'); imageContainer.className = 'item-images'; const rightSection = document.createElement('div'); rightSection.className = 'result-info-right';
+                item.addEventListener('mouseleave', () => { item.querySelectorAll('.item-images-wrapper.has-scroll .item-images').forEach(c => { if (c.scrollLeft > 0) c.scroll({ left: 0, behavior: 'smooth' }); }); });
+
+                // 2줄: 원래 한 줄 순서 그대로 1줄을 채우고, 넘치는 것부터 2줄로 이어짐 (splitItemLines). 남는 건 2줄 가로 스크롤.
+                const lines = document.createElement('div'); lines.className = 'item-lines';
+                const firstLine = createImageLine(); lines.appendChild(firstLine); lines.appendChild(createImageLine());
+                const imageContainer = firstLine.querySelector('.item-images'); const rightSection = document.createElement('div'); rightSection.className = 'result-info-right';
 				const charValue = luaData[k]; const itemDetails = itemDetailsMap[k];
                 
 				if (advancedSearchSelection) {
@@ -709,7 +771,7 @@
                     const charInfo = characters.find(([eng]) => eng.toLowerCase() === charName); if (!charInfo) continue;
                     const [engName, korName] = charInfo; const originalIndex = characters.findIndex(([eng]) => eng === engName);
                     const imageData = { type: 'character', src: `Portrait/${korName}.png`, alt: korName, engName: engName, count: charValue[charName], originalIndex: originalIndex };
-                    if (tier0Characters.some(c => c[0] === engName) || tier1Characters.some(c => c[0] === engName)) { allImportantItemsData.push(imageData); } else { tier2ImageData.push(imageData); }
+                    if (tier0Eng.has(engName) || tier1Eng.has(engName)) { allImportantItemsData.push(imageData); } else { tier2ImageData.push(imageData); }
                 }
                 
                 const juryIndex = characters.findIndex(([eng]) => eng.toLowerCase() === 'jury');
@@ -736,7 +798,7 @@
 
                 allImportantItemsData.sort((a, b) => a.originalIndex - b.originalIndex);
                 tier2ImageData.sort((a, b) => a.originalIndex - b.originalIndex);
-                
+
                 // 첫 고급 캐릭터만 eager 렌더 (lag 감소). 나머지(스킨/반지/나머지캐릭터/Extras/셀렉터/펫)는 renderFullItem이 교차 시 lazy 렌더.
                 if (allImportantItemsData.length > 0) {
                     imageContainer.appendChild(createCharacterImageElement(allImportantItemsData[0], tier0Eng, false, advancedSearchSelection));
@@ -748,19 +810,41 @@
                 { const pc = petD0Map.get(k) || 0; if (pc > 0) item.dataset.petSelector = String(pc); }
 
                 const priceBox = document.createElement('div'); priceBox.className = 'price-box'; const usdPrice = itemDetails.price.toFixed(2); const krwPriceRounded = Math.round(itemDetails.price * 1480 / 1000) * 1000;
+                const rubyTotal = rubyTotalOf(itemDetails);
                 priceBox.innerHTML = `<div class="price-usd">$${usdPrice}</div><div class="price-krw">₩ ${krwPriceRounded.toLocaleString()}</div>`;
-                rightSection.appendChild(priceBox);
+                const priceStack = document.createElement('div'); priceStack.className = 'price-stack';
+                const heroCount = Object.values(charValue).reduce((a, b) => a + b, 0);
+                const statChips = document.createElement('div'); statChips.className = 'stat-chips';
+                [['ruby-chip', rubyTotal], ['ticket-chip', itemDetails.resources.tickets || 0], ['hero-chip', heroCount]].forEach(([cls, value]) => {
+                    const chip = document.createElement('div'); chip.className = `stat-chip ${cls}`; chip.textContent = value.toLocaleString(); statChips.appendChild(chip);
+                });
+                priceStack.appendChild(statChips);
+                priceStack.appendChild(priceBox); rightSection.appendChild(priceStack);
 
-                const scrollIndicatorLeft = document.createElement('div'); scrollIndicatorLeft.className = 'scroll-indicator scroll-indicator-left'; scrollIndicatorLeft.innerHTML = '‹';
-                const scrollIndicatorRight = document.createElement('div'); scrollIndicatorRight.className = 'scroll-indicator scroll-indicator-right'; scrollIndicatorRight.innerHTML = '›';
-                imagesWrapper.appendChild(imageContainer); imagesWrapper.appendChild(scrollIndicatorLeft); imagesWrapper.appendChild(scrollIndicatorRight);
-
-                item.appendChild(imagesWrapper); item.appendChild(rightSection);
+                item.appendChild(lines); item.appendChild(rightSection);
 				container.appendChild(item);
 			});
 			res.innerHTML = ''; res.appendChild(fragment); document.getElementById('copyInstruction').style.display = 'block';
             document.querySelectorAll('#results .result-item').forEach(item => setupScrollControlsForItem(item, advancedSearchSelection)); setupItemObserver(advancedSearchSelection);
 		}
+
+        function createImageLine() {
+            const wrapper = document.createElement('div'); wrapper.className = 'item-images-wrapper';
+            wrapper.innerHTML = `<div class="item-images"></div><div class="scroll-indicator scroll-indicator-left">‹</div><div class="scroll-indicator scroll-indicator-right">›</div>`;
+            return wrapper;
+        }
+
+        // 1줄에 다 모았다가, 오른쪽 끝을 넘는 첫 아이콘부터 끝까지 2줄로 옮김 (폭 바뀌면 다시 호출)
+        function splitItemLines(item) {
+            const [first, second] = item.querySelectorAll('.item-images');
+            if (!first || !second || !first.clientWidth) return;
+            while (second.firstChild) first.appendChild(second.firstChild);
+            first.scrollLeft = 0; second.scrollLeft = 0;
+            const limit = first.getBoundingClientRect().right - parseFloat(getComputedStyle(first).paddingRight);
+            const children = Array.from(first.children);
+            const cut = children.findIndex(el => el.getBoundingClientRect().right > limit + 1);
+            if (cut !== -1) children.slice(cut).forEach(el => second.appendChild(el));
+        }
 
         function createRingAggregateSlot(entries) {
             // entries: [['authority4', 2], ['immortality5', 1], ...]  → 6★ 환산 (4=1/12, 5=1/3, 6=1)
@@ -865,7 +949,7 @@
                     if (entry.isIntersecting) { clearTimeout(entry.target.revertTimer); entry.target.renderTimer = setTimeout(() => renderFullItem(entry.target, advSel), 100); }
                     else { clearTimeout(entry.target.renderTimer); entry.target.revertTimer = setTimeout(() => revertToLazyItem(entry.target), 100); }
                 });
-            }, { root: document.getElementById('results'), rootMargin: '400px 0px' });
+            }, { root: null, rootMargin: '400px 0px' });
             document.querySelectorAll('.lazy-load-item').forEach(item => itemObserver.observe(item));
         }
 		
@@ -873,7 +957,7 @@
             if (item.querySelector('.js-lazy-loaded')) return;
             const imageContainer = item.querySelector('.item-images');
             const tier0Eng = new Set(tier0Characters.map(([eng]) => eng));
-            // 순서: 나머지 캐릭터/스킨/반지 → Extras → 펫셀렉터 → 펫 → 세나선택권 → 히어로셀렉터
+            // 순서: 나머지 캐릭터/스킨/반지 → Extras → 펫셀렉터 → 펫 → 세나선택권 → 히어로셀렉터 (전부 1줄에 붙인 뒤 splitItemLines가 2줄로 나눔)
             JSON.parse(item.dataset.remainingItems || '[]').forEach(d => imageContainer.appendChild(createCharacterImageElement(d, tier0Eng, true, advSel)));
             const tier2Items = JSON.parse(item.dataset.tier2Items || '[]');
             if (tier2Items.length > 0) {
@@ -888,6 +972,7 @@
             JSON.parse(item.dataset.petItems || '[]').forEach(([name, c]) => { const petEl = createPetSlotElement(name, c); petEl.classList.add('js-lazy-loaded'); imageContainer.appendChild(petEl); });
             imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/세나선택권.png', alt: 'Seven Knights Selector', engName: 'Selector', count: 7 }, tier0Eng, true, advSel));
             imageContainer.appendChild(createCharacterImageElement({ type: 'character', src: 'Portrait/스페셜선택권.png', alt: 'Hero Selector', engName: 'AllLegendSelector', count: 1 }, tier0Eng, true, advSel));
+            splitItemLines(item);
             setupScrollControlsForItem(item, advSel);
         }
 
@@ -898,9 +983,13 @@
             setupScrollControlsForItem(item);
         }
         
-        function setupScrollControlsForItem(item, advSel = null) {
-            const wrapper = item.querySelector('.item-images-wrapper'); const imagesContainer = item.querySelector('.item-images'); const scrollLeftBtn = item.querySelector('.scroll-indicator-left'); const scrollRightBtn = item.querySelector('.scroll-indicator-right');
-            if (!wrapper || !imagesContainer || !scrollLeftBtn || !scrollRightBtn) return;
+        function setupScrollControlsForItem(item) {
+            item.querySelectorAll('.item-images-wrapper').forEach(setupScrollControlsForLine);
+        }
+
+        function setupScrollControlsForLine(wrapper) {
+            const imagesContainer = wrapper.querySelector('.item-images'); const scrollLeftBtn = wrapper.querySelector('.scroll-indicator-left'); const scrollRightBtn = wrapper.querySelector('.scroll-indicator-right');
+            if (!imagesContainer || !scrollLeftBtn || !scrollRightBtn) return;
             requestAnimationFrame(() => {
                 const hasScroll = imagesContainer.scrollWidth > imagesContainer.clientWidth;
                 wrapper.classList.toggle('has-scroll', hasScroll);
@@ -921,7 +1010,7 @@
         }
         
 		function resetAllScrolledItems() { document.querySelectorAll('.item-images-wrapper.has-scroll .item-images').forEach(container => { if (container.scrollLeft > 0) { container.scroll({ left: 0, behavior: 'smooth' }); } }); }
-        function resetOtherScrolledItems(currentItem) { document.querySelectorAll('.result-item').forEach(item => { if (item !== currentItem) { const container = item.querySelector('.item-images-wrapper.has-scroll .item-images'); if (container && container.scrollLeft > 0) { container.scroll({ left: 0, behavior: 'smooth' }); } } }); }
+        function resetOtherScrolledItems(currentItem) { document.querySelectorAll('.result-item').forEach(item => { if (item !== currentItem) { item.querySelectorAll('.item-images-wrapper.has-scroll .item-images').forEach(container => { if (container.scrollLeft > 0) { container.scroll({ left: 0, behavior: 'smooth' }); } }); } }); }
 		function showExtrasPopup(images) { const popup = document.getElementById('extrasPopup'); const grid = document.getElementById('extras-popup-grid'); grid.innerHTML = ''; images.forEach(charData => { const container = document.createElement('div'); container.className = 'image-with-count-container'; container.innerHTML = `<img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`; grid.appendChild(container); }); popup.style.display = 'flex'; }
 
         function showItemDetailPopup(itemKey) {
@@ -1029,25 +1118,25 @@
 			characters.forEach(([eng, kor]) => {
 				const charBox = document.createElement('div'); charBox.className = 'adv-char-box'; charBox.dataset.engName = eng;
 				if (tier0Eng.has(eng)) charBox.classList.add('super-rare'); else if (tier1Eng.has(eng)) charBox.classList.add('rare'); else charBox.classList.add('extras-character-border');
-				charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${eng}</span>`;
+				charBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${kor}</span>`;
 				charBox.addEventListener('click', () => charBox.classList.toggle('selected'));
 				fragment.appendChild(charBox);
 			});
             
             const teoTsBox = document.createElement('div'); teoTsBox.className = 'adv-char-box legendary-item'; teoTsBox.dataset.engName = 'TeoTS';
-            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">teo TS</span>`;
+            teoTsBox.innerHTML = `<img src="Portrait/태오ts스킨.png" alt="태오 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">태오 TS</span>`;
             teoTsBox.addEventListener('click', () => teoTsBox.classList.toggle('selected'));
             
             const yeonheeIdolBox = document.createElement('div'); yeonheeIdolBox.className = 'adv-char-box legendary-item'; yeonheeIdolBox.dataset.engName = 'YeonheeIDOL';
-            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">yeonhee IDOL</span>`;
+            yeonheeIdolBox.innerHTML = `<img src="Portrait/연희idol스킨.png" alt="연희 IDOL" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">연희 IDOL</span>`;
             yeonheeIdolBox.addEventListener('click', () => yeonheeIdolBox.classList.toggle('selected'));
 
             const trudeRockBox = document.createElement('div'); trudeRockBox.className = 'adv-char-box legendary-item'; trudeRockBox.dataset.engName = 'TrudeROCK';
-            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">trude ROCK</span>`;
+            trudeRockBox.innerHTML = `<img src="Portrait/트루드rockstar스킨.png" alt="트루드 ROCK" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">트루드 ROCK</span>`;
             trudeRockBox.addEventListener('click', () => trudeRockBox.classList.toggle('selected'));
 
             const lubuTsBox = document.createElement('div'); lubuTsBox.className = 'adv-char-box legendary-item'; lubuTsBox.dataset.engName = 'LubuTS';
-            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">lubu TS</span>`;
+            lubuTsBox.innerHTML = `<img src="Portrait/여포ts스킨.png" alt="여포 TS 스킨" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">여포 TS</span>`;
             lubuTsBox.addEventListener('click', () => lubuTsBox.classList.toggle('selected'));
 
             let juryBoxNode = Array.from(fragment.children).find(child => child.dataset.engName?.toLowerCase() === 'jury');
@@ -1068,7 +1157,7 @@
             legendPetOrder.forEach(name => {
                 const kor = legendPetKor[name] || name;
                 const petBox = document.createElement('div'); petBox.className = 'adv-char-box rare pet-box'; petBox.dataset.engName = name;
-                petBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${name}</span>`;
+                petBox.innerHTML = `<img src="Portrait/${kor}.png" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${kor}</span>`;
                 petBox.addEventListener('click', () => petBox.classList.toggle('selected'));
                 fragment.appendChild(petBox);
             });
@@ -1084,18 +1173,52 @@
 			if (selectedCharElements.length === 0) { alert('Please select at least one character.'); return; }
 			advancedSearchSelection = Array.from(selectedCharElements).map(el => el.dataset.engName);
 			closeAdvancedSearchModal();
-			isAdvancedSearchMode = true; document.body.classList.add('advanced-search-active');
-			const advBtn = document.getElementById('advancedSearchBtn'); advBtn.innerHTML = '↩️ Back'; advBtn.classList.add('exit-mode');
+			// 고급검색은 상단 필터와 별개 → 상단 박스 선택을 비움 (다음에 List로 가면 비워진 상태로 Apply Filter)
+			document.querySelectorAll('#characterGrid .character-box.selected').forEach(box => toggleSelection(box));
 			const analyticsString = 'adv:' + advancedSearchSelection.join(','); gtag('event', 'advanced_search', { 'selected_characters': analyticsString });
-            displayAdvancedSearchResults(advancedSearchSelection);
-            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+            goToList({ advanced: true });
 		}
+
+        // List로 가는 길은 전부 여기: 로딩 화면을 최소 1초 띄우고, 고급검색 직후가 아니면 항상 현재 상단 박스로 Apply Filter
+        const wait = (ms) => new Promise(r => setTimeout(r, ms));
+        function showLoader() { const l = document.getElementById('loader'); l.style.transition = 'none'; l.style.display = 'flex'; l.classList.remove('hidden'); void l.offsetWidth; l.style.transition = ''; }
+        function hideLoader() { const l = document.getElementById('loader'); l.classList.add('hidden'); setTimeout(() => { if (l.classList.contains('hidden')) l.style.display = 'none'; }, 500); }
+        function goToList({ advanced = false, push = true } = {}) {
+            showLoader();
+            isAdvancedSearchMode = advanced;
+            if (!advanced) advancedSearchSelection = null;
+            showView('results', push && document.body.dataset.view !== 'results');
+            const render = advanced ? displayAdvancedSearchResults(advancedSearchSelection) : applyFiltersAndSort();
+            return Promise.all([render, wait(1000)]).then(hideLoader);
+        }
+
+        // 두 화면: 캐릭터 선택(select) ↔ 결과 목록(results). 결과로 갈 때 history에 한 칸 쌓아서 폰 뒤로가기 = 선택 화면 복귀.
+        // 고급검색 결과는 실행 직후에만: Select로 돌아갔다가 List(탭·앞으로가기 포함)로 가면 goToList가 Apply Filter로 덮음.
+        let selectScrollY = 0;
+        if (history.state && history.state.view) history.replaceState(null, ''); // 강제 새로고침 뒤 남은 상태 정리
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; // 선택 화면 스크롤 위치는 selectScrollY로 직접 복원
+        function showView(view, push = false) {
+            if (document.body.dataset.view === view) return;
+            if (view === 'results') {
+                selectScrollY = window.scrollY;
+                document.body.dataset.view = 'results';
+                window.scrollTo(0, 0);
+                if (push) history.pushState({ view: 'results' }, '');
+                document.querySelectorAll('#results .result-item').forEach(item => { splitItemLines(item); setupScrollControlsForItem(item); });
+            } else {
+                document.body.dataset.view = 'select';
+                fitNamesOneLine(document.getElementById('characterGrid'));
+                window.scrollTo(0, selectScrollY);
+            }
+        }
+        function backToSelect() { if (history.state && history.state.view === 'results') history.back(); else showView('select'); }
+        window.addEventListener('popstate', e => { if (e.state && e.state.view === 'results') goToList({ push: false }); else showView('select'); });
 
 		function displayAdvancedSearchResults(selectedChars) {
 			const resultsDiv = document.getElementById('results');
             resultsDiv.classList.add('sorting');
 
-			setTimeout(() => {
+			return new Promise(resolve => setTimeout(() => {
 				const scoredItems = Object.keys(luaData).map(key => {
 					const itemChars = luaData[key]; const itemDetails = itemDetailsMap[key]; let total = 0;
 					selectedChars.forEach(name => {
@@ -1110,18 +1233,12 @@
 					return { key, total, price: itemDetails.price };
 				});
 
-				const advSortKey = document.getElementById('sortDropdown')?.value || 'price-high'; const rs6 = (d) => Object.entries(d.rings || {}).reduce((s, [k, c]) => { const g = k.slice(-1); return s + c * (g === '6' ? 1 : g === '5' ? 1/3 : g === '4' ? 1/12 : 0); }, 0); const sortedKeys = scoredItems.sort((a, b) => { if (b.total !== a.total) return b.total - a.total; const dA = itemDetailsMap[a.key], dB = itemDetailsMap[b.key]; if (advSortKey === 'price-low') return dA.price - dB.price; if (advSortKey === 'ring-high') return (rs6(dB) - rs6(dA)) || (dB.price - dA.price); return dB.price - dA.price; }).map(item => item.key);
+				const advSortKey = document.getElementById('sortDropdown')?.value || 'price-high'; const rs6 = (d) => Object.entries(d.rings || {}).reduce((s, [k, c]) => { const g = k.slice(-1); return s + c * (g === '6' ? 1 : g === '5' ? 1/3 : g === '4' ? 1/12 : 0); }, 0); const sortedKeys = scoredItems.sort((a, b) => { if (b.total !== a.total) return b.total - a.total; const dA = itemDetailsMap[a.key], dB = itemDetailsMap[b.key]; if (advSortKey === 'price-low') return dA.price - dB.price; if (advSortKey === 'ring-high') return (rs6(dB) - rs6(dA)) || (dB.price - dA.price); if (advSortKey === 'ruby-high') return (rubyTotalOf(dB) - rubyTotalOf(dA)) || (dB.price - dA.price); return dB.price - dA.price; }).map(item => item.key);
 				displayResults({ data: luaData, sortedKeys, advancedSearchSelection: selectedChars });
 
 				resultsDiv.classList.remove('sorting');
-			}, 200);
-		}
-
-		function exitAdvancedSearchMode() {
-			isAdvancedSearchMode = false; advancedSearchSelection = null;
-			document.body.classList.remove('advanced-search-active');
-			const advBtn = document.getElementById('advancedSearchBtn'); advBtn.innerHTML = 'Advanced Search'; advBtn.classList.remove('exit-mode');
-			applyFiltersAndSort();
+				resolve();
+			}, 200));
 		}
 
 		function getSelectedCharacters(){ return [...document.querySelectorAll('.character-box.selected')].map(b => { const value = b.querySelector('input')?.value ?? '1'; return `${b.dataset.engName}:${value}`; }).join(','); }
@@ -1129,18 +1246,20 @@
         const throttle = (func, delay) => { let last = 0; return (...args) => { const now = Date.now(); if (now - last < delay) return; last = now; func(...args); }; };
         const debounce = (func, delay) => { let id; return (...args) => { clearTimeout(id); id = setTimeout(() => func(...args), delay); }; };
 		
-		const throttledFilterHandler = throttle(() => { document.getElementById('results').scrollIntoView({ behavior: 'smooth' }); applyFiltersAndSort(); const selectedCharsString = getSelectedCharacters(); if (selectedCharsString) { gtag('event', 'apply_filter', { 'selected_characters': selectedCharsString }); } }, 300);
+		const throttledFilterHandler = throttle(() => { goToList(); const selectedCharsString = getSelectedCharacters(); if (selectedCharsString) { gtag('event', 'apply_filter', { 'selected_characters': selectedCharsString }); } }, 300);
 
         document.getElementById('filterButton').addEventListener('click', throttledFilterHandler);
         document.getElementById('sortDropdown').addEventListener('change', function() { if (isAdvancedSearchMode) { if (advancedSearchSelection) displayAdvancedSearchResults(advancedSearchSelection); } else { applyFiltersAndSort(); } this.blur(); });
 
 		document.addEventListener('DOMContentLoaded', () => {
 			const advBtn = document.getElementById('advancedSearchBtn');
-			advBtn.addEventListener('click', () => { if (isAdvancedSearchMode) exitAdvancedSearchMode(); else openAdvancedSearchModal(); });
+			advBtn.addEventListener('click', openAdvancedSearchModal);
+			// Select / List 탭: List = Apply Filter와 같음
+			document.querySelectorAll('.view-tab').forEach(tab => tab.addEventListener('click', () => { if (tab.dataset.view === 'results') throttledFilterHandler(); else backToSelect(); }));
 			document.getElementById('adv-search-reset').addEventListener('click', () => { document.querySelectorAll('#advanced-search-grid .adv-char-box.selected').forEach(box => box.classList.remove('selected')); });
 			document.getElementById('adv-search-execute').addEventListener('click', executeAdvancedSearch);
             document.getElementById('adv-search-recommend').addEventListener('click', () => {
-                const recommendedChars = ['melia', 'gelidus', 'pye', 'rosie', 'jury', 'teots', 'yeonheeidol', 'truderock', 'lubuts', 'freyja', 'lubu', 'biscuit'];
+                const recommendedChars = ['melia', 'gelidus', 'pye', 'rosie', 'jury', 'teots', 'yeonheeidol', 'truderock', 'lubuts', 'hayeon', 'yoongun', 'sunran', 'biscuit'];
                 const allCharBoxes = document.querySelectorAll('#advanced-search-grid .adv-char-box');
                 allCharBoxes.forEach(box => { const charName = box.dataset.engName.toLowerCase(); if (recommendedChars.includes(charName)) { box.classList.add('selected'); } else { box.classList.remove('selected'); } });
             });
@@ -1157,10 +1276,9 @@
             });
 
             window.addEventListener('keydown', e => { if (e.key === 'Escape') { if (extrasPopup.style.display === 'flex') hideExtras(); if (detailPopup.style.display === 'flex') hideDetail(); if (document.getElementById('advancedSearchModal').classList.contains('visible')) closeAdvancedSearchModal(); } });
-            const resultsContainer = document.getElementById('results'); if (resultsContainer) resultsContainer.addEventListener('scroll', resetAllScrolledItems);
             document.body.addEventListener('click', e => { if (!e.target.closest('.result-item')) resetAllScrolledItems(); });
 			window.addEventListener('scroll', throttle(resetAllScrolledItems, 100));
-			window.addEventListener('resize', debounce(() => { document.querySelectorAll('#results .result-item').forEach(setupScrollControlsForItem); }, 50));
+			window.addEventListener('resize', debounce(() => { document.querySelectorAll('#results .result-item').forEach(item => { splitItemLines(item); setupScrollControlsForItem(item); }); }, 50));
 		});
     </script>
 </body>
