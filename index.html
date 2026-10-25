@@ -73,7 +73,10 @@
 	    #results .content-container { transform: translateZ(0); will-change: opacity; transition: opacity 0.2s ease; contain: layout paint style; backface-visibility: hidden; }
 	    #results.scrolling .result-item { transition: none !important; }
 	    /* off-screen rows skip layout/paint; 'auto' remembers each row's last real height */
-	    #results .result-item { content-visibility: auto; contain-intrinsic-size: auto 132px; } /* content-box height (row 154 = 132 + padding/border) */
+	    /* --row-ch = measured content-box height of a row at the current line count (updateLineCount) */
+	    #results .result-item { content-visibility: auto; contain-intrinsic-size: auto var(--row-ch, 132px); }
+	    /* MAX_LINES line slots per row; show only the first data-lines of them */
+	    #results:not([data-lines="3"]):not([data-lines="4"]) .item-lines > :nth-child(n+3), #results[data-lines="3"] .item-lines > :nth-child(n+4) { display: none; }
 		/* Cards sit straight on the page background: flat lighter surface + wider gaps so each account reads as one block */
 		:root { --card-bg: #1c1f25; --card-bg-hover: #23272e; --card-line: rgba(255, 255, 255, 0.07); }
 		.result-item { margin-bottom: 20px; padding: 10px 18px; background: var(--card-bg); cursor: pointer; transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s; border-radius: 14px; border: 1px solid var(--card-line); box-shadow: 0 2px 10px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 18px; position: relative; overflow: visible; }
@@ -234,8 +237,7 @@
 	        .spinbox-container input[type="number"] { font-size: 11px; padding: 0; height: 14px; }
 	        #filterButton, #advancedSearchBtn { font-size: 16px; padding: 12px; }
 	        .result-item { padding: 10px; flex-wrap: wrap; gap: 10px; }
-	        #results .result-item { contain-intrinsic-size: auto 171px; } /* row 193 = 171 + padding/border */
-            :root { --icon-w: 46px; }
+            :root { --icon-w: 42px; }
             .item-lines, .result-info-right { flex-basis: 100%; }
 			.result-info-right { justify-content: flex-end; }
 			.price-box { flex-grow: 1; align-items: center; background: rgba(39, 174, 96, 0.1); min-width: 0; height: 50px; }
@@ -758,9 +760,11 @@
                 item.addEventListener('mouseenter', () => resetOtherScrolledItems(item));
                 item.addEventListener('mouseleave', () => { item.querySelectorAll('.item-images-wrapper.has-scroll .item-images').forEach(c => { if (c.scrollLeft > 0) c.scroll({ left: 0, behavior: 'smooth' }); }); });
 
-                // 2줄: 원래 한 줄 순서 그대로 1줄을 채우고, 넘치는 것부터 2줄로 이어짐 (splitItemLines). 남는 건 2줄 가로 스크롤.
+                // 2~4줄: 원래 한 줄 순서 그대로 줄을 차례로 채우고(splitItemLines), 남는 건 마지막 줄 가로 스크롤.
+                // 줄 칸은 항상 MAX_LINES개 만들고, 쓰는 줄 수는 #results[data-lines]로 보여 줌 (updateLineCount)
                 const lines = document.createElement('div'); lines.className = 'item-lines';
-                const firstLine = createImageLine(); lines.appendChild(firstLine); lines.appendChild(createImageLine());
+                for (let i = 0; i < MAX_LINES; i++) lines.appendChild(createImageLine());
+                const firstLine = lines.firstChild;
                 const imageContainer = firstLine.querySelector('.item-images'); const rightSection = document.createElement('div'); rightSection.className = 'result-info-right';
 				const charValue = luaData[k]; const itemDetails = itemDetailsMap[k];
                 
@@ -846,16 +850,56 @@
             return wrapper;
         }
 
-        // 1줄에 다 모았다가, 오른쪽 끝을 넘는 첫 아이콘부터 끝까지 2줄로 옮김 (폭 바뀌면 다시 호출)
+        // 줄 수: 계정당 대략 TARGET_ICONS개가 보이도록 (줄당 개수로 나눠 올림), 2~MAX_LINES줄.
+        // 데스크톱 줄당 14~15 → 2줄, 중간 폭 10~13 → 3줄, 폰(42px 아이콘) 7 → 4줄. 화면 폭이 정하므로 모든 행이 같은 줄 수.
+        const TARGET_ICONS = 28, MIN_LINES = 2, MAX_LINES = 4;
+        let lineCount = MIN_LINES;
+        function updateLineCount() {
+            const res = document.getElementById('results');
+            const line = res.querySelector('.item-images');
+            const wrapper = line && line.parentElement; // .item-images는 내용만큼만 넓어지므로 줄 폭은 감싸는 wrapper로 잼
+            if (!wrapper || !wrapper.clientWidth) return false; // 결과 화면이 숨겨져 있으면 잴 수 없음
+            const cs = getComputedStyle(line);
+            const width = wrapper.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+            const gap = parseFloat(cs.columnGap) || 0;
+            const icon = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--icon-w'));
+            const perLine = Math.max(1, Math.floor((width + gap + 1) / (icon + gap))); // +1: splitItemLines도 1px 넘침은 허용
+            const n = Math.min(MAX_LINES, Math.max(MIN_LINES, Math.ceil(TARGET_ICONS / perLine)));
+            const changed = n !== lineCount || res.dataset.lines !== String(n);
+            lineCount = n; res.dataset.lines = String(n);
+            // 화면 밖 행 자리 높이(content-visibility)를 지금 줄 수의 실제 행 높이로 맞춤
+            const row = res.querySelector('.result-item');
+            if (row) {
+                row.style.contentVisibility = 'visible'; // 건너뛴 행이면 자리 높이가 재지므로 잠깐 실제로 배치
+                const rs = getComputedStyle(row);
+                const ch = row.getBoundingClientRect().height - parseFloat(rs.paddingTop) - parseFloat(rs.paddingBottom) - parseFloat(rs.borderTopWidth) - parseFloat(rs.borderBottomWidth);
+                row.style.contentVisibility = '';
+                res.style.setProperty('--row-ch', ch + 'px');
+            }
+            return changed;
+        }
+
+        // 모든 아이콘을 1줄에 모았다가, 줄마다 오른쪽 끝을 넘는 첫 아이콘부터 다음 줄로 넘김. 마지막 줄은 나머지 전부(가로 스크롤).
         function splitItemLines(item) {
-            const [first, second] = item.querySelectorAll('.item-images');
-            if (!first || !second || !first.clientWidth) return;
-            while (second.firstChild) first.appendChild(second.firstChild);
-            first.scrollLeft = 0; second.scrollLeft = 0;
-            const limit = first.getBoundingClientRect().right - parseFloat(getComputedStyle(first).paddingRight);
-            const children = Array.from(first.children);
-            const cut = children.findIndex(el => el.getBoundingClientRect().right > limit + 1);
-            if (cut !== -1) children.slice(cut).forEach(el => second.appendChild(el));
+            const all = Array.from(item.querySelectorAll('.item-images'));
+            const used = all.slice(0, lineCount);
+            const first = used[0];
+            if (!first || !first.clientWidth) return;
+            all.slice(1).forEach(line => { while (line.firstChild) first.appendChild(line.firstChild); });
+            all.forEach(line => { line.scrollLeft = 0; });
+            for (let i = 0; i < used.length - 1; i++) {
+                const line = used[i];
+                const limit = line.getBoundingClientRect().right - parseFloat(getComputedStyle(line).paddingRight);
+                const children = Array.from(line.children);
+                const cut = children.findIndex(el => el.getBoundingClientRect().right > limit + 1);
+                if (cut === -1) break;
+                children.slice(cut).forEach(el => used[i + 1].appendChild(el));
+            }
+        }
+
+        function relayoutRows() {
+            updateLineCount();
+            document.querySelectorAll('#results .result-item').forEach(item => { splitItemLines(item); setupScrollControlsForItem(item); });
         }
 
         function createRingAggregateSlot(entries) {
@@ -1216,7 +1260,7 @@
                 document.body.dataset.view = 'results';
                 window.scrollTo(0, 0);
                 if (push) history.pushState({ view: 'results' }, '');
-                document.querySelectorAll('#results .result-item').forEach(item => { splitItemLines(item); setupScrollControlsForItem(item); });
+                relayoutRows();
             } else {
                 document.body.dataset.view = 'select';
                 fitNamesOneLine(document.getElementById('characterGrid'));
@@ -1290,7 +1334,7 @@
             window.addEventListener('keydown', e => { if (e.key === 'Escape') { if (extrasPopup.style.display === 'flex') hideExtras(); if (detailPopup.style.display === 'flex') hideDetail(); if (document.getElementById('advancedSearchModal').classList.contains('visible')) closeAdvancedSearchModal(); } });
             document.body.addEventListener('click', e => { if (!e.target.closest('.result-item')) resetAllScrolledItems(); });
 			window.addEventListener('scroll', throttle(resetAllScrolledItems, 100));
-			window.addEventListener('resize', debounce(() => { document.querySelectorAll('#results .result-item').forEach(item => { splitItemLines(item); setupScrollControlsForItem(item); }); }, 50));
+			window.addEventListener('resize', debounce(relayoutRows, 50));
 		});
     </script>
 </body>
