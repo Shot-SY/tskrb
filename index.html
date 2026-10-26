@@ -61,6 +61,18 @@
 	    #filterButton:active { transform: translateY(0); }
 		#advancedSearchBtn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; margin-bottom: 24px; font-size: 17px; cursor: pointer; color: #e0e0e0; background: #1a1a1a; border: 1px solid rgba(255,64,129,0.4); border-radius: 10px; box-shadow: none; transition: all 0.2s ease; font-family: 'Poppins', sans-serif; font-weight: 600; position: relative; z-index: 1; }
 		#advancedSearchBtn:hover { background: #222; border-color: #ff4081; transform: translateY(-2px); }
+	    #nameTip { position: fixed; z-index: 6500; display: none; padding: 3px 8px; border-radius: 6px; background: rgba(20,20,24,0.95); border: 1px solid rgba(255,255,255,0.12); color: #fff; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600; white-space: nowrap; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+	    /* what the current list is filtered by (top-grid filter, or the advanced search picks) */
+	    .filter-summary { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+	    .filter-summary[hidden] { display: none; }
+	    .fs-label { font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 600; letter-spacing: 0.3px; color: #ff7aa8; background: rgba(255,64,129,0.12); padding: 3px 10px; border-radius: 7px; }
+	    .filter-summary.adv .fs-label { color: #82b1ff; background: rgba(68,138,255,0.14); }
+	    .fs-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+	    .fs-item { position: relative; }
+	    .fs-item img, .fs-item .new-character-placeholder { display: block; box-sizing: border-box; width: 43px; height: auto; aspect-ratio: 130 / 117; object-fit: cover; object-position: center top; border-radius: 7px; border: 1px solid rgba(255,152,0,0.4); font-size: 9px; }
+	    .fs-item.super-rare img { border: 2px solid #D32F2F; }
+	    .fs-item.legendary-item img { border: 2px solid #D4AF37; }
+	    .fs-count { position: absolute; bottom: -5px; right: -7px; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600; line-height: 17px; padding: 0 5px; border-radius: 6px; background: rgba(12,12,14,0.9); color: #e0e0e0; }
 	    #copyInstruction { margin-bottom: 14px; color: rgba(255, 64, 129, 0.8); text-align: center; font-size: 14px; font-weight: 600; letter-spacing: 0.2px; position: relative; z-index: 1; }
 	    #copyMessage { position: fixed; top: 50%; left: 50%; --copy-translate-y: -50%; transform: translate(-50%, var(--copy-translate-y)) scale(0.8); background: linear-gradient(135deg, #232526 0%, #414345 100%); color: #fff; padding: 20px 30px; border-radius: 12px; display: none; opacity: 0; font-family: 'Poppins', sans-serif; font-size: 1.1em; box-shadow: 0 8px 32px rgba(0,0,0,0.5); z-index: 5000; transition: opacity 0.3s ease, transform 0.3s ease; border-left: 4px solid #ff4081; will-change: transform, opacity; }
 	    #copyMessage.show { display: flex; align-items: center; gap: 15px; animation: messagePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
@@ -123,9 +135,9 @@
 		.hero-chip::before { width: 8px; height: 8px; border-radius: 50%; background: #00e5ff; box-shadow: 0 0 6px rgba(0, 229, 255, 0.6); }
 		.price-box .price-usd { font-size: 22px; font-weight: 700; color: #2ecc71; }
 		.price-box .price-krw { font-size: 14px; color: #bdc3c7; }
-		.target-total-box { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60px; min-width: 100px; padding: 0 12px; background: linear-gradient(270deg, rgba(41, 121, 255, 0.2), transparent); border-radius: 10px; font-family: 'Poppins', sans-serif; }
+		.target-total-box { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60px; min-width: 44px; padding: 0 10px; background: linear-gradient(270deg, rgba(41, 121, 255, 0.2), transparent); border-radius: 10px; font-family: 'Poppins', sans-serif; }
 		.target-total-label { font-size: 14px; color: #bdc3c7; }
-		.target-total-value { font-size: 22px; font-weight: 700; color: #448AFF; text-shadow: 0 0 8px rgba(68, 138, 255, 0.6); }
+		.target-total-value { font-size: 22px; font-weight: 700; color: #448AFF; }
 	    #sortDropdown { background-color: #2a2c30; color: #e0e0e0; border: 1px solid #555; padding: 8px 12px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; cursor: pointer; outline: none; transition: border-color 0.3s, box-shadow 0.3s; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 1em; padding-right: 35px; }
 	    #sortDropdown:focus, #sortDropdown:hover { border-color: #555; outline: none; box-shadow: none; }
 		.scroll-indicator { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; background: linear-gradient(135deg, rgba(40,40,40,0.8), rgba(20,20,20,0.8)); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 24px; line-height: 28px; font-weight: bold; cursor: pointer; z-index: 10; transition: opacity 0.2s; text-shadow: 0 0 4px rgba(0,0,0,0.5); user-select: none; }
@@ -255,7 +267,7 @@
 			.extras-box .item-title { font-size: 11px; }
 			.price-box .price-usd { font-size: 18px; }
 			.price-box .price-krw { font-size: 11px; }
-			.target-total-box { min-width: 70px; }
+			.target-total-box { min-width: 36px; padding: 0 8px; }
 			.target-total-value { font-size: 18px; }
 			.target-total-label { font-size: 11px; }
 			.extras-popup-content, .item-detail-popup-content, .advanced-search-content { width: 96%; padding: 12px; }
@@ -276,7 +288,7 @@
 	    }
 	</style>
 </head>
-<body data-view="select">
+<body data-view="results">
     <div id="loader"><div class="spinner"></div></div>
     <header class="app-header">
         <div class="app-title">Seven Knights <span>Re:BIRTH</span></div>
@@ -302,6 +314,7 @@
         </div>
     </div>
     <div id="resultsView">
+        <div id="filterSummary" class="filter-summary" hidden></div>
         <div id="copyInstruction">※ Click item to copy</div>
         <div id="results"></div>
     </div>
@@ -389,7 +402,7 @@
             const lastLoad = localStorage.getItem('lastLoadTime'); const currentTime = Date.now();
             if (!lastLoad || (currentTime - parseInt(lastLoad)) > 15000) { localStorage.setItem('lastLoadTime', currentTime); window.location.reload(true); return; }
             const loader = document.getElementById('loader');
-            loadLegendPets().then(() => loadCharacters()).then(() => loadPetD0()).then(() => loadData()).then(() => applyFiltersAndSort()).then(() => new Promise(r => setTimeout(r, 500)))
+            loadLegendPets().then(() => loadCharacters()).then(() => loadPetD0()).then(() => loadData()).then(() => applyFiltersAndSort()).then(() => { relayoutRows(); renderFilterSummary(false); return loadSelectImages(); }).then(() => new Promise(r => setTimeout(r, 500)))
                 .then(() => {
                     loader.classList.add('hidden');
                     setTimeout(() => {
@@ -731,6 +744,31 @@
 
         // 선택된 상단 박스를 필터 조건으로 한 번만 읽음 (계정마다 DOM을 다시 뒤지지 않게)
         const SKIN_FLAGS = { TeoTS: 'teoCostume', YeonheeIDOL: 'yeonheeCostume', TrudeROCK: 'trudeCostume', LubuTS: 'lubuCostume' };
+        const SKIN_LABELS = { TeoTS: '태오 TS', YeonheeIDOL: '연희 IDOL', TrudeROCK: '트루드 ROCK', LubuTS: '여포 TS' }; // 그리드 박스와 같은 표기
+        const SELECTOR_TYPES = new Set(['Selector', 'SpecialSelector', 'AllLegendSelector', 'PetSelector']);
+
+        // 아이콘 이름 툴팁: 마우스 기기는 리스트·상세 팝업·필터 요약 아이콘에 올리면 바로, 터치 기기는 상세 팝업에서 탭하면 1.5초
+        const nameTip = document.createElement('div'); nameTip.id = 'nameTip'; document.body.appendChild(nameTip);
+        function showNameTip(el) {
+            nameTip.textContent = el.dataset.name; nameTip.style.display = 'block';
+            const r = el.getBoundingClientRect(); const w = nameTip.offsetWidth, h = nameTip.offsetHeight;
+            const left = Math.max(4, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 4));
+            let top = r.top - h - 6; if (top < 4) top = r.bottom + 6;
+            nameTip.style.left = left + 'px'; nameTip.style.top = top + 'px';
+        }
+        function hideNameTip() { nameTip.style.display = 'none'; }
+        const NAME_TIP_SCOPE = '#results, #item-detail-popup-grid, #filterSummary';
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            document.addEventListener('mouseover', e => { const el = e.target.closest('[data-name]'); if (el && el.closest(NAME_TIP_SCOPE)) showNameTip(el); });
+            document.addEventListener('mouseout', e => { const el = e.target.closest('[data-name]'); if (el && !el.contains(e.relatedTarget)) hideNameTip(); });
+        } else {
+            document.getElementById('item-detail-popup-grid').addEventListener('click', e => {
+                const el = e.target.closest('[data-name]'); if (!el) return;
+                showNameTip(el); clearTimeout(nameTip.hideTimer); nameTip.hideTimer = setTimeout(hideNameTip, 1500);
+            });
+        }
+        window.addEventListener('scroll', hideNameTip, { passive: true });
+        document.getElementById('item-detail-popup-grid').addEventListener('scroll', hideNameTip, { passive: true });
         function readFilterRequirements() {
             const req = { chars: [], skins: [], pets: [] };
             document.querySelectorAll('#characterGrid .character-box.selected').forEach(box => {
@@ -781,7 +819,7 @@
                         else if (charValue[ln]) { total += charValue[ln]; }
                     });
 					const scoreBox = document.createElement('div'); scoreBox.className = 'target-total-box';
-					scoreBox.innerHTML = `<div class="target-total-label">Target Total</div><div class="target-total-value">${total}</div>`;
+					scoreBox.innerHTML = `<div class="target-total-label">Total</div><div class="target-total-value">${total}</div>`;
 					rightSection.prepend(scoreBox);
 				}
                 let allImportantItemsData = []; const tier2ImageData = [];
@@ -857,27 +895,30 @@
         let lineCount = MIN_LINES;
         function updateLineCount() {
             const res = document.getElementById('results');
-            const line = res.querySelector('.item-images');
-            const wrapper = line && line.parentElement; // .item-images는 내용만큼만 넓어지므로 줄 폭은 감싸는 wrapper로 잼
-            if (!wrapper || !wrapper.clientWidth) return false; // 결과 화면이 숨겨져 있으면 잴 수 없음
-            const cs = getComputedStyle(line);
-            const width = wrapper.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-            const gap = parseFloat(cs.columnGap) || 0;
-            const icon = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--icon-w'));
-            const perLine = Math.max(1, Math.floor((width + gap + 1) / (icon + gap))); // +1: splitItemLines도 1px 넘침은 허용
-            const n = Math.min(MAX_LINES, Math.max(MIN_LINES, Math.ceil(TARGET_ICONS / perLine)));
-            const changed = n !== lineCount || res.dataset.lines !== String(n);
-            lineCount = n; res.dataset.lines = String(n);
-            // 화면 밖 행 자리 높이(content-visibility)를 지금 줄 수의 실제 행 높이로 맞춤
             const row = res.querySelector('.result-item');
-            if (row) {
-                row.style.contentVisibility = 'visible'; // 건너뛴 행이면 자리 높이가 재지므로 잠깐 실제로 배치
+            if (!row) return false;
+            // 아직 한 번도 안 그려진(content-visibility로 건너뛴) 행은 내용 폭·높이가 0/자리값으로 재지므로, 잴 동안만 실제로 배치
+            row.style.contentVisibility = 'visible';
+            try {
+                const line = row.querySelector('.item-images');
+                const wrapper = line.parentElement; // .item-images는 내용만큼만 넓어지므로 줄 폭은 감싸는 wrapper로 잼
+                if (!wrapper.clientWidth) return false; // 결과 화면이 숨겨져 있으면 잴 수 없음
+                const cs = getComputedStyle(line);
+                const width = wrapper.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+                const gap = parseFloat(cs.columnGap) || 0;
+                const icon = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--icon-w'));
+                const perLine = Math.max(1, Math.floor((width + gap + 1) / (icon + gap))); // +1: splitItemLines도 1px 넘침은 허용
+                const n = Math.min(MAX_LINES, Math.max(MIN_LINES, Math.ceil(TARGET_ICONS / perLine)));
+                const changed = n !== lineCount || res.dataset.lines !== String(n);
+                lineCount = n; res.dataset.lines = String(n);
+                // 화면 밖 행 자리 높이(content-visibility)를 지금 줄 수의 실제 행 높이로 맞춤
                 const rs = getComputedStyle(row);
                 const ch = row.getBoundingClientRect().height - parseFloat(rs.paddingTop) - parseFloat(rs.paddingBottom) - parseFloat(rs.borderTopWidth) - parseFloat(rs.borderBottomWidth);
-                row.style.contentVisibility = '';
                 res.style.setProperty('--row-ch', ch + 'px');
+                return changed;
+            } finally {
+                row.style.contentVisibility = '';
             }
-            return changed;
         }
 
         // 모든 아이콘을 1줄에 모았다가, 줄마다 오른쪽 끝을 넘는 첫 아이콘부터 다음 줄로 넘김. 마지막 줄은 나머지 전부(가로 스크롤).
@@ -910,6 +951,7 @@
                 return s + c * (g === '6' ? 1 : g === '5' ? 1/3 : g === '4' ? 1/12 : 0);
             }, 0);
             const container = document.createElement('div'); container.className = 'image-with-count-container ring-slot';
+            container.dataset.name = [...entries].sort((a, b) => b[0].slice(-1).localeCompare(a[0].slice(-1))).map(([k, c]) => ringDisplay(k).label + (c > 1 ? `×${c}` : '')).join(' · '); // 툴팁: 반지 구성
             const img = document.createElement('img');
             img.src = 'Portrait/반지.webp'; img.alt = 'Ring'; img.className = 'small-character-img legendary-item';
             img.onerror = function() { handleImageError(this); };
@@ -922,7 +964,7 @@
 
         function createPetSlotElement(name, count) {
             const kor = legendPetKor[name] || name;
-            const container = document.createElement('div'); container.className = 'image-with-count-container pet-slot';
+            const container = document.createElement('div'); container.className = 'image-with-count-container pet-slot'; container.dataset.name = kor;
             const img = document.createElement('img');
             img.src = `Portrait/${kor}.webp`; img.alt = kor; img.className = 'small-character-img rare';
             img.onerror = function() { handleImageError(this); };
@@ -977,6 +1019,7 @@
                 return ringSlot;
             }
             const container = document.createElement('div'); container.className = 'image-with-count-container'; if (isLazy) { container.classList.add('js-lazy-loaded'); }
+            if (!SELECTOR_TYPES.has(charData.engName)) container.dataset.name = SKIN_LABELS[charData.engName] || charData.alt; // 이름 툴팁 (선택권은 자체 툴팁)
             const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'small-character-img'; img.onerror = function() { handleImageError(this); };
 			if (advSel && !advSel.includes(charData.engName) && charData.engName !== 'Selector' && charData.engName !== 'SpecialSelector' && charData.engName !== 'AllLegendSelector' && charData.engName !== 'PetSelector') { img.classList.add('dimmed'); }
             const badge = document.createElement('div'); badge.className = 'image-count-badge';
@@ -1071,6 +1114,7 @@
 		function showExtrasPopup(images) { const popup = document.getElementById('extrasPopup'); const grid = document.getElementById('extras-popup-grid'); grid.innerHTML = ''; images.forEach(charData => { const container = document.createElement('div'); container.className = 'image-with-count-container'; container.innerHTML = `<img src="${charData.src}" alt="${charData.alt}" class="small-character-img extras-character-border" loading="lazy" decoding="async" onerror="handleImageError(this)">${charData.count > 1 ? `<div class="image-count-badge">x${charData.count}</div>` : ''}`; grid.appendChild(container); }); popup.style.display = 'flex'; }
 
         function showItemDetailPopup(itemKey) {
+            hideNameTip();
             const itemDetails = itemDetailsMap[itemKey];
             const res = itemDetails.resources || { ruby: 0, tickets: 0, keybox: 0 };
 
@@ -1128,6 +1172,7 @@
             allItemsData.forEach(charData => {
                 const isSelector = charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector';
                 const container = document.createElement('div'); container.className = charData.isRing ? 'image-with-count-container ring-slot' : 'image-with-count-container';
+                if (!isSelector) container.dataset.name = SKIN_LABELS[charData.engName] || (charData.isRing ? ringDisplay(charData.engName).label : charData.alt);
                 const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
                 img.loading = 'eager'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
                 const badge = document.createElement('div'); badge.className = 'image-count-badge';
@@ -1236,6 +1281,27 @@
             goToList({ advanced: true });
 		}
 
+        // 리스트 위 필터 요약: 일반 필터는 선택한 상단 박스(+최소 개수), 고급검색은 고른 캐릭터. 아무것도 없으면 숨김
+        function renderFilterSummary(advanced) {
+            const box = document.getElementById('filterSummary');
+            const picked = advanced
+                ? Array.from(document.querySelectorAll('#advanced-search-grid .adv-char-box.selected'))
+                : Array.from(document.querySelectorAll('#characterGrid .character-box.selected'));
+            box.innerHTML = ''; box.classList.toggle('adv', advanced); box.hidden = picked.length === 0;
+            if (!picked.length) return;
+            const label = document.createElement('span'); label.className = 'fs-label'; label.textContent = advanced ? 'Total of:' : 'Filter'; // 고급검색: 리스트 각 행의 'Total'이 이 캐릭터들의 합계
+            const items = document.createElement('div'); items.className = 'fs-items';
+            picked.forEach(p => {
+                const img = p.querySelector('img'); const name = p.querySelector('.character-name, .adv-char-name')?.textContent || '';
+                const input = advanced ? null : p.querySelector('input'); const count = input ? parseInt(input.value) || 0 : 0;
+                const item = document.createElement('div'); item.className = 'fs-item'; item.dataset.name = name;
+                ['super-rare', 'legendary-item'].forEach(c => { if (p.classList.contains(c)) item.classList.add(c); });
+                item.innerHTML = `<img src="${img ? img.getAttribute('src') : ''}" alt="${name}" onerror="handleImageError(this)">${count > 1 ? `<span class="fs-count">x${count}</span>` : ''}`;
+                items.appendChild(item);
+            });
+            box.append(label, items);
+        }
+
         // List로 가는 길은 전부 여기: 로딩 화면을 최소 1초 띄우고, 고급검색 직후가 아니면 항상 현재 상단 박스로 Apply Filter
         const wait = (ms) => new Promise(r => setTimeout(r, ms));
         function showLoader() { const l = document.getElementById('loader'); l.style.transition = 'none'; l.style.display = 'flex'; l.classList.remove('hidden'); void l.offsetWidth; l.style.transition = ''; }
@@ -1245,14 +1311,15 @@
             isAdvancedSearchMode = advanced;
             if (!advanced) advancedSearchSelection = null;
             showView('results', push && document.body.dataset.view !== 'results');
+            renderFilterSummary(advanced);
             const render = advanced ? displayAdvancedSearchResults(advancedSearchSelection) : applyFiltersAndSort();
             return Promise.all([render, wait(1000)]).then(hideLoader);
         }
 
-        // 두 화면: 캐릭터 선택(select) ↔ 결과 목록(results). 결과로 갈 때 history에 한 칸 쌓아서 폰 뒤로가기 = 선택 화면 복귀.
-        // 고급검색 결과는 실행 직후에만: Select로 돌아갔다가 List(탭·앞으로가기 포함)로 가면 goToList가 Apply Filter로 덮음.
+        // 두 화면: 결과 목록(results, 첫 화면) ↔ 캐릭터 선택(select). 화면을 바꿀 때마다 history에 한 칸 쌓아서 폰 뒤로가기 = 직전 화면.
+        // 고급검색 결과는 실행 직후에만: Select로 돌아갔다가 List(탭·뒤로/앞으로가기 포함)로 가면 goToList가 Apply Filter로 덮음.
         let selectScrollY = 0;
-        if (history.state && history.state.view) history.replaceState(null, ''); // 강제 새로고침 뒤 남은 상태 정리
+        history.replaceState({ view: 'results' }, ''); // 첫 화면 = List (강제 새로고침 뒤 남은 상태도 이걸로 정리)
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; // 선택 화면 스크롤 위치는 selectScrollY로 직접 복원
         function showView(view, push = false) {
             if (document.body.dataset.view === view) return;
@@ -1264,12 +1331,22 @@
                 relayoutRows();
             } else {
                 document.body.dataset.view = 'select';
+                if (push) history.pushState({ view: 'select' }, '');
                 fitNamesOneLine(document.getElementById('characterGrid'));
                 window.scrollTo(0, selectScrollY);
             }
         }
-        function backToSelect() { if (history.state && history.state.view === 'results') history.back(); else showView('select'); }
-        window.addEventListener('popstate', e => { if (e.state && e.state.view === 'results') goToList({ push: false }); else showView('select'); });
+        // 첫 화면은 List지만 Select 그리드 그림도 첫 로딩 화면 안에서 다 받음 (Select를 처음 열 때 빈칸이 보이지 않게, 최대 5초)
+        // 고급검색 그리드도 같은 파일이라 함께 준비됨
+        // (decode()는 숨겨진 그림에선 보일 때까지 끝나지 않으므로 load/error 이벤트로 기다림)
+        function loadSelectImages() {
+            const imgs = Array.from(document.querySelectorAll('#characterGrid img'));
+            imgs.forEach(img => { img.loading = 'eager'; });
+            const loaded = img => img.complete ? Promise.resolve() : new Promise(r => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); });
+            return Promise.race([Promise.all(imgs.map(loaded)), wait(5000)]);
+        }
+        function backToSelect() { hideNameTip(); showView('select', true); }
+        window.addEventListener('popstate', e => { if (e.state && e.state.view === 'select') showView('select'); else goToList({ push: false }); });
 
 		function displayAdvancedSearchResults(selectedChars) {
 			const resultsDiv = document.getElementById('results');
@@ -1322,7 +1399,7 @@
             });
 
 			const extrasPopup = document.getElementById('extrasPopup'); const closeExtras = document.getElementById('closeExtrasPopup'); const hideExtras = () => { extrasPopup.style.display = 'none'; }; closeExtras.addEventListener('click', hideExtras);
-            const detailPopup = document.getElementById('itemDetailPopup'); const closeDetail = document.getElementById('closeItemDetailPopup'); const hideDetail = () => { detailPopup.style.display = 'none'; }; closeDetail.addEventListener('click', hideDetail);
+            const detailPopup = document.getElementById('itemDetailPopup'); const closeDetail = document.getElementById('closeItemDetailPopup'); const hideDetail = () => { detailPopup.style.display = 'none'; hideNameTip(); }; closeDetail.addEventListener('click', hideDetail);
 			
             window.addEventListener('click', e => { 
                 if (e.target == extrasPopup) hideExtras(); 
