@@ -36,6 +36,7 @@
         .character-box.rare, .adv-char-box.rare { border: 2px solid rgba(255, 152, 0, 0.5); }
         .character-box.super-rare, .adv-char-box.super-rare { border: 2px solid #D32F2F; box-shadow: 0 0 10px rgba(211, 47, 47, 0.35); }
         .character-box.legendary-item, .adv-char-box.legendary-item { border: 2px solid #D4AF37; box-shadow: 0 0 10px rgba(212, 175, 55, 0.35); }
+        .character-box.collab, .adv-char-box.collab { border: 2px solid #ff9800; box-shadow: 0 0 10px rgba(255, 152, 0, 0.35); }
         .extras-character-border, .adv-char-box.extras-character-border { border: 2px solid #b0b0b0; box-shadow: 0 0 10px rgba(176, 176, 176, 0.3); }
 	    .character-box.selected { background-color: rgba(255,64,129,0.9); box-shadow: 0 0 20px rgba(255,64,129,0.7), 0 8px 20px rgba(255,64,129,0.8); transform: translateY(-4px); z-index: 2; }
         @media (hover: hover) and (pointer: fine) {
@@ -111,6 +112,7 @@
 	    .small-character-img.rare, .detail-popup-img.rare { border: 1px solid rgba(255, 152, 0, 0.4); }
 	    .small-character-img.super-rare, .detail-popup-img.super-rare { border: 2px solid #D32F2F; }
         .small-character-img.legendary-item, .detail-popup-img.legendary-item { border: 2px solid #D4AF37; }
+        .small-character-img.collab, .detail-popup-img.collab, .fs-item.collab img { border: 2px solid #ff9800; } /* collab limited tier1 */
         .detail-popup-img.extras-character-border { border: 2px solid #b0b0b0; }
 	    body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('textures/dark-matter.webp') repeat; opacity: 0.1; z-index: -1; }
 	    .character-box::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('textures/gplay.webp') repeat; opacity: 0.5; border-radius: 14px; pointer-events: none; z-index: 0; }
@@ -580,7 +582,7 @@
             const grid = document.getElementById('characterGrid'); grid.innerHTML = ''; const fragment = document.createDocumentFragment();
             const tier0Eng = new Set(tier0Characters.map(([eng]) => eng)); const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
             characters.forEach(([eng, kor]) => {
-                const charBox = document.createElement('div'); charBox.className = 'character-box'; charBox.dataset.engName = eng;
+                const charBox = document.createElement('div'); charBox.className = 'character-box'; charBox.dataset.engName = eng; if (COLLAB_CHARS.has(eng)) charBox.classList.add('collab');
                 if (tier0Eng.has(eng)) charBox.classList.add('super-rare'); else if (tier1Eng.has(eng)) charBox.classList.add('rare'); else charBox.classList.add('extras-character-border');
                 charBox.innerHTML = `<img src="Portrait/${kor}.webp" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="character-name">${kor}</span><div class="spinbox-container"><input type="number" id="${eng}-spin" min="0" max="13" value="0" disabled></div>`;
                 charBox.addEventListener('click', (e) => { if (e.target.tagName.toLowerCase() !== 'input') toggleSelection(charBox); });
@@ -745,6 +747,7 @@
         // 선택된 상단 박스를 필터 조건으로 한 번만 읽음 (계정마다 DOM을 다시 뒤지지 않게)
         const SKIN_FLAGS = { TeoTS: 'teoCostume', YeonheeIDOL: 'yeonheeCostume', TrudeROCK: 'trudeCostume', LubuTS: 'lubuCostume' };
         const SKIN_LABELS = { TeoTS: '태오 TS', YeonheeIDOL: '연희 IDOL', TrudeROCK: '트루드 ROCK', LubuTS: '여포 TS' }; // 그리드 박스와 같은 표기
+        const COLLAB_CHARS = new Set(['tanjiro', 'zenitsu', 'shinobu', 'giyu', 'sungjinwoo', 'chahaein']); // 콜라보 한정캐: tier1이지만 원래 세기의 주황 테두리
         const SELECTOR_TYPES = new Set(['Selector', 'SpecialSelector', 'AllLegendSelector', 'PetSelector']);
 
         // 아이콘 이름 툴팁: 마우스 기기는 리스트·상세 팝업·필터 요약 아이콘에 올리면 바로, 터치 기기는 상세 팝업에서 탭하면 1.5초
@@ -1027,7 +1030,7 @@
             if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || charData.engName === 'Selector' || charData.engName === 'SpecialSelector' || charData.engName === 'AllLegendSelector' || charData.engName === 'PetSelector') {
                 img.classList.add('legendary-item'); badge.classList.add('legendary-badge');
             } else {
-                const isTier0 = tier0Eng.has(charData.engName); img.classList.add(isTier0 ? 'super-rare' : 'rare'); badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge');
+                const isTier0 = tier0Eng.has(charData.engName); img.classList.add(isTier0 ? 'super-rare' : 'rare'); if (COLLAB_CHARS.has(charData.engName)) img.classList.add('collab'); badge.classList.add(isTier0 ? 'super-rare-badge' : 'rare-badge');
             }
             container.appendChild(img); if (charData.count > 1) { badge.textContent = `x${charData.count}`; container.appendChild(badge); }
             
@@ -1180,7 +1183,7 @@
                 if (charData.tierClass) { img.classList.add(charData.tierClass); badge.classList.add(charData.tierClass === 'rare' ? 'rare-badge' : charData.tierClass === 'super-rare' ? 'super-rare-badge' : 'legendary-badge'); }
                 else if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || isSelector) { img.classList.add('legendary-item'); badge.classList.add('legendary-badge'); }
                 else if (tier0Eng.has(charData.engName)) { img.classList.add('super-rare'); badge.classList.add('super-rare-badge'); }
-                else if (tier1Eng.has(charData.engName)) { img.classList.add('rare'); badge.classList.add('rare-badge'); }
+                else if (tier1Eng.has(charData.engName)) { img.classList.add('rare'); if (COLLAB_CHARS.has(charData.engName)) img.classList.add('collab'); badge.classList.add('rare-badge'); }
                 else img.classList.add('extras-character-border');
 
                 if (isSelector) {
@@ -1218,7 +1221,7 @@
 			const fragment = document.createDocumentFragment();
 			const tier0Eng = new Set(tier0Characters.map(([eng]) => eng)); const tier1Eng = new Set(tier1Characters.map(([eng]) => eng));
 			characters.forEach(([eng, kor]) => {
-				const charBox = document.createElement('div'); charBox.className = 'adv-char-box'; charBox.dataset.engName = eng;
+				const charBox = document.createElement('div'); charBox.className = 'adv-char-box'; charBox.dataset.engName = eng; if (COLLAB_CHARS.has(eng)) charBox.classList.add('collab');
 				if (tier0Eng.has(eng)) charBox.classList.add('super-rare'); else if (tier1Eng.has(eng)) charBox.classList.add('rare'); else charBox.classList.add('extras-character-border');
 				charBox.innerHTML = `<img src="Portrait/${kor}.webp" alt="${kor}" class="character-img" loading="lazy" decoding="async" onerror="handleImageError(this)"><span class="adv-char-name">${kor}</span>`;
 				charBox.addEventListener('click', () => charBox.classList.toggle('selected'));
@@ -1295,7 +1298,7 @@
                 const img = p.querySelector('img'); const name = p.querySelector('.character-name, .adv-char-name')?.textContent || '';
                 const input = advanced ? null : p.querySelector('input'); const count = input ? parseInt(input.value) || 0 : 0;
                 const item = document.createElement('div'); item.className = 'fs-item'; item.dataset.name = name;
-                ['super-rare', 'legendary-item'].forEach(c => { if (p.classList.contains(c)) item.classList.add(c); });
+                ['super-rare', 'legendary-item', 'collab'].forEach(c => { if (p.classList.contains(c)) item.classList.add(c); });
                 item.innerHTML = `<img src="${img ? img.getAttribute('src') : ''}" alt="${name}" onerror="handleImageError(this)">${count > 1 ? `<span class="fs-count">x${count}</span>` : ''}`;
                 items.appendChild(item);
             });
