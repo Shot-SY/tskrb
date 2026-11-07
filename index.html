@@ -1135,6 +1135,13 @@
                 allItemsData.push({ src: `Portrait/${korName}.webp`, alt: korName, engName, count: charValue[charName], originalIndex });
             }
             
+            // Collab weapons: every account has all four; each sits right after its character.
+            ['tanjiro', 'zenitsu', 'shinobu', 'giyu'].forEach(eng => {
+                const ci = characters.findIndex(([e]) => e.toLowerCase() === eng); if (ci === -1) return;
+                const weaponName = `${characters[ci][1]}무기`;
+                allItemsData.push({ src: `Portrait/${weaponName}.webp`, alt: weaponName, engName: `${characters[ci][0]}Weapon`, count: 1, originalIndex: ci + 0.01, tierClass: 'legendary-item', isWeapon: true });
+            });
+
             const juryIndex = characters.findIndex(([e]) => e.toLowerCase() === 'jury');
             const baseSkinIndex = juryIndex !== -1 ? juryIndex : 4;
 
@@ -1179,7 +1186,7 @@
                 const img = document.createElement('img'); img.src = charData.src; img.alt = charData.alt; img.className = 'detail-popup-img';
                 img.loading = 'eager'; img.decoding = 'async'; img.onerror = function() { handleImageError(this); };
                 const badge = document.createElement('div'); badge.className = 'image-count-badge';
-                if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && !charData.isRing && !isSelector) { img.classList.add('dimmed'); }
+                if (isAdvancedSearchMode && advancedSearchSelection && !advancedSearchSelection.includes(charData.engName) && !charData.isRing && !charData.isWeapon && !isSelector) { img.classList.add('dimmed'); }
                 if (charData.tierClass) { img.classList.add(charData.tierClass); badge.classList.add(charData.tierClass === 'rare' ? 'rare-badge' : charData.tierClass === 'super-rare' ? 'super-rare-badge' : 'legendary-badge'); }
                 else if (charData.engName === 'TeoTS' || charData.engName === 'YeonheeIDOL' || charData.engName === 'TrudeROCK' || charData.engName === 'LubuTS' || isSelector) { img.classList.add('legendary-item'); badge.classList.add('legendary-badge'); }
                 else if (tier0Eng.has(charData.engName)) { img.classList.add('super-rare'); badge.classList.add('super-rare-badge'); }
